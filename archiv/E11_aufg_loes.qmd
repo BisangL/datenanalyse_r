@@ -1,0 +1,286 @@
+# Woche 11 {.unnumbered}
+
+Repetition einfache lineare Regression
+
+## Lernziele
+
+Im Rahmen dieser Aufgaben werden keine neuen Themen eingeführt, sondern Aspekte (Zugriff auf lm-Objekt und Interpretation des Modells) der Woche 10 wiederholt. 
+
+Konkret repetieren wir:
+
+-   Sie erklären die Struktur eines lm-Objekts.
+-   Sie interpretieren das Modell und schätzen dessen Güte ein.
+
+## Aufgaben
+
+1.  Laden Sie das Datenimport-Skript (stellen Sie sicher, dass es auf dem aktuellsten Stand ist und verbessern Sie -- falls vorhanden -- Fehler) und kopieren Sie die Regressionsmodelle aus dem Quarto-Dokument Woche 10 in das aktuelle Quarto-Dokument. 
+
+2.  Beziehen Sie sich auf das Modell mit der metrischen unabhängigen Variable. Greifen Sie mittels `$` auf das lm-Objekt zu und
+
+    -   erstellen Sie einen Plot mit der Vorhersagewerte für y auf der x-Achse und den Residuen des Modells auf der y-Achse (Tukey-Anscombe-Plot). Wie ist dieser Plot zu interpretieren?
+
+    -   plotten Sie die unabhängige Variable gegen die abhängige Variable (wiederum mit den Ausprägungen im lm-Objekt). Ergänzen Sie dann bei dieser zweiten Darstellung die Regressionsgerade mittels `abline()`. Dazu sollen Sie auf den b0-Wert als y-Achsenabschnitt (`a`) und den Koeffizienten als Steigung (`b`) zurückgreifen. Sie finden beide Werte im Unterobjekt `coefficients`.
+
+3.  R integriert kategoriale Variablen im Regressionsmodell als Dummy-Variablen (0-1 kodierte Variablen). Fügen Sie dem Datensatz die benötigten Dummy-Variablen für die Variable "eisced" an.
+
+4.  In der nächsten Einheit erarbeiten wir uns Wissen zu den t- und F-Werten und zu deren inferenzstatistischen Interpretation. Lesen Sie dazu die Abschnitte aus Diaz-Bone (2023).
+
+5.  Interpretieren Sie einen der p-Werte in Ihrem Modell und halten Sie die Interpretation schriftlich fest.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+## Lösungen
+
+1.  Laden des Datenimport-Skripts:
+
+
+```{r}
+rm(list = ls()) # Workspace loeschen
+options(scipen = 999) # schaltet wissenschaftliche Schreibweise aus
+source(file = "C:/Users/BisangL/Documents/c_fuer_quarto/skripts/datenaufbereitung_ess.R")
+```
+
+
+### Repetition der Modelle
+
+Wir beziehen uns wieder auf die drei Modelle, die wir letzte Woche erstellt haben. Wichtig ist, dass wir uns für die Stärke des Einflusses einer Eingangs-Variable X auf eine Zielvariable Y interessieren.
+
+(i - metrisch - *ppltrst \~ agea*)\
+Wie wirkt sich das Alter auf die Wahrnehmung aus, wie stark andere Menschen vertrauenswürdig sind?
+
+(ii - binominal - *ppltrst \~ gndr*)\
+Inwiefern hat das Geschlecht eine Auswirkung auf die Wahrnehmung, wie stark andere Menschen vertrauenswürdig sind?
+
+(iii - ordinal - *ppltrst \~ eisced*) 
+Wie wirkt sich das Bildungsniveau auf die Wahrnehmung aus, wie stark andere Menschen vertrauenswürdig sind?
+
+```{r}
+lm.met <- lm(ppltrst ~ agea, data = d.ess)
+lm.bin <- lm(ppltrst ~ gndr, data = d.ess)
+lm.ord <- lm(ppltrst ~ eisced, data = d.ess)
+```
+
+### Deskriptiv statistische Interpretation der Modelle
+
+2.  Zugriff auf das lm-Objekt:
+
+> Erstellen Sie einen Plot mit der Vorhersagewerte für y auf der x-Achse und den Residuen des Modells auf der y-Achse (Tukey-Anscombe-Plot). Wie ist dieser Plot zu interpretieren?
+
+```{r}
+plot(lm.met$fitted.values, lm.met$residuals, xlab = "Fitted Values", 
+     ylab = "Residuals", main = "Tukey-Anscombe-Plot")
+abline(h = 0, col = "blue") # Residuen sollen um 0 streuen
+```
+
+Die Grafik dient der Überprüfung zweier Anwendungsvoraussetzungen der linearen Regression: Wir sehen, ob die Residuen (da wir die erwarteten Fehler nicht kennen) um Null streuen und ob gleich bleibende Varianz (Homoskedastizität) aufweisen. 
+
+Es wird deutlich, ob systematische Verzerrungen vorliegen. Eine solche Verzerrung ist im nächsten Plot dargestellt (Varianzheterogenität, [vgl. @Diaz-Bone2023, 229f.]). 
+
+```{r}
+x.5 <- 1:100
+y.5 <- c(1:50, (sample((1:100), 50)))
+lm.5 <- lm(y.5 ~ x.5)
+plot(lm.5$fitted.values, lm.5$residuals,xlab = "Fitted Values", 
+     ylab = "Residuals", main = "Tukey-Anscombe-Plot")
+```
+
+> Plotten Sie die unabhängige Variable gegen die abhängige Variable (wiederum mit den Ausprägungen im lm-Objekt). Ergänzen Sie dann bei dieser zweiten Darstellung die Regressionsgerade mittels `abline()`. Dazu sollen Sie auf den b0-Wert als y-Achsenabschnitt (`a`) und den Koeffizienten als Steigung (`b`) zurückgreifen. Sie finden beide Werte im Unterobjekt `coefficients`.
+
+Im Unterobjekt "coefficients" finden wir die beiden benötigten Werte:
+
+```{r}
+str(lm.met$coefficients)
+lm.met$coefficients
+```
+
+Es sind zwei Werte (Intercept und Koeffizient für agea) enthalten. Wir können mit Indizieren die Werte auswählen:
+
+```{r}
+plot(x = lm.met$model$agea, y = lm.met$model$ppltrst,
+     xlab = "Alter", ylab = "Vertrauen in Mitmenschen",
+     main = "Metrisches Regressionsmodell")
+abline(a = lm.met$coefficients[1], b= lm.met$coefficients[2],
+       col = "red")
+```
+
+Die Interpretation der beiden Werte ist: *Intercept* (b0, y-Achsenabschnitt) gibt den Vorhersagewert an, wenn die unabhängige Variable 0 ist, also wenn jemand 0 Jahre alt wäre. Der Koeffizient b1 gibt die Zunahme des Vorhersagewertes an, wenn wir x1 um eine Einheit erhöhen. Da der Koeffizient positiv ist,  nimmt das Vertrauens mit zunehmendem Alter zu.
+
+```{r}
+summary(lm.met)
+```
+
+R-Quadrat [*Multiple R-squared* sowie dessen leichte Anpassung, die den Wert in der Grundgesamtheit schätzt, @Diaz-Bone2023, 223] besagt, dass das Modell (hier nur Alter) nur ein sehr kleiner Anteil der Varianz des Vertrauens in Menschen erklärt. R-Quadrat kann zwischen 0 und 1 variieren -- somit ist der Wert besonders tief.
+
+### Exkurs zu verschiedenen Regressionsmodellen
+
+Die folgende Darstellung aus dem Buch *Statistik für Soziologen* [@Diaz-Bone2023, 107] zeigt vier bivariaten Regressionsmodellen. Im Plot oben links hat X keinen Einfluss auf Y (b1 = 0). Die anderen drei Plots zeigen Modelle mit demselben b1-Wert, aber unterschiedlichen R-Quadrat-Werten. Unten links ist der perfekte Fit dargestellt.
+
+```{r echo = FALSE, fig.cap = "4 Regressionsmodelle"}
+knitr::include_graphics("Bilder/Modelle.jpg")
+```
+
+### Faktoren im Regressionsmodell
+
+Die anderen beiden Modelle enthalten keine metrische X-Variable, sondern binomiale und ordinale Variablen. Dies ist in der Interpretation zu berücksichtigen:
+
+```{r}
+summary(lm.bin)
+```
+
+Wir sehen, dass gndr*w* im Output steht. Das heisst, R hat standardmässig die Kategorie m als Referenzkategorie gewählt (da der numerische Code tiefer ist). Der Koeffizient gibt die Änderung der Zielgrösse an, wenn man von "männlich" zu "weiblich" wechselt, und alle anderen Koeffizienten konstant hält (siehe auch Lösung Woche 10).
+
+3.  Kategoriale Variablen im Regressionsmodell:
+
+Dasselbe Prinzip -- die Veränderung beim Wechsel von Referenzkategorie zu einer anderen Kategorie -- gilt auch für kategoriale Variablen mit mehr als zwei Ausprägungen, wenn wir die Contrasts entsprechend definieren. Hierbei werden im Hintergrund für k-1 Ausprägungen Dummy-Variablen erstellt, die dann ins Regressionsmodell einfliessen.
+
+Das Prinzip der Dummy-Variable können wir wie folgt veranschaulichen:
+
+```{r}
+str(d.ess$eisced)
+```
+Die Variable hat insgesamt sieben Levels, deshalb benötigen wir sechs Dummy-Variablen, um die Variable vollständig zu beschreiben. Wir können sie folgendermassen bilden:
+
+```{r}
+# von Hand
+d.ess$eisced_1 <- ifelse(d.ess$eisced == "isced_1", 1, 0)
+d.ess$eisced_2 <- ifelse(d.ess$eisced == "isced_2", 1, 0)
+d.ess$eisced_3b <- ifelse(d.ess$eisced == "isced_3b", 1, 0)
+d.ess$eisced_3a <- ifelse(d.ess$eisced == "isced_3a", 1, 0)
+d.ess$eisced_4 <- ifelse(d.ess$eisced == "isced_4", 1, 0)
+d.ess$eisced_51 <- ifelse(d.ess$eisced == "isced_5_1", 1, 0)
+
+# oder mit Funktion...
+# install.packages("psych")
+library(psych)
+dummies <- dummy.code(d.ess$eisced)
+# d.ess <- cbind(d.ess, dummies) # auskommentiert, da sonst doppelt im DF
+```
+
+Nun können wir das Prinzip der Dummy-Variablen nachvollziehen. Wenn jemand bei allen Variablen 0 hat, so entspricht muss das Bildungsniveau 5_2 sein. Wenn die Person bei der ersten Dummy-Variable eine 1 hat (und folglich bei allen anderen 0), dann wäre es das Bildungsniveau "ES-ISCED I", usw.
+
+```{r}
+cbind(
+  table(d.ess$eisced, d.ess$eisced_1)[, 2],
+  table(d.ess$eisced, d.ess$eisced_2)[, 2],
+  table(d.ess$eisced, d.ess$eisced_3a)[, 2],
+  table(d.ess$eisced, d.ess$eisced_3b)[, 2],
+  table(d.ess$eisced, d.ess$eisced_4)[, 2],
+  table(d.ess$eisced, d.ess$eisced_51)[, 2]
+)
+```
+
+R rechnet die Faktoren automatisch in die benötigten Dummy-Variablen um, damit diese in der linearen Regression zur Anwendung kommen können. Aufgabe drei hat den Prozess im Hintergrund und das zugrundeliegende Prinzip lediglich veranschaulicht.
+
+
+Nun nochmals zu den Contrasts: Standardmässig wendet R eine spezielle Variante an, um die Koeffizienten ordinaler Faktoren zu berechnen, nämlich "contr.poly" (anstelle von "contr.treatment" bei nominalen Variablen, siehe für eine Übersicht [hier](https://stats.oarc.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/#ORTHOGONAL)). Die Einstellung variiert nach Fragestellung, allerdings beschränken wir uns hier auf "contr.treatment", weil dies besonders leicht zu interpretieren ist.
+
+```{r}
+lm.bin$contrasts
+lm.ord$contrasts
+```
+
+4. Interpretation:
+
+Die Kategorien sind mit der Standardeinstellung schwierig zu vergleichen. Sie lassen sich inhaltlich und deskriptiv kaum noch sinnvoll "übersetzen". Wir verwenden deshalb die Methode, die R standardmässig auf Dummy-Variablen anwendet (siehe auch Lösung Woche 10):
+
+```{r}
+options(contrasts = c("contr.treatment", "contr.treatment"))
+lm.ord.2 <- lm(ppltrst ~ eisced, data = d.ess)
+lm.ord.2
+```
+
+Dadurch sind die Koeffizienten inhaltlich interpretierbar. Zum Beispiel führt der Wechsel vom ersten (Referenzkategorie) auf das vierte Bildungsniveau dazu, dass das Vertrauen in andere Menschen steigt.
+
+### Inferenzstatistische Interpretation der Modelle
+
+```{r}
+summary(lm.met)
+```
+
+Wenn wir zur inferenzstatistischen Interpretation übergehen, dann fragen wir uns, ob unser Modell insgesamt und die Effekte der unabhängigen Variablen von der Stichprobe auf die Grundgesamtheit übertragen werden können. Dies wollen wir *testen* [vgl. @Diaz-Bone2023, 215ff].
+
+Führen wir das Test-Prozedere von Hand durch, gehen wir in vier Schritten vor (in der Praxis übernimmt das R für uns, aber wir müssen wissen, was R tut!). Diese Schritte helfen uns auch, die Werte im R-Output zu verstehen.
+
+(1) Hypothesen
+
+H0:\
+Das Modell besitzt keine Erklärungsleistung in der GG (r\^2 = 0).\
+bzw.\
+Die Variable Alter hat keinen Einfluss auf das Vertrauen in der GG (b1=0).
+
+H1:\
+Das Modell besitzt eine Erklärungsleistung in der GG (r\^2 \> 0).\
+bzw.\
+Die Variable Alter hat einen Einfluss auf das Vertrauen in der GG (b1!=0).
+
+(2) Konstruktion der Stichprobenverteilungen
+
+Unter Annahme der Nullhypothese konstruieren wir die theoretischen Verteilungen der Stichprobenwerte (wie wenn wir unendlich viele Stichproben ziehen würden). Wir erstellen eine F-Verteilung mit Freiheitsgrade df1 = 1 (Anzahl Prädiktoren) und df2 = 1520 (Anzahl gültige Fälle abzüglich Anzahl Koeffizienten -- wenn Achsenabschnitt vorhanden, dann Anzahl Prädiktoren + 1, siehe auch *on 1 and 1520 DF* im Summary), um R-Quadrat zu testen.
+
+```{r}
+v1 <- seq(0, 5, length.out = 1000) # es soll R^2 > 0 
+fv <- df(v1, 1, 1520) # Dichte dieser Verteilung
+```
+
+Für die b1-Werte berechnen wir eine T-Verteilung, die durch Freiheitsgrade (df = n-2) bestimmt ist:
+
+```{r}
+v2 <- seq(-4, 4, length.out = 1000) # b^1 negativ/positiv
+tv <- dt(v2, 1520) # Dichte dieser Verteilung
+```
+
+(3) Annahme- und Rückweisungswert
+
+Diese Verteilungen können wir darstellen und jeweils den Annahme- und Rückweisungswert einrichten (rot schraffiert). Der Rückweisungsbereich umfasst Werte, die so extrem sind, dass sie zur Verwerfung der Nullhypothese führen. Dies erfolgt auf einem bestimmten Signifikanzniveau (oftmals 95\%).
+
+(4) Auswertung der Stichprobe
+
+Anschliessend tragen wir den empirischen Wert unserer Stichprobe in die Grafik ein (blau). Dazu wird der R-Quadrat- bzw. b1-Wert in den entsprechenden F- bzw. t-Wert umgerechnet ist -- beide Werte finden wir auch im Modelloutput (siehe *F-statistic* und *t value*).
+
+```{r}
+plot(v1, fv, type = "l", main = "F-Verteilung für R^2")
+abline(v = qf(0.95, 1, 1520), col = "red")
+rect(10, -4, qf(0.95, 1, 1520), 6, density = 5, col = "red")
+abline(v = summary(lm.met)$fstatistic["value"], col = "blue") # empirischer Wert dazu
+```
+
+Der empirische Wert der Stichprobe liegt im Annahmebereich. Wir können also die H0 bzgl. R-Quadrat beibehalten. Dasselbe sehen wir auch für den b1-Wert:
+
+```{r}
+plot(v2, tv, type = "l", main = "t-Verteilung für den Regressionskoeffizienten")
+abline(v = qt(0.975, 1520), col = "red")
+abline(v = qt(0.025, 1520), col = "red")
+rect(4, -0.4, qt(0.975, 1520), 0.4, density = 5, col = "red")
+rect(qt(0.025, 1520), -0.4, -4, 0.4, density = 5, col = "red")
+abline(v = summary(lm.met)$coefficients["agea", "t value"], col = "blue")
+
+```
+
+Beide Werte sind nicht signifikant: Eine Erklärungsleistung in der Grundgesamtheit und ein Einfluss der Variable Alter auf das Vertrauen in der Grundgesamtheit sind nicht nachweisbar.
+
+In der Praxis werden oft nur die Koeffizienten und die p-Werte (*p-value*) berücksichtigt. Ist der Koeffizient zwar signifikant, aber sehr klein, ist der Effekt der Variable in der Realität vernachlässigbar. 
+In bivariaten Modellen entspricht der p-Wert des Gesamtmodells jenem des einzelnen Koeffizienten, weil nur die eine Variable vorliegt und so beide Male das gesamte Modell getestet wird.
+
+Der p-Wert dreht nun die Logik um: Es geht nicht mehr darum, eine Sicherheit zu bestimmten (also ein Signifikanzniveau) und dann zu fragen, ob der empirische Werte noch in den Rückweisungsbereich "passt" oder nicht. Vielmehr wird umgekehrt gefragt, mit welcher Sicherheit wir die Nullhypothese beibehalten sollten (aufgrund unseres empirischen Wertes).
+
+Wir erhalten den p-Wert, wenn wir die Wahrscheinlichkeit des (einseitigen) F-Werts bestimmen und diese von 1 abziehen.
+
+```{r}
+1 - pf(q = summary(lm.met)$fstatistic["value"], 
+       df1 = 1, df2 = 1520) # stimmt mit dem Wert im summary überein
+```
+
+Beim zweiseitigen T-Test berechnen wir den p-Wert, indem wir die Wahrscheinlichkeit des empirischen t-Werts berechnen und mit zwei multiplizieren:
+
+```{r}
+2 * pt(q = summary(lm.met)$coefficients["agea", "t value"], df = 1520, lower.tail = F)
+```
+Es handelt sich beim p-Wert um die Fläche unter der Dichtekurve für den Bereich von Werten der Teststatistik, die „extremer“ sind als der beobachtete Wert. Falls die Nullhypothese stimmt, gibt der p-Wert die Wahrscheinlichkeit wieder mindestens so extreme Werte wie den beobachteten Wert zu erhalten.
+
+Die Standardfehler der Koeffizienten (*Std.Error*) beschreiben die durchschnittliche Abweichung der Koeffizienten, da diese auf Stichprobendaten beruhen. Würden wir mit einer neuen Stichprobe einen neuen Wert berechnen, dann würde dieser Wert im Durchschnitt um den Standardfehler abweichen.

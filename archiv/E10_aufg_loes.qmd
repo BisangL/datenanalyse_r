@@ -1,0 +1,200 @@
+# Woche 10 {.unnumbered}
+
+Einführung Lineare Regression
+
+## Lernziele
+
+Nachdem wir unsere Daten aufbereitet, ersten Analysen mittels Kreuztabellen gemacht und die Faktoren definiert haben, gehen wir in der kommenden Woche zur Regressionsanalyse über. Dabei behalten wir die Arbeit mit unterschiedlichen Datenformaten (inklusive Faktoren) im Auge. Wir beginnen mit bivariaten Regressionsmodellen und machen uns Schritt für Schritt mit der Definition und Interpretation dieser Modelle in R vertraut.
+
+Die Lernziele:
+
+-   Sie wenden die Funktion `lm()` an.
+-   Sie erklären die Notation, mit der in R Regressionsmodelle formal darstellt.
+-   Sie erklären, wie in ein lineares Regressionsmodell sowohl metrische als auch kategoriale und binomiale unabhängige Variablen einfliessen können.
+-   Sie erklären die Struktur eines lm-Objekts.
+-   Sie interpretieren das Modell und schätzen dessen Güte ein.
+
+## Aufgaben
+
+1.  Laden Sie Ihr Datenimport-Skript (in dem nun auch die Faktoren definiert sind) und arbeiten Sie wie die Wochen zuvor in einem Quarto Dokument.
+
+2.  Formulieren Sie zwei inhaltliche Fragestellungen, die Sie anhand des ESS-Datensatzes und mit einem einfachen (bivariaten) Regressionsmodell beantworten können. Eine der beiden Fragestellungen soll eine kategoriale Variable als unabhängige Variable enthalten.
+
+3.  Nutzen Sie je ein Streudiagramm und einen Boxplot, um erste Hinweise zu Ihren Fragestellungen zu erhalten.
+
+4.  Bevor Sie die beiden Modelle mittels `lm()` erstellen, sollen Sie sich vorab mit dieser Funktion etwas vertraut machen (über die Hilfeseite der Funktion, mittels Online-Tutorials, usw.). Erläutern Sie die Funktion `lm()` kurz in eigenen Worten!
+
+5.  Erstellen Sie die beiden Modelle in R. Wie sind die Objekte, in denen Sie die Modelle speichern, aufgebaut? Welche Komponenten und Informationen beinhalten sie?
+
+6.  Interpretieren Sie die Ergebnisse der beiden Regressionsanalysen. Reflektieren Sie, ob Interpretation eingeschränkt ist.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+## Lösungen
+
+### Einführung der Regressionsmodelle
+
+Die bivariate Regressionsanalyse berechnet die gerichtete (asymmetrische) Beziehung zwischen zwei Variablen, in der einfachsten Form einer unabhängigen Variable X auf eine abhängige Variable Y. Mit der linearen Regression sind Vorhersagen, Schätzungen von Parametern und Bestimmung von Einflussgrössen, aber auch Optimierungen und Kalibrierungen möglich. Dabei repräsentiert X die Ursache und Y die Wirkung. Wir versuchen uns mittels Wahrscheinlichkeitsmodell der "Realität" anzunähern. Wir gehen davon aus, dass die Daten im Datensatz zufällig sind und nicht "die Wahrheit" abbilden. Das heisst, die Regressionsgerade ist zufällig. Es können auch kategoriale Variablen als unabhängige Variablen hinzugezogen werden. Bei kategorialen Variablen mit mehreren Ausprägungen wird im Hintergrund ein multiples Modell generiert, das für die jeweiligen Ausprägungen eine Referenzkategorie und für den Rest eine Dummy-Variable erstellt. Wir werden anschliessend noch sehen, was dies genau bedeutet.
+
+1.  Laden des Datenimport-Skripts:
+
+```{r}
+rm(list = ls()) # Workspace loeschen
+options(scipen = 999) # schaltet wissenschaftliche Schreibweise aus
+pfad <- "C:/Users/BisangL/Documents/c_fuer_quarto/"
+source(file = paste0(pfad,
+                     "skripts/datenaufbereitung_ess.R"))
+```
+
+2.  Formulieren inhaltlicher Fragestellungen:
+
+Wie wirkt sich das Alter auf das Vertrauen in Mitmenschen aus? *ppltrst \~ agea*\
+
+Wie wirkt sich das Geschlecht auf das Vertrauen in Mitmenschen aus? *ppltrst \~ gndr*\
+
+Wie wirkt sich das Bildungsniveau auf das Vertrauen in Mitmenschen aus? *ppltrst \~ eisced*\
+
+3.  Streudiagramm für metrische Variablen:
+
+Wir wollen im Folgenden die Fragestellungen bearbeiten. Die unabhängige Variablen sind im ersten Modell metrisch (lm.met), im zweiten Modell binominal (lm.bin) und im dritten Modell ordinal skaliert (lm.ord).
+
+```{r}
+plot(jitter(d.ess$agea), jitter(d.ess$ppltrst))
+```
+
+Hier scheint es kaum möglich zu sein, einen Zusammenhang zwischen den beiden Variablen zu identifizieren. Die Verteilungen in Abhängigkeit einer nicht-metrischen Variablen können wir mit einem Boxplot visualisieren:
+
+```{r}
+boxplot(ppltrst ~ gndr, data = d.ess)
+boxplot(ppltrst ~ eisced, data = d.ess)
+```
+
+Die Unterschiede scheinen in beiden Fällen eher gering auszufallen...
+
+### Formulierung der Regressionsmodelle
+
+4.  Die Funktion `lm()`:
+
+Die Funktion `lm()` ist der Befehl in R zur Berechnung von linearen Modellen allgemein. Sie "übersetzt" die normale Regressionsgleichung y = b0 + b1x + e in die Formulierung `response ~ term`. Mit der übersetzten Formel können dann auch multiple, lineare Regressionen dargestellt werden, `response ~ term + term`, oder um Interaktionsterme ergänzt werden, `response ~ term + term * term`. Die weiteren Argumente der Funktion (neben der eigentlichen Formel sowie der Angabe des Datensatzes) erlauben etwa die Daten zu unterteilen, Gewichtungen einzubauen oder den Umgang mit fehlenden Werten genauer zu bestimmen. Wir spezifizieren die Funktion nicht weiter, sondern begnügen uns mit den Standardeinstellungen.
+
+\
+
+5.  Formulieren der Modelle:
+
+```{r}
+lm.met <- lm(ppltrst ~ agea, data = d.ess)
+lm.bin <- lm(ppltrst ~ gndr, data = d.ess)
+lm.ord <- lm(ppltrst ~ eisced, data = d.ess)
+```
+
+Die Funktion `lm()` generiert ein Listenobjekt mit 13 Unterobjekten. Die genauen Details, was in diesen lm-Objekt zu finden ist, können wir der Hilfeseite unter *Value* entnehmen.
+
+Wir beginnen mit dem metrischen Modell:
+
+```{r}
+str(lm.met)
+```
+
+`coefficients`: Koeffizientseffekt pro Fall sowie Namen der Koeffizienten (b0/Intercept und x1/Alter)\
+`residuals`: Angaben zu allen Residuen\
+`effects`: ein Wert aus der Berechnungsweise der kleinsten Quadrate\
+`rank`: der numerische Rang des Modells (Anzahl Variablen insgesamt) `fitted.values`: Vorhersagewerte\
+`assign`: ? (numerischer Wert zur Zuordnung von abhängiger und unabhängiger Variable)\
+`qr`: ? (...eine Spezifierung aus dem Modell der kleinsten Quadrate?)\
+`df.residual`: Freiheitsgrade der Residuen (= n - Anazhl Variablen)\
+`na.action`: Umgangsweise mit fehlenden Werten\
+`xlevels`: Gibt die Ausprägungen bei Faktoren als unabhängige Variablen an\
+`call`: die Formel\
+`terms`: alle Begriffe im Modell\
+`model`: Beschreibung der Variablen des Modells
+
+Bei den Modellen mit kategorialen Variablen finden wir zusätzlich noch ein weiteres Unterobjekt (wenn noch fehlende Werte vorhanden wären, dann wäre das Ergebnisobjekt eine Liste mit 14 Unterobjekten). `contrasts` spezifiziert den Umgang mit den kategorialen Variablen (siehe unten).
+
+```{r}
+str(lm.bin)
+```
+
+### Interpretation der Modelle
+
+6.  Interpretieren der Regressionsanalysen:
+
+::: callout-important
+## Residuen-Analyse
+In der Praxis beginnt man nicht mit der Interpretation der Modelle, sondern mit der *Prüfung der Anwendungsvoraussetzungen* (Residuendiagnostik)! Um die Modelle einzuführen und dann den Sinn der Anwendungsvoraussetzungen nachvollziehen zu können, schauen wir uns trotzdem erstmal die Ergebnisse an.
+:::
+
+```{r}
+summary(lm.met)
+```
+
+Die Funktion `summary()` fasst das Modell zusammen und gibt Kennzahlen aus. Die Auflistung beginnt mit der Formel (Call), geht über zu einer kurzen Beschreibung der Verteilung der Residuen (Residuals), bevor die Koeffizienten und anschliessend eine Übersicht zum gesamten Modell folgen.
+
+Zuerst werden die Koeffizienten beschrieben (*Estimate*), d.h. der b0-Wert (*Intercept*) und der Koeffizient der unabhängigen Variable. Ersterer gibt den Vorhersagewert an, wenn die unabhängige Variable 0 wäre. Letzterer gibt die Zunahme des Vorhersagewertes bei einer Zunahme der unabhängigen Variable um 1 an.
+
+Die zweite Kennzahl ist der Standardfehler (*Std.Error*), also die durchschnittliche Abweichung der Koeffizienten. Als Faustregel für diesen Wert gilt: Das Konfidenzintervall, d.h. Ergebnis von Regressionskoeffizient --/+ (2 \* SE), sollte nicht 0 überschreiten, sonst ist die Wahrscheinlichkeit gross, dass der Effekt auch Null sein könnte ("nicht signifikant"). Es gilt also den Standardfehler im Zusammenhang mit dem Regressionskoeffizienten zu betrachten.
+
+Die dritte Kennzahl ist der t-Wert (*t value*). Er repräsentiert die Testwerte des t-Tests. Die Frage, die der t-Test beantwortet, ist: Hat die x-Variable in der "Realität" einen Einfluss auf die y-Variable? Die Nullhypothese lautet: Der Koeffizient ist gleich Null, d.h. es besteht in der "Realität" keinen Einfluss. Die Alternativhypothese ist zweiseitig und lautet: Der Koeffizient ist nicht gleich Null. Es gilt die Faustregel: t-Werte, die grösser als 2 sind, sind meistens auf dem 5%- Niveau (bei nicht allzu wenigen Freiheitsgraden) signifikant. In der Praxis schauen wir meist nur die daraus abgeleiteten p-Werten an. Dennoch geben die t-Werte ebenfalls einen Eindruck der „Stärke der Signifikanz“.
+
+Der p-Wert (*Pr(\>\|t\|)*) ist der Signifikanzwert für einzelne Regressionskoeffizienten. Wir interessieren uns dabei für die Frage, ob die einzelnen unabhängigen Variablen einen Effekt auf die abhängige Variable haben. Die Nullhypothese entspricht der oben formulierten Hypothese. Zusätzlich findet sich auch jeweils noch der Hinweis zu den Sternchen als Signifikanzcodes.
+
+Anschliessend folgen weitere Kennwerte zum gesamten Modell: Die Standardabweichung der Residuen wird ausgegeben (*Residual standard error*) sowie die Freiheitsgrade (*degrees of freedom*), das heisst N - J - 1, wobei N die Fallzahl und J die Anzahl unabhängiger Variablen ist.
+
+Danach folgen das multiple R-Quadrart (*Multiple R-squared*) sowie dessen Anpassung (*Adjusted R-squared*). Ersteres ist das Bestimmtheitsmass und gibt uns die Erklärungsleistung des Modells an. Ist der Wert nahe 1, erklärt das Modell einen grossen Anteil der totalen Varianz und ist somit gut.
+
+Schliesslich finden sich noch die Angaben zum F-Test (*F-statistic*). Beim (globalen) F-Test interessieren wir uns für die Frage, ob es mindestens eine x-Variable im Modell gibt, die einen relevanten Effekt auf die y-Variable hat. Wir vergleichen das kleinere Modell (nur Achsenabschnitt) mit einem grösseren Modell (hier eine x-Variable). Die Nullhypothese lautet: Alle βj (ausser β0) sind Null. R gibt sowohl den konkreten F-Test-Wert (und die Anzahl Freiheitsgrade der Verteilung) als auch den p-Wert aus.
+
+Wir schauen uns noch die anderen Modelle an:
+
+```{r}
+summary(lm.bin)
+```
+
+Wiederum scheint das Modell keine grosse Erklärungsleistung zu besitzen (und diese kann auch nicht auf eine Grundgesamtheit übertragen werden). Für die Variable "gndr" steht nicht nur der Variablenname, sondern auch ein Level ("gndr*w*"). Dies sagt aus, dass wir diesen Effekt auf das Vetrauen erwarten, wenn wir beim Geschlecht von "männlich" (Referenzlevel) zu "weiblich" wechseln. Deshalb kann man auch vom Unterschied zum Referenzlevel sprechen. Der Intercept entspricht dem Schätzer des Referenzlevels.
+
+Standardmässig nimmt R das erst genannte Level als Referenzlevel. Wenn der Faktor manuell definiert ist, wird diese "Erstnennung" berücksichtigt, sonst gilt die alphabetische Reihenfolge (siehe Aufbereitungsskript oder 'str()' --\> "m"). Wir können das Referenzlevel abhängig von der Fragestellung ändern:
+
+```{r}
+str(d.ess$gndr)
+d.ess$gndr <- relevel(d.ess$gndr, ref = "w")
+str(d.ess$gndr)
+lm.bin.rel <- lm(ppltrst ~ gndr, data = d.ess)
+summary(lm.bin.rel)
+```
+
+Bei einer dummy-Variable ändert sich das Vorzeichen und der Intercept.
+
+Nun zum Modell mit geordnetem Faktor als Input-Variable:
+
+```{r}
+summary(lm.ord)
+drop1(lm.ord, test = "F") # da dummy-Variable gleich wie summary-Output
+```
+
+Beim dritten, kategorialen (ordinalen) Modell sehen wir, dass die einzelnen Ausprägungen der unabhängigen Variable eigene dummy-Koeffizienten und zugehörige Kennwerte erhalten. R kann kategoriale Variablen auf unterschiedliche Arten in Modelle aufnehmen, weil wir zum Beispiel drei Kategorien auf verschiedene Art und Weise in zwei Kategorien ausdrücken können. Häufig wird `contr.treatment` verwendet, wobei der ersten Ausprägung der Wert 0 zugewiesen wird und die Koeffizienten dann die Veränderung gegenüber dieser Ausprägung angeben. Dadurch braucht es zum Beispiel nicht mehr gut, mittel und schlecht, sondern nur zwei dummy-Variablen (R macht das im Hintergrund selbst, wenn wir die Optionen entsprechend spezifizieren). Wenn wir sie aufrufen, sehen wir, dass R standardmässig verschiedene Varianten gewählt hat:
+
+```{r}
+lm.bin$contrasts
+lm.ord$contrasts
+```
+
+Für geordnete Faktoren wählt R `contr.poly`. Da `contr.treatment` leichter zu interpretieren ist, ändern wir diese Einstellung. Wir müssen zwei Werte für (1) ungeordnete Faktoren und (2) geordnete Faktoren angeben.
+
+```{r}
+options(contrasts = c("contr.treatment", "contr.treatment"))
+lm.ord.2 <- lm(ppltrst ~ eisced, data = d.ess)
+summary(lm.ord.2)
+```
+
+Die p-Werte der einzelnen Ausprägungen von eisced sind nur schwer interpretierbar. Wollen wir wissen, ob das Modell mit der kategorialen Variable besser ist als das Nullmodell (die kategoriale Variable "insgesamt" einen Effekt hat), müssen wir einen F-Test für die Variable mit 'drop1()' durchführen. Diese Funktion prüft, ob das vollständige Modell besser passt als das Modell ohne den Term.
+
+```{r}
+drop1(lm.ord.2, test = "F")
+```
+
+...auch hier könnten wir wieder das Referenzlevel ändern...!

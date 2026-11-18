@@ -1,0 +1,21 @@
+{
+  "hash": "037166e62d8a7c1e80121582cdbabc84",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Woche 9 {.unnumbered}\n\n*Funktionen, if-else-Statements und Loops*\n\n## Lernziele\n\nIn den letzten Wochen haben wir verschiedene Funktionen kennengelernt, um Daten zu bereinigen, zu plausibilisieren und aufzubereiten. Zudem haben wir insbesondere die Funktionen zur Erstellung von Grafiken angewendet, um erste interessante Ergebnisse zu generieren. In dieser Woche schauen wir uns an, wie Sie Funktionen selbst schreiben, und in welchen Fällen for-Schleifen und Funktionen sinnvoll sind.\n\nKonkret:\n\n-   Sie erläutern, wozu und in welchen Fällen Funktionen und for-Schleifen nützlich sind.\n-   Sie erklären, wie eine for-Schleife funktioniert.\n-   Sie erstellen einfache for-Schleifen.\n-   Sie erläutern, wie Funktionen in R aufgebaut sind.\n-   Sie schreiben eine Funktion.\n-   Sie erklären, wie if-else-Statements funktionieren und wenden die Funktion `ifelse()` an.\n\n## Aufgaben\n\n::: callout-important\n## for-Schleifen, Funktionen etc.\n\nOperationen, die mehrfach ausgeführt werden sollen, können mit for-Schleifen und Funktionen erfasst werden.\n\n[**Good Practice:**]{style=\"color:darkgreen;\"}\n\n-   for-Schleifen nur verwenden, wenn keine Alternativen möglich sind, denn sie sind vergleichsweise langsam. Wenn immer möglich ist Vektorisierung oder `apply()` vorzuziehen.\n-   Wenn Sie for-Schleifen verwenden, packen Sie so wenige \"Tasks\" wie möglich in die Schleife. Denn \"Tasks\" in der Schleife werden bei jedem Durchgang ausgeführt!\n:::\n\n1.  Bauen Sie den summary-Output der numerischen Variablen mit einer for-Schleife nach. Orientieren Sie sich am untenstehenden Aufbau einer For-Schleife.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Aufbau einer For-Schleife. Gelb markierte Elemente sind fix, die anderen sind zu definieren.](Bilder/aufbau_for-schleife.png)\n:::\n:::\n\n\n2.  Beschreiben Sie, was untenstehender Code macht und inwiefern diese for-Schleife sinnvoller ist als jene, die Sie in Aufgabe 1 gebaut haben. (Kommentieren Sie den Code aus.) Hinweis: `kmeans(mca1$ind$coord[, c(\"Dim 1\", \"Dim 2\")], i)$withinss` ruft die Within-Clustervarianz von i Clustern auf, die mit der Funktion `kmeans()` von Koordinaten (`mca1$ind$coord[, c(\"Dim 1\", \"Dim 2\")]`) gebildet wurden.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nwss <- rep(0, 18)\nfor(i in 1:17){\n  wss[i] <- sum(kmeans(mca1$ind$coord[, c(\"Dim 1\", \"Dim 2\")], i)$withinss)\n}\nplot(1:18, wss, type = \"b\", xlab = \"\", ylab = \"\")\n```\n:::\n\n\n3.  Schauen Sie sich die Hilfeseite der `ifelse()`-Funktion an. Erklären Sie in wenigen Sätzen den Aufbau.\n\n4.  Bilden Sie eine Funktion, die im Funktionskörper die `ifelse()`-Funktion enthält. Orientieren Sie sich am unten aufgeführten Aufbau einer Funktion (und ggf. an den Beispielen auf OLAT, Sitzung 8). Begründen Sie den/die Task/s, welche die Funktion ausführt (gerne dürfen Sie hier mit einem LLM arbeiten und dessen Output mit Ihren Kenntnissen verbessern!). Wenden Sie die Funktion auf eine Variable des gekürzten Datensatzes an und speichern Sie das Resultat in einer neuen Variable. Diskutieren Sie, inwiefern dieses Vorgehen sinnvoll ist.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Aufbau einer Funktion. Gelb markierte Elemente sind fix, die anderen sind zu definieren.](Bilder/aufbau_funktion.png)\n:::\n:::\n\n\n*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit \"Reflexion\" in\nIhrem Markdown-Dokument!)*\n\nBitte reflektieren Sie und halten stichpunktartig fest:\n\n-   Was ist Ihnen klar geworden?\n-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?\n",
+    "supporting": [
+      "E09_aufg_25_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

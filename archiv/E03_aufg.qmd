@@ -1,0 +1,46 @@
+# Woche 3 {.unnumbered}
+
+Grundlagen Teil 2 und Korrelation
+
+## Lernziele
+
+In der dritten Seminarwoche vertiefen wir Elemente der Programmiersprache R, die Sie bereits kennengelernt haben, und ordnen sie in neuen Zusammenhängen zu. Vertieft wird nochmals der Umgang mit verschiedenen Datenarten und Objekttypen: Zahlen, Text und logische Werte sowie einzelne Werte, Vektoren und Matrizen. Sie lernen Möglichkeiten kennen, um über bestimmte Funktionen systematisch Vektoren zu definieren. Auf diesen Grundlagen aufbauend, gehen wir auf erste statistische Inhalte ein, nämlich die bivariaten Zusammenhänge von metrischen Variablen (Korrelation).
+
+Die Lernziele:
+
+-   Sie können die drei bisher kennengelernten Objekttypen (einzelne Zahl, Vektor, und Matrix) kombinieren.
+-   Sie kennen die drei verschiedenen Datenarten von R:
+-   Sie können die Rolle von
+    -   numerischen Daten
+    -   Textdaten (strings)
+    -   logischen Daten erklären.
+-   Sie können Vektoren mittels der Funktionen ...
+    -   ... `c()`
+    -   ... `seq()`
+    -   ... sowie `rep()` definieren
+    -   ... und diese auf alle drei Arten von Daten anwenden.
+-   Sie können den Begriff "Korrelation" erklären, bivariate Zusammenhänge in R berechnen und interpretieren.
+
+## Aufgaben
+
+1.  Erstellen Sie vier verschiedene Vektoren mit je einer Länge von vier Einheiten und verbinden Sie diese zu einer 4x4-Matrix. Die Funktion `apply()` erlaubt Ihnen, eine Funktionen wie z.B. `mean()` oder `var()` auf diese Matrix anzuwenden. Nur wie genau? Sehen Sie sich die Hilfe zu `apply()` an, probieren Sie die Funktion aus und versuchen Sie zu verstehen, wie sie funktioniert. Erläutern Sie `apply()` dann in eigenen Worten mit Bezug auf die von Ihnen erzeugte 4x4-Matrix!
+
+2.  Erstellen Sie je einen Vektor mit numerischen Daten, Text-Daten und logischen Daten. Mit den Funktionen `as.numeric()`, `as.character()` und `as.logical()` können Sie die Vektoren in andere Datenarten umwandeln. In welchen Fällen funktioniert das? Und wo sind die Grenzen dieses "Zwingens"?
+
+3.  Definieren Sie folgende Vektoren mittels der Funktionen `seq()` und `rep()`:
+
+-   Vektor 3a: 100 101 102 103 104 105 106 107 108 109 110
+-   Vektor 3b: 1 1 1 2 2 2 2 3 3 3 5 5 5 5 9 9 9
+-   Vektor 3c: Die Zahlen des Vektors b als ausgeschriebene Wörter
+
+4.  Was macht das Argument `trim` für die Funktion `mean()`? Wozu könnten Sie dieses Argument in einem sozialwissenschaftlichen Kontext nutzen? Spezifizieren Sie das Argument auf sinnvolle Weise, um das arithmetische Mittel des in Aufgabe 3 erstellten Vektors (oder eines anderen Vektors) zu berechnen!
+
+5.  Definieren Sie Vektoren mittels der Funktionen `c()`, `rep()` und `seq()`. Diese Vektoren -- d.h. Variablen -- sollen sozialwissenschaftlichen Phänomenen entsprechen. Berechnen Sie die Korrelationskoeffizienten.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

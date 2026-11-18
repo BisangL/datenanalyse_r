@@ -1,0 +1,21 @@
+{
+  "hash": "0b92f596cd439aa408b005ce8824c5dc",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Woche 9 {.unnumbered}\n\n*Funktionen und if-else-Statements*\n\n## Lernziele\n\nIn den letzten Wochen haben wir verschiedene Funktionen kennengelernt, um Daten zu bereinigen, zu plausibilisieren und aufzubereiten. Zudem haben wir insbesondere die Funktionen zur Erstellung von Grafiken angewendet, um erste interessante Ergebnisse zu generieren. In dieser Woche schauen wir uns an, wie Sie Funktionen selbst schreiben, und in welchen Fällen diese sinnvoll sind.\n\nKonkret:\n\n-   Sie erläutern, wozu und in welchen Fällen Funktionen nützlich sind.\n-   Sie erläutern, wie Funktionen in R aufgebaut sind.\n-   Sie schreiben eine Funktion.\n-   Sie erklären, wie if-else-Statements funktionieren und wenden die Funktion `ifelse()` an.\n\n## Aufgaben\n\n### Aufgabe 1: Funktionsaufbau\n\nSchauen Sie sich die Hilfeseite der `ifelse()`-Funktion an. Erklären Sie in wenigen Sätzen den Aufbau.\n\n### Aufgabe 2: Anwendung\n\nBilden Sie eine Funktion, die im Funktionskörper die `ifelse()`-Funktion enthält. Orientieren Sie sich am unten aufgeführten Aufbau einer Funktion (und ggf. an den Beispielen auf OLAT, Sitzung 8). Begründen Sie den/die Task/s, welche die Funktion ausführt (gerne dürfen Sie hier mit einem LLM arbeiten und dessen Output mit Ihren Kenntnissen verbessern!). Wenden Sie die Funktion auf eine Variable des gekürzten Datensatzes an und speichern Sie das Resultat in einer neuen Variable. Diskutieren Sie, inwiefern dieses Vorgehen sinnvoll ist.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Aufbau einer Funktion. Gelb markierte Elemente sind fix, die anderen sind zu definieren.](Bilder/aufbau_funktion.png){width=3.22in}\n:::\n:::\n\n\n### Aufgabe 3: eigenes Beispiel\n\nEntwickeln Sie eine eigene Funktion, die im Rahmen der Plausibilisierung und Aufbereitung hilfreich ist.\n\n*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit \"Reflexion\" in\nIhrem Markdown-Dokument!)*\n\nBitte reflektieren Sie und halten stichpunktartig fest:\n\n-   Was ist Ihnen klar geworden?\n-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?",
+    "supporting": [
+      "E09b_aufg_26_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

@@ -1,0 +1,44 @@
+# Woche 10 {.unnumbered}
+
+*Einführung Lineare Regression*
+
+## Lernziele
+
+Nachdem wir unsere Daten aufbereitet und ersten Analysen mittels Kreuztabellen und Plots gemacht haben, gehen wir in der kommenden Woche zur Regressionsanalyse über. Wir beginnen mit einfachen Regressionsmodellen und machen uns Schritt für Schritt mit der Definition und Interpretation dieser Modelle in R vertraut.
+
+Die Lernziele:
+
+-   Sie wenden die Funktion `lm()` an.
+-   Sie erklären die Notation, mit der R Regressionsmodelle formal darstellt.
+-   Sie erklären, wie in ein lineares Regressionsmodell sowohl metrische als auch kategoriale und binomiale unabhängige Variablen einfliessen können.
+-   Sie erklären die Struktur eines lm-Objekts.
+-   Sie interpretieren das Modell und schätzen dessen Güte ein.
+
+## Aufgaben
+
+1.  Formulieren Sie zwei inhaltliche Fragestellungen, die Sie anhand des ESS-Datensatzes (gerne dürfen Sie auch nochmals im Codebook die Variablen durchgehen, passende Variablen im R-Skript bereinigen und dann ins Modell aufnehmen!) und mit einem einfachen linearen Regressionsmodell beantworten können. Eine der beiden Fragestellungen soll eine kategoriale Variable als unabhängige Variable enthalten.
+
+2.  Nutzen Sie je ein Streudiagramm und einen Boxplot, um erste Hinweise zu Ihren Fragestellungen zu erhalten. Fügen Sie im Streudiagramm die Regressionsgerade hinzu.
+
+3.  Schauen Sie sich die Hilfeseite der `lm()`-Funktion an und erläutern Sie die Funktion und ihre Argumente in eigenen Worten.
+
+4.  Erstellen Sie die beiden Modelle in R. Wie sind die lm-Objekte aufgebaut? Welche Komponenten und Informationen beinhalten sie?
+
+5.  Interpretieren Sie die Ergebnisse der beiden Regressionsanalysen. Reflektieren Sie, ob Interpretation eingeschränkt sein könnte.
+
+6.  Repetition: Erstellen Sie eine Funktion, die Kreuztabellen mit relativen Häufigkeiten (so wie es sinnvoll ist!) und Randsummen (so wie es sinnvoll ist!) erstellt. Wenden Sie die Funktion auf zwei Beispiele an, die Ihnen sinnvoll erscheinen. Berücksichtigen Sie folgendes Vorgehen:
+
+::: callout-important
+## Funktion bauen – Vorgehen:
+
+1.  Tasks im Funktionsrumpf ausserhalb der Funktion schrittweise schreiben und testen ("innerster Kern" zuerst!)
+2.  Tasks schrittweise unter Funktionsname speichern
+3.  Funktion aufrufen und prüfen
+:::
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

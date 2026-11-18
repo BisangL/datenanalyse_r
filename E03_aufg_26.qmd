@@ -1,0 +1,46 @@
+# Woche 2 {.unnumbered}
+
+*Grundlagen II*
+
+## Lernziele
+
+In der zweiten Seminarwoche vertiefen wir Elemente der Programmiersprache R, die Sie bereits kennengelernt haben. Zudem lernen Sie den Umgang mit verschiedenen Datenarten und Objekttypen: Zahlen, Text und logische Werte sowie einzelne Werte, Vektoren und Matrizen. Sie lernen Möglichkeiten kennen, um über bestimmte Funktionen systematisch Vektoren zu definieren.
+
+Die Lernziele:
+
+-   Sie kombinieren, resp. wandeln die drei bisher kennengelernten und neue Objekttypen (einzelne Zahl, Vektor, Matrix, Datensatz) um.
+-   Sie erklären, was ein Dataframe in R ist, und die Unterschiede zu einer Matrix benennen.
+-   Sie erklären die drei verschiedenen Datenarten von R:
+    -   numerischen Daten
+    -   Textdaten
+    -   logischen Daten erklären.
+-   Sie definieren Vektoren mittels der Funktionen `c()`, `seq()` und `rep()`, und wenden diese auf alle drei Arten von Daten an.
+
+## Aufgaben
+
+1.  Definieren Sie folgende Vektoren mittels der Funktionen `seq()` und `rep()`:
+
+-   Vektor 1a: 100 101 102 103 104 105 106 107 108 109 110
+-   Vektor 1b: 1 1 1 2 2 2 2 3 3 3 5 5 5 5 9 9 9
+-   Vektor 1c: Die Zahlen des Vektors b als ausgeschriebene Wörter
+
+2.  Erstellen Sie je einen Vektor mit numerischen Daten, Text-Daten und logischen Daten. Mit den Funktionen `as.numeric()`, `as.character()` und `as.logical()` können Sie die Vektoren in andere Datenarten umwandeln. In welchen Fällen funktioniert das? Und wo sind die Grenzen dieses "Zwingens"?
+
+3.  Wählen Sie ein sozialwissenschaftliches Beispiel mit vier verschiedene Vektoren und je mindestens 10 Elementen. Verwenden Sie dazu die Funktionen, die Sie oben kennengelernt haben. Verbinden Sie die Vektoren zu einer Matrix (mindestens 10x4 Elemente).
+
+<!-- -->
+
+a.  Sehen Sie sich die Hilfeseite der Funktion `matrix()` an. Wozu können Sie die Funktion verwenden? Welche Argumente akzeptiert und/oder benötigt die Funktion und wozu dienen diese Argumente?
+b.  Worin besteht der Unterschied zu Dataframes?
+
+<!-- -->
+
+4.  Wenden Sie die Funktion `mean()`auf Ihr Beispiel an.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

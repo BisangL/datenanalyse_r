@@ -1,0 +1,33 @@
+# Woche 11 {.unnumbered}
+
+*Repetition einfache lineare Regression*
+
+## Lernziele
+
+Im Rahmen dieser Aufgaben werden keine neuen Themen eingeführt, sondern Aspekte (Zugriff auf lm-Objekt und Interpretation des Modells) der Woche 10 wiederholt.
+
+Konkret:
+
+-   Sie erklären die Struktur eines lm-Objekts.
+-   Sie interpretieren das Modell und schätzen dessen Güte ein.
+
+## Aufgaben
+
+1.  Arbeiten Sie mit dem Modell mit der metrischen unabhängigen Variable von letzter Woche. Greifen Sie auf Elemente des lm-Objekts zu.
+
+    a.  Erstellen Sie einen Plot mit der Vorhersagewerte für y auf der x-Achse und den Residuen des Modells auf der y-Achse (Tukey-Anscombe-Plot). Wie ist dieser Plot zu interpretieren?
+
+    b.  Plotten Sie die unabhängige Variable gegen die abhängige Variable (nutzen Sie dazu auch die Elemente des lm-Objekts). Ergänzen Sie dann bei dieser zweiten Darstellung die Regressionsgerade mittels `abline()`.
+
+2.  R integriert kategoriale Variablen im Regressionsmodell als Dummy-Variablen (0-1 kodierte Variablen). Fügen Sie dem Datensatz die benötigten Dummy-Variablen für eine Variable an. Wie viele Dummy-Variablen benötigen Sie?
+
+3.  Interpretieren Sie einen der p-Werte in Ihrem Modell (lesen Sie ggf. in Diaz-Bone 2023 nach) und halten Sie die Interpretation schriftlich fest.
+
+4. Repetition: Notieren Sie, welche Datenarten mit welchen bivariaten Plots dargestellt werden können (konsultieren Sie die Lösungen und Inputs von Woche 8). Prüfen Sie die Plots aus Woche 10 dahingehend und auf Ihre Aussagekraft. Begründen Sie jeweils Ihre Wahl und korrigieren Sie sie, falls nötig. Reichen Sie die Plots von Woche 10 nochmals ein.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

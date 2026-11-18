@@ -1,0 +1,52 @@
+project:
+  type: book
+
+book:
+  title: "Sozialwissenschaftliche Datenanalyse mit R"
+  author: "Léonie Bisang"
+  date: "2026/09/02"
+  chapters:
+    - index.qmd
+    - E01.qmd
+    # - E02_aufg_26.qmd
+    - E02_aufg_loes_26.qmd
+    # - E03_aufg_26.qmd
+    - E03_aufg_loes_26.qmd
+    # - E04_aufg_26.qmd
+    - E04_aufg_loes_26.qmd
+    # - E05_aufg_26.qmd
+    - E05_aufg_loes_26.qmd
+    # - E06_aufg_26.qmd
+    - E06_aufg_loes_26.qmd
+    # - E07_aufg_26.qmd
+    - E07_aufg_loes_26.qmd
+    # - E08_aufg_26.qmd
+    - E08_aufg_loes_26.qmd
+    # - E09a_aufg_26.qmd
+    - E09a_aufg_loes_26.qmd
+    # - E09b_aufg_26.qmd
+    - E09b_aufg_loes_26.qmd
+    - E10_aufg_26.qmd
+    # - E10_aufg_loes_26.qmd
+    # # - E11_aufg_26.qmd
+    # - E11_aufg_loes_26.qmd
+    # # - E12_aufg_26.qmd
+    # - E12_aufg_loes_26.qmd
+    # # - E13_aufg_26.qmd
+    # - E13_aufg_loes_26.qmd
+    - literatur.qmd
+
+bibliography: references.bib
+csl: springer-vs-author-date.csl
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+    output-file: w3.pdf
+
+editor: visual
+
+# um zu publizieren: "quarto publish quarto-pub" in Terminal (oder "quarto render E10_aufg_loes_26.qmd --to pdf")
+# deno upgrade

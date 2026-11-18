@@ -1,0 +1,316 @@
+# Woche 8 {.unnumbered}
+
+
+Einführung Datenanalyse: Kreuztabellen
+
+## Lernziele
+
+Nachdem wir uns bereits mit dem ESS-Datensatz und dessen Struktur vertraut gemacht haben, gehen wir nun zur Datenaufbereitung und Datenanalyse in R über. Dieser Übergang ist fliessend: Die Schritte zum Kennenlernen eines Datensatzes, die Plausibilitätsprüfung und die Suche nach Fehlern liefern häufig bereits erste Einblicke im Sinne einer explorativen Datenanalysen, die womöglich zu Schritten der Datenaufbereitung veranlassen. Die Aufgaben fokussieren auf die Rolle von Kreuztabellen in diesem Prozess, inklusive der Berechnung von Chi-Quadrat-Tests. In den Folgewochen gehen wir davon ausgehend schrittweise zur Berechnung von Regressionsanalysen über.
+
+Die Lernziele:
+
+-   Sie stellen Kreuztabellen auf verschiedene Weisen dar und interpretieren sie inhaltlich zutreffend.
+-   Sie interpretieren Chi-Quadrat-Tests (und lernen somit inferenzstatistische Test in R kennen).
+-   Sie erklären, wie die Phasen der Plausibilisierung, der Datenaufbereitung, der Datenexploration und der Datenanalyse zusammenhängen.
+
+
+## Aufgaben
+
+1.  Laden Sie den Datensatz von Woche 7 in RStudio. Erfassen Sie den hierfür benötigten Code nicht nur im Quarto-Dokument, sondern erstellen Sie ein zusätzliches R-Skript (z.B. unter dem Namen "ess_import.R"). Dieses Skript soll den Datensatz laden und alle notwendigen Datenaufbereitungen vornehmen. Sie können also auch bereits die ersten Definitionen von fehlenden Werten dort integrieren. Die Idee ist, dass dieses Skript über die kommenden Wochen umfangreicher wird und Sie zum Beispiel die Definition von Faktoren, Änderung von Variablenbezeichnungen oder die Berechnung neuer Variablen darin aufnehmen.
+
+2.  Repetition: Erklären sie nochmals die Funktion des `$`-Zeichens.
+
+3.  Erstellen Sie mittels der Funktion `table()` eine Kreuztabelle mit den Variablen Geschlecht und Internetnutzung. Wie können Sie vorgehen, um eine Kreuztabelle mit Prozentwerten (relativer statt absoluter Häufigkeiten) zu erstellen, die ausserdem die Randsummen enthält? Suchen Sie eine Darstellung der Tabelle --- d.h. der Anordnung der Variablen in Zeilen und Spalten sowie der Wahl der Randsummen, die sinnvoll das Verhältnis der abhängigen und unabhängigen Variablen wiedergibt. Was fällt Ihnen inhaltlich an der Tabelle auf?
+
+4.  Die Funktion `CrossTable()` ist Teil des Paketes "gmodels" und ermöglicht die flexible und detailreiche Arbeit mit Kreuztabellen. Bauen Sie mittels dieser Funktion die Kreuztabelle aus Aufgabe 2 nach.
+
+5.  Mittels `CrossTable()` lassen sich nicht nur Tabellen erstellen, sondern auch Chi-Quadrat-Tests durchführen.
+
+    -   Kopieren Sie Ihren Code für die Kreuztabelle aus Ausgabe 4, ergänzen Sie diesen um das nötige Argument für den Chi-Quadrat Test und speichern Sie es als Objekt mit dem Namen 'chi2test.res'.
+    -   Greifen Sie anschliessend auf die darin enthaltenen Angaben zum Chi-Quadrat Test zu und interpretieren Sie diese -- sowohl deskriptiv als auch inferenzstatistisch.
+    
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+## Lösungen
+
+1.  Laden des Datensatzes:
+
+Bisher haben wir die Daten folgendermassen geladen:
+
+```{r eval = FALSE}
+# Vorbereitung
+rm(list = ls()) # Workspace loeschen
+options(scipen = 999) # schaltet wissenschaftliche Schreibweise aus
+
+# Daten einlesen
+d.ess <- read.csv(file = "C:/Users/BisangL/Documents/c_fuer_quarto/buch_hs24/daten/ess_19_ch.csv")
+```
+
+Zur Wiederholung: Wir laden vorerst nur Rohdaten und müssen anschliessend fehlende Werte definieren. Die Funktion `read.csv()` kennt einen Umgang mit fehlenden Werten über das Argument `na.strings`. Allerdings sind in unserem Rohdatensatz fehlende Werte mit Zahlenwerten gekennzeichnet (z.B. 7777) und werden von R -- solange wir sie nicht anders definiert haben -- auch als numerische Werte verwendet.
+
+```{r eval = FALSE}
+# Alter
+d.ess$agea[d.ess$agea == 999] <- NA
+d.ess$yrbrn[d.ess$yrbrn > 7000] <- NA
+
+# Bildung
+d.ess$eduyrs[d.ess$eduyrs > 70] <- NA
+d.ess$eisced[d.ess$eisced > 7] <- NA
+```
+
+Die Fehler, die wir im Datensatz im Rahmen des letzten Wochenplans entdeckt haben, müssen wir korrigieren.
+
+```{r eval = FALSE}
+d.ess$agea[d.ess$agea == 530 & !is.na(d.ess$agea)] <- 2018 - d.ess$yrbrn[d.ess$agea == 530 & !is.na(d.ess$agea)]
+d.ess$yrbrn[d.ess$yrbrn == 2009 & !is.na(d.ess$yrbrn)] <- 2018 - d.ess$agea[d.ess$yrbrn == 2009  & !is.na(d.ess$yrbrn)]
+d.ess$eisced[d.ess$eduyrs == 0 & d.ess$eisced == 7] <- round(mean(d.ess$eisced[d.ess$eduyrs == 18],
+                                                                  na.rm = TRUE))
+d.ess <- d.ess[-which(d.ess$eduyrs > 13 & d.ess$eisced == 1), ]
+```
+
+Das Einlesen der Daten, die Datenplausibilisierung und -aufbereitung lagern wir neu in ein R-Skript (d.h., .R-Datei statt .qmd-Datei) aus. Alle Schritte der Plausibilisierung und Datenaufbereitung werden in diesem Skript erledigt. Da wir das Skript diese Woche noch nicht integrieren, kopieren wir den Code noch manuell in einen Code-Chunk:
+
+```{r}
+d.ess <- read.csv(file = "C:/Users/BisangL/Documents/c_fuer_quarto/buch_hs23/daten/ess_19_ch.csv")
+```
+
+\
+
+2.  Repetition `$`:
+
+Das Dollarzeichen ermöglicht, einfach auf Variablen in einem Datensatz zuzugreifen:
+
+```{r}
+# Variable agea im Datensatz d.ess, 1. Fall
+d.ess$agea[1]
+```
+
+\
+
+3.  Kreuztabelle mit Geschlecht und Internetnutzung:
+
+Wir orientieren uns wieder am Codebook, um NA zu definieren. Diese Codezeilen sind auch aus dem R-Skript manuell ins Quarto-Dokument kopiert:
+
+```{r}
+# Alter
+d.ess$agea[d.ess$agea == 999] <- NA
+d.ess$yrbrn[d.ess$yrbrn > 7000] <- NA
+
+# Bildung
+d.ess$eduyrs[d.ess$eduyrs > 70] <- NA
+d.ess$eisced[d.ess$eisced > 7 | d.ess$eisced == 0] <- NA
+
+# Internetnutzung
+table(d.ess$netusoft) # es gibt keine NA?!
+d.ess$netusoft[d.ess$netusoft >= 7] <- NA
+table(d.ess$netusoft, useNA = "always")
+
+# Geschlecht
+table(d.ess$gndr) # auch hier gibts nur 1 und 2...
+d.ess$gndr[d.ess$gndr == 9] <- NA
+
+# uemp3m
+table(d.ess$uemp3m, useNA = "always")
+d.ess$uemp3m[d.ess$uemp3m > 2] <- NA
+table(d.ess$uemp3m, useNA = "always")
+
+# ...weitere Variablen...
+d.ess$pplhlp[d.ess$pplhlp > 10] <- NA
+d.ess$ppltrst[d.ess$ppltrst > 10] <- NA
+d.ess$wkhtot[d.ess$wkhtot >= 666] <- NA
+```
+
+::: callout-important
+## R-Skript erstellen
+Falls Sie den Code, mit dem der Datensatz eingelesen und die fehlenden Werte definiert werden, noch nicht in einem R-Skript (z.B. `datenaufbereitung_ess.R`) definiert haben, erledigen Sie das jetzt noch.
+:::
+
+Anschliessend erstellen wir die Tabelle. In einem ersten Schritt verwenden wir die `table()`-Funktion und erhalten eine Tabelle mit absoluten Werten. 
+
+```{r eval = F}
+# Internetnutzung
+table(d.ess$netusoft) # es gibt keine NA?!
+d.ess$netusoft[d.ess$netusoft >= 7] <- NA
+table(d.ess$netusoft, useNA = "always")
+
+# Geschlecht
+table(d.ess$gndr) # auch hier gibts nur 1 und 2...
+d.ess$gndr[d.ess$gndr == 9] <- NA
+```
+
+Wenn wir Tabellen (bzw. Kontingenztabellen) darstellen, so ist die Konvention dass "bei gerichteten Beziehungen die Ausprägungen der unabhängigen Variablen (X) den Spalten zugeordnet werden und die Ausprägungen der abhängigen Variablen (Y) den Reihen zugeordnet werden" [@Diaz-Bone2023, 70]. Die Aufgabenstellung spricht zwar nicht von einer gerichteten Beziehung, dennoch macht es Sinn, Geschlecht als unabhängige Variable anzusehen (und nicht anzunehmen, dass die Internetnutzung das Geschlecht bestimmt). Dieser Überlegung folgend richten wir auch die Randsummen ein: Uns interessiert die Verteilungen der Internetnutzung nach Geschlecht und deshalb sollen sich die Anteilswerte pro Ausprägung des Geschlechts auf 100% summieren.
+
+```{r}
+table(d.ess$netusoft, d.ess$gndr, useNA = "always")
+addmargins(table(d.ess$netusoft, d.ess$gndr), 1) # 1: Randsummen ergänzen (nur Spalten)
+```
+
+Da es keine NA gibt, wird für eine bessere Lesbarkeit nachfolgend das Argument `useNA = "always"`weggelassen -- das sollten Sie jedoch nur tun, wenn Sie sich sicher sind, dass es keine NA gibt! Danach ergänzen wir die relativen Werte, das können wir mit Base R machen:
+
+```{r eval=FALSE}
+prop.table(table(d.ess$netusoft, d.ess$gndr), 2) # 2 damit pro Geschlecht (Geschlecht ist 100%)
+addmargins(prop.table(table(d.ess$netusoft, d.ess$gndr), 2), 1)
+#oder
+t <- table(d.ess$netusoft, d.ess$gndr)
+prop.table(t, 2)
+# wir können das auch noch runden und in %-Werten ausgeben...
+round(addmargins(prop.table(table(d.ess$netusoft, d.ess$gndr), 2), 1) * 100, 2)
+```
+
+Stattdessen können wir auch den Pipe-Operator und die Funktion `with()` von "tidyverse" verwenden -- hier handelt es sich um eine Mischung von tidyverse-Funktionen und Base R. Unter einer "Pipe" können Sie sich eine Röhre vorstellen, in die Sie oben die Daten `d.ess` einfüllen. Die Daten durchlaufen dann die gesamte "Pipe", d.h. alle Funktionen werden in der definierten Reihenfolge ausgeführt (zuerst `table()`, dann `prop.table()` und `addmargins()`). Der Punkt `.` bedeutet, dass der Datensatz genommen wird, wie er an dieser Stelle der Pipe vorliegt.
+
+```{r}
+library(tidyverse)
+t.ant <- d.ess %>% 
+  with(table(netusoft, gndr)) %>% 
+  prop.table(., 2) %>% 
+  addmargins(., 1)
+```
+
+Wie können wir diese Tabelle interpretieren? Die Internetnutzung variiert kaum in Abhängigkeit des Geschlechts. Einzig der Anteil der Personen, die das Internet kaum verwenden, ist bei den Männern viel höher als bei den Frauen.
+
+\
+
+4.  Die Tablle mittels `CrossTable()`:
+
+```{r}
+#install.packages("gmodels")
+library(gmodels)
+# ?CrossTable
+```
+
+Ein Blick in die Hilfeseite zeigt, dass wir vor allem die Argumente `FALSE` setzen müssen, die wir nicht in unserer Tabelle haben wollen (z.B. keine Spalten- und Tabellenprozente, keine Angaben zu Chi-Quadrat). Wenn wir nur die Anteilswerte betrachten wollen, können wir den Inhalt `$prop.tbl` aufrufen. Leider besteht jedoch kein Argument, mit dem wir die Randverteilung gemäss der Tabelle oben darstellen könnten, dafür können wir mit dem Argument `digits =`die Anzahl Stellen nach dem Komma leicht definieren.
+
+```{r}
+t.netusoft.gndr <- CrossTable(d.ess$netusoft, d.ess$gndr,
+                              digits = 2,
+                              prop.r = F,
+                              prop.t = F,
+                              prop.chisq = F)
+str(t.netusoft.gndr)
+t.netusoft.gndr$prop.tbl
+```
+
+::: callout-important
+## CrossTable() und fehlende Werte
+Der Umgang mit fehlenden Werten ist in der Funktion `CrossTable()` nicht spezifiziert. Sollten Sie also einen fehlenden Wert in einer Variablen haben, müssen Sie diesen selber "entfernen". Hier ein fiktives Beispiel: Wäre in Fall 45 in der Variable "netusoft" ein fehlender Wert vorhanden, müssten wir diesen in beiden Variablen manuell ausschliessen:
+:::
+
+```{r eval=FALSE}
+CrossTable(d.ess$netusoft[-45], d.ess$gndr[-45],
+           digits = 2,
+           prop.r = F,
+           prop.t = F,
+           prop.chisq = F)
+```
+
+\
+
+5.  Chi-Quadrat Test mittels `CrossTable()`:
+
+Zuerst grundsätzlich: Was machen wir hier? Wir berechnen einerseits den Chi-Quadrat-Wert. Dieser erfasst die Stärke eines ungerichteten Zusammenhangs zwischen zwei kategorialen Variablen (auch für Variablen mit mehr als zwei Ausprägungen) [@Diaz-Bone2023, S.82]. Diesen Zusammenhang wollen wir für die Grundgesamtheit "testen". Wir prüfen die Nullhypothese, dass die beiden Variablen in der Grundgesamtheit statistisch voneinander unabhängig sind. Die Alternativhypothese lautet entsprechend, dass in der Grundgesamtheit die beiden Variablen statistisch zusammenhängen [@Diaz-Bone2023, S.177].
+
+```{r}
+chi2test.res <- CrossTable(d.ess$netusoft, d.ess$gndr, 
+                           digits = 2,
+                           prop.r = F,
+                           prop.t = F,
+                           prop.chisq = F,
+                           chisq = T)
+```
+
+::: callout-important
+## Achtung: Stichprobe!
+Wir tun im Moment so, als würde es sich bei den vorliegenden Daten um ein Abbild der Grundgesamtheit handeln. Das ist nicht der Fall, es handelt sich um eine Stichprobe und im Datensatz sind drei Gewichtungsvariablen enthalten. Diese müssten bei einer korrekt durchgeführten Analyse einbezogen werden. Da Sie in diesem Kurs R-Kenntnisse erwerben sollen und Themen der Inferenzstatistik nicht im Fokus stehen, werden wir diese vereinfachte Version fortführen (p.s. der Chi-Quadrat-Test wird unter Berücksichtigung der Gewichtungsvariablen signifikant!).
+:::
+
+Was ist im Objekt "chi2test.res" enthalten?
+
+```{r}
+str(chi2test.res)
+```
+
+Neben den Tabellenwerten (Fallzahlen sowie den Spalten-, Reihen- und Tabellenprozenten) finden wir auch den Inhalt "chisq". Auf dieses können wir mit `$` zugreifen...
+
+```{r}
+chi2test.res$chisq
+```
+
+...und darin auch die "Pearson Residuals" (Abweichung zwischen tatsächlichen und theoretischen Werten, siehe Hilfeseite der `chisq.test()`-Funktion):
+
+```{r}
+(chi2test.res$chisq$observed - chi2test.res$chisq$expected) / sqrt(chi2test.res$chisq$expected)
+chi2test.res$chisq$residuals
+```
+
+Wie können wir die Ergebnisse interpretieren? Als erstes beschreiben wir die Ergebnisse: Wir erhalten einen Chi-Quadrat Wert gemäss Pearson von...
+
+```{r}
+chi2test.res$chisq$statistic
+```
+
+Es besteht ein Zusammenhang zwischen den beiden Variablen Geschlecht und Internetnutzung. Allerdings ist die Grössenordnung dieses Wertes nicht nur durch eine Stärke des Zusammenhangs bestimmt, sondern auch durch das Tabellenformat [@Diaz-Bone2023, 86]. Dieses Tabellenformat wird über die Freiheitsgrade (df) deutlich: (i-1) x (j-1). Oder eben:
+
+```{r}
+chi2test.res$chisq$parameter
+```
+
+Möchte man die Stärke einschätzen (oder auch Zusammenhänge und deren Stärke miteinander vergleichen), sollte man auf Cramer's V zurückgreifen, da diese Masszahl auf ein Bereich von 0 bis 1 normiert ist (etwa über die Funktion `cramersV()` im Paket „lsr").
+
+```{r}
+#install.packages("lsr")
+library(lsr)
+cramersV(d.ess$netusoft, d.ess$gndr)
+```
+
+Cramer's V verweist auf einen schwachen Zusammenhang der Variablen Geschlecht und Internetnutzung.
+
+Zweitens gehen wir zu inferenzstatistischen Interpretation über (zum "Testen"). Wir könnten zuerst den Chi-Quadrat Test "von Hand" durchführen:
+
+(1) Hypothesen:\
+    H0: In der Grundgesamtheit besteht kein Zusammenhang zwischen Geschlecht und Internetnutzung.\
+    H1: Es besteht in der Grundgesamtheit ein Zusammenhang zwischen Geschlecht und Internetnutzung.
+
+(2) Stichprobenverteilung:\
+    Wir bestimmen die Stichprobenverteilung mittels des "parameter"-Unterobjektes: Eine Chi-Quadrat-Verteilung mit 4 Freiheitsgrade. Die Anzahl Freiheitsgrade ist der einzige explizite Parameter Verteilung [@Diaz-Bone2023, 177].
+
+```{r}
+chi2test.res$chisq$parameter
+```
+
+(3) Annahme- und Rückweisungsbereich:\
+    Der Test soll mit einem Signifikanzniveau von 5% durchgeführt werden:
+
+```{r}
+qchisq(0.95, 4, lower.tail = T)
+```
+
+(4) Auswertung der Stichprobe und Testentscheidung: Der Stichprobenkennwert beträgt
+
+```{r}
+chi2test.res$chisq$statistic
+```
+
+Dieser Wert fällt in den Annahmebereich (da 2.922134 \< 9.487729) und der Stichprobenbefund ist nicht signifikant. Die H0 muss verworfen werden.
+
+Dieses Vorgehen entspricht allerdings nicht der Realität des statistischen Arbeitens. In der Praxis orientieren wir uns direkt am "p-Wert". Dieser Wert liegt bei...
+
+```{r}
+chi2test.res$chisq$p.value
+```
+
+Die Interpretation ist nun wie folgt: Erst bei p-Werten \< 0.05 können wir auf einem 95% Signifikanzniveau annehmen, dass auch in der Grundgesamtheit ein Zusammenhang zwischen den Variablen vorliegt [vgl. auch @Manderscheid2017, 165f]. Daher auch hier: Das Ergebnis ist nicht signifikant.
+
+Der p-Wert dreht jedoch die Testlogik etwas um. Konkret sagt dieser Wert nämlich aus, dass eine...
+
+```{r}
+round(chi2test.res$chisq$p.value, 3) * 100
+```
+
+-prozentige Wahrscheinlichkeit besteht, dass der berechnete Zusammenhang in der Stichprobe zufällig aufgetreten ist.

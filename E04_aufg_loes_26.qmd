@@ -1,0 +1,565 @@
+# Woche 3 {.unnumbered}
+
+*Daten generieren und auswählen*
+
+## Lernziele
+
+In der kommenden Woche lernen Sie zwei neue Aspekte der Arbeit mit R kennen und üben diese: Zugreifen auf einzelne Elemente und Teilen von Datenobjekten (*Indizieren* und *Subsetting*). Dafür nutzen Sie das data.frame-Objekt, das Sie letzte Woche erstellt haben.
+
+Die Lernziele:
+
+- In R normalverteilte Zufallsvariablen generieren.
+
+- Die Logik des Stichprobenfehlers mit R nachvollziehen und erklären.
+
+- Auf verschiedene Arten auf einzelne Elemente eines Objekts zugreifen.
+
+- Attribute von Objekten abfragen.
+
+## Aufgaben
+
+1.  Erstellen Sie drei normalverteilte Vektoren mit je 10, 1000 und 100'000 Datenpunkten (Funktion `rnorm()`). Alle Vektoren repräsentieren Körpergrössen. Schauen Sie sich je den Output der summary-Funktion (Funktion `summary()`) an und berechnen Sie den Standardfehler. Was stellen Sie fest?
+
+## Hinweise zum Indizieren & Subsetting
+
+Indizieren und Subsetting von Elementen können wir potenziell auf alle Objekte anwenden. Da wir letzte Woche den Objekttyp data.frame kennengelernt haben, werden wir das Zugreifen auf Elemente an diesem Objekttyp ausprobieren. Untenstehend werden zwei Beispieldatensätze erstellt, um indizieren und subsetting daran zu erläutern.
+
+```{r include=FALSE}
+# Beispiel 1
+# id zur Identifikation der Fälle (z.B. Personen)
+v.id <- seq(1, 100)
+
+# politische Einstellung der Person
+# Spektrum von 1 = links bis 10 = rechts
+v.pol <- runif(100, 1, 10)
+
+# Stromverbrauch der Person pro Jahr in Kwh
+v.strom <- rnorm(100, 7520.17, 500)
+
+# Wasserbrauch der Person pro Tag in Liter
+v.wasser <- rnorm(100, 296, 30)
+
+# Einkommen der Person pro Jahr
+v.eink <- rnorm(100, 86645, 15000)
+
+# Wohngegend der Personen
+v.wohn <- c(rep('stadt', 43),
+            rep('aglo', 27),
+            rep('land', 30)) 
+d.pol <- data.frame(v.id, v.pol, v.strom, v.wasser, v.eink, v.wohn,
+                    row.names = v.id)
+# erste fünf Fälle anzeigen
+head(d.pol)
+
+# v.pol runden (-> neue Variable)
+d.pol$pol.r <- round(d.pol$v.pol)
+head(d.pol)
+
+# Beispiel 2 ----
+# Geschlecht: 1 männlich, 2 weiblich, 3 divers
+v.geschl <- sample(c(rep(1, 48), # mit sample() durchmischt R die Zahlen zufällig
+                     rep(2, 44), 
+                     rep(3, 3), 
+                     rep(NA, 5)))
+# Bildung: 1 keine, 2 Grundschule, 3 Sekundarstufe, 4 Tertiärausbildung
+v.bild <- sample(c(rep(1, 4), 
+                   rep(2, 18), 
+                   rep(3, 36), 
+                   rep(4, 39), 
+                   rep(NA, 3)))
+
+# Einkommensklasse: Von 1 bis 5, Breiten nicht definiert 
+v.eink.kl <- sample(c(rep(1, 6), 
+                      rep(2, 29), 
+                      rep(3, 28), 
+                      rep(4, 30), 
+                      rep(5, 4),
+                      rep(6,3)))
+
+# CH-Bürgerschaft: 1 Ja, 0 Nein
+v.ch <- sample(c(rep(1, 60), rep(0, 40)))
+
+v.reg <- sample(c(rep("Tessin", 4), 
+                   rep("Région Lemanique", 13), 
+                   rep("Espace Mittelland", 18),
+                   rep("Nordwestschweiz", 9),
+                   rep("Zürich", 26),
+                   rep("Ostschweiz", 11),
+                   rep("Zentralschweiz", 15),
+                   rep(NA, 4)))
+
+d.mig <- data.frame(v.geschl, v.bild, v.eink.kl, v.ch, v.reg)
+head(d.mig)
+```
+
+i.  Beim *Indizieren* (auswählen von Daten mittels Positionsangabe) wählen wir anhand von Objektdimensionen die Elemente aus. Die Position ist in *eckigen Klammern* anzugeben. Für eindimensionale Objekte ist nur eine Position notwendig, bei zweidimensionalen Objekten werden die Positionen auf den beiden Dimensionen kommagetrennt genannt. Zum Beispiel können wir die fünfte Ausprägung (also der fünfte Fall) des Vektors Bildungsstufe aufrufen. Da ein Vektor ein eindimensionales Objekt ist, reicht die Positionsangabe "5" aus:
+
+```{r}
+v.bild[5]
+```
+
+Greifen wir auf das fünfte Element eines Vektors von 11 bis 20 zu, ist das "Ergebnis" 15:
+
+```{r}
+v.bsp <- 11:20
+v.bsp[5]
+```
+
+Dasselbe Prinzip können wir nun auch auf data.frames (oder Matrizen) anwenden. Dort greifen wir aber auf ein zweidimensionales Objekt zu, deshalb müssen wir zwei Angaben nennen, um nicht die ganze jeweilige Spalte oder Zeile zu erhalten (vor dem Komma Zeilen, nach dem Komma Spalten). Das funktioniert nicht nur mit numerischen Angaben, sondern auch mit den Spalten- und Zeilennamen!
+
+```{r}
+d.pol[1, ]
+d.pol[, 1]
+d.pol[1, 2]
+d.pol[2, 1]
+d.pol[1, ]
+d.pol[, 4]
+d.pol[, "v.pol"]
+```
+
+Die Logik können wir erweitern und mit bereits bekannten Funktionen kombinieren:
+
+```{r}
+d.pol[1:10, c(3, 4)]
+colnames(d.pol)
+d.pol[c(4, 5), c("v.pol", "v.eink")]
+```
+
+ii. Statt mit eckigen Klammern können wir auch mit dem *\$-Operators* auf Spalten (Variablen) zugreifen. Wie bereits in Woche 2 gesehen, funktioniert dies nur für data-frame-Objekte, nicht aber für Matrizen.
+
+```{r}
+mean(d.pol$v.wasser)
+cor(d.pol$v.wasser, d.pol$v.strom)
+```
+
+Die beiden Möglichkeiten können wir kombinieren, um zum Beispiel den fünften Fall der Wasser-Variable im data-frame-Objekt d.pol aufzurufen:
+
+```{r}
+d.pol$v.wasser[5]
+```
+
+Eine Positionsangabe ist ausreichend, weil die Variable eindimensional ist.
+
+iii. Es ist mit *which()* auch möglich, in einem Vektor nach Elementen mit bestimmten Eigenschaften zu suchen. Dazu bruachen wir logische Bedingungen:
+
+```{r}
+# Welche Fälle stammen aus dem Tessin?
+which(d.mig$v.reg == "Tessin")
+
+# Welche Fälle stammen aus dem Tessin und sind Frauen?
+which(d.mig$v.reg == "Tessin" & d.mig$v.geschl == 2)
+
+# Welche Fälle im Datensatz sind Frauen oder Ausländer*innen
+# und aus der tiefsten Einkommensklasse...
+which((d.mig$v.geschl == 1 | d.mig$v.ch == 0) &
+        d.mig$v.eink.kl == 1)
+```
+
+R gibt die Position im Vektor aus. Damit wir den Inhalt an dieser Position sehen, müssen wir indizieren. Dadurch ist es möglich einen Teildatensatz mit Personen, die ein überdurchschnittliches Einkommen aufweisen, zu erstellen (*subsetting*):
+
+```{r}
+d.mig.t1 <- d.mig[which(d.mig$v.eink.kl >  mean(d.mig$v.eink.kl)), ]
+d.mig.t2 <- d.mig[d.mig$v.eink.kl > mean(d.mig$v.eink.kl), ] # Kurzversion
+
+# noch mit der Auswahl von bestimmten Variablen
+d.mig.t3 <- d.mig[
+  d.mig$v.eink.kl > mean(d.mig$v.eink.kl),
+  1:3
+]
+```
+
+2.  Erstellen Sie einen Datensatz mit sozialwissenschaftlich interessanten Inhalten (Funktion `data.frame()`). Der Datensatz soll aus fünf Variablen bestehen und 100 Fälle umfassen. Nutzen Sie dazu die verschiedenen Funktionen, die wir bisher kennengelernt haben (`c()`, `rep()`, `seq()`, und Zufallsvariablen, ...). Die fünfte Variablen soll dem Datenformat character entsprechen.
+
+3.  Wenden Sie die Funktionen `dim()`, `names()`, `str()`, `class()`, `summary()` und `typeof()` auf Ihren Datensatz an. Welche Informationen erhalten Sie? Welche Outputs sind sinnvoll, welche weniger sinnvoll?
+
+4.  Wählen Sie aus Ihrem Datensatz die Fälle 20 bis 30 sowie die zweite und dritte Variable aus (ohne einen Teildatensatz zu erstellen). Nutzen Sie zwei verschiedene Varianten!
+
+5.  Suchen Sie Fälle in Ihrem Datensatz unter der Verwendung von mindestens zwei Variablen. Diese Fälle sollen "spezielle" oder "interessante" Beispiele repräsentieren. Begründen Sie Ihre Wahl! Falls Sie keine solche Fälle in Ihrem Datensatz finden, fügen Sie solche hinzu (indizieren Sie und weisen Sie einen neuen Wert zu).
+
+6.  Definieren Sie eine logische Bedingung, die Ihnen erlaubt, Ihren Datensatz anhand der Character-Variablen in zwei Gruppen zu teilen. Dies ist eine erste Variante um Teildatensätze zu erstellen (d.xy.t.1 und d.xy.t.2). Teilen Sie dann als zweite Variante Ihren Datensatz anhand einer anderen logischen Bedingung in zwei andere Gruppen (d.xy.t.3 und d.xy.t.4). Nutzen Sie hierfür, wenn möglich, zwei numerische Variablen.
+
+7.  Berechnen Sie den Mittelwert einer Variablen für alle Teildatensätze. Was wären (kurze) sozialwissenschaftliche Interpretationen Ihrer Ergebnisse?
+
+8.  Wählen Sie einen Teildatensatz aus und berechnen Sie den Mittelwert einer Variable für einen Teil der Fälle, ohne jedoch zuerst einen Teildatensatz als Objekt zu speichern.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+- Was ist Ihnen klar geworden?
+
+- Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+## Lösungen
+
+```{r Vorbereitung}
+rm(list = ls()) # Workspace loeschen
+options(scipen = 999) # schaltet wissenschaftliche Schreibweise aus
+```
+
+1.  Normalverteilte Zufallsvariablen
+
+Unsere Variablen repräsentieren die Körpergrösse von Frauen und Männern (Sie haben wahrscheinlich mit einer Variable geübt). Sie sind *normalverteilt* -- das heisst, die Werte gruppieren sich um den Mittelwert von 170cm. Kleine und grosse Werte treten mit zunehmender Entfernung vom Mittelwert immer seltener auf. Normalverteilungen (Funktion `rnorm()`) definieren sich über die beiden expliziten Parameter des arithmetischen Mittels und der Standardabweichung. Je grösser die Fallzahl, desto näher liegt das arithmetische Mittel der gezogenen Elemente (und auch die Standardabweichung) an den expliziten Parametern. Zudem sehen wir bei grossen Fallzahlen die typische Glockenform.
+
+...mit je 10 Fällen (um sich die Verteilung besser vorstellen zu können, ist auch ein Histogramm angefügt, Grafiken vertiefen wir in Woche 8):
+
+```{r Aufgabe 1.1}
+m.mean <- 178 # Quelle m.mean und w.mean: https://dam-api.bfs.admin.ch/hub/api/dam/assets/30305714/master, aufgerufen am 01.10.25
+m.sd <- 8 # Fantasiezahlen für sd
+w.mean <- 166
+w.sd <- 6
+
+v.1.m <- rnorm(n = 10, mean = m.mean, sd = m.sd)
+summary(v.1.m)
+hist(v.1.m)
+
+v.1.w <- rnorm(n = 10, mean = w.mean, sd = w.sd)
+summary(v.1.w)
+hist(v.1.w)
+```
+
+Der Schwerpunkt der Körpergrösse der Frauen liegt anders (aufgrund des unterschiedlichen Durchschnittswerts). Zudem sind die Verteilungen unterschiedlich breit, was aber mit 10 Fällen noch nicht gut erkennbar ist (aufgrund der unterschiedlichen Standardabweichungen). Untenstehend wird erstmal nur mit der Verteilung der Frauen weiter gearbeitet. Die Verteilung der Männer wird abschliessend nochmals aufgegriffen, um zu zeigen, inwiefern sich die beiden unterscheiden.
+
+...mit 1000 Fällen:
+
+```{r Aufgabe 1.2}
+v.2.w <- rnorm(n = 1000, mean = w.mean, sd = w.sd)
+summary(v.2.w)
+hist(v.2.w, breaks = 100)
+```
+
+...mit 100'000 Fällen:
+
+```{r Aufgabe 1.3}
+v.3.w <- rnorm(n = 100000, mean = w.mean, sd = w.sd)
+summary(v.3.w)
+hist(v.3.w, breaks = 100)
+```
+
+::: callout-important
+## Es gibt noch andere Verteilungen...
+
+*Binomialverteilung (auch Bernoulli-Verteilung)*
+
+`rbinom()` erstellt zufällige binomiale Verteilungen, die für Zähldaten zu verwenden sind. Ein klassisches Beispiel sind Münzwürfe.
+
+```{r Aufgabe 2.4}
+hist(rbinom(n = 100, size = 1, prob = 0.5))
+```
+
+*Uniforme Verteilung*
+
+Bei der *Gleichverteilung* hat jede Ausprägung dieselbe Auftrittswahrscheinlichkeit. Zum Beispiel ist die Wahrscheinlichkeit beim Würfeln (mit einem fairen Würfel) für jede Augenzahl 1/6:
+
+```{r}
+hist(runif(n = 100, min = 1, max = 6))
+```
+:::
+
+*Exkurs: Grafische Darstellung von Verteilungen (Vertiefung folgt in Woche 8)*
+
+Wir können die Histogramme noch weiter ausarbeiten: Um sie besser vergleichen zu können, sollen zwei Histogramme dieselbe "Spannbreite" in der x-Achsen haben, jeweils 100 Balken aufweisen, aber unterschiedlich eingefärbt sein. Dazu verwenden wir die Argumente `break =`, womit wir die Anzahl der Balken im Histogramm bestimmen können, `xlim =`, das die "Spannbreite" der x-Achse definiert und col für die Farbgebung. Zudem fügen wir mit `xlab` und `ylab` sinnvolle Achsenbeschriftungen sowie einen Titel (`main`) hinzu. In der folgenden Abbildung sehen Sie den Unterschied aufgrund der verschiedenen Parametern gut:
+
+```{r exkurs}
+v.3.m <- rnorm(n = 100000, mean = m.mean, sd = m.sd)
+
+hist(v.3.m,
+     col = "coral",
+     main = "Vergleich Männer und Frauen",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     breaks = 100,
+     xlim = c(140, 220))
+
+# zweites Histogramm dazu - das funktioniert nur bei knitten!
+# leicht transparente Farbe, damit das zweite Histogramm das erste nicht verdeckt
+col2rgb("blue") # Werte unten einsetzen
+new.color <- rgb(red = 0, green = 0, blue = 255, alpha = 255/2,
+                 maxColorValue = 255) # RGB Spannbreite, muss definiert sein
+hist(v.3.w,
+     breaks = 100,
+     col = new.color,
+     add = T)
+
+legend("topright", 
+       legend = c("Frauen", "Männer"),
+       col = c(new.color, "coral"),
+       cex = 0.75,
+       pch = 15,
+       pt.cex = 1.5)
+```
+
+Zurück zu Aufgabe 1:
+
+```{r}
+rbind(summary(v.1.w), summary(v.2.w), summary(v.3.w))
+```
+
+Wir sehen in der obenstehenden Tabelle, dass der Durchschnitt (Mean) deutlich variiert. Wir haben unterschiedlich viele Zahlen aus der theoretischen Normalverteilung mit den Parametern Mittelwert (166) und Standardabweichung (6) gezogen. In der Tendenz kommt der empirische Mittelwert (in der obenstehenden Tabelle) mit zunehmender Fallzahl näher am theoretischen Mittelwert (Parameter der Verteilung) zuliegen.
+
+Den "Stichprobenfehler" gibt die *Streuung von Mittelwerten* (oder auch Anteilswerten) um den Mittelwert an (es handelt sich um eine Standardabweichung der Stichprobenkennwerte, wobei Stichprobenfehler ein eher umgangssprachlicher Begriff ist). Die "klassische" Standardabweichung hingegen ist das Mass für die *Streuung der einzelnen Werte* um den Mittelwert. Der Standardfehler wird zum Beispiel für die Berechnung von t-Test-Statistiken gebraucht. Die Formel ist:
+
+${\sigma}\bar{_x} = \frac{\sigma}{\sqrt{n}}$
+
+Wir berechnen das:
+
+```{r}
+w.sd / sqrt(10) # wir nehmen hier als GG die theoretische Normalverteilung mit den entsprechenden Parametern
+w.sd / sqrt(1000)
+w.sd / sqrt(100000)
+```
+
+Wir sehen, dass der Stichprobenfehler mit zunehmender Stichprobengrösse kleiner wird. In der Praxis schätzt man jedoch die Standardabweichung in der Grundgesamtheit, da im Normalfall keine theoretischen Werte gegeben sind.
+
+2.  Dataframes erstellen
+
+Zwei Beispiele:
+
+```{r Aufgabe 2.1}
+# id zur Identifikation der Fälle (z.B. Personen)
+v.id <- seq(1, 100)
+
+# politische Einstellung der Person
+# Spektrum von 1 = links bis 10 = rechts
+v.pol <- runif(100, 1, 10)
+
+# Stromverbrauch der Person pro Jahr in Kwh
+v.strom <- rnorm(100, 7520.17, 500)
+
+# Wasserbrauch der Person pro Tag in Liter
+v.wasser <- rnorm(100, 296, 30)
+
+# Einkommen der Person pro Jahr
+v.eink <- rnorm(100, 86645, 15000)
+
+# Wohngegend der Personen
+v.wohn <- c(rep('stadt', 43),
+            rep('aglo', 27),
+            rep('land', 30)) 
+d.pol <- data.frame(v.id, v.pol, v.strom, v.wasser, v.eink, v.wohn,
+                    row.names = v.id)
+# erste fünf Fälle anzeigen
+head(d.pol)
+
+# v.pol runden (-> neue Variable)
+d.pol$pol.r <- round(d.pol$v.pol)
+head(d.pol)
+```
+
+```{r Aufgabe 2.2}
+# Geschlecht: 1 männlich, 2 weiblich, 3 divers
+v.geschl <- sample(c(rep(1, 48), # mit sample() durchmischt R die Zahlen zufällig
+                     rep(2, 44), 
+                     rep(3, 3), 
+                     rep(NA, 5)))
+# Bildung: 1 keine, 2 Grundschule, 3 Sekundarstufe, 4 Tertiärausbildung
+v.bild <- sample(c(rep(1, 4), 
+                   rep(2, 18), 
+                   rep(3, 36), 
+                   rep(4, 39), 
+                   rep(NA, 3)))
+
+# CH-Staatsbürgerschaft: 1 Ja, 0 Nein
+v.ch <- sample(c(rep(1, 60), rep(0, 40)))
+
+# Einkommen der Person pro Jahr
+v.eink <- rnorm(100, 86645, 15000)
+
+v.alter <- runif(100, 18, 65) 
+
+v.reg <- sample(c(rep("Tessin", 4), 
+                   rep("Région Lemanique", 13), 
+                   rep("Espace Mittelland", 18),
+                   rep("Nordwestschweiz", 9),
+                   rep("Zürich", 26),
+                   rep("Ostschweiz", 11),
+                   rep("Zentralschweiz", 15),
+                   rep(NA, 4)))
+
+
+
+d.mig <- data.frame(v.geschl, v.bild, v.ch, v.eink, v.alter, v.reg)
+head(d.mig, n = 10) # die ersten 10 Fälle anzeigen
+```
+
+3. Funktionen zur "Erkundung" der Daten
+
+```{r}
+dim(d.mig)
+```
+
+Die Funktion `dim()` gibt die Anzahl Dimensionen des Datensatzes aus -- das heisst die Zeilen- und Spaltenzahl, was der Anzahl Fällen und Variablen im Datensatz entspricht. Auf diese Dimensionen können Sie mittels `[]` zugreifen.
+
+```{r}
+d.mig[c(2, 3), c(2, 4)]
+d.mig[101, 6] # liegt ausserhalb der vorhandenen Dimensionen
+```
+
+```{r}
+names(d.mig)
+```
+
+Die Funktion `names()` gibt die Namen der Spalten aus, also die Variablennamen. Alternativ können wir auch die Funktion `colnames()` verwenden, die sich spezifisch nur auf die Spaltennamen bezieht (Pendant zu `rownames()`). Diese können wir dann auch verändern:
+
+```{r}
+colnames(d.mig)[4] <- "v.ch.neu"
+colnames(d.mig)
+```
+
+Die Funktion `names()` gibt die Namen der Zeilen bei `data.frames` nicht aus. Diese könnten wir mit `rownames()` aufrufen und auch verändern...
+
+```{r}
+row.names(d.mig)
+row.names(d.mig)[3] <- "Fall drei"
+row.names(d.mig)
+```
+
+```{r}
+str(d.mig)
+```
+
+Die Funktion `str()` gibt die Struktur des Datensatzes und die enthaltenen Elemente (hier Variablen des Datensatzes) aus. Machen die Datenarten Sinn? Nein, denn die Durchschnitt von v.geschl, v.bild, v.eink.kl und v.ch zu berechnen machen keinen Sinn! Wir müssen dringend umkodieren (wir nutzen erstmal `as.character()`, wir werden im Verlauf des Seminars aber noch eine weitere Möglichkeit kennenlernen):
+
+```{r}
+d.mig$v.geschl <- as.character(d.mig$v.geschl)
+d.mig$v.bild <- as.character(d.mig$v.bild)
+d.mig$v.ch <- as.character(d.mig$v.ch)
+```
+
+
+Mittels `$`-Operator können Sie darauf zugreifen. Sie sehen anhand dieser Übersicht rasch, ob eine Umwandlung numerischer in kategoriale Datentypen (oder umgekehrt) notwendig ist.
+
+
+```{r}
+class(d.mig)
+```
+
+Die Funktion `class()` beschreibt die Klasse des Objektes, die  bestimmte Eigenschaften impliziert. Die Klasse "data.frame" impliziert zum Beispiel, dass es sich um ein zweidimensionales Objekt handelt, das unterschiedliche Datentypen vereinen kann.
+
+
+Eine weitere nützliche Funktion ist `summary()`. Sie ermöglicht eine Übersicht über alle Variablen im Datensatz und bietet einen auf die Datenart angepassten Output:
+
+```{r}
+summary(d.mig)
+```
+
+Die Funktion gibt für jede Variable eine Zusammenfassung aus. Sie berechnet für jede metrische Variable den Mittelwert, sowie die Lage- und Streuungsmasse.  Bei Character-Daten wird die Klasse ausgegeben. Zudem wird die Anzahl fehlender Werte (`NA`) angezeigt, falls welche vorhanden sind. 
+
+```{r}
+typeof(d.mig)
+```
+
+Die Funktion `typeof()` beschreibt, wie R die Daten abspeichert, die im Objekt enthalten sind. Hier als Liste, d.h. "Bündel von Vektoren". In der Praxis wird diese Funktion im Rahmen von Datenanalysen kaum verwendet. 
+
+4. Variablen und Fälle auswählen
+```{r results = 'hide'}
+# Variante 1: Indizieren (bevorzugt zu verwenden, da einfach)
+d.mig[20:30, c(2, 3)]
+# auch direkt mit colnames
+d.mig[20:30, c("v.bild", "v.ch")]
+
+# Variante 2: $-Operator und indizieren (in der Praxis zu komplex)
+cbind(d.mig$v.bild[20:30], d.mig$v.ch[20:30])
+```
+Es gibt noch weitere einfache(re) Varianten:
+
+```{r results = 'hide'}
+#  mit subset() (in der Praxis zu komplex)
+subset(d.mig,
+  subset = v.id > 19 & v.id < 31,
+  select = colnames(d.mig)[c(2, 3)]
+)
+```
+
+...oder mit dem Paket Tidyverse (siehe [hier](https://dplyr.tidyverse.org/)).
+
+```{r}
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+Die Funktion `filter()` bezieht sich auf Zeilen, `select()` auf Spalten. Mit dem Pipe-Operator `%>%` ist es möglich, mehrere Operation (wie durch eine Röhre, von oben nach unten) aneinander zu hängen:
+
+```{r results = 'hide'}
+d.mig %>%
+  filter(v.id %in% 20:30 ) %>%
+  select(v.bild, v.ch)
+```
+
+5. Suchen von "speziellen" oder "interessanten" Fällen:
+
+Für eine Übersicht lassen wir uns erst eine Tabelle ausgeben und suchen danach nach den Fällen:
+
+```{r}
+table(d.mig$v.geschl, useNA = "always")
+which(d.mig$v.geschl == "3")
+```
+Noch spezieller könnten diese Fälle sein, wenn sie zum Beispiel ein ausgeprägt hohes oder tiefes Bildungsniveau aufweisen:
+
+```{r}
+which(d.mig$v.geschl == "3" & (d.mig$v.bild == "1" | d.mig$v.bild == "4"))
+```
+Da noch keine Fälle vorhanden sind, fügen wir beim ersten Fall mit Geschlechtsausprägung "3" ein besonders hohes Bildungsniveau hinzu und prüfen, ob nun ein Fall vorhanden ist, der beide Bedingungen erfüllt.
+```{r}
+d.mig$v.bild[which(d.mig$v.geschl == "3")[1]] <- "4"
+which(d.mig$v.geschl == "3" & (d.mig$v.bild == "1" | d.mig$v.bild == "4"))
+```
+
+6. Erstellen von vier Teildatensätzen mit logischen Bedingungen:
+
+```{r include = FALSE}
+# nochmals ein Beispiel-Datensatz
+id <- seq(1, 100)
+alter <- runif(100, 18, 80) # in Realität nicht sinnvoll
+gr <- rnorm(100, 166, 6)
+prakti <- sample(rep(1:5, c(20, 30, 40, 10, 0)))
+zufr <- sample(rep(1:5, c(0, 10, 20, 40, 30)))
+univ <- sample(c(
+  rep("UniBe", 20),
+  rep("unilu", 20),
+  rep("unibas", 20),
+  rep("unibe", 20),
+  rep("unifr", 20)
+))
+dat.tdf <- data.frame(id, alter, gr, prakti, zufr, univ)
+```
+
+```{r}
+# Subsets anhand kategorialer Variable
+d.tdf.t.1 <- dat.tdf[which(dat.tdf$univ == "unilu"), ]
+d.tdf.t.2.a <- dat.tdf[dat.tdf$univ == "unibas" |
+  dat.tdf$univ == "unibe" |
+  dat.tdf$univ == "unifr", ]
+# kürzere Schreibweise
+d.tdf.t.2.b <- dat.tdf[dat.tdf$univ %in% c("unibas", "unibe", "unifr"), ]
+# oder noch kürzer (und einfacher, deshalb zu bevozugen!)
+d.tdf.t.2.c <- dat.tdf[dat.tdf$univ != "unilu", ]
+
+# Subsets anhand zwei numerischer Variablen
+ausw <- which(dat.tdf$alter > 65 & dat.tdf$gr > 160)
+d.tdf.t.3 <- dat.tdf[ausw,]
+d.tdf.t.4 <- dat.tdf[-ausw,] # mit Negativ-Auswahlen lassen sich fehlerfrei Subsets erstellen
+```
+
+:::callout-important
+## Output von `which()`
+
+Beachten Sie, dass `which()` erst die Position der Elemente wiedergibt. Um einen Teildatensatz zu erstellen, müssen Sie noch mit Indizes arbeiten.
+:::
+
+5.  Berechnen des Mittelwerts einer Variable für alle vier Teildatensätze:
+
+```{r}
+# 
+mean(d.tdf.t.1$alter) # Alter an Unilu: zufällig
+mean(d.tdf.t.2.c$alter) # Alter andere Universitäten: zufällig
+mean(d.tdf.t.3$alter) # sollte tendenziell höher liegen als in d.tdf.t.4, aber zwei Bedingungen
+mean(d.tdf.t.4$alter)
+```
+
+
+6.  Berechnen eines Mittelwerts in einem Schritt:
+```{r}
+ mean(dat.tdf$alter[dat.tdf$univ == "unilu"])
+```
+

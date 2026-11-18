@@ -1,0 +1,45 @@
+# Woche 10 {.unnumbered}
+
+*Einführung Lineare Regression*
+
+## Lernziele
+
+Nachdem wir unsere Daten aufbereitet und ersten Analysen mittels Kreuztabellen und Plots gemacht haben, gehen wir in der kommenden Woche zur Regressionsanalyse über. Wir beginnen mit einfachen Regressionsmodellen und machen uns Schritt für Schritt mit der Definition und Interpretation dieser Modelle in R vertraut.
+
+Die Lernziele:
+
+-   Sie erklären die Notation von Regressionsmodellen in R.
+-   Sie erklären, wie in ein lineares Regressionsmodell sowohl metrische als auch kategoriale und binomiale unabhängige Variablen einfliessen können.
+-   Sie wenden die Funktion `lm()` an.
+
+## Aufgaben
+
+::: callout-important
+## Regressionsanalyse
+
+Die bivariate Regressionsanalyse berechnet die gerichtete (asymmetrische) Beziehung zwischen zwei Variablen, in der einfachsten Form einer unabhängigen Variable X auf eine abhängige Variable Y. Mit der linearen Regression sind Vorhersagen, Schätzungen von Parametern und Bestimmung von Einflussgrössen, aber auch Optimierungen und Kalibrierungen möglich. Dabei repräsentiert X die Ursache und Y die Wirkung.
+
+Es können auch kategoriale Variablen als unabhängige Variablen hinzugezogen werden. Bei kategorialen Variablen mit mehreren Ausprägungen wird im Hintergrund ein multiples Modell gerechnet, das für die jeweiligen Ausprägungen eine Referenzkategorie und für den Rest eine Dummy-Variable erstellt. Wir werden anschliessend noch sehen, was dies genau bedeutet.
+
+Quelle: Diaz-Bone, R. (2023). Statistik für die Soziologie (6). Berlin: UVK.
+:::
+
+### Aufgabe 1
+
+a) Formulieren Sie zwei inhaltliche Fragestellungen, die Sie anhand des ESS-Datensatzes (gerne dürfen Sie auch nochmals im Codebook die Variablen durchgehen, passende Variablen im R-Skript bereinigen und dann ins Modell aufnehmen!) und mit einem einfachen linearen Regressionsmodell beantworten können. Eine der beiden Fragestellungen soll einen nicht-geordneten Faktor als unabhängige Variable enthalten.
+
+b) Nutzen Sie je ein Streudiagramm und einen Boxplot, um erste Hinweise zu Ihren Fragestellungen zu erhalten. Fügen Sie im Streudiagramm die Regressionsgerade hinzu.
+
+c) Schauen Sie sich die Hilfeseite der `lm()`-Funktion an und erläutern Sie die Funktion und ihre Argumente in eigenen Worten.
+
+d) Erstellen Sie die beiden Modelle in R. Wie sind die lm-Objekte aufgebaut? Welche Komponenten und Informationen beinhalten sie?
+
+e) Interpretieren Sie die Ergebnisse der beiden Regressionsanalysen. Reflektieren Sie, ob Interpretation eingeschränkt sein könnte.
+
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

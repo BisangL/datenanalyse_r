@@ -1,0 +1,482 @@
+# Woche 4 {.unnumbered}
+
+Grafiken erstellen
+
+## Lernziele
+
+Nachdem wir uns bereits verschiedenste Grundlagen für die Arbeit mit R sowie R Studio erarbeitet und erste statistische Inhalte kennengelernt haben, stehen nun einige ergänzende Aspekte an. Mittels dieser Aspekte nähern wir uns der tatsächlichen sozialwissenschaftlichen Datenanalyse: Sie sollen grafische Techniken ausprobieren, Zufallsvariablen kennenlernen und Datensätze erstellen. Zudem sollen Sie das Prinzip der Inferenzstatistik mittels R vertiefen.
+
+Die Lernziele:
+
+Sie können...
+
+-   zwei Variablen in einem Streudiagramm darstellen und die Darstellungen interpretieren.
+
+-   Unterschied von Gleichverteilungen und Normalverteilungen erklären und in R entsprechend verteilte Zufallsvariablen generieren.
+
+-   metrische Verteilungen in Histogrammen darstellen.
+
+-   erste Techniken nennen, wie Sie Grafiken erweitern und kombinieren.
+
+-   erklären, was ein Dataframe in R ist, und die Unterschiede zu einer Matrix benennen.
+
+-   Sie haben sich in R die Grundlagen für ein Verständnis von Inferenzstatistik allgemein und des Stichprobenfehlers im Besonderen erarbeitet.
+
+## Aufgaben
+
+1.  Nutzten Sie Funktion `plot()`, um die bivariate Verteilung eines Variablen-Paars darzustellen, das Sie letzte Woche (z.B. Aufgabe zur Korrelation) erstellt haben. Verwenden Sie weiter auch eine Farbe für die Punkte und verweisen Sie im Titel sowie in den Achsenbeschriftungen auf das sozialwissenschaftliche Phänomen, das Sie darstellen.
+
+2.  Erstellen Sie Vektoren für eine Gleichverteilung mittels `runif()` und für eine Normalverteilung mittels `rnorm()`. Alle Vektoren repräsentieren Körpergrössen. Es sollen Vektoren mit je 10, mit je 30 und mit je 1000 Fällen erstellt werden.
+
+3.  Als nächstes sollen Sie die beiden Verteilungen aus der Aufgabe 2, die 1000 Fälle aufweisen, grafisch darstellen.
+
+4.  Erzeugen Sie ein Dataframe mittels der Funktion `data.frame()`. Dieses soll aus fünf Variablen bestehen und 100 Fälle umfassen. Nutzen Sie dazu die verschiedenen Funktionen, die wir bisher kennengelernt haben (`c()`, `rep()`, `seq()`, und Zufallsvariablen, ...). Die fünfte Variablen soll dem Datenformat character entsprechen. Überlegen Sie sich einen sozialwissenschaftlichen Kontext für dieses Dataframe und benennen Sie die Variablen entsprechend. Mit diesem Datensatz werden wir nächste Woche weiterarbeiten.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+> *Bonusaufgabe*: Das Paket "ggplot2" (Teil der grösseren Paketsammlung "tidyverse") ermöglicht gegenüber der Basisfunktion `plot()` besonders komplexe grafische Lösungen. Versuchen Sie Ihre Variablenverteilung aus Aufgabe 1 auch mit Funktionen dieses Pakets darzustellen. Sie können den untenstehenden Beispielcode nutzen (die von Ihnen zu ergänzende Aspekte sind "..." gekennzeichnet). Recherchieren Sie zudem, wie "ggplot2" funktioniert.
+
+```{r}
+# install.packages("ggplot2")
+# library(ggplot2)
+# g.1 <- ggplot(data = ..., mapping = aes(x = ..., y = ...)) +
+#   geom_point(size = 1, position = "jitter",  color = "...") +
+#   ggtitle("...")
+```
+
+Die Funktion `ggplot()` folgt einer Layer-Struktur: Die erste Zeile initiiert die Grafik. Die nachfolgenden Zeilen spezifizieren die Art der Abbildung (Geometries, z.B. `geom_point()` oder `geom_hist()`). Gelten die Angaben für das ganze Objekt, können Sie in der ersten initiierenden Zeile die Daten festlegen (muss (1) ein data.frame-Objekt (2) im long-Format sein, d.h. (1) kein Matrix-Format und (2) keine Kreuztabelle). Zudem bestimmen Sie im Argument mapping mit `aes =()` die abzubildenden Aspekte (Asthetics). Des Weiteren können Sie hier Farben, Formen, Grössen, Linientypen usw. generell oder abhängig von Merkmalsausprägungen festlegen. Falls Sie mehrere Layers mit unterschiedlichen Inhalten übereinanderlegen möchten, können Sie diese Angaben auch in den Geometries festhalten. Eine gute Einführung bietet das Buch *Data Visualization* [@Healy2019].
+
+## Lösungen
+
+```{r Vorbereitung}
+rm(list = ls()) # Workspace loeschen
+options(scipen = 999) # schaltet wissenschaftliche Schreibweise aus
+```
+
+1.  Variablen-Paare und Funktion `plot()`:
+
+```{r Aufgabe 1.1}
+v.1 <- c(1, 3, 4, 2)
+bild <- rep(v.1, times = c(22, 30, 21, 27), length.out = NA)
+v.2 <- c(40000, 70000, 100000, 65000)
+eink <- rep(v.2, times = c(22, 30, 21, 27), length.out = NA)
+plot(bild, eink)
+```
+
+Im Plot sind nur vier Beobachtungen sichtbar, obschon die Vektoren 100 Fälle enthalten. Um die Fälle sichtbar(er) zu machen, können Sie die Funktion `jitter()` anwenden.
+
+```{r Aufgabe 1.2}
+plot(jitter(bild), jitter(eink))
+```
+
+Anschliessend können wir uns überlegen, welche Möglichkeiten zur Erweiterung der Grafik bestehen. Rufen Sie dazu die Hilfeseite der Funktion `plot()` auf.
+
+-   Die Voreinstellung von `plot()`ist `type = "p"`, das heisst ein Punktediagramm.
+-   Bleiben wir bei diesem Darstellungstyp, können wir die Punktform und -grösse bestimmten: `pch =` und `lwd =`.
+-   Zudem können wir über das Argument `main =` einen Titel setzen. Wünschen wir einen Zeilenumbruch im Titel, schreiben wir `\n`.
+-   Die beiden Achsen lassen sich mittels `xlab =` und `ylab =` beschriften.
+-   Die Grösse des Textes ist über `cex.lab =` bestimmbar.
+-   Die Grösse der Achsenbeschriftung lassen sich über `cex.axis =` bestimmen.
+-   (...)
+
+```{r Aufgabe 1.3}
+plot(jitter(bild), jitter(eink),
+     type = "p",
+     pch = 5,
+     lwd = 0.75,
+     main = "Einkommen in Abhängigkeit \n des Bildungsstandes",
+     xlab = "Bildungsstand (1-5)",
+     ylab = "Einkommen",
+     cex.lab = 0.75,
+     cex.axis = 0.75)
+```
+
+Der Umgang mit Farben in grafischen Darstellungen ist an sich ein umfassendes Thema. Wir gehen hier nur auf die technischen Aspekte in R ein. In der Funktion `plot()` können wir sie über das Argument `col =` bestimmen. Dabei gibt es eine Vielzahl von Möglichkeiten, um die Farbe(n) auszuwählen. Hier sollen drei aufgeführt werden:
+
+1.  Die Funktion `colors()` gibt Farbnamen aus. Wenn Sie alle Punkte blau färben möchten, ergänzen Sie `col = "blue"`.
+
+```{r Aufgabe 1.4}
+plot(jitter(bild), jitter(eink),
+     type = "p",
+     pch = 5,
+     lwd = 0.75,
+     main = "Einkommen in Abhängigkeit \n des Bildungsstandes",
+     xlab = "Bildungsstand (1-5)",
+     ylab = "Einkommen",
+     cex.lab = 0.75,
+     cex.axis = 0.75,
+     col = "blue")
+```
+
+(ii) Farben können auch anhand Zahlen definiert werden. `col = 26` führt zum selben Resultat wie `col = "blue"`. Falls wir die einzelnen Punkte unterschiedlich einfärben möchten, können wir einen Zahlen-Vektor einfügen. Wir können jedem der 100 Punkte in unserem Streudiagramm eine andere Farbe zuweisen, indem wir `col = 1:100` setzen.
+
+```{r Aufgabe 1.5}
+plot(jitter(bild), jitter(eink),
+     type = "p",
+     pch = 5,
+     lwd = 0.75,
+     main = "Einkommen in Abhängigkeit \n des Bildungsstandes",
+     xlab = "Bildungsstand (1-5)",
+     ylab = "Einkommen",
+     cex.lab = 0.75,
+     cex.axis = 0.75,
+     col = 1:100)
+```
+
+(iii) Als dritte Möglichkeiten können Sie hex-Werte angeben (z.B. `col = "#E7EBF5"`).
+(iv) Sie finden zahlreiche Pakete, die Farbpaletten bereitstellen. Zum Beispiel bietet "RcolorBrewer" eine Farbpalette für blau an (die allerdings nur neun anstatt der benötigten 100 verschiedener Blautöne beinhaltet).
+
+::: callout-important
+## Grafik als Objekt speichern
+
+Sie können Grafiken als Objekte speichern und dann diese Objekte wieder aufrufen.
+
+```{r Aufgabe 1.6}
+g.1 <- plot(jitter(bild), jitter(eink))
+g.1
+```
+:::
+
+```{r Aufgabe 1.7}
+# install.packages("RColorBrewer")
+library(RColorBrewer)
+plot(jitter(bild), jitter(eink),
+     type = "p",
+     pch = 5,
+     lwd = 0.75,
+     main = "Einkommen in Abhängigkeit \n des Bildungsstandes",
+     xlab = "Bildungsstand (1-5)",
+     ylab = "Einkommen",
+     cex.lab = 0.75,
+     cex.axis = 0.75,
+     col = brewer.pal(100, "Blues")) # 100 Farben sind für das menschliche Auge 
+# nicht unterscheidbar und machen deshalb keinen Sinn
+```
+
+> **Bonusaufgabe**: Aufgabe 1 mit dem Paket "ggplot2"
+
+```{r Aufgabe 1.8}
+# install.packages("ggplot2")
+library(ggplot2)
+ggplot(data = data.frame(cbind(eink, bild)), mapping = aes(x = bild, y = eink)) +
+  geom_point(size = 1, position = "jitter",  color = "blue") +
+  ggtitle("Einkommen in Abhängigkeit des Bildungsstandes")
+```
+
+2.  Gleichverteilte und normalverteilte Vektoren
+
+Im Folgenden betrachten wir die Gleichverteilung und die Normalverteilung mittels `summary()`und stellen sie mit `hist()` als Histogramme dar (siehe auch Aufgabe 3). Insbesondere bei grösseren Fallzahlen werden dadurch die Eigenschaften der Verteilungen deutlich:
+
+Bei der *Gleichverteilung* hat jede Ausprägung dieselbe Auftrittswahrscheinlichkeit. Das heisst, dass jede Körpergrösse zwischen Minimal- und Maximalwert (die beiden Parameter der Funktion `runif()`) mit derselben Häufigkeit vorkommt. Dies entspricht aber nicht der empirischen Realität von Körpergrössen. Je grösser die Fallzahl, desto mehr gleichen die Minimal- und Maximalwerte den theoretischen Vorgaben in der Funktion, weil R zufällig Element der Verteilung zieht.
+
+Bei der *Normalverteilung* gruppieren sich die meisten Werte um den Mittelwert von 170cm, während kleine und grosse Werte mit zunehmender Entfernung vom Mittelwert immer seltener auftreten. Dies wiederum entspricht stärker der tatsächlichen, empirischen Verteilungen von Körpergrössen. Normalverteilungen (Funktion `rnorm()`) definieren sich über die beiden expliziten Parameter des arithmetischen Mittels und der Standardabweichung. Je grösser die Fallzahl, desto näher liegt das arithmetische Mittel der gezogenen Elemente (und auch die Standardabweichung) dem expliziten Parameter. Zudem sehen wir bei grossen Fallzahlen die typische Kurvenform der Normalverteilung gut.
+
+...mit je 10 Fällen:
+
+```{r Aufgabe 2.1}
+summary(runif(n = 10, min = 150, max = 210))
+hist(runif(10, 150, 210)) # Kurzform -> Achtung: Reihenfolge!
+summary(rnorm(n = 10, mean = 170, sd = 15))
+hist(rnorm(10, 180, 10))
+```
+
+...mit je 30 Fällen:
+
+```{r Aufgabe 2.2}
+summary(runif(30, 150, 210))
+hist(runif(30, 150, 210))
+summary(rnorm(30, 170, 15))
+hist(rnorm(30, 180, 10))
+```
+
+...mit je 1000 Fällen:
+
+```{r Aufgabe 2.3}
+summary(runif(1000, 150, 210))
+hist(runif(1000, 150, 210))
+summary(rnorm(1000, 170, 15))
+hist(rnorm(1000, 180, 10))
+```
+
+::: callout-important
+## Binomialverteilung (auch Bernoulli-Verteilung)
+
+`rbinom()` erstellt zufällige binomiale Verteilungen, die für Zähldaten zu verwenden sind. Klassische Beispiele sind Münzwürfe oder Würfelexperimente.
+
+```{r Aufgabe 2.4}
+rbinom(n = 10, size = 1, prob = 0.5) # Münzwürfe
+rbinom(15, 2, (1/6 * 1/6)) # Würfelexperimente
+```
+:::
+
+3.  Grafische Darstellung von Verteilungen
+
+> Nutzen Sie die Funktion `hist()`, um die beiden Verteilungen mit Histogrammen darzustellen. Die beiden Histogramme sollen dieselbe Spannbreite in der x-Achsen haben und jeweils 10 Klassen aufweisen. Wählen Sie je eine Farbe für die Darstellung der Gleich- und der Normalverteilung.
+
+Damit wir nicht immer unterschiedliche Werte erhalten, wenn die jeweilige Funktion zur Erstellung einer Zufallsvariable abgerufen wird, speichern wir das Resultat als Vektor ab:
+
+```{r Aufgabe 3.1}
+v.uni <- runif(1000, 150, 210)
+v.normv <- rnorm(1000, 180, 10)
+```
+
+Die meisten Argumente kennen wir bereits aus Aufgabe 1. Neu hinzu kommen die Argumente `break =`, womit wir die Anzahl der Balken im Histogramm bestimmen können, und `xlim =`, das die Spannbreite der x-Achse definiert.
+
+```{r Aufgabe 3.2}
+hist(v.uni,
+     col = "cyan1",
+     main = "Gleichverteilung",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     xlim = c(150,210))
+hist(v.normv,
+     col = "coral",
+     main = "Normalverteilung",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     xlim = c(150,210))
+
+# mit selbstbestimmter Klassenbreite:
+hist(v.normv,
+     col = "coral",
+     main = "Normalverteilung",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     breaks = 3, # Anzahl Zellen für Histogramm
+     # oder Breakpoints 
+     # breaks = c(140, 160,seq(165,195,5),200,220) 
+     xlim = c(150,210))
+```
+
+Was stellt dieses Histogramm dar?
+
+```{r Aufgabe 3.3}
+hist(v.normv,
+     col = "cyan1",
+     main = "Normalverteilung",
+     xlab = "Körpergrösse",
+     breaks = 10,
+     xlim = c(150, 210),
+     freq = FALSE,
+     ylab = "Dichte")
+```
+
+Mit der Festlegung `freq = FALSE` betrachten wir jetzt nicht mehr die Häufigkeit der Körpergrösse pro Balken/Klasse, sondern die Dichte: Klassenhäufigkeit / Klassenbreite [@Diaz-Bone2019, 40]. Dieser Histogramm-Typ erfüllt das Prinzip der Flächentreue (ebd.).
+
+> Über die Funktion `abline()` können Sie dem aktuellen aufgerufenen Plot eine Linie hinzufügen. Fügen Sie den Histogrammen die Mittelwerte der jeweils anderen Verteilung als vertikale Linie hinzu (in der entsprechenden Farbe).
+
+```{r Aufgabe 3.4}
+hist(v.uni ,
+     col = "cyan1",
+     main = "Gleichverteilung",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     breaks = 10,
+     xlim = c(150, 210))
+abline(v = mean(v.normv),
+       col = "coral",
+       lwd = 4,
+       lty = 2) # unterbrochene Linie
+
+
+hist(v.normv,
+     col = "coral",
+     main = "Normalverteilung",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     breaks = 10,
+     xlim = c(150,210))
+abline(v = mean(v.uni),
+       col = "cyan1",
+       lwd = 4,
+       lty = 2)
+```
+
+> Mit `add = TRUE` in der Funktion `hist()` können Sie Grafiken übereinander legen. Versuchen Sie, auf diese Art Ihre beiden Histogramme in einer Grafik darzustellen.
+
+```{r Aufgabe 3.5}
+hist(v.uni ,
+     col = "cyan1",
+     main = "Gleichverteilung",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     breaks = 10,
+     xlim = c(150,210))
+hist(v.normv,
+     col = "coral",
+     breaks = 10,
+     add = T)
+```
+
+Es bestehen drei Probleme: Erstens müssen wir die Spannbreite der y-Achse anpassen (`ylim =`), damit wir alle Werte der Normalverteilung korrekt sehen:
+
+```{r Aufgabe 3.6}
+hist(v.uni ,
+     col = "cyan1",
+     main = "Gleichverteilung",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     breaks = 10,
+     xlim = c(150, 210),
+     ylim = c(0, 400))
+hist(v.normv,
+     col = "coral",
+     breaks = 10,
+     add = T)
+```
+
+Das zweite Problem ist, dass der Titel nicht mehr stimmt und wir eine Legende brauchen (mit Funktion `legend()`.
+
+```{r Aufgabe 3.7}
+hist(v.uni ,
+     col = "cyan1",
+     main = "Verteilungen",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     breaks = 10,
+     xlim = c(150, 210),
+     ylim = c(0, 400))
+hist(v.normv,
+     col = "coral",
+     breaks = 10,
+     add = T)
+legend("topright", 
+       legend = c("Gleichverteilung", "Normalverteilung"),
+       col = c("cyan1", "coral"),
+       cex = 0.75,
+       pch = 15,
+       pt.cex = 1.5)
+```
+
+Das dritte Problem ist, dass die Gleichverteilung im mittleren Bereich nicht mehr gut sichtbar ist und die Normalverteilung deshalb etwas transparent sein soll. Eine graduell transparente Farbe erhalten wir mit der Funktion `rgb()`. Zunächst legen wir die Rot-, Blau- und Grün-Anteile fest. Diese können wir über die Funktion `col2rgb()` abfragen. Dann geben wir mit dem Argument `alpha = ` die gewünschte Transparenz der neuen Farbe an. Zudem müssen wir das Argument `maxColorValue` auf 255 setzen, entsprechend dem grössten Wert.
+
+```{r Aufgabe 3.8}
+col2rgb("coral")
+new.color <- rgb(red = 255, green = 127, blue = 80, alpha = 255/2,
+                 maxColorValue = 255) # RGB Spannbreite, muss definiert sein
+```
+
+Und dann nochmals unser beiden gemeinsam dargestellten Histogramme:
+
+```{r Aufgabe 3.9}
+hist(v.uni ,
+     col = "cyan1",
+     main = "Zufallsverteilungen",
+     xlab = "Körpergrösse",
+     ylab = "Häufigkeit",
+     breaks = 10,
+     xlim = c(150, 210),
+     ylim = c(0, 400))
+hist(v.normv,
+     col = new.color,
+     breaks = 10,
+     add = T)
+legend("topright", 
+       legend = c("Gleichverteilung", "Normalverteilung"),
+       col = c("cyan1", new.color),
+       cex = 0.75,
+       pch = 15,
+       pt.cex = 1.5)
+```
+
+4.  Dataframes erstellen
+
+Drei Beispiele:
+
+```{r Aufgabe 4.1}
+# id zur Identifikation der Fälle (z.B. Personen)
+v.id <- seq(1, 100)
+
+# politische Einstellung der Person
+# Spektrum von 1 = links bis 10 = rechts
+v.pol <- runif(100, 1, 10)
+
+# Stromverbrauch der Person pro Jahr in Kwh
+v.strom <- rnorm(100, 7520.17, 500)
+
+# Wasserbrauch der Person pro Tag in Liter
+v.wasser <- rnorm(100, 296, 30)
+
+# Einkommen der Person pro Jahr
+v.eink <- rnorm(100, 86645, 15000)
+
+# Wohngegend der Personen
+v.wohn <- c(rep('stadt', 43),
+            rep('aglo', 27),
+            rep('land', 30)) 
+d.pol <- data.frame(v.id, v.pol, v.strom, v.wasser, v.eink, v.wohn,
+                    row.names = v.id)
+# erste fünf Fälle anzeigen
+head(d.pol)
+
+# v.pol runden (-> neue Variable)
+d.pol$pol.r <- round(d.pol$v.pol)
+head(d.pol)
+```
+
+```{r Aufgabe 4.2}
+# Geschlecht: 1 männlich, 2 weiblich, 3 divers
+v.geschl <- sample(c(rep(1, 48), # mit sample() durchmischt R die Zahlen zufällig
+                     rep(2, 44), 
+                     rep(3, 3), 
+                     rep(NA, 5)))
+# Bildung: 1 keine, 2 Grundschule, 3 Sekundarstufe, 4 Tertiärausbildung
+v.bild <- sample(c(rep(1, 4), 
+                   rep(2, 18), 
+                   rep(3, 36), 
+                   rep(4, 39), 
+                   rep(NA, 3)))
+
+# Einkommensklasse: Von 1 bis 5, Breiten nicht definiert 
+v.eink.kl <- sample(c(rep(1, 6), 
+                      rep(2, 29), 
+                      rep(3, 28), 
+                      rep(4, 30), 
+                      rep(5, 4),
+                      rep(6,3)))
+
+# CH-Bürgerschaft: 1 Ja, 0 Nein
+v.ch <- sample(c(rep(1, 60), rep(0, 40)))
+
+v.reg <- sample(c(rep("Tessin", 4), 
+                   rep("Région Lemanique", 13), 
+                   rep("Espace Mittelland", 18),
+                   rep("Nordwestschweiz", 9),
+                   rep("Zürich", 26),
+                   rep("Ostschweiz", 11),
+                   rep("Zentralschweiz", 15),
+                   rep(NA, 4)))
+
+d.mig <- data.frame(v.geschl, v.bild, v.eink.kl, v.ch, v.reg)
+head(d.mig)
+```
+
+Bevor wir zum dritten Beispiel kommen, können wir uns eine Frage stellen. Diese gilt unseren bisherigen Charakter-Variablen. Sind diese beiden Variablen wirklich angemessene Charakter-Variablen?
+
+```{r}
+is.character(d.pol$v.wohn)
+is.character(d.mig$v.reg)
+```
+
+Die beiden Variablen könnten wir genauso als numerische Vektoren speichern, in dem wir den jeweiligen Ausprägungen numerische Werte zuordnen ("stadt"=1, "Land"=2, usw.). Wir werden im weiteren Verlauf des Seminars sehen, dass wir für solche kategorialen Variablen auch ein spezifisches Datenformat zur Verfügung haben, nämlich die Faktoren.
+
+```{r}
+#install.packages("stringi")
+#install.packages("randomNames")
+library(stringi)
+library(randomNames)
+
+usernames <- stri_rand_strings(100, sample(5:20, 100, replace = TRUE))
+name <- randomNames::randomNames(100, which.names = "first")
+age <- sample(1:99, 100, replace = TRUE)
+height <- runif(100, min = 140, max = 220)
+n_posts <- seq(4, 103)
+d.string <- data.frame(usernames, name, age, height, n_posts)
+head(d.string)
+```

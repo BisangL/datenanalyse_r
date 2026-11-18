@@ -1,0 +1,39 @@
+# Woche 6 {.unnumbered}
+
+Funktionen
+
+## Lernziele
+
+In den vergangenen Wochen haben wir grundlegende Aspekte der Arbeit mit R kennengelernt. Als Vorbereitung sollen Sie diese Inhalte nochmals Revue passieren lassen. Drei neue Aspekte kommen hinzu: (1) Sie sollen Ihre Rezeptionsfertigkeiten (sprich: R-Code lesen und verstehen) ausbauen. Dies ist eine wichtige Voraussetzung für die Arbeit mit R. (2) Sie lernen, wie Funktionen aufgebaut sind. (3) Inhaltlich erarbeiten Sie sich mit dem rezipierten Code das Prinzip der Inferenzstatistik in R (Stichprobenverteilung und Standardfehler).
+
+Die Lernziele:
+-   Sie entziffern von einer anderen Person geschriebenen R-Code.
+
+-   Sie zählen mehrere Möglichkeiten auf, um Code lesbar zu gestalten.
+
+-   Sie erläutern, wie selbstgeschriebene Funktionen in R aufgebaut sind und können die Funktionen Schritt für Schritt interpretieren.
+
+-   Sie entwickeln Ihr Verständnis davon weiter, wie in R Grafiken genutzt und angepasst werden, um statistische Inhalte zu visualisieren.
+
+-   Sie erklären Konzepte der Inferenzstatistik (Stichprobenverteilung und Standardfehler).
+
+## Aufgaben
+
+1.  Öffnen Sie die Datei "standardfehler.R" in RStudio (auf OLAT, Termin 8 verfügbar). Gehen Sie den Code Zeile für Zeile durch, zuerst *ohne* diesen auszuführen. Versuchen Sie dabei im Detail zu verstehen, was hier vor sich geht. Halten Sie Ihre Einsichten als Kommentare fest. Auch allfällige Fragen und Unklarheiten können Sie als Kommentare notieren.
+
+2.  Fügen Sie anschliessend die von Ihnen gesammelten Fragen und die dazugehörigen Codezeilen in ein Quarto-Dokument ein. Die Codezeilen sollen als R Chunk in Quarto aufgeführt, aber mit der Ergänzung `eval = FALSE` im Kopf des Chunks versehen sein. Im Fliesstext des Quarto-Dokuments können Sie Ihre Kommentare und Fragen erläutern.
+
+3.  Führen Sie dann den Code des Skripts "standardfehler.R" Schritt für Schritt aus. Löschen Sie die Kommentare betreffend Unklarheiten, die sich mit der Ausführung des Codes geklärt haben.
+
+4.  Konzentrieren Sie sich anschliessend nochmals auf den letzten Punkt ("`# *Gemeinsame Darstellung*...`"). Was hat dieser Codeabschnitt mit dem Konzept des Standardfehlers/des Stichprobenfehlers zu tun? Spielen Sie mit den Parametern. Welche Zusammenhänge, die für den Standardfehler wesentlich sind, lassen sich erkennen? Hilfe bei dieser Aufgabe finden Sie auch bei Diaz-Bone (2023).[^e06-1]
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+
+[^e06-1]: Diaz-Bone, Rainer. 2023. *Statistik für die Soziologie*.

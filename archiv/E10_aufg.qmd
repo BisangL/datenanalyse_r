@@ -1,0 +1,29 @@
+# Woche 10 {.unnumbered}
+
+Einführung Lineare Regression
+
+## Lernziele
+
+Nachdem wir unsere Daten aufbereitet, ersten Analysen mittels Kreuztabellen gemacht und die Faktoren definiert haben, gehen wir in der kommenden Woche zur Regressionsanalyse über. Dabei behalten wir die Arbeit mit unterschiedlichen Datenformaten (inklusive Faktoren) im Auge. Wir beginnen mit bivariaten Regressionsmodellen und machen uns Schritt für Schritt mit der Definition und Interpretation dieser Modelle in R vertraut.
+
+Die Lernziele:
+
+-   Sie wenden die Funktion `lm()` an.
+-   Sie erklären die Notation, mit der in R Regressionsmodelle formal darstellt.
+-   Sie erklären, wie in ein lineares Regressionsmodell sowohl metrische als auch kategoriale und binomiale unabhängige Variablen einfliessen können.
+-   Sie erklären die Struktur eines lm-Objekts.
+-   Sie interpretieren das Modell und schätzen dessen Güte ein.
+
+## Aufgaben
+
+1. Laden Sie Ihr Datenimport-Skript (in dem nun auch die Faktoren definiert sind) und arbeiten Sie wie die Wochen zuvor in einem Quarto Dokument.
+
+2. Formulieren Sie zwei inhaltliche Fragestellungen, die Sie anhand des ESS-Datensatzes und mit einem einfachen (bivariaten) Regressionsmodell beantworten können. Eine der beiden Fragestellungen soll eine kategoriale Variable als unabhängige Variable enthalten. 
+
+3. Nutzen Sie je ein Streudiagramm und einen Boxplot, um erste Hinweise zu Ihren Fragestellungen zu erhalten. 
+
+4.	Bevor Sie die beiden Modelle mittels `lm()` erstellen, sollen Sie sich vorab mit dieser Funktion etwas vertraut machen (über die Hilfeseite der Funktion, mittels Online-Tutorials, usw.). Erläutern Sie  die Funktion `lm()` kurz in eigenen Worten!
+
+4. Erstellen Sie die beiden Modelle in R. Wie sind die Objekte, in denen Sie die Modelle speichern, aufgebaut? Welche Komponenten und Informationen beinhalten sie? 
+
+5. Interpretieren Sie die Ergebnisse der beiden Regressionsanalysen. Reflektieren Sie, ob Interpretation eingeschränkt ist.

@@ -1,0 +1,35 @@
+# Woche 12 {.unnumbered}
+
+Multiple lineare Regression
+
+## Lernziele
+
+In dieser Woche werden Sie mit einem multiplen linearen Regressionsmodell arbeiten. Wie immer, werden wir erst eine Fragestellung formulieren, uns möglichen Variablen anschauen und dann Modell erstellen, prüfen und interpretieren.
+
+Die Lernziele:
+
+-   Sie erläutern, wie Sie mittels Grafiken erste Ideen für ein multiples Modell sammeln können.
+-   Sie wenden multiple lineare Regressionsanalysen in R an (modellieren, prüfen, interpretieren).
+-   Sie erläutern, wie Sie mit `plot()` die Anwendungsvoraussetzungen für ein multivariates Modell prüfen.
+
+## Aufgaben
+
+1. Laden Sie das Datenimport-Skript (stellen Sie sicher, dass es auf dem aktuellen Stand ist und verbessern Sie -- falls vorhanden -- Fehler).
+
+2. Visualisieren Sie die Zusammenhänge zwischen den Variablen “ppltrst”, “eduyrs”, “netusoft” und “uemp3m”.
+
+3. Interpretieren Sie die Grafiken in einigen Sätzen: Welche Zusammenhänge sind vorhanden? Formulieren Sie eine Fragestellung und Hypothesen.
+
+4. Erstellen Sie das Regressionsmodell mit der `lm()`-Funktion. 
+
+5. Prüfen Sie die Anwendungsvoraussetzungen mittels `plot()`-Funktion. Inwiefern sind die Voraussetzungen für eine multiple lineare Regression (nicht) erfüllt?
+
+5. Interpretieren Sie den Modell-Output.
+    
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

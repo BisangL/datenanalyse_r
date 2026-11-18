@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Woche 1 – Sozialwissenschaftliche Datenanalyse mit R</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./E03_aufg_loes_26.html" rel="next">
+<link href="./E01.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8575377b15774f46c10fa1d7752ca172.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E02_aufg_loes_26.html">Woche 1</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Sozialwissenschaftliche Datenanalyse mit R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einführung in den Kurs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E02_aufg_loes_26.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Woche 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E03_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E04_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E05_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 4</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E06_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E07_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 6</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E08_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 7</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E09a_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E09b_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 9</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E10_aufg_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./literatur.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literatur</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#r-als-programm-rstudio" id="toc-r-als-programm-rstudio" class="nav-link active" data-scroll-target="#r-als-programm-rstudio">R als Programm &amp; RStudio</a></li>
+  <li><a href="#lernziele" id="toc-lernziele" class="nav-link" data-scroll-target="#lernziele">Lernziele</a></li>
+  <li><a href="#aufgaben" id="toc-aufgaben" class="nav-link" data-scroll-target="#aufgaben">Aufgaben</a></li>
+  <li><a href="#lösungen" id="toc-lösungen" class="nav-link" data-scroll-target="#lösungen">Lösungen</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Woche 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Einführung in R und Grundlagen I</em></p>
+<section id="r-als-programm-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="r-als-programm-rstudio">R als Programm &amp; RStudio</h2>
+<p>Ross Ihaka und Robert Gentleman haben die Programmiersprache R in den 1990er Jahre an der Universität Auckland in Neuseeland entwickelt <span class="citation" data-cites="Manderscheid2017">(<a href="literatur.html#ref-Manderscheid2017" role="doc-biblioref">Manderscheid 2017, p. 1</a>)</span>. R war von Beginn an auf statistische Analysen und die Statistiklehre ausgerichtet. Der Buchstabe “R” als Name geht sowohl auf die vormalige Programmiersprache “S” als auch auf die Vornamen der beiden Entwickler zurück <span class="citation" data-cites="Sauer2019">(<a href="literatur.html#ref-Sauer2019" role="doc-biblioref">Sauer 2019, p. 13f</a>.)</span>. Das R-Projekt wurde in Zusammenarbeit mit anderen Wissenschaftlern*innen vorangetrieben und später unter der General Public Licence (<a href="https://en.wikipedia.org/wiki/GNU">GNU</a>) veröffentlicht <span class="citation" data-cites="Manderscheid2017">(<a href="literatur.html#ref-Manderscheid2017" role="doc-biblioref">Manderscheid 2017, p. 1</a>)</span>. R ist daher frei zugänglich, kostenlos und darf von allen weiterentwickelt werden. Es ist insbesondere auch diese <em>Open Source</em>-Idee, welche stark zur Verbreitung von R beiträgt und durch die laufenden Entwicklungen in den Fachbereichen und Analysemethoden direkt in die Software eingehen.</p>
+<p>Das Programm R ist in Paketen organisiert und präsentiert sich als “Statistikumgebung” <span class="citation" data-cites="Manderscheid2017">(<a href="literatur.html#ref-Manderscheid2017" role="doc-biblioref">Manderscheid 2017, p. 1</a>)</span>. Ausgehend von der Basisversion (“R Base”-Paket, vorinstalliert) können Sie R beliebig mit Paketen erweitern. Unter <a href="#0">https://cran.r-project.org/</a> findet sich eine beständig wachsende und umfangreiche Sammlung von Paketen. Die Pakete bieten sowohl Lösungen für allgemeine Verfahren (z.B. Pakete für die multiple Korrespondenzanalyse, siehe “soc.ca”) als auch für spezifische Probleme (z.B. für “Atomic Force Microscope Image Analysis” beim Paket “AFM”).</p>
+<p>Bevor Sie die Pakete nutzen können, müssen Sie diese <strong>einmalig installieren</strong> und jedes Mal, wenn Sie eine <strong>neue R-Sitzung starten, neu laden</strong> (siehe untenstehender Code). Das werden Sie in den nachfolgenden Aufgaben auch üben. Die verwendeten Pakete werden nach dem Beenden des Programms wieder “versorgt”, alle einmal installierten Pakete bleiben aber installiert. Dieser Vorgang stellt sicher, dass R “schlank” bleibt und jeweils nur die benötigen Pakete ausgeführt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"soc.ca"</span>) <span class="co"># R-Code, um das Paket "soc.ca" zu installieren</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(soc.ca) <span class="co"># R-Code, um das Paket "soc.ca" zu laden</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Neben den Stärken der <em>Open Source</em>-Idee und der daraus folgenden, beständigen Aktualisierung und Erweiterungen des Programms zeichnet R vielfältige Visualisierungsmöglichkeiten aus. Es bieten sich zahllose Möglichkeiten für Grafiken und Diagramme bereits mit der Basisversion, insbesondere aber mit weiterführenden Paketen (z.B. “ggplot2”).</p>
+<p>Grafische Benutzeroberflächen (GUI) ergänzen die Programmiersprache R. Wir verwenden im Seminar RStudio – die am weitesten verbreitete grafische Benutzeroberfläche von R. RStudio erleichtert den Umgang mit R. Es bietet einige praktische Zusatzfunktionen (z.B. Auto-Vervollständigungsfunktionen, automatisches Einrücken, Syntaxhervorhebung, integrierte Hilfsfunktion, Informationen zu Objekten im Workspace, menügestützten Oberflächen oder Daten-Viewer <span class="citation" data-cites="Manderscheid2017">(<a href="literatur.html#ref-Manderscheid2017" role="doc-biblioref">Manderscheid 2017, p. 18</a>)</span>). Wenn Sie <strong>RStudio öffnen, startet R automatisch im Hintergrund</strong>. Diese Arbeitsteilung von R und RStudio ist mit einem Auto vergleichbar: R ist der Motor des Autos und RStudio das Armaturenbrett, vor dem Sie sitzen und das Auto lenken. R verrichtet die eigentliche Arbeit.</p>
+<p>Für den weiteren Verlauf fassen wir <strong>R als Sprache</strong> auf – sowohl als Programmiersprache als auch als Sprache in einem metaphorischen Sinn: Sie lernen ein komplexes System zur Kommunikation kennen. Wie auch bei einer anderen Sprache gibt es in R Zeichen mit Bedeutungen (ähnliche wie Nomen, Verben…) und Regeln zur Verknüpfung dieser Zeichen (ähnlich wie eine Grammatik). Diese Grundlagen eignen Sie sich im Folgenden an.</p>
+<p>Mit dieser Vorstellung von R als Sprache geht auch die Vorstellung des Lernprozesses einher: Wir lernen eine Sprache, indem wir diese immer wieder benutzen, Probleme lösen und vor allem auch Fehler machen. Damit Sie später mit dem Programm selbstständig arbeiten und mit diesen Problemen umgehen können, entwickeln Sie im Seminar auch Lösungsstrategien und ein Sinn für die Interpretation von Fehlermeldungen. Am Anfang fällt Ihnen möglicherweise manches schwer, mit der Zeit werden Sie jedoch mit R vertrauter und sicherer.</p>
+</section>
+<section id="lernziele" class="level2">
+<h2 class="anchored" data-anchor-id="lernziele">Lernziele</h2>
+<p>Die Herausforderung besteht darin, den Weg zwischen scheinbarer <em>Trivialität</em> und überfordernder <em>Komplexität</em> zu finden: Nehmen Sie kleine Schritte ernst, sonst werden die grossen Schritte sehr schnell mühsam. Die Lernziele der ersten beiden Wochen sind:</p>
+<ol type="1">
+<li>Die aktuellen Versionen von R und RStudio auf Ihrem Computer installieren</li>
+<li>R-Pakete installieren, diese Zeile auskommentieren und Pakete laden</li>
+<li>Eine Funktion aufrufen</li>
+<li>Erklären, wie Sie mit R interagieren können</li>
+<li>einfache Operationen durchführen</li>
+<li>Online Unterstützungsangeboten aufzählen</li>
+<li>Die Funktionen der vier Fenster in RStudio erläutern und insbesondere die Unterschiede zwischen der Konsole und dem Skript benennen</li>
+<li>Erklären, wie und wozu Sie im Skript kommentieren</li>
+<li>Den Unterschied zwischen R-Datei und qmd-Datei erklären</li>
+<li>Das R-Skript in ein Markdown-Dokument (.qmd) übertragen</li>
+<li>Bezüglich <em>Funktionen</em> (erstes Grundelement der “Sprache R”) können Sie
+<ul>
+<li>angeben, wie Funktionen grundsätzlich aufgebaut sind</li>
+<li>erläutern, wie Sie Hilfe zu Funktionen finden</li>
+<li>erklären, wozu Argumente in Funktionen verwendet werden</li>
+</ul></li>
+<li>Bezüglich <em>Objekte</em> (zweites Grundelement der “Sprache R”) können Sie
+<ul>
+<li>erklären, was ein Objekt ist</li>
+<li>die im Workspace verfügbaren Objekte anzeigen</li>
+<li>das Zusammenspiel von Funktionen und Objekte erläutern</li>
+<li>drei verschiedenen Arten von Objektklassen unterscheiden und beschreiben</li>
+</ul></li>
+</ol>
+</section>
+<section id="aufgaben" class="level2">
+<h2 class="anchored" data-anchor-id="aufgaben">Aufgaben</h2>
+<ol type="1">
+<li><p>Installieren Sie die aktuellen Versionen von <a href="https://cran.r-project.org">R</a> und <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> auf Ihrem Computer. Wenn Sie diese bereits installiert haben, überprüfen Sie bitte deren Aktualität und updaten diese bei Bedarf.</p></li>
+<li><p>Fassen Sie in eigenen Worten die Funktionen der vier Fenster von RStudio zusammen.</p></li>
+<li><p>“swirl” ist eine in R implementierte interaktive Einführung in die Grundlagen von R. Installieren und laden Sie dieses Paket.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Auskommentieren! #
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pakete sind einmalig zu installieren, müssen jedoch nach jedem Neustart (von R) neu geladen werden. Eine gute Möglichkeit ist, nach der einmaligen Installation diese Zeile «auszukommentieren» mit einem “#” zu Beginn der Zeile.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+| Hi! Type swirl() when you are ready to begin.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Code “ausführen”
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Damit R die Addition tatsächlich “ausführt” (d.h., Sie ein Resultat erhalten), müssen Sie im <strong>Skript</strong> den Cursor in die entsprechende Zeile setzen und “run” klicken (oben rechts) oder “ctrl + enter”. In der <strong>Konsole</strong> reicht “enter”.</p>
+</div>
+</div>
+<ol start="4" type="1">
+<li><p>Rufen Sie die Funktion <code>swirl()</code> auf und experimentieren Sie damit (<em>Hinweis</em>: tun Sie dies in der Konsole, das ist das Feld unten links). Falls Sie bereits R-Erfahrung haben: Rufen Sie sich in Erinnerung und notieren Sie sich, was Sie noch wissen und was für Sie neu ist.</p></li>
+<li><p>Suchen Sie online nach R-Tutorials, R-Foren und Ähnlichem. Halten Sie die URLs von Seiten und Ressourcen fest, die Ihnen hilfreich und/oder wichtig vorkommen (aber unter Umständen noch etwas schwer zu verstehen sind).</p></li>
+<li><p>Nutzen Sie R für eine Addition (quasi als Taschenrechner). Probieren Sie dies sowohl in einem Skript als auch in der Konsole. Worin bestehen Vor- und Nachteile?</p></li>
+<li><p>Übertragen Sie die Addition in ein R Markdown-Datei (.qmd; unter File - New File - R Markdown; wählen Sie PDF).</p></li>
+</ol>
+<!-- -->
+<ol type="a">
+<li>In welchen Abschnitten führt R die Addition tatsächlich aus?</li>
+<li>Beschreiben Sie in wenigen Sätzen, was Sie berechnen. In welchen Abschnitten ist diese Beschreibung ohne Fehlermeldung möglich?</li>
+<li>Fügen Sie die Notizen von Aufgabe 1 bis 5 dem Markdown-File (.qmd) hinzu. Ordnen Sie R-Code und Text sinnvoll in Code Chunks respektive Fliesstext zu.</li>
+<li>Schauen Sie sich auch die Formatierungsmöglichkeiten für Fliesstext in den Cheatsheets zu R Markdown an (siehe <a href="https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf">hier</a>). Probieren Sie drei Formatierungen in Ihrem Markdown-Dokument (.qmd) aus.</li>
+<li>Speichern Sie die R Markdown-Datei (.qmd) an einem für Sie sinnvollen Ort (z.B. Kurs-Ordner) lokal auf Ihrem Computer (unter File - Save As).</li>
+<li>Welche Vor- und Nachteile hat R Markdown(.qmd) gegenüber einem Skript?</li>
+</ol>
+<!-- -->
+<p>Arbeiten Sie für die nachfolgenden Aufgaben mit der R Markdown-Datei (.qmd) weiter. Es folgt eine kurze Einführung von Vektoren, Assignements, Funktionen und Objekten und jeweils eine Aufgabe, um das Eingeführte selbst anzuwenden.</p>
+<ol start="9" type="1">
+<li><strong>Vektoren</strong> erlauben, Funktionen auf mehrere Zahlen (im Vektorobjekt) gleichzeitig anzuwenden. Sie werden mit der Funktion erstellt (c kommt von combine). In der Klammer werden die Elemente mit einem Komma getrennt. Zum Beispiel können wir für mehrere Personen gleichzeitig das Einkommen durch die Anzahl Arbeitsstunden (beides pro Woche) teilen:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2500</span>) <span class="sc">/</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">40</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">65</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 46.87500 50.00000 31.25000 50.00000 38.46154</code></pre>
+</div>
+</div>
+<p>Überlegen Sie sich ein eigenes Beispiel und setzten dieses um.</p>
+<ol start="10" type="1">
+<li><strong>Assignments</strong>: Falls Sie mehrere Operationen mit den oben eingeführten Vektoren machen möchten, ist es sinnvoll, diese als Objekte zu speichern. Die Objektnamen sind frei wählbar, Sie sollten jedoch darauf achten, dass diese konzis (knapp und eindeutig), sinnvoll und möglichst einheitlich sind und mit einem Buchstaben beginnen. Einige Wörter sind in R bereits “belegt” (siehe <code>?Reserved</code>, z.B. mean oder R). Diese sollten Sie nicht überschreiben. Vektoren können mit einem Assignment <code>&lt;-</code> einem Objekt zugewiesen werden. Ein Trick: Mit <strong>Alt + -</strong> können Sie diesen Pfeil schnell tippen. Zurück zum Beispiel:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>inc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2500</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>wk_h <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">40</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">65</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>inc <span class="sc">/</span> wk_h <span class="co"># selbe Operation wie oben</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 46.87500 50.00000 31.25000 50.00000 38.46154</code></pre>
+</div>
+</div>
+<p>Kopieren Sie Ihr Beispiel und speichern Sie die beiden Vektoren je als Objekt.</p>
+<ol start="11" type="1">
+<li><strong>Funktionen</strong>: Im ersten Teil des Seminars verwenden wir Funktionen, die bereits jemand für uns verfasst hat (man kann im Gegensatz dazu auch eigene Funktionen schreiben!). Sie haben bereits die Funktion <code>c()</code> verwendet. Funktionen ruft man auf, indem man ihren Namen (z.B. <code>c</code> oder auch <code>round</code>) schreibt und dann in Klammern die Argumente angibt (z.B. <code>round(x = 2.432, digits = 1)</code>). Informationen zu den möglichen Argumenten und ihren Ausprägungen erhalten Sie auf der Hilfeseite der jeweiligen Funktion. Tippen Sie dazu ein Fragezeichen gefolgt vom Funktionsnamen in die Konsole und führen Sie diese Zeile aus (<code>?round</code>). Für manche Argumente sind default-Werte definiert (z.B. rundet R auf ganze Zahlen, wenn Sie das Argument <code>digits</code> nicht angeben). Die Namen der Argumente (z.B. <code>x</code>) müssen Sie nicht angeben, wenn Sie ihre Reihenfolge berücksichtigen (die Kurzform ist dann <code>round(2.432, 1)</code>). Sie können Funktionen auch ineinander schachteln:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(inc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1500</code></pre>
+</div>
+</div>
+<p>Schauen Sie sich die Hilfeseite von <code>mean()</code> an. Fassen Sie in eigenen Worten zusammen, wie Funktionen aufgebaut sind und wozu Argumente verwendet werden.</p>
+<ol start="12" type="1">
+<li><strong>Objekte</strong>: In R ist alles (z.B. Datensatz, Matrix, Funktion, Vektor) ein Objekt. Es werden allerdings Objektklassen unterschieden. Vielen Fehlermeldungen liegt eine Nicht-Passung von Objektklasse und Funktion zugrunde (z.B. Durchschnitt von Buchstaben berechnen). Deshalb sollten Sie die Objektklasse des Objekts/der Objekte, mit denen Sie arbeiten, stets präsent haben. Sie können sie mit <code>class(inc)</code> abfragen. Die wichtigsten Objektklassen sind:</li>
+</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 69%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>numeric/integer</td>
+<td>Dezimalzahlen/ganze Zahlen</td>
+</tr>
+<tr class="even">
+<td>character</td>
+<td>Buchstaben (ggf. mit Zahlen)</td>
+</tr>
+<tr class="odd">
+<td>factor</td>
+<td>Vektor mit numerischen Codes und Labels</td>
+</tr>
+<tr class="even">
+<td>logical</td>
+<td>TRUE, FALSE, NA</td>
+</tr>
+<tr class="odd">
+<td>data frame</td>
+<td>zweidimensionales Objekt mit Spaltennamen</td>
+</tr>
+<tr class="even">
+<td>matrix</td>
+<td>zweidimensionales Objekt ohne Spaltennamen</td>
+</tr>
+<tr class="odd">
+<td>list</td>
+<td>“Vektor”, der ganze Objekte enthält</td>
+</tr>
+<tr class="even">
+<td>lm</td>
+<td>Output eines linearen Modells</td>
+</tr>
+<tr class="odd">
+<td>function</td>
+<td>bereits vorhandene/selbstgeschrieben Funktion</td>
+</tr>
+<tr class="even">
+<td>NULL</td>
+<td>Objekt, das existiert, aber nicht definiert ist – das verwendet man um Objekte erst mal zu initiieren, die nachher noch gefüllt werden (z.B. <code>x &lt;- NULL</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Wir werden im Verlauf des Seminars noch sehen, wie Sie die Objektklasse eines Objekts ändern können.</p>
+<p>Erläutern Sie, wie Funktionen und Objekte zusammenhängen.</p>
+<ol start="13" type="1">
+<li>Geben Sie an, welche Elemente des folgenden Codes Objekte, Assignments und Vektoren sind:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(x)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># help("sqrt") "#" löschen, um Befehl auszuführen</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?help "#" löschen, um Befehl auszuführen</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="cn">NA</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">11</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(<span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="14" type="1">
+<li>Generieren Sie aus dem Markdown-Dokument (.qmd) ein PDF (unter Knit - Knit to PDF) und reichen Sie dieses über <a href="https://lms.uzh.ch/url/RepositoryEntry/17753735758/CourseNode/79952613784216">OLAT</a> ein. Möglicherweise müssen Sie noch eine LaTex distribution installieren – folgen Sie bitte den Anweisungen in der Konsole.</li>
+</ol>
+</section>
+<section id="lösungen" class="level2">
+<h2 class="anchored" data-anchor-id="lösungen">Lösungen</h2>
+<ol type="1">
+<li>Version überprüfen Mittels der Funktion <code>version</code> (ohne Klammern!) lässt sich die Version von R abrufen. Ob dies der aktuellsten Version entspricht, müssen Sie auf der R Projektseite überprüfen. RStudio können Sie über die Menüsteuerung updaten: “Help” &gt; “Check for Updates”.</li>
+</ol>
+<p>Mit der Funktion <code>versionInfo()</code> des Pakets <code>rstudioapi</code> (das müssen Sie zunächst mit den Funktionen <code>install.packages(rstudioapi)</code> und dann mit <code>library(rstudioapi)</code> aufrufen) erfahren Sie die Version von RStudio. RStudio meldet sich jedoch, wenn es ein Update gibt. Diese Updates sollten Sie jeweils ausführen.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>RStudio nicht gleich R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>RStudio als grafische Benutzeroberfläche ist nicht dasselbe wie R. Ein Update von RStudio ist also nicht gleich ein Update von R! Letzteres muss manuell erfolgen.</p>
+</div>
+</div>
+<p><strong>Ergänzenden Hinweise:</strong></p>
+<ul>
+<li>Es können gleichzeitig mehrere Versionen von R auf Ihrem Computer installiert sein. RStudio arbeitet (meist) automatisch mit der neusten Version. Sollte dies nicht der Fall sein, können Sie es unter Tools - Global Options - General - R Version einstellen.</li>
+<li>Installierten Pakete bleiben (meist) erhalten. Wenn nicht, schlägt R Studio die Installation von zu ladenden Paketen vor.</li>
+</ul>
+<ol start="2" type="1">
+<li>Fassen Sie in eigenen Worten die Funktionen der vier Fenster von RStudio zusammen.</li>
+</ol>
+<p>Wir beginnen mit den beiden Fenstern, in denen Sie Code eingeben können (in den Standardeinstellungen links, oben und unten). Das <strong>Skript-Fenster</strong> ist oben. Da können Sie Code eingeben. Ausgeführt werden diese Befehle erst, wenn Sie Ctrl und Enter drücken oder auf run klicken (bzw. Cmd &amp; Enter bei Mac). Diese Eingabe von Codezeilen wird ergänzt durch die Eingabe in der <strong>Konsole</strong>, dem Fenster unten. Diese Codezeilen können Sie nicht als Skript speichern, nur mit der Pfeiltaste wieder holen. Das heisst, Sie können Code nur immer einzeln eingeben und diese müssen Sie dann direkt (und einzeln) mit Enter ausführen.Es handelt sich um die Ansicht von R ohne grafische Benutzeroberfläche und ermöglicht schnelles Ausprobieren. Beständiges Überarbeiten, Kommentieren und eine klare Dokumentation des Ablaufs sind jedoch nicht möglich – was für wissenschaftliches Arbeiten notwendig ist. Weiter weisen die Befehle in der Konsole keine Farbkodierung auf, welche die Eingabe von Befehlen erleichtern würde. Als weiteren Bereich findet sich “Background Jobs” und “Terminal” in der Konsole. Diese Tabs ermöglichen Schnittstellen zu anderen Programmen und die Ausführung komplexerer Befehle.</p>
+<p>Im <strong>Environment</strong> (Fenster oben rechts) finden sich Objekte, die im “Workspace” gespeichert sind und auf die Sie nun zugreifen können. Entfernen wir ein Objekt aus der Environment über <code>rm(a)</code> oder löschen wir die ganze Environment über <code>rm(list = ls())</code> funktioniert ein Skript, das darauf zugreift, nicht mehr. Löschen wir hingegen nur den Code, der das Objekt definiert, würde das Skript bis zum Sitzungsende weiterhin funktionieren. Im Fenster finden Sie des Weiteren eine Übersicht der vergangenen Befehle (“History”), die Möglichkeit zur Verbindung von verschiedenen Datenquellen (“Connections”) und auch ein weiteres Tutorial.</p>
+<p>Im Fenster unten rechts werden <strong>Grafiken</strong> angezeigt, und Sie können auf die Ordnerstruktur, Pakete und Hilfe zugreifen. Ebenso findet sich ein Viewer – dort können wir dann beispielsweise die Vorschau von HTML-Dokumente und Websites betrachten – und ein Tab “Presentation” – da würden Sie eine Vorschau von Folien erhalten, die zum Beispiel mit R Markdown erstellt werden können.</p>
+<ol start="3" type="1">
+<li><code>swirl()</code> installieren und laden (in der Konsole – nicht im Markdown Dokument!)</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("swirl")</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(swirl)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">swirl</span>()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bye</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Worin besteht das Problem bei folgendem Code?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"swirl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Beim Knitten des Dokumentes führt dieser Code unter Umständen zu einer Fehlermeldung. Hierfür gibt es verschiedene Lösungswege. Sie könnten die genauen Details eines CRAN Mirrors angeben (siehe Fehlermeldung beim Rendern), damit das Paket bei jedem Rendern erneut installiert wird. Das ist jedoch nicht nötig, eine einmalige Installation reicht aus. Eine andere Möglichkeit ist im entsprechenden Kopf des Code Chunks die Option <code>eval = FLALSE</code> zu ergänzen. Am einfachsten ist es jedoch, die Funktion als Kommentar zu setzen (wie Sie es im Code Chunk oben sehen).</p>
+<ol start="4" type="1">
+<li><code>swirl()</code> ausprobieren</li>
+</ol>
+<p>…</p>
+<ol start="5" type="1">
+<li>Hilfe und Tutorials In R gibt es neben den Hilfeseiten zu den Paketen (im rechten unteren Fenster unter Help, oder ?funktionsname) weitere bereits integrierte Tutorials, z.B. das Paket “learnr” (im rechten oberen Fenster unter Tutorial). Auch sehr nützlich sind die Cheatsheets, auf denen die wichtigsten Funktionen vermerkt sind:</li>
+</ol>
+<p><a href="https://posit.co/resources/cheatsheets/" class="uri">https://posit.co/resources/cheatsheets/</a></p>
+<p>Online finden sich zudem zahlreiche Hilfsangebote. Einführende Seiten sind zum Beispiel: <a href="https://www.statmethods.net/" class="uri">https://www.statmethods.net/</a></p>
+<p><a href="https://www.guru99.com/r-tutorial.html" class="uri">https://www.guru99.com/r-tutorial.html</a></p>
+<p><a href="https://www.tutorialspoint.com/r/index.htm" class="uri">https://www.tutorialspoint.com/r/index.htm</a></p>
+<p><a href="https://r-coder.com/" class="uri">https://r-coder.com/</a></p>
+<p><a href="https://www.w3schools.com/r/" class="uri">https://www.w3schools.com/r/</a></p>
+<p><a href="https://www.statology.org/r-guides/" class="uri">https://www.statology.org/r-guides/</a></p>
+<p><a href="https://www.geeksforgeeks.org/r-tutorial/" class="uri">https://www.geeksforgeeks.org/r-tutorial/</a></p>
+<p><a href="https://wgruber.github.io/R-Intro/rstudio5.html" class="uri">https://wgruber.github.io/R-Intro/rstudio5.html</a></p>
+<p><a href="https://education.rstudio.com/learn/beginner/" class="uri">https://education.rstudio.com/learn/beginner/</a></p>
+<p><a href="https://community.rstudio.com/" class="uri">https://community.rstudio.com/</a></p>
+<p>Geht es um die Lösung konkreter Probleme, bietet Google und insbesondere die folgende Seite Hilfe.</p>
+<p><a href="https://stackoverflow.com/" class="uri">https://stackoverflow.com/</a></p>
+<ol start="6" type="1">
+<li>R als Taschenrechner</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="co"># funktioniert sowohl in Konsole als auch im Skript</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<ol start="7" type="1">
+<li>R Markdown</li>
+</ol>
+<!-- -->
+<ol type="a">
+<li><p>Eine Markdown-Datei ist unterteilt in einfachen Fliesstext (weisser Hintergrund) und R Chunks (grauer Hintergrund), das sind Codestücke für R. R Code muss in einem Code Chunk liegen, damit er ausgeführt wird. Code Chunks können Sie in der Taskliste oben - grünen “+c”-Button oder über die Tastenkombination “Ctrl + Alt + i” (bei Mac “Cmd + Option + i”) hinzufügen. Ausserhalb dieser Code Chunks erkennt R den Code nicht als solchen, sondern nimmt ihn als Text an.</p></li>
+<li><p>… (Antwort siehe 7.a)</p></li>
+<li><p>… (berücksichtigen Sie 7.a)</p></li>
+<li><p>… (siehe Cheatsheet)</p></li>
+<li><p>…</p></li>
+<li><p>Vor- und Nachteile von Markdown-Dokumenten</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vorteile</th>
+<th>Nachteile</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>kombiniert Code, Output (z. B. Grafiken) und Text</td>
+<td>Code in einem Markdown-Dokument zu entwickeln ist oftmals mühsam</td>
+</tr>
+<tr class="even">
+<td>Dokument wird zu einem PDF oder anderen Formaten “geknitted” (gestrickt), wobei die R Chunks ausgeführt werden</td>
+<td>Funktionen können eingeschränkt sein oder zusätzliche Implementierungen erfordern</td>
+</tr>
+<tr class="odd">
+<td>es können dynamische Analysedokumente erstellt werden</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>sinnvoll vor allem für Dokumente, die mehrfach mit unterschiedlichen Inputs aber gleichen Berechnungen produziert werden müssen (z.B. Jahresberichte)</td>
+<td>für Analyse (ohne Report) ist deshalb ein Skript vorzuziehen</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<!-- -->
+<ol start="8" type="1">
+<li>Eigenes Beispiel: <em>Je grösser die Füsse, desto mehr Lohn – kein Witz! Dies ist keine Kausalität, sondern hängt damit zusammen, dass Männer, die tendenziell grössere Füsse haben, immer noch mehr verdienen als Frauen, deren Füssen in der Tendenz kleiner sind.</em></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">c</span>(<span class="dv">35</span>, <span class="dv">39</span>, <span class="dv">46</span>, <span class="dv">37</span>, <span class="dv">45</span>, <span class="dv">44</span>, <span class="dv">15</span>), <span class="fu">c</span>(<span class="dv">3500</span>, <span class="dv">3750</span>, <span class="dv">8000</span>, <span class="dv">4000</span>, <span class="dv">12000</span>, <span class="dv">10000</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8358855</code></pre>
+</div>
+</div>
+<p>Zu beachten ist, dass die beiden Vektoren gleich lang sein müssen.</p>
+<ol start="9" type="1">
+<li>…als Vektoren im Workspace gespeichert…</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>schuhgr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">35</span>, <span class="dv">39</span>, <span class="dv">46</span>, <span class="dv">37</span>, <span class="dv">45</span>, <span class="dv">44</span>, <span class="dv">15</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>lohn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3500</span>, <span class="dv">3750</span>, <span class="dv">8000</span>, <span class="dv">4000</span>, <span class="dv">12000</span>, <span class="dv">10000</span>, <span class="dv">10</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(schuhgr, lohn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8358855</code></pre>
+</div>
+</div>
+<ol start="10" type="1">
+<li><p>Aufgbau von Funktionen Eine Funktion ist immer folgendermassen aufgebaut: <code>funktionsname(argument1, argument2, ...)</code>. Argumente sind Parameter der Funktion. Bei mean wird im Wesentlichen ein x, ein Objekt, verlangt. Im Beispiel wird das Einkommen (<code>inc</code>) aufgerufen. Da es sich bei x um das erste Argument handelt, muss der Name des Arguments nicht genannt werden (<code>x = ...</code>). In der Funktion <code>round()</code> haben wir das Argument x auf die Funktion <code>mean(inc)</code> gesetzt (Schachtelung). Bei der Ausführung werden die Eingaben einbezogen, so dass sich entsprechend die Resultate unterscheiden.</p></li>
+<li><p>Zusammenhang von Funktionen und Objekten</p></li>
+</ol>
+<p>Funktionen sind Objekte. Outputs von Funktionen können jedoch auch als Objekten im Workspace gespeichert werden, z.B.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>d_inc <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(inc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="12" type="1">
+<li>Geben Sie an, welche Elemente des folgenden Codes Objekte, Assignments und Vektoren sind:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(inc) <span class="co"># inc ist ein Objekt (x ist nicht definiert), sqrt ist eine Funktion</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># help("sqrt") "#" löschen, um Funktion auszuführen</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?help "#" löschen, um Funktion auszuführen</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="cn">NA</span>) <span class="co"># y Objekt, &lt;- Assignment, c(...) Vektor</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">11</span>) <span class="co"># z Objekt, &lt;- Assignment, c(...) Vektor</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(<span class="cn">TRUE</span>) <span class="co"># is.logical ist eine Funktion, für das Argument x ist TRUE eingesetzt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="13" type="1">
+<li>…</li>
+</ol>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Manderscheid2017" class="csl-entry" role="listitem">
+Manderscheid, Katharina. 2017. <em>Sozialwissenschaftliche datenanalyse mit r: Eine einführung</em>. 2nd ed. Wiesbaden: Springer VS.
+</div>
+<div id="ref-Sauer2019" class="csl-entry" role="listitem">
+Sauer, Sebastian. 2019. <em>Moderne datenanalyse mit r: Daten einlesen, aufbereiten, visualisieren, modellieren und kommunizieren</em>. Wiesbaden: Springer VS.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./E01.html" class="pagination-link" aria-label="Einführung in den Kurs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Einführung in den Kurs</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./E03_aufg_loes_26.html" class="pagination-link" aria-label="Woche 2">
+        <span class="nav-page-text">Woche 2</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

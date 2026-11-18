@@ -1,0 +1,352 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Woche 8 {.unnumbered}
+
+*Arbeiten mit Datensätzen III: Daten erkunden*
+
+## Lernziele
+
+In dieser Woche beschäftigen wir uns mit ggplot. Es ist ein
+leistungsfähiges Visualisierungspaket in R, das heute standardmässig zur
+Erstellung von Grafiken mit R verwendet wird und Teil von Tidyverse ist.
+Tidyverse ist eine Paket-Sammlung, die auf Datascience ausgerichtet ist.
+Entweder können Sie nur ggplot2 oder die gesamte
+tidyverse-Paket-Sammlung installieren. ggplot hat eine eigene
+Philosophie und es ist deshalb nützlich, erstmal den Aufbau/die Logik zu
+verstehen.
+
+Die Lernziele:
+
+-   Sie erläutern, wie Code zur Erstellung von Plots mit ggplot
+    aufgebaut ist.
+-   Sie erstellen Plots mit ggplot2 und erweitern diese Grafiken auf
+    unterschiedliche Art und Weise.
+-   Sie nennen die Vorteile von ggplot2 gegenüber Base R betreffend
+
+## Aufgaben
+
+```{r echo = FALSE}
+source(file = "C:/Users/BisangL/Documents/c_fuer_quarto/skripts/datenaufbereitung_ess11.R")
+```
+
+::: callout-important
+## ggplot2
+
+Grafiken sind systematisch (basierend auf [Grammar of
+Graphics](https://link.springer.com/book/10.1007/0-387-28695-0)) in
+"Layers" aufgebaut. Die Komponenten sind:
+
+| Element | Inhalt |
+|-------------------------|-----------------------------------------------|
+| Daten | Datensatz |
+| "Aesthetics" | Welche Variablen werden visualisiert (mittels Achsen, Farben, Grössen, Farbintensität...)? |
+| Skalen | von... bis..., Skalenniveau... |
+| (Geometrische Objekte) | Formen |
+| Statistiken | Welche Daten sind wie dargestellt (z.B. Gruppierungen, absolute Häufigkeiten, Regressionslinien...)? |
+| Facets | Aufteilung der Daten in mehrere Plots |
+| Themes | Wie sind die Plots gestaltet/angeordnet? |
+     
+Die Elemente können flexibel miteinander kombiniert werden. Dadurch lassen sich sowohl einfache Diagramme (z. B. Balken-, Linien- oder Punktdiagramme) als auch komplexe, mehrschichtige Visualisierungen erstellen.
+
+Ein Plot muss mit `ggplot(data, aes(...))` initiiert werden. Dann folgt ein erstes Layer wie zum Beispiel `geom_point()`. Es können weitere Layers (z.B. `geom_line()`) folgen. Die Layers werden mit einem `+` miteinander verbunden. Erweiterungen wie Facettierung (mit z.B. `facet_grid()`) zur Aufteilung nach Gruppen oder Themes (z.B. `theme_bw()`) zur grafischen Anpassung machen ggplot2 besonders vielseitig.
+:::
+
+1.  Stellen Sie das Histogramm von Aufgabe 1, Woche 8 mit der `ggplot()`-Funktion dar. 
+
+a.  Beschreiben Sie die Argumente `x`, `breaks`, `col`, `main`, `xlim`, `ylim`, `xlab` und `ylab`.
+b.  
+
+::: callout-important
+## `plot()`-Funktion
+
+Diese Funktion ist zur Visualisierung von Daten vielseitig einsetzbar.
+Wie die `table()`-Funktion kann sie sowohl univariat als auch bivariat
+verwendet werden. Zudem können sowohl kategorial als auch numerisch
+kodierte Daten als Input eingehen. R passt den Grafiktyp automatisch an
+(solange Sie die Daten im Verlauf der Datenbereinigung korrekt kodiert
+haben!).
+:::
+
+2.  Sehen Sie sich die Hilfe zu `plot()` (vom R Base Package) an.
+    Beschreiben Sie die Argumente `x`, `y`, `main`, `xlab`, `ylab` und
+    `col`.
+
+3.  Stellen Sie die Variable von Aufgabe 1 mit der `plot()`-Funktion
+    dar. Spezifizieren Sie die vorher nachgeschlagenen Argumente
+    sinnvoll. Was zeigt die Grafik? Weshalb ist die Darstellung von
+    Aufgabe 1 sinnvoller?
+
+4.  Stellen Sie eine kategorial kodierte Variable mit der
+    `plot()`-Funktion dar. Inwiefern ist diese Grafik sinnvoll? Was
+    zeigt sie inhaltlich?
+
+5.  Nutzten Sie Funktion `plot()`, um eine bivariate Verteilung
+    darzustellen.
+
+<!-- -->
+
+a.  Welche Kombinationen von Datenarten lassen sich sinnvoll darstellen?
+    Probieren Sie aus und begründen Sie.
+b.  Interpretieren Sie die *sinnvollen* Outputs und benennen Sie den
+    Grafiktyp.
+c.  Überlegen Sie sich Optionen für die Darstellung derjenigen
+    Kombinationen, die mittels `plot()`-Funktion noch nicht
+    zufriedenstellend dargestellt werden können.
+
+::: callout-important
+## Grafische Elemente hinzufügen
+
+Diese Funktionen sind nützlich, wenn Sie einem Plot entweder quasi einen
+weiteren Plot oder ein grafisches Element hinzufügen wollen. Mittels dem
+Argument `add = T` können zwei Verteilungen in einem Plot dargestellt
+werden (siehe Woche 4, Aufgabe 1, Exkurs zu grafischen Darstellungen ovn
+Verteilungen). Dabei ist zu berücksichtigen, dass die Farben nicht
+deckend sein dürfen, weil sonst ein Teil der ersten Grafik verdeckt
+wird. Solche Kombinationen sind mit dem `ggplot2`-Package einfacher zu
+erstellen und wir vertiefen an dieser Stelle deshalb lediglich, wie Sie
+einzelne grafische Elemente einer bestehenden Grafik hinzufügen. Linien
+können Sie mittels der Funktion `abline()`, Punkte mittels der Funktion
+`points()` hinzufügen.
+:::
+
+6.  Schauen Sie sich die entsprechende Hilfeseite an und fügen Sie Ihrem
+    Streudiagramm von Aufgabe 4 eine Linie hinzu, die ungefähr den
+    Zusammenhang der beiden Variablen widerspiegelt. In einem nächsten
+    Schritt überlegen Sie sich und halten schriftlich fest, wie Sie die
+    exakte Linie zeichnen können. Probieren Sie es als zweite Varianate
+    in R aus.
+
+::: callout-important
+## Legende gehört dazu!
+
+In der Legende einer Grafik wird angegeben, was die Farben (oder auch
+Formen, Grössen...) repräsentieren. In Base R können Legenden mit der
+Funktion `legend()` initiiert werden.
+:::
+
+7.  Schauen Sie sich die Hilfeseite der Funktion an, fügen Sie
+    untenstehender Grafik eine Legende hinzu und beschriften Sie die
+    Achsen. Macht die Grafik Sinn? Können Sie die Variablen sinnvoller
+    darstellen?
+
+```{r}
+hist(d.ch.k$agea, col = "blue", xlim = c(0, 100), ylim = c(0, 800))
+new.color <- rgb(red = 0, green = 255, blue = 0, alpha = 255/2,
+                 maxColorValue = 255)
+hist(d.ch.k$eduyrs, col = new.color, add = T)
+```
+
+w7 - 5. Repetieren Sie die Inhalte der Statistik-Vorlesung zum Thema
+Chi-Quadrat-Test. Falls Sie nicht teilnehmen, lesen Sie bitte das
+Kapitel 4.25 in "Statistik für die Soziologie" ([hier über die ZHB frei
+zugänglich](https://www.utb.de/doi/abs/10.36198/9783838559766-67-113)).
+Berechnen Sie den Chi-Quadrat-Wert mit der `chisq.test()`-Funktion für
+die Variablen aus Aufgabe 4, Woche 7 (Sie brauchen die absolute
+Häufigkeitstabelle!). Interpretieren Sie das Resultat.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in
+Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+## Lösungen
+
+1.  Histogramm
+
+<!-- -->
+
+a.  Wahl für Histogramm:
+
+Metrische Variablen können mittels Histogramm dargestellt werden, das
+sind agea, yrbrn, eduyrs oder wkhtot
+
+b.  Argumente...
+
+| Argument | Inhalt |
+|----------------------|--------------------------------------------------|
+| `x` | Vektor (numerisch) |
+| `breaks` | Anzahl Balken (oder auch Funktion/Algorithmus zu deren Berechnung – in der Praxis jedoch selten benutzt) |
+| `col` | Balkenfarbe (Füllung) |
+| `main` | Titel des Diagramms |
+| `xlim/ylim` | Spannweite der x-, resp. y-Achse |
+| `xlab/ylab` | Beschriftung der x-, resp. y-Achse |
+
+c.  Spezifikation dieser Argumente...
+
+```{r}
+hist(d.ch.k$wkhtot, breaks = 15, col = "grey", main = "Verteilung der Wochenarbeitsstunden", xlim = c(0, 100), ylim = c(0, 500), xlab = "Wochenarbeitsstunden", ylab = "Häufigkeit")
+```
+
+d.  Interpretation...
+
+Die meisten Befragten arbeiten etwas mehr als 40 Stunden pro Woche. 42
+Stunden pro Woche entspricht bei einem Beschäftigungsgrad von 100% der
+üblichen Arbeitszeit in der Schweiz. Vergleichsweise viele arbeiten bis
+zu rund 50 Arbeitsstunden pro Woche. Dies erklärt sich dadurch, dass
+Überstunden auch erfasst wurden. Das Maximum liegt bei 90 Stunden pro
+Woche, was bei einer Sieben-Tage-Woche rund 13 Stunden pro Tag und bei
+einer Fünf-Tage-Woche 18 Stunden pro Tag wären. Ersteres ist auf
+Dauerunrealistisch, kann vielleicht in äussersten Ausnahmefällen.
+Letzteres ist unplausibel. Unter 40 Stunden pro Woche finden sich
+Teilzeitpensen. Interessant wäre, sich das Histogramm nach Geschlecht
+anzuschauen.
+
+```{r}
+par(mfrow = c(1, 2)) 
+hist(d.ch.k$wkhtot[d.ch.k$gndr == "w"], breaks = 15, main = "Verteilung Frauen", xlim = c(0, 100), ylim = c(0, 300), xlab = "Wochenarbeitsstunden", ylab = "Häufigkeit", yaxt = "n")
+axis(side = 2, at = seq(0, 300, 50), labels = seq(0, 300, 50))
+hist(d.ch.k$wkhtot[d.ch.k$gndr == "m"], breaks = 15, main = "Verteilung Männer", xlim = c(0, 100), ylim = c(0, 300), xlab = "Wochenarbeitsstunden", ylab = "Häufigkeit", yaxt = "n")
+axis(side = 2, at = seq(0, 300, 50), labels = seq(0, 300, 50))
+```
+
+2\. plot – Argumente...
+
+| Argument | Inhalt |
+|------------------------------------|------------------------------------|
+| `x`, `y` | Koordinaten oder R-Objekt, das plot()-Funktion bearbeiten kann |
+| `main` | Titel des Diagramms |
+| `xlab`, `ylab` | Beschriftung der x-, resp. y-Achse |
+| `col` | Farbe |
+
+3.  Variable von Aufgabe 1
+
+```{r}
+plot(x = jitter(d.ch.k$wkhtot), main = "Verteilung der Wochenarbeitsstunden", xlab = "Fall", ylab = "Wochenarbeitsstunden", col = "black")
+```
+
+Die Grafik ist nichts sagend und sinnlos, auch, wenn man die Punkte mit
+der `jitter()`-Funktion versetzt zeichnet.
+
+4.  Kategoriale Variable mit `plot()`:
+
+```{r}
+plot(d.ch.k$gndr, ylim = c(0, 800), main = "Verteilung des Geschlechts", ylab = "Anzahl", xlab = "Geschlecht")
+```
+
+Die Grafik ist korrekt, aber inhaltlich nicht sinnvoll, weil aufgrund
+des Stichprobenplans das Geschlecht in der Stichprobe ungefähr gleich
+verteilt sein soll. Sie zeigt, wie viele der Befragten männlich,
+respektive weiblich angegeben haben.
+
+3.  bivariate Verteilung...
+
+<!-- -->
+
+a.  Kombinationen von Datenarten und c. noch nicht sinnvolle Plots
+    sinnvoller konstruieren: kat und num: Boxplot
+
+```{r}
+plot(d.ch.k$gndr, d.ch.k$wkhtot, ylab = "Arbeitswochenstunden", xlab = "Geschlecht") # sinnvoll
+```
+
+**num und kat: (Streudiagramm gegen Index – nicht sinnvoll!)**
+
+```{r}
+plot(d.ch.k$wkhtot, d.ch.k$gndr) # num und kat -> nicht sinnvoll
+```
+
+**num und num: Streudiagramm**
+
+```{r}
+plot(jitter(d.ch.k$agea), jitter(d.ch.k$eduyrs)) # mit diesen Variablen jedoch nicht wirklich hilfreich
+```
+
+**kat und kat: ("Mosaic" – nicht sinnvoll!)**
+
+```{r}
+plot(d.ch.k$gndr, d.ch.k$edlvdch_zf) # vergleicht Anteile Bildungslevel nach Geschlecht, allerdings gestapelte Balkendiagramme und deshalb schwer lesbar 
+# --> lesbarer wird's so:
+barplot(prop.table(table(x = d.ch.k$gndr, y = d.ch.k$edlvdch_zf), 2), 
+        beside = T, ylim = c(0, 1), col = c("blue", "red"),
+        ylab = "Anteilswert", 
+        xlab = "Bildungsniveau")
+legend("topright", 
+       legend = c("Frauen", "Männer"),
+       col = c("red", "blue"),
+       cex = 0.75,
+       pch = 15,
+       pt.cex = 1.5)
+```
+
+::: callout-important
+## Korrekte Kodierung der Variablen
+
+Die plot()-Funktion generiert je nach Kodierung der Variable
+unterschiedliche Plotarten. Deshalb ist es essentiell, dass die
+Variablen im Aufbereitungsskript korrekt kodiert sind!
+:::
+
+b.  Interpretation der sinnvollen Outputs:
+
+| Plot | Interpretation |
+|--------------------------|----------------------------------------------|
+| Boxplot | Die meisten befragten Männer arbeiten um die 40 Stunden pro Wochen, während Frauen eher in Teilzeitpensen arbeiten. |
+| (Streudiagramm) | Bildet die Anzahl Wochenarbeitsstunden in Abhängigkeit der Bildungsjahre ab. Anhand des Plots ist keine Tendenz erkennbar. |
+| Balkendiagramm (angepasst) | Es sind mehr Männer in der Stichprobe als Frauen, die angegeben haben, ein Sek1-Abschluss zu haben. Betreffend Primar- und Tertiär-Abschluss sind es mehr Frauen. Diese Daten sind allerdings schwierig zu interpretieren, weil wir nur die Stichprobe anschauen. |
+
+c.  Siehe a.
+
+<!-- -->
+
+6.  Linien zu Streudiagramm von Aufgabe 4 -- es ist nicht wirklich ein
+    Zusammenhang erkennbar, auch wenn wir uns nur Befragte mit tertiärer
+    Bildung anschauen...
+
+```{r}
+plot(jitter(d.ch.k$agea)[d.ch.k$edlvdch_zf == "tert"], jitter(d.ch.k$eduyrs)[d.ch.k$edlvdch_zf == "tert"], 
+     xlim = c(0, 100),
+     ylim = c(0, 40))
+abline(h = 15, col = "red")
+abline(lm(eduyrs ~ agea, data = d.ch.k[d.ch.k$edlvdch_zf == "tert", ]), col = "blue") # Regressionslinie dazu, die macht hier kein Sinn, weil kein Zusammenhang vorliegt, wie wir bereits festgestellt haben...
+```
+
+<!-- -->
+
+7.  Legende...
+
+```{r}
+hist(d.ch.k$agea, col = "blue", xlim = c(0, 100), ylim = c(0, 800), xlab = "Jahre", ylab = "Häufigkeit", main = "Bildungs- und Altersjahre")
+new.color <- rgb(red = 0, green = 255, blue = 0, alpha = 255/2,
+                 maxColorValue = 255)
+hist(d.ch.k$eduyrs, col = new.color, add = T)
+
+legend("topright", 
+       legend = c("Bildungsjahre", "Altersjahre"),
+       col = c(new.color, "blue"),
+       cex = 0.75,
+       pch = 15,
+       pt.cex = 1.5)
+```
+
+Die Grafik zeigt das Histogramm der Bildungs- und Altersjahre in einem
+Plot. Auf der x-Achse sind zwar in beiden Fällen Jahre abgebildet, die
+Grafik macht aber nichts sichtbar. Sinnvoller ist es, sich zwei Gruppen
+einer der beiden Variablen anzuschauen, oder den Zusammenhang der beiden
+Variablen bivariat darzustellen:
+
+```{r}
+plot(jitter(d.ch.k$agea), jitter(d.ch.k$eduyrs)) # man sieht nicht so viel... ausser vielleicht, dass ältere Personen weniger und "mittelalte" Befragte am meisten Bildungsjahre angeben...
+abline(lm(eduyrs ~ agea, data = d.ch.k), col = "blue")
+```
+
+w7 - 5. Chi-Quadrat-Wert
+
+7.  Stichproben-Daten: Erläutern Sie den Unterschied...
+
+```{r}
+chisq.test(table(d.ch.k$gndr, d.ch.k$netusoft_zf)) # es scheint in den Stichprobendaten kein Zusammenhang zu bestehen
+
+# wir schauen uns das noch in der Grundgesamtheit an...
+library(survey)
+svy.ch <- svydesign(ids = ~psu, strata = ~stratum, weights = ~anweight,
+                    data = d.ch.k)
+svychisq(formula = ~ gndr + netusoft_zf, design = svy.ch)
+# auch in der Grundgesamtheit besteht kein Zusammenhang
+```

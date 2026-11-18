@@ -1,0 +1,21 @@
+{
+  "hash": "2c613d582f3a5c297023a8cd0687cd93",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\neditor: \n  markdown: \n    wrap: 72\n---\n\n# Woche 12 {.unnumbered}\n\n*Grafiken mit ggplot*\n\n## Lernziele\n\nIn dieser Woche beschäftigen wir uns mit ggplot. Es ist ein\nleistungsfähiges Visualisierungspaket in R, das heute standardmässig zur\nErstellung von Grafiken mit R verwendet wird und Teil von Tidyverse ist.\nTidyverse ist eine Paket-Sammlung, die auf Datascience ausgerichtet ist.\nEntweder können Sie nur ggplot2 oder die gesamte\ntidyverse-Paket-Sammlung installieren. ggplot hat eine eigene\nPhilosophie und es ist deshalb nützlich, erstmal den Aufbau/die Logik zu\nverstehen.\n\nDie Lernziele:\n\n-   Sie erläutern, wie Code zur Erstellung von Plots mit ggplot\n    aufgebaut ist.\n-   Sie erstellen Plots mit ggplot2 und erweitern diese Grafiken auf\n    unterschiedliche Art und Weise.\n-   Sie nennen die Vorteile von ggplot2 gegenüber Base R betreffend\n\n## Aufgaben\n\n\n::: {.cell}\n\n:::\n\n\n::: callout-important\n## ggplot2\n\nGrafiken sind systematisch (basierend auf [Grammar of\nGraphics](https://link.springer.com/book/10.1007/0-387-28695-0)) in\n\"Layers\" aufgebaut. Die Komponenten sind:\n\n| Element | Inhalt |\n|-------------------------|-----------------------------------------------|\n| Daten | Datensatz |\n| \"Aesthetics\" | Welche Variablen werden visualisiert (mittels Achsen, Farben, Grössen, Farbintensität...)? |\n| Skalen | von... bis..., Skalenniveau... |\n| (Geometrische Objekte) | Formen |\n| Statistiken | Welche Daten sind wie dargestellt (z.B. Gruppierungen, absolute Häufigkeiten, Regressionslinien...)? |\n| Facets | Aufteilung der Daten in mehrere Plots |\n| Themes | Wie sind die Plots gestaltet/angeordnet? |\n     \nDie Elemente können flexibel miteinander kombiniert werden. Dadurch lassen sich sowohl einfache Diagramme (z. B. Balken-, Linien- oder Punktdiagramme) als auch komplexe, mehrschichtige Visualisierungen erstellen.\n\nEin Plot muss mit `ggplot(data, aes(...))` initiiert werden. Dann folgt ein erstes Layer wie zum Beispiel `geom_point()`. Es können weitere Layers (z.B. `geom_line()`) folgen. Die Layers werden mit einem `+` miteinander verbunden. Die Plots lassen sich in mehrere Plots aufteilen (mit z.B. `facet_grid()`) oder mit \"Themes\" (z.B. `theme_bw()`) zur grafischen Anpassung vielseitig erweitern.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Aufbau ggplot-Funktion. Graue Bereiche bleiben immer gleich.](Bilder/aufbau_ggplot.png)\n:::\n:::\n\n\nAls Input braucht ggplot einen Datensatz im \"long\"-Format. Das heisst, Sie müssen unter Umständen diesen Datensatz (mit ggf. Gruppierungen) vorbereiten. Nützlicher Code ist:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse) # für Pipe-Operatoren (%>%) und ggplot-Funktion\nd.g <- d.ch.k %>% \n  group_by(gndr, edlvdch_zf) %>% # Gruppierungsvariablen\n  summarise(anz = n()) # zählen\n```\n:::\n\n\n:::\n\n1.  Bauen Sie die \"Endversion\" Ihres Histogramms von Aufgabe 1, Woche 8 mit der `ggplot()`-Funktion nach. \n\na.  Kommentieren Sie, wie die Argumente von Base R in ggplot heissen und wie Sie diese spezifizieren müssen.\nb.  Machen Sie daraus für männliche und weibliche Befragte je ein Plot (Hinweis: `facet_grid()`).\n\n\n2.  Bauen Sie die *sinnvollen* \"Endversionen\" Ihrer bivariaten Grafiken von Aufgaben 5 und 6, Woche 8 mit der `ggplot()`-Funktion nach. Nehmen Sie jeweils noch eine zusätzliche Variable mit auf. Nutzen Sie dafür die Farbgebung, Farbintensität, Punkteart und -grösse oder -- wie in Aufgabe 1 -- die Möglichkeit, mehrere Plots nebeneinander zu erstellen. \n\n\n*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit \"Reflexion\" in Ihrem Markdown-Dokument!)*\n\nBitte reflektieren Sie und halten stichpunktartig fest:\n\n-   Was ist Ihnen klar geworden?\n-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?",
+    "supporting": [
+      "E12_aufg_25_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

@@ -1,0 +1,5959 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        html {
+            max-width: 70ch;
+            /* larger spacing on larger screens, very small spacing on tiny screens */
+            padding: calc(1vmin + .5rem);
+            /* shorthand for margin-left/margin-right */
+            margin-inline: auto;
+            /* fluid sizing: https://frontaid.io/blog/fluid-typography-2d-css-locks-clamp/ */
+            font-size: clamp(1em, 0.909em + 0.45vmin, 1.25em);
+            /* use system font stack: https://developer.mozilla.org/en-US/docs/Web/CSS/font-family */
+            font-family: system-ui;
+            --font-size-x-small: 0.8rem;
+            --font-size-small: 1rem;
+            --font-size-medium: 1.3rem;
+            --font-size-large: 1.65rem;
+            --font-size-x-large: 2.4rem;
+            --space-xx-small: 0.25rem;
+            --space-x-small: 0.5rem;
+            --space-small: 1rem;
+            --space-medium: 1.5rem;
+            --space-large: 3rem;
+            --space-x-large: 4rem;
+            --space-xx-large: 6rem;
+            --space-xxx-large: 8rem;
+            --divider-line: 1px dashed var(--color-light-gray);
+            --outline-width: 3px;
+        }
+
+        /* increase line-height for everything except headings */
+        body :not(:is(h1, h2, h3, h4, h5, h6)) {
+            line-height: 1.75;
+        }
+
+        /*
+        .var-header {
+            position: sticky;
+            top: 10px;
+        } */
+
+        .data-table {
+            margin-left: 0;
+            margin-bottom: 0;
+            margin-top: var(--space-small);
+            margin-left: var(--space-small);
+            font-size: var(--font-size-x-small);
+            display: block;
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .data-table table {
+            border-collapse: collapse;
+            font-size: var(--font-size-x-small);
+        }
+
+        .data-table thead {
+            border-bottom: 2px solid var(--color-black);
+            display: table-header-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+
+        .data-table th {
+            padding-bottom: var(--space-x-small);
+            padding-right: var(--space-small);
+            padding-bottom: var(--space-xx-small);
+            padding-top: var(--space-xx-small);
+            text-align: left;
+        }
+
+    </style>
+    <title>Codebook</title>
+</head>
+
+
+
+
+
+<body>
+    <h1>Codebook</h1>
+    <h2>Datafile</h2>
+    
+        <h3>ESS9</h3>
+    
+        ESS9 - integrated file, edition 3.1
+    
+        
+        <p><a href="https://doi.org/10.21338/ess9e03_1" target=”_blank”>doi:10.21338/ess9e03_1</a></p>
+    
+    
+
+    <h2>Variables</h2>
+    <ul class="toc-list">
+        
+        <li>
+            <a href="#name">
+                <span>name</span>
+                <span> - Title of dataset</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#essround">
+                <span>essround</span>
+                <span> - ESS round</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#edition">
+                <span>edition</span>
+                <span> - Edition</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#proddate">
+                <span>proddate</span>
+                <span> - Production date</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#idno">
+                <span>idno</span>
+                <span> - Respondent's identification number</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#cntry">
+                <span>cntry</span>
+                <span> - Country</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#dweight">
+                <span>dweight</span>
+                <span> - Design weight</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#pspwght">
+                <span>pspwght</span>
+                <span> - Post-stratification weight including design weight</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#pweight">
+                <span>pweight</span>
+                <span> - Population size weight (must be combined with dweight or pspwght)</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#anweight">
+                <span>anweight</span>
+                <span> - Analysis weight</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#netusoft">
+                <span>netusoft</span>
+                <span> - Internet use, how often</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#ppltrst">
+                <span>ppltrst</span>
+                <span> - Most people can be trusted or you can't be too careful</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#pplhlp">
+                <span>pplhlp</span>
+                <span> - Most of the time people helpful or mostly looking out for themselves</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#gndr">
+                <span>gndr</span>
+                <span> - Gender</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#yrbrn">
+                <span>yrbrn</span>
+                <span> - Year of birth</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#agea">
+                <span>agea</span>
+                <span> - Age of respondent, calculated</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#eisced">
+                <span>eisced</span>
+                <span> - Highest level of education, ES - ISCED</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#edulvlb">
+                <span>edulvlb</span>
+                <span> - Highest level of education</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#eduyrs">
+                <span>eduyrs</span>
+                <span> - Years of full-time education completed</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#pdwrk">
+                <span>pdwrk</span>
+                <span> - Doing last 7 days: paid work</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#edctn">
+                <span>edctn</span>
+                <span> - Doing last 7 days: education</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#wkhtot">
+                <span>wkhtot</span>
+                <span> - Total hours normally worked per week in main job overtime included</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#isco08">
+                <span>isco08</span>
+                <span> - Occupation, ISCO08</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#uemp3m">
+                <span>uemp3m</span>
+                <span> - Ever unemployed and seeking work for a period more than three months</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#prob">
+                <span>prob</span>
+                <span> - Sampling probability</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#stratum">
+                <span>stratum</span>
+                <span> - Sampling stratum</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#psu">
+                <span>psu</span>
+                <span> - Primary sampling unit</span>
+            </a>
+        </li>
+        
+
+    </ul>
+
+    
+    <div>
+        <h3 id="name">name </h3>
+        
+        <div>Title of dataset</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="essround">essround </h3>
+        
+        <div>ESS round</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="edition">edition </h3>
+        
+        <div>Edition</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="proddate">proddate </h3>
+        
+        <div>Production date</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="idno">idno </h3>
+        
+        <div>Respondent's identification number</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="cntry">cntry </h3>
+        
+        <div>Country</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">AT</td>
+                        
+                        <td>Austria</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">BE</td>
+                        
+                        <td>Belgium</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">BG</td>
+                        
+                        <td>Bulgaria</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">CH</td>
+                        
+                        <td>Switzerland</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">CY</td>
+                        
+                        <td>Cyprus</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">CZ</td>
+                        
+                        <td>Czechia</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">DE</td>
+                        
+                        <td>Germany</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">DK</td>
+                        
+                        <td>Denmark</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">EE</td>
+                        
+                        <td>Estonia</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">ES</td>
+                        
+                        <td>Spain</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">FI</td>
+                        
+                        <td>Finland</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">FR</td>
+                        
+                        <td>France</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">GB</td>
+                        
+                        <td>United Kingdom</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">HR</td>
+                        
+                        <td>Croatia</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">HU</td>
+                        
+                        <td>Hungary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">IE</td>
+                        
+                        <td>Ireland</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">IS</td>
+                        
+                        <td>Iceland</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">IT</td>
+                        
+                        <td>Italy</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">LT</td>
+                        
+                        <td>Lithuania</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">LV</td>
+                        
+                        <td>Latvia</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">ME</td>
+                        
+                        <td>Montenegro</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">NL</td>
+                        
+                        <td>Netherlands</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">NO</td>
+                        
+                        <td>Norway</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">PL</td>
+                        
+                        <td>Poland</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">PT</td>
+                        
+                        <td>Portugal</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">RS</td>
+                        
+                        <td>Serbia</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">SE</td>
+                        
+                        <td>Sweden</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">SI</td>
+                        
+                        <td>Slovenia</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">SK</td>
+                        
+                        <td>Slovakia</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="dweight">dweight </h3>
+        
+        <div>Design weight</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="pspwght">pspwght </h3>
+        
+        <div>Post-stratification weight including design weight</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="pweight">pweight </h3>
+        
+        <div>Population size weight (must be combined with dweight or pspwght)</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="anweight">anweight </h3>
+        
+        <div>Analysis weight</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="netusoft">netusoft </h3>
+        
+        <div>Internet use, how often</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">1</td>
+                        
+                        <td>Never</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2</td>
+                        
+                        <td>Only occasionally</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3</td>
+                        
+                        <td>A few times a week</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4</td>
+                        
+                        <td>Most days</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5</td>
+                        
+                        <td>Every day</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="ppltrst">ppltrst </h3>
+        
+        <div>Most people can be trusted or you can't be too careful</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">0</td>
+                        
+                        <td>You can't be too careful</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1</td>
+                        
+                        <td>1</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2</td>
+                        
+                        <td>2</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3</td>
+                        
+                        <td>3</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4</td>
+                        
+                        <td>4</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5</td>
+                        
+                        <td>5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6</td>
+                        
+                        <td>6</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7</td>
+                        
+                        <td>7</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8</td>
+                        
+                        <td>8</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9</td>
+                        
+                        <td>9</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">10</td>
+                        
+                        <td>Most people can be trusted</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">77</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">88</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">99</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="pplhlp">pplhlp </h3>
+        
+        <div>Most of the time people helpful or mostly looking out for themselves</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">0</td>
+                        
+                        <td>People mostly look out for themselves</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1</td>
+                        
+                        <td>1</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2</td>
+                        
+                        <td>2</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3</td>
+                        
+                        <td>3</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4</td>
+                        
+                        <td>4</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5</td>
+                        
+                        <td>5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6</td>
+                        
+                        <td>6</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7</td>
+                        
+                        <td>7</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8</td>
+                        
+                        <td>8</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9</td>
+                        
+                        <td>9</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">10</td>
+                        
+                        <td>People mostly try to be helpful</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">77</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">88</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">99</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="gndr">gndr </h3>
+        
+        <div>Gender</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">1</td>
+                        
+                        <td>Male</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2</td>
+                        
+                        <td>Female</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="yrbrn">yrbrn </h3>
+        
+        <div>Year of birth</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">7777</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8888</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9999</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="agea">agea </h3>
+        
+        <div>Age of respondent, calculated</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">999</td>
+                        
+                        <td>Not available*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="eisced">eisced </h3>
+        
+        <div>Highest level of education, ES - ISCED</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">0</td>
+                        
+                        <td>Not possible to harmonise into ES-ISCED</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1</td>
+                        
+                        <td>ES-ISCED I , less than lower secondary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2</td>
+                        
+                        <td>ES-ISCED II, lower secondary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3</td>
+                        
+                        <td>ES-ISCED IIIb, lower tier upper secondary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4</td>
+                        
+                        <td>ES-ISCED IIIa, upper tier upper secondary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5</td>
+                        
+                        <td>ES-ISCED IV, advanced vocational, sub-degree</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6</td>
+                        
+                        <td>ES-ISCED V1, lower tertiary education, BA level</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7</td>
+                        
+                        <td>ES-ISCED V2, higher tertiary education, >= MA level</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">55</td>
+                        
+                        <td>Other</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">77</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">88</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">99</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="edulvlb">edulvlb </h3>
+        
+        <div>Highest level of education</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">0</td>
+                        
+                        <td>Not completed ISCED level 1</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">113</td>
+                        
+                        <td>ISCED 1, completed primary education</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">129</td>
+                        
+                        <td>Vocational ISCED 2C < 2 years, no access ISCED 3</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">212</td>
+                        
+                        <td>General/pre-vocational ISCED 2A/2B, access ISCED 3 vocational</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">213</td>
+                        
+                        <td>General ISCED 2A, access ISCED 3A general/all 3</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">221</td>
+                        
+                        <td>Vocational ISCED 2C >= 2 years, no access ISCED 3</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">222</td>
+                        
+                        <td>Vocational ISCED 2A/2B, access ISCED 3 vocational</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">223</td>
+                        
+                        <td>Vocational ISCED 2, access ISCED 3 general/all</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">229</td>
+                        
+                        <td>Vocational ISCED 3C < 2 years, no access ISCED 5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">311</td>
+                        
+                        <td>General ISCED 3 >=2 years, no access ISCED 5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">312</td>
+                        
+                        <td>General ISCED 3A/3B, access ISCED 5B/lower tier 5A</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">313</td>
+                        
+                        <td>General ISCED 3A, access upper tier ISCED 5A/all 5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">321</td>
+                        
+                        <td>Vocational ISCED 3C >= 2 years, no access ISCED 5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">322</td>
+                        
+                        <td>Vocational ISCED 3A, access ISCED 5B/ lower tier 5A</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">323</td>
+                        
+                        <td>Vocational ISCED 3A, access upper tier ISCED 5A/all 5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">412</td>
+                        
+                        <td>General ISCED 4A/4B, access ISCED 5B/lower tier 5A</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">413</td>
+                        
+                        <td>General ISCED 4A, access upper tier ISCED 5A/all 5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">421</td>
+                        
+                        <td>ISCED 4 programmes without access ISCED 5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">422</td>
+                        
+                        <td>Vocational ISCED 4A/4B, access ISCED 5B/lower tier 5A</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">423</td>
+                        
+                        <td>Vocational ISCED 4A, access upper tier ISCED 5A/all 5</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">510</td>
+                        
+                        <td>ISCED 5A short, intermediate/academic/general tertiary below bachelor</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">520</td>
+                        
+                        <td>ISCED 5B short, advanced vocational qualifications</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">610</td>
+                        
+                        <td>ISCED 5A medium, bachelor/equivalent from lower tier tertiary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">620</td>
+                        
+                        <td>ISCED 5A medium, bachelor/equivalent from upper/single tier tertiary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">710</td>
+                        
+                        <td>ISCED 5A long, master/equivalent from lower tier tertiary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">720</td>
+                        
+                        <td>ISCED 5A long, master/equivalent from upper/single tier tertiary</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">800</td>
+                        
+                        <td>ISCED 6, doctoral degree</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5555</td>
+                        
+                        <td>Other</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7777</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8888</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9999</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="eduyrs">eduyrs </h3>
+        
+        <div>Years of full-time education completed</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">77</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">88</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">99</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="pdwrk">pdwrk </h3>
+        
+        <div>Doing last 7 days: paid work</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">0</td>
+                        
+                        <td>Not marked</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1</td>
+                        
+                        <td>Marked</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="edctn">edctn </h3>
+        
+        <div>Doing last 7 days: education</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">0</td>
+                        
+                        <td>Not marked</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1</td>
+                        
+                        <td>Marked</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="wkhtot">wkhtot </h3>
+        
+        <div>Total hours normally worked per week in main job overtime included</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">666</td>
+                        
+                        <td>Not applicable*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">777</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">888</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">999</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="isco08">isco08 </h3>
+        
+        <div>Occupation, ISCO08</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">0</td>
+                        
+                        <td>Armed forces occupations</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">100</td>
+                        
+                        <td>Commissioned armed forces officers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">110</td>
+                        
+                        <td>Commissioned armed forces officers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">200</td>
+                        
+                        <td>Non-commissioned armed forces officers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">210</td>
+                        
+                        <td>Non-commissioned armed forces officers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">300</td>
+                        
+                        <td>Armed forces occupations, other ranks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">310</td>
+                        
+                        <td>Armed forces occupations, other ranks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1000</td>
+                        
+                        <td>Managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1100</td>
+                        
+                        <td>Chief executives, senior officials and legislators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1110</td>
+                        
+                        <td>Legislators and senior officials</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1111</td>
+                        
+                        <td>Legislators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1112</td>
+                        
+                        <td>Senior government officials</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1113</td>
+                        
+                        <td>Traditional chiefs and heads of village</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1114</td>
+                        
+                        <td>Senior officials of special-interest organizations</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1120</td>
+                        
+                        <td>Managing directors and chief executives</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1200</td>
+                        
+                        <td>Administrative and commercial managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1210</td>
+                        
+                        <td>Business services and administration managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1211</td>
+                        
+                        <td>Finance managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1212</td>
+                        
+                        <td>Human resource managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1213</td>
+                        
+                        <td>Policy and planning managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1219</td>
+                        
+                        <td>Business services and administration managers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1220</td>
+                        
+                        <td>Sales, marketing and development managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1221</td>
+                        
+                        <td>Sales and marketing managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1222</td>
+                        
+                        <td>Advertising and public relations managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1223</td>
+                        
+                        <td>Research and development managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1300</td>
+                        
+                        <td>Production and specialised services managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1310</td>
+                        
+                        <td>Production managers in agriculture, forestry and fisheries</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1311</td>
+                        
+                        <td>Agricultural and forestry production managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1312</td>
+                        
+                        <td>Aquaculture and fisheries production managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1320</td>
+                        
+                        <td>Manufacturing, mining, construction, and distribution managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1321</td>
+                        
+                        <td>Manufacturing managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1322</td>
+                        
+                        <td>Mining managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1323</td>
+                        
+                        <td>Construction managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1324</td>
+                        
+                        <td>Supply, distribution and related managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1330</td>
+                        
+                        <td>Information and communications technology service managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1340</td>
+                        
+                        <td>Professional services managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1341</td>
+                        
+                        <td>Child care services managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1342</td>
+                        
+                        <td>Health services managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1343</td>
+                        
+                        <td>Aged care services managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1344</td>
+                        
+                        <td>Social welfare managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1345</td>
+                        
+                        <td>Education managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1346</td>
+                        
+                        <td>Financial and insurance services branch managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1349</td>
+                        
+                        <td>Professional services managers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1400</td>
+                        
+                        <td>Hospitality, retail and other services managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1410</td>
+                        
+                        <td>Hotel and restaurant managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1411</td>
+                        
+                        <td>Hotel managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1412</td>
+                        
+                        <td>Restaurant managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1420</td>
+                        
+                        <td>Retail and wholesale trade managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1430</td>
+                        
+                        <td>Other services managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1431</td>
+                        
+                        <td>Sports, recreation and cultural centre managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">1439</td>
+                        
+                        <td>Services managers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2000</td>
+                        
+                        <td>Professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2100</td>
+                        
+                        <td>Science and engineering professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2110</td>
+                        
+                        <td>Physical and earth science professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2111</td>
+                        
+                        <td>Physicists and astronomers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2112</td>
+                        
+                        <td>Meteorologists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2113</td>
+                        
+                        <td>Chemists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2114</td>
+                        
+                        <td>Geologists and geophysicists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2120</td>
+                        
+                        <td>Mathematicians, actuaries and statisticians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2130</td>
+                        
+                        <td>Life science professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2131</td>
+                        
+                        <td>Biologists, botanists, zoologists and related professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2132</td>
+                        
+                        <td>Farming, forestry and fisheries advisers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2133</td>
+                        
+                        <td>Environmental protection professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2140</td>
+                        
+                        <td>Engineering professionals (excluding electrotechnology)</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2141</td>
+                        
+                        <td>Industrial and production engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2142</td>
+                        
+                        <td>Civil engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2143</td>
+                        
+                        <td>Environmental engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2144</td>
+                        
+                        <td>Mechanical engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2145</td>
+                        
+                        <td>Chemical engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2146</td>
+                        
+                        <td>Mining engineers, metallurgists and related professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2149</td>
+                        
+                        <td>Engineering professionals not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2150</td>
+                        
+                        <td>Electrotechnology engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2151</td>
+                        
+                        <td>Electrical engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2152</td>
+                        
+                        <td>Electronics engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2153</td>
+                        
+                        <td>Telecommunications engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2160</td>
+                        
+                        <td>Architects, planners, surveyors and designers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2161</td>
+                        
+                        <td>Building architects</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2162</td>
+                        
+                        <td>Landscape architects</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2163</td>
+                        
+                        <td>Product and garment designers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2164</td>
+                        
+                        <td>Town and traffic planners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2165</td>
+                        
+                        <td>Cartographers and surveyors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2166</td>
+                        
+                        <td>Graphic and multimedia designers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2200</td>
+                        
+                        <td>Health professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2210</td>
+                        
+                        <td>Medical doctors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2211</td>
+                        
+                        <td>Generalist medical practitioners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2212</td>
+                        
+                        <td>Specialist medical practitioners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2220</td>
+                        
+                        <td>Nursing and midwifery professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2221</td>
+                        
+                        <td>Nursing professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2222</td>
+                        
+                        <td>Midwifery professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2230</td>
+                        
+                        <td>Traditional and complementary medicine professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2240</td>
+                        
+                        <td>Paramedical practitioners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2250</td>
+                        
+                        <td>Veterinarians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2260</td>
+                        
+                        <td>Other health professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2261</td>
+                        
+                        <td>Dentists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2262</td>
+                        
+                        <td>Pharmacists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2263</td>
+                        
+                        <td>Environmental and occupational health and hygiene professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2264</td>
+                        
+                        <td>Physiotherapists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2265</td>
+                        
+                        <td>Dieticians and nutritionists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2266</td>
+                        
+                        <td>Audiologists and speech therapists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2267</td>
+                        
+                        <td>Optometrists and ophthalmic opticians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2269</td>
+                        
+                        <td>Health professionals not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2300</td>
+                        
+                        <td>Teaching professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2310</td>
+                        
+                        <td>University and higher education teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2320</td>
+                        
+                        <td>Vocational education teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2330</td>
+                        
+                        <td>Secondary education teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2340</td>
+                        
+                        <td>Primary school and early childhood teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2341</td>
+                        
+                        <td>Primary school teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2342</td>
+                        
+                        <td>Early childhood educators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2350</td>
+                        
+                        <td>Other teaching professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2351</td>
+                        
+                        <td>Education methods specialists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2352</td>
+                        
+                        <td>Special needs teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2353</td>
+                        
+                        <td>Other language teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2354</td>
+                        
+                        <td>Other music teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2355</td>
+                        
+                        <td>Other arts teachers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2356</td>
+                        
+                        <td>Information technology trainers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2359</td>
+                        
+                        <td>Teaching professionals not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2400</td>
+                        
+                        <td>Business and administration professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2410</td>
+                        
+                        <td>Finance professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2411</td>
+                        
+                        <td>Accountants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2412</td>
+                        
+                        <td>Financial and investment advisers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2413</td>
+                        
+                        <td>Financial analysts</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2420</td>
+                        
+                        <td>Administration professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2421</td>
+                        
+                        <td>Management and organization analysts</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2422</td>
+                        
+                        <td>Policy administration professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2423</td>
+                        
+                        <td>Personnel and careers professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2424</td>
+                        
+                        <td>Training and staff development professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2430</td>
+                        
+                        <td>Sales, marketing and public relations professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2431</td>
+                        
+                        <td>Advertising and marketing professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2432</td>
+                        
+                        <td>Public relations professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2433</td>
+                        
+                        <td>Technical and medical sales professionals (excluding ICT)</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2434</td>
+                        
+                        <td>Information and communications technology sales professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2500</td>
+                        
+                        <td>Information and communications technology professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2510</td>
+                        
+                        <td>Software and applications developers and analysts</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2511</td>
+                        
+                        <td>Systems analysts</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2512</td>
+                        
+                        <td>Software developers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2513</td>
+                        
+                        <td>Web and multimedia developers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2514</td>
+                        
+                        <td>Applications programmers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2519</td>
+                        
+                        <td>Software and applications developers and analysts not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2520</td>
+                        
+                        <td>Database and network professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2521</td>
+                        
+                        <td>Database designers and administrators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2522</td>
+                        
+                        <td>Systems administrators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2523</td>
+                        
+                        <td>Computer network professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2529</td>
+                        
+                        <td>Database and network professionals not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2600</td>
+                        
+                        <td>Legal, social and cultural professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2610</td>
+                        
+                        <td>Legal professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2611</td>
+                        
+                        <td>Lawyers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2612</td>
+                        
+                        <td>Judges</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2619</td>
+                        
+                        <td>Legal professionals not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2620</td>
+                        
+                        <td>Librarians, archivists and curators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2621</td>
+                        
+                        <td>Archivists and curators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2622</td>
+                        
+                        <td>Librarians and related information professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2630</td>
+                        
+                        <td>Social and religious professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2631</td>
+                        
+                        <td>Economists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2632</td>
+                        
+                        <td>Sociologists, anthropologists and related professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2633</td>
+                        
+                        <td>Philosophers, historians and political scientists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2634</td>
+                        
+                        <td>Psychologists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2635</td>
+                        
+                        <td>Social work and counselling professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2636</td>
+                        
+                        <td>Religious professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2640</td>
+                        
+                        <td>Authors, journalists and linguists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2641</td>
+                        
+                        <td>Authors and related writers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2642</td>
+                        
+                        <td>Journalists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2643</td>
+                        
+                        <td>Translators, interpreters and other linguists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2650</td>
+                        
+                        <td>Creative and performing artists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2651</td>
+                        
+                        <td>Visual artists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2652</td>
+                        
+                        <td>Musicians, singers and composers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2653</td>
+                        
+                        <td>Dancers and choreographers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2654</td>
+                        
+                        <td>Film, stage and related directors and producers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2655</td>
+                        
+                        <td>Actors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2656</td>
+                        
+                        <td>Announcers on radio, television and other media</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2659</td>
+                        
+                        <td>Creative and performing artists not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3000</td>
+                        
+                        <td>Technicians and associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3100</td>
+                        
+                        <td>Science and engineering associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3110</td>
+                        
+                        <td>Physical and engineering science technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3111</td>
+                        
+                        <td>Chemical and physical science technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3112</td>
+                        
+                        <td>Civil engineering technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3113</td>
+                        
+                        <td>Electrical engineering technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3114</td>
+                        
+                        <td>Electronics engineering technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3115</td>
+                        
+                        <td>Mechanical engineering technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3116</td>
+                        
+                        <td>Chemical engineering technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3117</td>
+                        
+                        <td>Mining and metallurgical technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3118</td>
+                        
+                        <td>Draughtspersons</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3119</td>
+                        
+                        <td>Physical and engineering science technicians not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3120</td>
+                        
+                        <td>Mining, manufacturing and construction supervisors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3121</td>
+                        
+                        <td>Mining supervisors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3122</td>
+                        
+                        <td>Manufacturing supervisors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3123</td>
+                        
+                        <td>Construction supervisors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3130</td>
+                        
+                        <td>Process control technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3131</td>
+                        
+                        <td>Power production plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3132</td>
+                        
+                        <td>Incinerator and water treatment plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3133</td>
+                        
+                        <td>Chemical processing plant controllers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3134</td>
+                        
+                        <td>Petroleum and natural gas refining plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3135</td>
+                        
+                        <td>Metal production process controllers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3139</td>
+                        
+                        <td>Process control technicians not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3140</td>
+                        
+                        <td>Life science technicians and related associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3141</td>
+                        
+                        <td>Life science technicians (excluding medical)</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3142</td>
+                        
+                        <td>Agricultural technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3143</td>
+                        
+                        <td>Forestry technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3150</td>
+                        
+                        <td>Ship and aircraft controllers and technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3151</td>
+                        
+                        <td>Ships' engineers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3152</td>
+                        
+                        <td>Ships' deck officers and pilots</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3153</td>
+                        
+                        <td>Aircraft pilots and related associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3154</td>
+                        
+                        <td>Air traffic controllers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3155</td>
+                        
+                        <td>Air traffic safety electronics technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3200</td>
+                        
+                        <td>Health associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3210</td>
+                        
+                        <td>Medical and pharmaceutical technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3211</td>
+                        
+                        <td>Medical imaging and therapeutic equipment technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3212</td>
+                        
+                        <td>Medical and pathology laboratory technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3213</td>
+                        
+                        <td>Pharmaceutical technicians and assistants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3214</td>
+                        
+                        <td>Medical and dental prosthetic technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3220</td>
+                        
+                        <td>Nursing and midwifery associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3221</td>
+                        
+                        <td>Nursing associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3222</td>
+                        
+                        <td>Midwifery associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3230</td>
+                        
+                        <td>Traditional and complementary medicine associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3240</td>
+                        
+                        <td>Veterinary technicians and assistants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3250</td>
+                        
+                        <td>Other health associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3251</td>
+                        
+                        <td>Dental assistants and therapists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3252</td>
+                        
+                        <td>Medical records and health information technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3253</td>
+                        
+                        <td>Community health workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3254</td>
+                        
+                        <td>Dispensing opticians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3255</td>
+                        
+                        <td>Physiotherapy technicians and assistants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3256</td>
+                        
+                        <td>Medical assistants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3257</td>
+                        
+                        <td>Environmental and occupational health inspectors and associates</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3258</td>
+                        
+                        <td>Ambulance workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3259</td>
+                        
+                        <td>Health associate professionals not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3300</td>
+                        
+                        <td>Business and administration associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3310</td>
+                        
+                        <td>Financial and mathematical associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3311</td>
+                        
+                        <td>Securities and finance dealers and brokers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3312</td>
+                        
+                        <td>Credit and loans officers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3313</td>
+                        
+                        <td>Accounting associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3314</td>
+                        
+                        <td>Statistical, mathematical and related associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3315</td>
+                        
+                        <td>Valuers and loss assessors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3320</td>
+                        
+                        <td>Sales and purchasing agents and brokers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3321</td>
+                        
+                        <td>Insurance representatives</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3322</td>
+                        
+                        <td>Commercial sales representatives</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3323</td>
+                        
+                        <td>Buyers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3324</td>
+                        
+                        <td>Trade brokers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3330</td>
+                        
+                        <td>Business services agents</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3331</td>
+                        
+                        <td>Clearing and forwarding agents</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3332</td>
+                        
+                        <td>Conference and event planners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3333</td>
+                        
+                        <td>Employment agents and contractors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3334</td>
+                        
+                        <td>Real estate agents and property managers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3339</td>
+                        
+                        <td>Business services agents not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3340</td>
+                        
+                        <td>Administrative and specialised secretaries</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3341</td>
+                        
+                        <td>Office supervisors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3342</td>
+                        
+                        <td>Legal secretaries</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3343</td>
+                        
+                        <td>Administrative and executive secretaries</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3344</td>
+                        
+                        <td>Medical secretaries</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3350</td>
+                        
+                        <td>Regulatory government associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3351</td>
+                        
+                        <td>Customs and border inspectors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3352</td>
+                        
+                        <td>Government tax and excise officials</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3353</td>
+                        
+                        <td>Government social benefits officials</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3354</td>
+                        
+                        <td>Government licensing officials</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3355</td>
+                        
+                        <td>Police inspectors and detectives</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3359</td>
+                        
+                        <td>Regulatory government associate professionals not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3400</td>
+                        
+                        <td>Legal, social, cultural and related associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3410</td>
+                        
+                        <td>Legal, social and religious associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3411</td>
+                        
+                        <td>Police inspectors and detectives</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3412</td>
+                        
+                        <td>Social work associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3413</td>
+                        
+                        <td>Religious associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3420</td>
+                        
+                        <td>Sports and fitness workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3421</td>
+                        
+                        <td>Athletes and sports players</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3422</td>
+                        
+                        <td>Sports coaches, instructors and officials</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3423</td>
+                        
+                        <td>Fitness and recreation instructors and program leaders</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3430</td>
+                        
+                        <td>Artistic, cultural and culinary associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3431</td>
+                        
+                        <td>Photographers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3432</td>
+                        
+                        <td>Interior designers and decorators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3433</td>
+                        
+                        <td>Gallery, museum and library technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3434</td>
+                        
+                        <td>Chefs</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3435</td>
+                        
+                        <td>Other artistic and cultural associate professionals</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3500</td>
+                        
+                        <td>Information and communications technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3510</td>
+                        
+                        <td>Information and communications technology operations and user support technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3511</td>
+                        
+                        <td>Information and communications technology operations technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3512</td>
+                        
+                        <td>Information and communications technology user support technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3513</td>
+                        
+                        <td>Computer network and systems technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3514</td>
+                        
+                        <td>Web technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3520</td>
+                        
+                        <td>Telecommunications and broadcasting technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3521</td>
+                        
+                        <td>Broadcasting and audio-visual technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">3522</td>
+                        
+                        <td>Telecommunications engineering technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4000</td>
+                        
+                        <td>Clerical support workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4100</td>
+                        
+                        <td>General and keyboard clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4110</td>
+                        
+                        <td>General office clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4120</td>
+                        
+                        <td>Secretaries (general)</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4130</td>
+                        
+                        <td>Keyboard operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4131</td>
+                        
+                        <td>Typists and word processing operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4132</td>
+                        
+                        <td>Data entry clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4200</td>
+                        
+                        <td>Customer services clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4210</td>
+                        
+                        <td>Tellers, money collectors and related clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4211</td>
+                        
+                        <td>Bank tellers and related clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4212</td>
+                        
+                        <td>Bookmakers, croupiers and related gaming workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4213</td>
+                        
+                        <td>Pawnbrokers and money-lenders</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4214</td>
+                        
+                        <td>Debt-collectors and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4220</td>
+                        
+                        <td>Client information workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4221</td>
+                        
+                        <td>Travel consultants and clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4222</td>
+                        
+                        <td>Contact centre information clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4223</td>
+                        
+                        <td>Telephone switchboard operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4224</td>
+                        
+                        <td>Hotel receptionists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4225</td>
+                        
+                        <td>Enquiry clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4226</td>
+                        
+                        <td>Receptionists (general)</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4227</td>
+                        
+                        <td>Survey and market research interviewers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4229</td>
+                        
+                        <td>Client information workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4300</td>
+                        
+                        <td>Numerical and material recording clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4310</td>
+                        
+                        <td>Numerical clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4311</td>
+                        
+                        <td>Accounting and bookkeeping clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4312</td>
+                        
+                        <td>Statistical, finance and insurance clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4313</td>
+                        
+                        <td>Payroll clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4320</td>
+                        
+                        <td>Material-recording and transport clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4321</td>
+                        
+                        <td>Stock clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4322</td>
+                        
+                        <td>Production clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4323</td>
+                        
+                        <td>Transport clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4400</td>
+                        
+                        <td>Other clerical support workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4410</td>
+                        
+                        <td>Other clerical support workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4411</td>
+                        
+                        <td>Library clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4412</td>
+                        
+                        <td>Mail carriers and sorting clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4413</td>
+                        
+                        <td>Coding, proof-reading and related clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4414</td>
+                        
+                        <td>Scribes and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4415</td>
+                        
+                        <td>Filing and copying clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4416</td>
+                        
+                        <td>Personnel clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">4419</td>
+                        
+                        <td>Clerical support workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5000</td>
+                        
+                        <td>Service and sales workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5100</td>
+                        
+                        <td>Personal service workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5110</td>
+                        
+                        <td>Travel attendants, conductors and guides</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5111</td>
+                        
+                        <td>Travel attendants and travel stewards</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5112</td>
+                        
+                        <td>Transport conductors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5113</td>
+                        
+                        <td>Travel guides</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5120</td>
+                        
+                        <td>Cooks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5130</td>
+                        
+                        <td>Waiters and bartenders</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5131</td>
+                        
+                        <td>Waiters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5132</td>
+                        
+                        <td>Bartenders</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5140</td>
+                        
+                        <td>Hairdressers, beauticians and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5141</td>
+                        
+                        <td>Hairdressers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5142</td>
+                        
+                        <td>Beauticians and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5150</td>
+                        
+                        <td>Building and housekeeping supervisors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5151</td>
+                        
+                        <td>Cleaning and housekeeping supervisors in offices, hotels and other establishments</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5152</td>
+                        
+                        <td>Domestic housekeepers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5153</td>
+                        
+                        <td>Building caretakers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5160</td>
+                        
+                        <td>Other personal services workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5161</td>
+                        
+                        <td>Astrologers, fortune-tellers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5162</td>
+                        
+                        <td>Companions and valets</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5163</td>
+                        
+                        <td>Undertakers and embalmers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5164</td>
+                        
+                        <td>Pet groomers and animal care workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5165</td>
+                        
+                        <td>Driving instructors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5169</td>
+                        
+                        <td>Personal services workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5200</td>
+                        
+                        <td>Sales workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5210</td>
+                        
+                        <td>Street and market salespersons</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5211</td>
+                        
+                        <td>Stall and market salespersons</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5212</td>
+                        
+                        <td>Street food salespersons</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5220</td>
+                        
+                        <td>Shop salespersons</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5221</td>
+                        
+                        <td>Shop keepers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5222</td>
+                        
+                        <td>Shop supervisors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5223</td>
+                        
+                        <td>Shop sales assistants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5230</td>
+                        
+                        <td>Cashiers and ticket clerks</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5240</td>
+                        
+                        <td>Other sales workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5241</td>
+                        
+                        <td>Fashion and other models</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5242</td>
+                        
+                        <td>Sales demonstrators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5243</td>
+                        
+                        <td>Door to door salespersons</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5244</td>
+                        
+                        <td>Contact centre salespersons</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5245</td>
+                        
+                        <td>Service station attendants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5246</td>
+                        
+                        <td>Food service counter attendants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5249</td>
+                        
+                        <td>Sales workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5300</td>
+                        
+                        <td>Personal care workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5310</td>
+                        
+                        <td>Child care workers and teachers' aides</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5311</td>
+                        
+                        <td>Child care workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5312</td>
+                        
+                        <td>Teachers' aides</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5320</td>
+                        
+                        <td>Personal care workers in health services</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5321</td>
+                        
+                        <td>Health care assistants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5322</td>
+                        
+                        <td>Home-based personal care workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5329</td>
+                        
+                        <td>Personal care workers in health services not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5400</td>
+                        
+                        <td>Protective services workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5410</td>
+                        
+                        <td>Protective services workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5411</td>
+                        
+                        <td>Fire-fighters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5412</td>
+                        
+                        <td>Police officers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5413</td>
+                        
+                        <td>Prison guards</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5414</td>
+                        
+                        <td>Security guards</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">5419</td>
+                        
+                        <td>Protective services workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6000</td>
+                        
+                        <td>Skilled agricultural, forestry and fishery workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6100</td>
+                        
+                        <td>Market-oriented skilled agricultural workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6110</td>
+                        
+                        <td>Market gardeners and crop growers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6111</td>
+                        
+                        <td>Field crop and vegetable growers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6112</td>
+                        
+                        <td>Tree and shrub crop growers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6113</td>
+                        
+                        <td>Gardeners, horticultural and nursery growers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6114</td>
+                        
+                        <td>Mixed crop growers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6120</td>
+                        
+                        <td>Animal producers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6121</td>
+                        
+                        <td>Livestock and dairy producers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6122</td>
+                        
+                        <td>Poultry producers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6123</td>
+                        
+                        <td>Apiarists and sericulturists</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6129</td>
+                        
+                        <td>Animal producers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6130</td>
+                        
+                        <td>Mixed crop and animal producers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6200</td>
+                        
+                        <td>Market-oriented skilled forestry, fishery and hunting workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6210</td>
+                        
+                        <td>Forestry and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6220</td>
+                        
+                        <td>Fishery workers, hunters and trappers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6221</td>
+                        
+                        <td>Aquaculture workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6222</td>
+                        
+                        <td>Inland and coastal waters fishery workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6223</td>
+                        
+                        <td>Deep-sea fishery workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6224</td>
+                        
+                        <td>Hunters and trappers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6300</td>
+                        
+                        <td>Subsistence farmers, fishers, hunters and gatherers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6310</td>
+                        
+                        <td>Subsistence crop farmers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6320</td>
+                        
+                        <td>Subsistence livestock farmers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6330</td>
+                        
+                        <td>Subsistence mixed crop and livestock farmers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">6340</td>
+                        
+                        <td>Subsistence fishers, hunters, trappers and gatherers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7000</td>
+                        
+                        <td>Craft and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7100</td>
+                        
+                        <td>Building and related trades workers, excluding electricians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7110</td>
+                        
+                        <td>Building frame and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7111</td>
+                        
+                        <td>House builders</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7112</td>
+                        
+                        <td>Bricklayers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7113</td>
+                        
+                        <td>Stonemasons, stone cutters, splitters and carvers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7114</td>
+                        
+                        <td>Concrete placers, concrete finishers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7115</td>
+                        
+                        <td>Carpenters and joiners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7119</td>
+                        
+                        <td>Building frame and related trades workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7120</td>
+                        
+                        <td>Building finishers and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7121</td>
+                        
+                        <td>Roofers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7122</td>
+                        
+                        <td>Floor layers and tile setters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7123</td>
+                        
+                        <td>Plasterers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7124</td>
+                        
+                        <td>Insulation workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7125</td>
+                        
+                        <td>Glaziers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7126</td>
+                        
+                        <td>Plumbers and pipe fitters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7127</td>
+                        
+                        <td>Air conditioning and refrigeration mechanics</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7130</td>
+                        
+                        <td>Painters, building structure cleaners and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7131</td>
+                        
+                        <td>Painters and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7132</td>
+                        
+                        <td>Spray painters and varnishers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7133</td>
+                        
+                        <td>Building structure cleaners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7200</td>
+                        
+                        <td>Metal, machinery and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7210</td>
+                        
+                        <td>Sheet and structural metal workers, moulders and welders, and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7211</td>
+                        
+                        <td>Metal moulders and coremakers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7212</td>
+                        
+                        <td>Welders and flamecutters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7213</td>
+                        
+                        <td>Sheet-metal workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7214</td>
+                        
+                        <td>Structural-metal preparers and erectors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7215</td>
+                        
+                        <td>Riggers and cable splicers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7220</td>
+                        
+                        <td>Blacksmiths, toolmakers and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7221</td>
+                        
+                        <td>Blacksmiths, hammersmiths and forging press workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7222</td>
+                        
+                        <td>Toolmakers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7223</td>
+                        
+                        <td>Metal working machine tool setters and operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7224</td>
+                        
+                        <td>Metal polishers, wheel grinders and tool sharpeners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7230</td>
+                        
+                        <td>Machinery mechanics and repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7231</td>
+                        
+                        <td>Motor vehicle mechanics and repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7232</td>
+                        
+                        <td>Aircraft engine mechanics and repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7233</td>
+                        
+                        <td>Agricultural and industrial machinery mechanics and repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7234</td>
+                        
+                        <td>Bicycle and related repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7300</td>
+                        
+                        <td>Handicraft and printing workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7310</td>
+                        
+                        <td>Handicraft workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7311</td>
+                        
+                        <td>Precision-instrument makers and repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7312</td>
+                        
+                        <td>Musical instrument makers and tuners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7313</td>
+                        
+                        <td>Jewellery and precious-metal workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7314</td>
+                        
+                        <td>Potters and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7315</td>
+                        
+                        <td>Glass makers, cutters, grinders and finishers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7316</td>
+                        
+                        <td>Sign writers, decorative painters, engravers and etchers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7317</td>
+                        
+                        <td>Handicraft workers in wood, basketry and related materials</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7318</td>
+                        
+                        <td>Handicraft workers in textile, leather and related materials</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7319</td>
+                        
+                        <td>Handicraft workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7320</td>
+                        
+                        <td>Printing trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7321</td>
+                        
+                        <td>Pre-press technicians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7322</td>
+                        
+                        <td>Printers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7323</td>
+                        
+                        <td>Print finishing and binding workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7400</td>
+                        
+                        <td>Electrical and electronic trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7410</td>
+                        
+                        <td>Electrical equipment installers and repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7411</td>
+                        
+                        <td>Building and related electricians</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7412</td>
+                        
+                        <td>Electrical mechanics and fitters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7413</td>
+                        
+                        <td>Electrical line installers and repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7420</td>
+                        
+                        <td>Electronics and telecommunications installers and repairers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7421</td>
+                        
+                        <td>Electronics mechanics and servicers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7422</td>
+                        
+                        <td>Information and communications technology installers and servicers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7500</td>
+                        
+                        <td>Food processing, wood working, garment and other craft and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7510</td>
+                        
+                        <td>Food processing and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7511</td>
+                        
+                        <td>Butchers, fishmongers and related food preparers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7512</td>
+                        
+                        <td>Bakers, pastry-cooks and confectionery makers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7513</td>
+                        
+                        <td>Dairy-products makers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7514</td>
+                        
+                        <td>Fruit, vegetable and related preservers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7515</td>
+                        
+                        <td>Food and beverage tasters and graders</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7516</td>
+                        
+                        <td>Tobacco preparers and tobacco products makers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7520</td>
+                        
+                        <td>Wood treaters, cabinet-makers and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7521</td>
+                        
+                        <td>Wood treaters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7522</td>
+                        
+                        <td>Cabinet-makers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7523</td>
+                        
+                        <td>Woodworking-machine tool setters and operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7530</td>
+                        
+                        <td>Garment and related trades workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7531</td>
+                        
+                        <td>Tailors, dressmakers, furriers and hatters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7532</td>
+                        
+                        <td>Garment and related pattern-makers and cutters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7533</td>
+                        
+                        <td>Sewing, embroidery and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7534</td>
+                        
+                        <td>Upholsterers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7535</td>
+                        
+                        <td>Pelt dressers, tanners and fellmongers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7536</td>
+                        
+                        <td>Shoemakers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7540</td>
+                        
+                        <td>Other craft and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7541</td>
+                        
+                        <td>Underwater divers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7542</td>
+                        
+                        <td>Shotfirers and blasters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7543</td>
+                        
+                        <td>Product graders and testers (excluding foods and beverages)</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7544</td>
+                        
+                        <td>Fumigators and other pest and weed controllers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7549</td>
+                        
+                        <td>Craft and related workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8000</td>
+                        
+                        <td>Plant and machine operators, and assemblers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8100</td>
+                        
+                        <td>Stationary plant and machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8110</td>
+                        
+                        <td>Mining and mineral processing plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8111</td>
+                        
+                        <td>Miners and quarriers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8112</td>
+                        
+                        <td>Mineral and stone processing plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8113</td>
+                        
+                        <td>Well drillers and borers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8114</td>
+                        
+                        <td>Cement, stone and other mineral products machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8120</td>
+                        
+                        <td>Metal processing and finishing plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8121</td>
+                        
+                        <td>Metal processing plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8122</td>
+                        
+                        <td>Metal finishing, plating and coating machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8130</td>
+                        
+                        <td>Chemical and photographic products plant and machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8131</td>
+                        
+                        <td>Chemical products plant and machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8132</td>
+                        
+                        <td>Photographic products machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8140</td>
+                        
+                        <td>Rubber, plastic and paper products machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8141</td>
+                        
+                        <td>Rubber products machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8142</td>
+                        
+                        <td>Plastic products machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8143</td>
+                        
+                        <td>Paper products machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8150</td>
+                        
+                        <td>Textile, fur and leather products machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8151</td>
+                        
+                        <td>Fibre preparing, spinning and winding machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8152</td>
+                        
+                        <td>Weaving and knitting machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8153</td>
+                        
+                        <td>Sewing machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8154</td>
+                        
+                        <td>Bleaching, dyeing and fabric cleaning machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8155</td>
+                        
+                        <td>Fur and leather preparing machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8156</td>
+                        
+                        <td>Shoemaking and related machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8157</td>
+                        
+                        <td>Laundry machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8159</td>
+                        
+                        <td>Textile, fur and leather products machine operators not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8160</td>
+                        
+                        <td>Food and related products machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8170</td>
+                        
+                        <td>Wood processing and papermaking plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8171</td>
+                        
+                        <td>Pulp and papermaking plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8172</td>
+                        
+                        <td>Wood processing plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8180</td>
+                        
+                        <td>Other stationary plant and machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8181</td>
+                        
+                        <td>Glass and ceramics plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8182</td>
+                        
+                        <td>Steam engine and boiler operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8183</td>
+                        
+                        <td>Packing, bottling and labelling machine operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8189</td>
+                        
+                        <td>Stationary plant and machine operators not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8200</td>
+                        
+                        <td>Assemblers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8210</td>
+                        
+                        <td>Assemblers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8211</td>
+                        
+                        <td>Mechanical machinery assemblers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8212</td>
+                        
+                        <td>Electrical and electronic equipment assemblers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8219</td>
+                        
+                        <td>Assemblers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8300</td>
+                        
+                        <td>Drivers and mobile plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8310</td>
+                        
+                        <td>Locomotive engine drivers and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8311</td>
+                        
+                        <td>Locomotive engine drivers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8312</td>
+                        
+                        <td>Railway brake, signal and switch operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8320</td>
+                        
+                        <td>Car, van and motorcycle drivers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8321</td>
+                        
+                        <td>Motorcycle drivers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8322</td>
+                        
+                        <td>Car, taxi and van drivers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8330</td>
+                        
+                        <td>Heavy truck and bus drivers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8331</td>
+                        
+                        <td>Bus and tram drivers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8332</td>
+                        
+                        <td>Heavy truck and lorry drivers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8340</td>
+                        
+                        <td>Mobile plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8341</td>
+                        
+                        <td>Mobile farm and forestry plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8342</td>
+                        
+                        <td>Earthmoving and related plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8343</td>
+                        
+                        <td>Crane, hoist and related plant operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8344</td>
+                        
+                        <td>Lifting truck operators</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8350</td>
+                        
+                        <td>Ships' deck crews and related workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9000</td>
+                        
+                        <td>Elementary occupations</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9100</td>
+                        
+                        <td>Cleaners and helpers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9110</td>
+                        
+                        <td>Domestic, hotel and office cleaners and helpers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9111</td>
+                        
+                        <td>Domestic cleaners and helpers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9112</td>
+                        
+                        <td>Cleaners and helpers in offices, hotels and other establishments</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9120</td>
+                        
+                        <td>Vehicle, window, laundry and other hand cleaning workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9121</td>
+                        
+                        <td>Hand launderers and pressers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9122</td>
+                        
+                        <td>Vehicle cleaners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9123</td>
+                        
+                        <td>Window cleaners</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9129</td>
+                        
+                        <td>Other cleaning workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9200</td>
+                        
+                        <td>Agricultural, forestry and fishery labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9210</td>
+                        
+                        <td>Agricultural, forestry and fishery labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9211</td>
+                        
+                        <td>Crop farm labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9212</td>
+                        
+                        <td>Livestock farm labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9213</td>
+                        
+                        <td>Mixed crop and livestock farm labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9214</td>
+                        
+                        <td>Garden and horticultural labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9215</td>
+                        
+                        <td>Forestry labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9216</td>
+                        
+                        <td>Fishery and aquaculture labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9300</td>
+                        
+                        <td>Labourers in mining, construction, manufacturing and transport</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9310</td>
+                        
+                        <td>Mining and construction labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9311</td>
+                        
+                        <td>Mining and quarrying labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9312</td>
+                        
+                        <td>Civil engineering labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9313</td>
+                        
+                        <td>Building construction labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9320</td>
+                        
+                        <td>Manufacturing labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9321</td>
+                        
+                        <td>Hand packers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9329</td>
+                        
+                        <td>Manufacturing labourers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9330</td>
+                        
+                        <td>Transport and storage labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9331</td>
+                        
+                        <td>Hand and pedal vehicle drivers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9332</td>
+                        
+                        <td>Drivers of animal-drawn vehicles and machinery</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9333</td>
+                        
+                        <td>Freight handlers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9334</td>
+                        
+                        <td>Shelf fillers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9400</td>
+                        
+                        <td>Food preparation assistants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9410</td>
+                        
+                        <td>Food preparation assistants</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9411</td>
+                        
+                        <td>Fast food preparers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9412</td>
+                        
+                        <td>Kitchen helpers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9500</td>
+                        
+                        <td>Street and related sales and service workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9510</td>
+                        
+                        <td>Street and related service workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9520</td>
+                        
+                        <td>Street vendors (excluding food)</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9600</td>
+                        
+                        <td>Refuse workers and other elementary workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9610</td>
+                        
+                        <td>Refuse workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9611</td>
+                        
+                        <td>Garbage and recycling collectors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9612</td>
+                        
+                        <td>Refuse sorters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9613</td>
+                        
+                        <td>Sweepers and related labourers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9620</td>
+                        
+                        <td>Other elementary workers</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9621</td>
+                        
+                        <td>Messengers, package deliverers and luggage porters</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9622</td>
+                        
+                        <td>Odd job persons</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9623</td>
+                        
+                        <td>Meter readers and vending-machine collectors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9624</td>
+                        
+                        <td>Water and firewood collectors</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9629</td>
+                        
+                        <td>Elementary workers not elsewhere classified</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">66666</td>
+                        
+                        <td>Not applicable*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">77777</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">88888</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">99999</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="uemp3m">uemp3m </h3>
+        
+        <div>Ever unemployed and seeking work for a period more than three months</div>
+        
+
+        </label>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody class="codelist">
+                    
+                    
+                    <tr>
+                        <td class="nowrap">1</td>
+                        
+                        <td>Yes</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">2</td>
+                        
+                        <td>No</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">7</td>
+                        
+                        <td>Refusal*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">8</td>
+                        
+                        <td>Don't know*</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="nowrap">9</td>
+                        
+                        <td>No answer*</td>
+                        
+                    </tr>
+                    
+                    
+                </tbody>
+
+            </table>
+            
+            <p>
+                <span> *) Missing Value </span>
+            </p>
+            
+        </div>
+        
+    </div>
+    
+    <div>
+        <h3 id="prob">prob </h3>
+        
+        <div>Sampling probability</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="stratum">stratum </h3>
+        
+        <div>Sampling stratum</div>
+        
+
+        </label>
+        
+    </div>
+    
+    <div>
+        <h3 id="psu">psu </h3>
+        
+        <div>Primary sampling unit</div>
+        
+
+        </label>
+        
+    </div>
+    
+</body>
+
+</html>

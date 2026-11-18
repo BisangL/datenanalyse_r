@@ -1,0 +1,5 @@
+# Vorwort {.unnumbered}
+
+Willkommen auf der Webseite des Seminars "Sozialwissenschaftliche Datenanalyse mit R" (Universität Luzern). Hier finden Sie **kurze Einleitungen** und die **wöchentlichen Aufgaben** sowie die **Lösungen** am Tag nach dem Seminar.
+
+*Diese Webseite ist ein sogenanntes "Quarto Book" (siehe [hier](https://quarto.org/docs/books/)). Quarto ist eine Möglichkeit, dynamische Dokumente (wie z.B. Webseiten) mit RStudio zu erstellen. Es entspricht einer neuen und erweiterten Version von R Markdown.*

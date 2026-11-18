@@ -1,0 +1,95 @@
+VAR;LABEL;TYPE;INPUT;QUESTION
+ID;Eindeutige Identifizierung, gleich in beiden Wellen;TEXT;;
+WAVE;Welle;TEXT;;
+QUESTNNR;Fragebogen, der im Interview verwendet wurde;TEXT;SYSTEM;
+LANGUAGE;Sprache;TEXT;SYSTEM;
+Country;Land in dem Befragung durchgeführt wurde (de= Deutschland, ch=Schweiz);;;
+support_divers;Einstiegsfrage: Wie wichtig ist für Ihr Unternehmen die Förderung von Diversity in der Belegschaft?;ORDINAL;SCALE;Wie bereits in der Einleitung erwähnt, muss die Diversity((*| Diversity meint im Folgenden die Vielfalt der Belegschaft hinsichtlich Geschlecht und Migrationshintergrund)) der Belegschaft nicht per se gewinnbringend sein. Auch Homogenität((*|Homogenität = Einheitlichkeit, Gleichheit)) kann seine Vorteile haben. Deshalb würden wir zuerst gerne wissen, wie wichtig Ihrem Unternehmen Diversity bzw. Homogenität ist. Bitte teilen Sie uns Ihren persönlichen Eindruck dazu mit.
+support_homogen;Einstiegsfrage: Wie wichtig ist für Ihr Unternehmen, eine möglichst homogene Belegschaft zu haben?;ORDINAL;SCALE;Wie bereits in der Einleitung erwähnt, muss die Diversity((*| Diversity meint im Folgenden die Vielfalt der Belegschaft hinsichtlich Geschlecht und Migrationshintergrund)) der Belegschaft nicht per se gewinnbringend sein. Auch Homogenität((*|Homogenität = Einheitlichkeit, Gleichheit)) kann seine Vorteile haben. Deshalb würden wir zuerst gerne wissen, wie wichtig Ihrem Unternehmen Diversity bzw. Homogenität ist. Bitte teilen Sie uns Ihren persönlichen Eindruck dazu mit.
+KA18_02;a) einfach MA: ...anhand eines Lohngruppensystems entlohnt.;ORDINAL;SCALE;Im Folgenden möchten wir mehr über die <i>Rahmenbedingungen</i> der Arbeit in Ihrem Unternehmen erfahren.
+KA18_03;a) einfach MA: ...anhand schriftlicher Regeln befördert.;ORDINAL;SCALE;Im Folgenden möchten wir mehr über die <i>Rahmenbedingungen</i> der Arbeit in Ihrem Unternehmen erfahren.
+KA18_05;a) einfach MA: ...durch schriftliche Tests (z.B. Assessment Center, Eignungs-, Fähigkeiten-, oder Leistungstest) ausgewählt, die Teil des Bewerbungsverfahrens sind.;ORDINAL;SCALE;Im Folgenden möchten wir mehr über die <i>Rahmenbedingungen</i> der Arbeit in Ihrem Unternehmen erfahren.
+KA19_02;b) einfach MA-Stellen: ...nach schriftlich festgelegten Regeln besetzt werden.;ORDINAL;SCALE;
+KA19_03;b) einfach MA-Stellen: ...zur Besetzung (auch) intern ausgeschrieben werden.;ORDINAL;SCALE;
+KA20_02;c) einfach MA-Leistung: ...anhand schriftlicher Leistungsbeurteilungen ermittelt.;ORDINAL;SCALE;
+KA20_03;c) einfach MA-Leistung: ...anhand der Einschätzungen von mehreren Personen ermittelt (z.B. durch 360-Grad-Feedback bzw. durch Feedback von Vorgesetzten und Kollegen/innen, etc.).;ORDINAL;SCALE;
+MA04_02;a+b) Mitarbeiterförderung: ...die Möglichkeit des job sharing, also eine Vollzeitstelle mit einer oder mehreren Personen zu teilen.;ORDINAL;SCALE;Im Folgenden sind einige Formen der <i>Arbeitsorganisation</i> und der <i>Mitarbeiterförderung</i> beschrieben.
+MA04_03;a+b) Mitarbeiterförderung: ...die Möglichkeit der Teilzeitarbeit.;ORDINAL;SCALE;Im Folgenden sind einige Formen der <i>Arbeitsorganisation</i> und der <i>Mitarbeiterförderung</i> beschrieben.
+MA04_04;a+b) Mitarbeiterförderung: ...Programme, um Mitarbeitende für Management- oder Führungsaufgaben zu trainieren.;ORDINAL;SCALE;Im Folgenden sind einige Formen der <i>Arbeitsorganisation</i> und der <i>Mitarbeiterförderung</i> beschrieben.
+MA04_05;a+b) Mitarbeiterförderung: ...Programme, in denen Mitarbeitende auf verschiedenen Arbeitsplätzen oder in verschiedenen Abteilungen für unterschiedliche Aufgaben eingesetzt werden, um ihre Fähigkeiten zu erweitern.;ORDINAL;SCALE;Im Folgenden sind einige Formen der <i>Arbeitsorganisation</i> und der <i>Mitarbeiterförderung</i> beschrieben.
+MA03_02;c) (w1)Förderung der Work-Life-Balance(wave1): ...flexible Arbeitszeitmodelle (z.B. Homeoffice oder Gleitzeiten). Wave2: MA06_02 MA06_09 fragen Homeoffice oder Gleitzeit einzeln ab. MA03_02 fasst Werte zusammen.;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA03_03;c) (w1)Förderung der Work-Life-Balance: ...ein Kinderbetreuungsangebot.;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA03_01;c) (w1)Förderung der Work-Life-Balance: ...Regelungen, dass Meetings zu Kernarbeitszeiten stattfinden sollen (z.B. um Sitzungen am späten Abend zu verhindern).;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA03_06;c) (w1)Förderung der Work-Life-Balance: ...Verantwortliche aus dem Senior oder Top-Managementbereich*, die sich für die Realisierung von Maßnahmen zur Verbesserung der Work-Life-Balance einsetzen.;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA03_07;c) (w1)Förderung der Work-Life-Balance: ...die Möglichkeit, Sabbaticals* zu nehmen.;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA06_02;c) (w2)Förderung der Work-Life-Balance(wave2): ...flexible Arbeitszeitmodelle (z.B. Gleitzeiten).;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA06_09;c) (w2)Förderung der Work-Life-Balance(wave2): ...die Möglichkeit von zu Hause aus zu arbeiten (z.B. Teleworking/Homeoffice).;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA06_10;c) (w2)Förderung der Work-Life-Balance(wave2): ...(temporäre) Eltern-Kind-Zimmer.;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA06_05;c) (w2)Förderung der Work-Life-Balance(wave2): ...Regelungen zum Mutterschaftsurlaub, die über die gesetzlichen Bestimmungen hinausgehen (z.B. spezielle Regelungen für Sonderurlaub oder Lohn).;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+MA06_07;c) (w2)Förderung der Work-Life-Balance(wave2): ...Regelungen zum Vaterschaftsschaftsurlaub, die über die gesetzlichen Bestimmungen hinausgehen (z.B. spezielle Regelungen für Sonderurlaub oder Lohn).;ORDINAL;SCALE;Im Folgenden sind einige Maßnahmen zur <i>Förderung der Work-Life-Balance</i> beschrieben.
+DI05_01;a)  Diversity-Massnahmen neu: ...Diversity-Fortbildungen, die sich speziell mit Geschlechter-Diversity auseinandersetzen.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_02;a)  Diversity-Massnahmen neu: ...Diversity-Fortbildungen, die sich speziell mit interkultureller Diversity (Migrationshintergrund* oder ethnischer Hintergrund) auseinandersetzen.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_03;a)  Diversity-Massnahmen neu: ...Diversity-Fortbildungen, die Diversity im Allgemeinen behandeln.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_04;a)  Diversity-Massnahmen neu: ...eine interne Möglichkeit, Fälle von Diskriminierung zu melden (z.B. Beschwerdestelle, Vertrauensperson, Mobbingbeauftragter, etc.).;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_05;a)  Diversity-Massnahmen neu: ...zentrale Verantwortliche (Manager oder Abteilungen), die für Diversity* zuständig sind.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_06;a)  Diversity-Massnahmen neu: ...ein Komitee, das für Diversity* zuständig ist und Mitglieder aus dem Senior oder Top-Management* enthält.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_07;a)  Diversity-Massnahmen neu: ...Verantwortliche aus dem Senior oder Top-Managementbereich* die sich für die Realisierung von Maßnahmen zur Verbesserung der Diversität einsetzen.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_08;a)  Diversity-Massnahmen neu: ...mindestens eine Führungsperson, die sich bekanntermaßen für Diversity einsetzt.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_09;a)  Diversity-Massnahmen neu: ...Anreize für Manager Diversityziele zu unterstützen.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_10;a)  Diversity-Massnahmen neu: ...offizielle Statements, dass Diversity wertgeschätzt wird (z.B. auf der Webseite oder in Stellenanzeigen, etc.).;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI05_11;a)  Diversity-Massnahmen neu: ...konkrete Diversityziele (z.B. höhere Diversity im Management, Reduzierung von Karriereunterschieden), deren Fortschritt gemessen wird.;ORDINAL;SCALE;Im Folgenden sind einige <i>Diversity-Maßnahmen</i> beschrieben.
+DI06_01;b)  Diversity Frauen neu: ...Netzwerkaktivitäten (z.B. Lunchmeetings, After-Work Aktivitäten).;ORDINAL;SCALE;Im Folgenden sind weitere, speziellere Diversity-Maßnahmen beschrieben.
+DI06_02;b)  Diversity Frauen neu: ...Mentoring-Programme.;ORDINAL;SCALE;Im Folgenden sind weitere, speziellere Diversity-Maßnahmen beschrieben.
+DI06_04;b)  Diversity Frauen neu: ...Karriereförderungsmaßnahmen, wie z.B. Frauen bei gleicher Qualifikation bevorzugt einzustellen oder zu befördern.;ORDINAL;SCALE;Im Folgenden sind weitere, speziellere Diversity-Maßnahmen beschrieben.
+DI06_06;b)  Diversity Frauen neu: ... Rollenvorbilder im Management. Das heißt, mindestens eine Frau dient als Vorbild und zur Identifikation für andere Frauen.;ORDINAL;SCALE;Im Folgenden sind weitere, speziellere Diversity-Maßnahmen beschrieben.
+DI06_03;b)  Diversity Frauen neu: ...Bestrebungen, Frauen in Programme zu rekrutieren, die auf Management- oder Führungsaufgaben vorbereiten.;ORDINAL;SCALE;Im Folgenden sind weitere, speziellere Diversity-Maßnahmen beschrieben.
+DI06_05;b)  Diversity Frauen neu: ...Zielvorgaben bezüglich der Rekrutierung oder Beförderung (z.B. Frauenquoten).;ORDINAL;SCALE;Im Folgenden sind weitere, speziellere Diversity-Maßnahmen beschrieben.
+DI07_01;c)  Diversity Migranten neu: ...Netzwerkaktivitäten (z.B. Lunchmeetings, After-Work Aktivitäten).;ORDINAL;SCALE;
+DI07_02;c)  Diversity Migranten neu: ...Mentoring-Programme.;ORDINAL;SCALE;
+DI07_04;c)  Diversity Migranten neu: ...Karriereförderungsmaßnahmen, wie z.B. Personen mit Migrationshintergrund bei gleicher Qualifikation bevorzugt einzustellen oder zu befördern.;ORDINAL;SCALE;
+DI07_05;c)  Diversity Migranten neu: ...Rollenvorbilder im Management. Das heißt, mindestens eine Person mit Migrationshintergrund dient als Vorbild und zur Identifikation.;ORDINAL;SCALE;
+DI07_06;c)  Diversity Migranten neu: ...Sprachförderung (z.B. Organisation oder Finanzierung von Sprachkursen).;ORDINAL;SCALE;
+DI04_01;d)  weitere Diversity-Massnahmen: [01];TEXT;OPEN;Falls in Ihrem Unternehmen weitere Diversity-Maßnahmen existieren, die bisher nicht genannt wurden, ergänzen Sie diese bitte noch:
+LO_pfp_topmgt;Lohnanreizstruktur neu: …beim Senior oder Top-Management?* %LO05_01%;METRIC;SCALE;Im Folgenden möchten wir mehr über die Lohnstruktur auf verschiedenen Hierarchiestufen in Ihrem Unternehmen erfahren. Neben fixen Löhnen gibt es auch leistungsbasierte Löhne, z.B. in Form von Boni, Gewinnbeteiligungen, etc. Bitte schätzen Sie für die unten genannten Hierarchiestufen grob ein, wieviel Prozent des Jahresbruttogehaltes auf leistungsbasierter Entlohnung basiert. 
+LO_pfp_mgt;Lohnanreizstruktur neu: …beim gesamten Management?* %LO05_03%;METRIC;SCALE;Im Folgenden möchten wir mehr über die Lohnstruktur auf verschiedenen Hierarchiestufen in Ihrem Unternehmen erfahren. Neben fixen Löhnen gibt es auch leistungsbasierte Löhne, z.B. in Form von Boni, Gewinnbeteiligungen, etc. Bitte schätzen Sie für die unten genannten Hierarchiestufen grob ein, wieviel Prozent des Jahresbruttogehaltes auf leistungsbasierter Entlohnung basiert. 
+LO_pfp_all;Lohnanreizstruktur neu: …bei Mitarbeitenden mit Festanstellung ohne Managementfunktion? %LO05_04%;METRIC;SCALE;Im Folgenden möchten wir mehr über die Lohnstruktur auf verschiedenen Hierarchiestufen in Ihrem Unternehmen erfahren. Neben fixen Löhnen gibt es auch leistungsbasierte Löhne, z.B. in Form von Boni, Gewinnbeteiligungen, etc. Bitte schätzen Sie für die unten genannten Hierarchiestufen grob ein, wieviel Prozent des Jahresbruttogehaltes auf leistungsbasierter Entlohnung basiert. 
+fem_share_topmgt;Anteil Frauen neu: ...Senior oder Top-Management:;METRIC;SCALE;Bitte schätzen Sie ein, wie hoch der Anteil von <i>Frauen</i> auf den verschiedenen Hierarchiestufen Ihres Unternehmens ist.
+fem_share_mgt;Anteil Frauen neu: ...gesamten Management:;METRIC;SCALE;Bitte schätzen Sie ein, wie hoch der Anteil von <i>Frauen</i> auf den verschiedenen Hierarchiestufen Ihres Unternehmens ist.
+fem_share_all;Anteil Frauen neu: ...gesamten Unternehmen:;METRIC;SCALE;Bitte schätzen Sie ein, wie hoch der Anteil von <i>Frauen</i> auf den verschiedenen Hierarchiestufen Ihres Unternehmens ist.
+mig_share_topmgt;Anteil Migranten neu: ...Senior oder Top-Management:;METRIC;SCALE;Bitte schätzen Sie ein, wie hoch der Anteil von Personen mit <i>Migrationshintergrund</i>((*|Unter Personen mit Migrationshintergrund sind alle Personen gemeint, die selbst oder deren (Groß-)Eltern aus einem anderen Staat eingewandert sind.)) auf den verschiedenen Hierarchiestufen Ihres Unternehmens ist.
+mig_share_mgt;Anteil Migranten neu: ...gesamten Management:;METRIC;SCALE;Bitte schätzen Sie ein, wie hoch der Anteil von Personen mit <i>Migrationshintergrund</i>((*|Unter Personen mit Migrationshintergrund sind alle Personen gemeint, die selbst oder deren (Groß-)Eltern aus einem anderen Staat eingewandert sind.)) auf den verschiedenen Hierarchiestufen Ihres Unternehmens ist.
+mig_share_all;Anteil Migranten neu: ...gesamten Unternehmen:;METRIC;SCALE;Bitte schätzen Sie ein, wie hoch der Anteil von Personen mit <i>Migrationshintergrund</i>((*|Unter Personen mit Migrationshintergrund sind alle Personen gemeint, die selbst oder deren (Groß-)Eltern aus einem anderen Staat eingewandert sind.)) auf den verschiedenen Hierarchiestufen Ihres Unternehmens ist.
+DM_empl;Vollzeitarbeitskräfte: [Keine Beschreibung] 01;ORDINAL;SCALE;Wie viele <i>Vollzeitarbeitskräfte</i> sind (weltweit) in Ihrem Unternehmen beschäftigt?
+DM_turnover;Brutto-Umsatzerlös: [Keine Beschreibung] 01;ORDINAL;SCALE;<i>Wie hoch</i> ist der jährliche <i>Brutto-Umsatzerlös</i> Ihres Unternehmens?
+DM_gender;Geschlecht: [Keine Beschreibung] 01;ORDINAL;SCALE;Bitte geben Sie Ihr <i>Geschlecht</i> an:
+DM_migbackgr;Migrationshintergrund (Befragter): [Keine Beschreibung] 01;ORDINAL;SCALE;Haben Sie persönlich einen Migrationshintergrund?((*|Migrationshintergrund meint, dass Sie selbst oder Ihre (Groß-)Eltern aus einem anderen Staat eingewandert sind.))
+DM_founding_*;Gründung: [Keine Beschreibung] 01;ORDINAL;SCALE;Vor wie vielen Jahren wurde Ihr Unternehmen (oder erste Teile davon) <i>gegründet</i>?
+DM_sector;Branche;ORDINAL;SCALE;Zu welcher <i>Branche</i> zählt Ihr Unternehmen?
+DM_legal;Rechtsform: [Keine Beschreibung] 01;ORDINAL;SCALE;Wie lautet die <i>Rechtsform</i> Ihres Unternehmens?
+DM_board_direc;Zahl Verwaltungsrat:  ... Personen;METRIC;OPEN;Aus wie vielen Personen besteht in Ihrem Unternehmen der <i>Aufsichtsrat</i>?
+DM_execmgt;Zahl Geschäftsleitung:  ... Personen;METRIC;OPEN;Aus wie vielen Personen besteht in Ihrem Unternehmen die <i>Geschäftsführung/Vorstand</i>?
+DM15_01;Anmerkungen: [01];TEXT;OPEN;Falls Sie noch Anmerkungen zur Studie haben, können Sie uns diese im Folgenden mitteilen.
+DM_tenure;Dauer Anstellung: Seit ... Jahren;METRIC;OPEN;Wie lange <i>arbeiten Sie</i> bereits für Ihre jetzige Firma?
+DM_mgt_pos;Managementposition;NOMINAL;SELECTION;Haben Sie persönlich eine <i>Managementposition</i> inne?
+DM_mgtpos_share;Anteil Managementstellen: Anteil Managementstellen: %DM16_01%;ORDINAL;SCALE;Wie hoch ist ungefähr der <i>Anteil an Managementstellen</i>, im Verhältnis zu allen Vollzeitarbeitsstellen in Ihrem Unternehmen (inkl. aller Managementstufen)?
+DM_union_share;Anteil Gewerkschaft: Anteil Gewerkschaftsmitglieder;ORDINAL;SCALE;Wie hoch ist ca. der <i>Anteil an Gewerkschaftsmitgliedern</i>, in Ihrem Unternehmen, im Verhältnis zu allen Vollzeitarbeitskräften und inklusive aller Managementstufen?
+DM22_OS;Betriebssystem;NOMINAL;SYSTEM;
+DM22_BID;Browser-Identifikation (HTTP_USER_AGENT);TEXT;SYSTEM;
+DM22_BNM;Browser;NOMINAL;SYSTEM;
+DM22_BVS;Browser-Version;TEXT;SYSTEM;
+DM22_FmF;Format;NOMINAL;SYSTEM;
+DM22_ScW;Bildschirmbreite;METRIC;SYSTEM;
+DM22_ScH;Bildschirmhöhe;METRIC;SYSTEM;
+DM22_QnW;Fragebogen-Breite;METRIC;SYSTEM;
+DM22_HAL;Spracheinstellungen des Browsers (HTTP_ACCEPT_LANGUAGE);TEXT;SYSTEM;
+DM22_LNG;Präferierte Sprache;TEXT;SYSTEM;
+DM24;gleicher Befragter;NOMINAL;SELECTION;Wie in der Einleitung beschrieben, handelte es sich bei dieser Befragung um ein Follow-up (Folgebefragung). Haben Sie bereits die erste Befragung vor zwei Jahren ausgefüllt?
+TIME_SUM;Verweildauer gesamt (ohne Ausreißer);METRIC;SYSTEM;
+FINISHED;Wurde die Befragung abgeschlossen (letzte Seite erreicht)?;BOOL;SYSTEM;
+Q_VIEWER;Hat der Teilnehmer den Fragebogen nur angesehen, ohne die Pflichtfragen zu beantworten?;BOOL;SYSTEM;
+LASTPAGE;Seite, die der Teilnehmer zuletzt bearbeitet hat;METRIC;SYSTEM;
+MAXPAGE;Letzte Seite, die im Fragebogen bearbeitet wurde;METRIC;SYSTEM;
+MISSING;Anteil fehlender Antworten in Prozent;METRIC;SYSTEM;
+MISSREL;Anteil fehlender Antworten (gewichtet nach Relevanz);METRIC;SYSTEM;
+TIME_RSI;Maluspunkte für schnelles Ausfüllen;METRIC;SYSTEM;
+DEG_TIME;Maluspunkte für schnelles Ausfüllen;METRIC;SYSTEM;

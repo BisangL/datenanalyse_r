@@ -1,0 +1,342 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Woche 12 {.unnumbered}
+
+Multiple lineare Regression
+
+## Lernziele
+
+In dieser Woche werden Sie mit einem multiplen linearen
+Regressionsmodell arbeiten. Wie immer, werden wir erst eine
+Fragestellung formulieren, uns möglichen Variablen anschauen und dann
+Modell erstellen, prüfen und interpretieren.
+
+Die Lernziele:
+
+-   Sie erläutern, wie Sie mittels Grafiken erste Ideen für ein
+    multiples Modell sammeln können.
+-   Sie wenden multiple lineare Regressionsanalysen in R an
+    (modellieren, prüfen, interpretieren).
+-   Sie erläutern, wie Sie mit `plot()` die Anwendungsvoraussetzungen
+    für ein multivariates Modell prüfen.
+
+## Aufgaben
+
+In der nächsten Einheit erarbeiten wir uns Wissen zu den t- und F-Werten und zu deren inferenzstatistischen Interpretation. Lesen Sie dazu die Abschnitte aus Diaz-Bone (2023).
+
+1.  Laden Sie das Datenimport-Skript (stellen Sie sicher, dass es auf
+    dem aktuellen Stand ist und verbessern Sie -- falls vorhanden --
+    Fehler).
+
+2.  Visualisieren Sie die Zusammenhänge zwischen den Variablen
+    “ppltrst”, “eduyrs”, “netusoft” und “uemp3m”.
+
+3.  Interpretieren Sie die Grafiken in einigen Sätzen: Welche
+    Zusammenhänge sind vorhanden? Formulieren Sie eine Fragestellung und
+    Hypothesen.
+
+4.  Erstellen Sie das Regressionsmodell mit der `lm()`-Funktion.
+
+5.  Prüfen Sie die Anwendungsvoraussetzungen mittels `plot()`-Funktion.
+    Inwiefern sind die Voraussetzungen für eine multiple lineare
+    Regression (nicht) erfüllt?
+
+6.  Interpretieren Sie den Modell-Output.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+## Lösungen
+
+### Vorbereitung
+
+1.  Laden des Skripts
+
+```{r}
+rm(list = ls()) # Workspace loeschen
+options(scipen = 999) # schaltet wissenschaftliche Schreibweise aus
+source(file = "C:/Users/BisangL/Documents/c_fuer_quarto/skripts/datenaufbereitung_ess.R")
+```
+
+```{r}
+library(ggplot2) # Pakete für Plot
+library(GGally)
+library(car) # Paket für vif
+```
+
+Für eine einfachere Handhabung wählen wir die Variablen aus, die wir für
+unser Modell brauchen:
+
+```{r}
+d.red <- d.ess[!is.na(d.ess$uemp3m), c("ppltrst", "eduyrs", "netusoft", "uemp3m")]
+
+str(d.red) # Kodierung prüfen -> ok
+```
+
+Wie in Wochen 10 und 11 gesehen, müssen wir die Nebenbedingungen für
+geordnete Faktoren (netusoft) so setzen, dass wir diese nachher sinnvoll
+interpretieren können:
+
+```{r}
+options(contrasts = c("contr.treatment", "contr.treatment"))
+```
+
+2.  Visualisieren von Zusammenhängen
+
+```{r}
+ggplot(data = d.red, mapping = aes(x = eduyrs, y = ppltrst, col = netusoft)) +
+  geom_jitter(size = 0.7) +
+  facet_wrap(.~ uemp3m)
+```
+
+Alternativ können wir auch alle Variablen gegeneinander plotten:
+
+```{r}
+pairs(d.red)
+ggpairs(d.red) # von {Ggally} -> Balkendiagramme und Boxplots
+```
+
+3.  Zwischen Vertrauen und Anzahl Bildungsjahren ist keine eindeutige
+    Beziehung erkennbar. Vor allem das Vertrauen von Personen, die ca.
+    neun Jahre Bildung absolviert haben, streut stark. Personen, die nur
+    wenige Bildungsjahre angeben, brauchen eher nie das Internet und die
+    Nutzung nimmt mit der Anzahl Bildungsjahre zu (ggf. sollte eine
+    Interaktion hinzugefügt werden). Arbeitslosigkeit (länger als drei
+    Monate) scheint keinen Einfluss zu haben (vielleicht ist der
+    Schwerpunkt der Punktewolke etwas tiefer). Tendenziell sind weniger
+    gebildete Personen eher arbeitslos.
+
+Wir wollen uns mögliche Einflussfaktoren auf das Vertrauen in die
+Politik anschauen. Aus der Literatur ist für Europa bekannt, dass
+Arbeitslosigkeit das Vertrauen in die Politik erschüttern kann ([Zentrum
+für neue Sozialpolitik
+2022](https://zentrum-neue-sozialpolitik.org/projekte/vertrauen-einkommen-arbeitslosigkeit-wahlbeteiligung-landtagswahl/)).
+Aber auch digitale Medien im Zusammenhang mit Bildung können das
+Vertrauen beeinflussen ([Max-Planck
+2022](https://www.mpg.de/19474069/1108-bild-wie-gefaehrlich-sind-digitale-medien-fuer-die-demokratie-149835-x)).
+
+Fragestellung: Welche Faktoren beeinflussen das Vertrauen in die
+Politik?
+
+Hypothese: Gemäss der Literatur, die sich jedoch auf Europa bezieht,
+sollten alle aufgenommenen Variablen einen Effekt auf das Vertrauen in
+die Politik haben.
+
+### Multiples, lineares Modell
+
+4.  Regressionsmodell
+
+```{r}
+fit.1 <- lm(ppltrst ~ eduyrs + netusoft + uemp3m,
+           data = d.red)
+```
+
+### Anwendungsvoraussetzungen
+
+5.  Überprüfen der Anwendungsvoraussetzungen:
+
+Folgende Anwendungsvoraussetzungen sind zu berücksichtigen:
+
+1)  **Linearitätsannahme**: Die Einflüsse der einzelnen
+    Eingangs-Variablen auf die Ziel-Variable müssen sich mit einem
+    linearen Modell beschreiben lassen. Diese Annahme lässt sich mit dem
+    Tukey-Anscombe-Plot prüfen. Wenn die Annahme vereltzt ist, streuen
+    die Residuen nicht um Null (Plot siehe unten).
+
+2)  **Erwartungswert der Residuen ist Null**. Diese Voraussetzung lässt
+    sich mit einem Tukey-Anscombe-Plot prüfen. Die Punktewolke sollte um
+    die Nulllinie streuen. Gegebenenfalls kann noch ein Smoother
+    hinzugefügt werden.
+
+```{r}
+plot(fit.1, which = 1)
+```
+
+Es besteht ein leichter Trichter auf der linken Seite des Plots. Die
+Residuen scheinen jedoch um Null zu streuen.
+
+3)  **Residuen-Varianz ist konstant** (Homoskedastizität). Diese Voraussetzung lässt sich mit
+    einem Tukey-Anscombe-Plot prüfen. Die Punktewolke sollte ein
+    paralleles Band bilden. Gegebenenfalls kann noch ein Smoother
+    hinzugefügt werden (Plot siehe oben).
+
+4)  **Residuen sind normalverteilt**. Die Normalverteilung der Residuen
+    ist mit einem Quantil-Quantil-Plot (Q-Q-Plot) oder einem Histogramm
+    zu prüfen.
+
+```{r}
+plot(fit.1, which = 2)
+```
+
+Die Residuen sind nicht normalverteilt.
+
+5)  **Residuen sind unabhängig voneinander**. Diese Voraussetzung lässt
+    sich prüfen, indem man die (unstandardisierte) Residuen gegen die
+    Zeit oder gegen den Ort aufträgt.
+
+Im Beispiel sollten Zeit und Ort keine Rolle spielen. Dies gründet auf
+inhaltlichen Überlegungen.
+
+(6) **Einflussreiche Beobachtungen**: Beobachtungen, die das Modell stark
+    beeinflussen, sind in einem Streudiagramm der (standardisierten)
+    Residuen gegen Leverage ersichtlich.
+
+```{r}
+plot(fit.1, which = 5)
+```
+
+Es gibt eine einflussreiche Beobachtungen (mit Zahlen versehen), jedoch
+gibt es keine krassen Fälle (diese wären mit einer Linie abgetrennt).
+
+(7) **Kollinearität** tritt auf, wenn Input-Variablen im
+    Modell enthalten sind, die dasselbe messen. Sie können anhand von
+    Streudiagrammen der Eingangs-Variable gegeneinander identifiziert
+    werden (siehe ggpairs- oder pairs-Plot). Alternativ kann man sich
+    auf VIF- oder Toleranz-Werte beziehen. Liegen Kollinearitäten vor,
+    ist eine der beiden redundanten Eingangs-Variable auszuschliessen.
+
+```{r}
+vif(fit.1)
+```
+
+Es sind keine problematischen Kollinearitäten (GVIF \> 5) vorhanden.
+Auch der Pairs-Plot zeigt keine Auffälligkeiten.
+
+### Verbesserung des Modells?
+
+Mit folgenden Vorgehensweisen können Modelle verbessert werden:
+
+Transformation der Ziel- und Eingangs-Variablen (nach Tukey "first aid
+transformations"):
+
+::: callout-important
+## Interpretation ändert sich bei Transformation
+
+Sind Variablen transformiert, muss dies unbedingt bei der Interpretation
+berücksichtigt werden!
+:::
+
+-   Logarithmus-Transformation für Konzentrationen und Beträge
+    (ausschliesslich positive, stetige Zufallsvariable)
+-   Wurzeltransformation für Zähldaten
+-   Arcus-Sinus-Transformation für Anteile.
+
+Diese Transformationen können angewendet werden, wenn es keine Gegengründe gibt.
+
+Weitere Möglichkeiten, um das Modell zu verbessern sind: 
+
+- Weitere Variablen aufnehmen! 
+- Wechselwirkungen berücksichtigen 
+- Bei vorliegender Multikollinearität, die redundanten Variablen entfernen
+
+```{r}
+fit.2 <- lm(sqrt(ppltrst) ~ netusoft + eduyrs + uemp3m,
+           data = d.red)
+plot(fit.2, which = 1) 
+plot(fit.2, which = 2) 
+```
+
+Die Transformation macht das Modell noch schlechter... Vielleicht hilft
+ein komplexeres Modell mit einer Interaktion zwischen Bildungsjahren und
+Arbeitslosigkeit, weil aus der Literatur bekannt ist, dass mit
+steigender Bildung die Wahrscheinlichkeit länger arbeitslos zu sein,
+fällt?
+
+```{r}
+fit.3 <- lm(sqrt(ppltrst) ~ netusoft + eduyrs * uemp3m,
+           data = d.red)
+plot(fit.3, which = 1) 
+plot(fit.3, which = 2) 
+```
+
+Das nützt auch nichts. Wahrscheinlich wäre es am sinnvollsten, ein
+kumulativen Logit-Modell zu verwenden und das Vertrauen in die Politik
+als ordinalen Faktor zu kodieren... Trotzdem gehen wir mal zur
+Interpretation von fit.1 über.
+
+::: callout-important
+## Vertrauensintervalle und p-Werte sind nicht vertrauenswürdig
+
+Sind die Anwendungsvoraussetzungen nicht eingehalten, sind die Test,
+p-Werte und Vertrauensintervalle nicht vertrauenswürdig!
+:::
+
+### Interpretation
+
+5.  Interpretation
+
+`summary()` gibt Koeffizienten und Tests aus:
+
+```{r}
+summary(fit.1)
+```
+
+Der *F-Statistic*-Wert (Teststatistik für das Gesamtmodell) gibt an,
+dass das Modell signifikant ist: Interpretation gemäss VL: Mit einer
+Sicherheit von 95% können wir davon ausgehen, dass wir mit den
+verschiedenen Variablen auch in der Grundgesamtheit eine
+Erklärungsleistung erzielen können. Abstrakter könnte man auch sagen,
+dass das Gesamtmodell besser ist als das Nullmodell.
+
+Betrachtet wir die Erklärungsleistung (*Adjusted R2*), relativiert sich
+diese Aussage. In unserer Stichprobe können wir nämlich lediglich etwas
+mehr als 4% der Variation von "ppltrst" durch die anderen Variablen
+erklären.
+
+Nachdem wir das Modell insgesamt eingeschätzt haben, können wir noch zu
+den einzelnen Koeffizienten übergehen. Wichtig ist dabei folgendes: Der
+Einfluss der entsprechenden unabhängigen Variable ist bereinigt von
+allen anderen unabhängigen Variablen. Wir betrachten daher "partielle"
+Regressionskoeffizienten [@Diaz-Bone2023, 195].
+
+Um die Faktoren interpretieren zu können, müssen wir einen F-Test
+durchführen. Dieser prüft, ob die Faktoren insgesamt einen Einfluss auf
+die Zielvariable haben. Wie wir bereits wissen, verwandelt R Faktoren in
+mehrere dummy-Variabeln und gibt dafür jeweils p-Werte aus. Es ist
+jedoch nicht sinnvoll einzelne dummy-Regressoren zu testen. Ein F-Test
+für den ganze dummy-Regressoren-Block dieses Faktors ist deshalb nötig,
+um die Relevanz des Faktors für das Modell festzustellen.
+
+```{r}
+drop1(fit.1, test = "F")
+```
+
+Der Faktor netusoft hat keinen Einfluss, der Faktor uemp3m aber schon.
+Deshalb entfernen wir ersteren aus dem Modell.
+
+```{r}
+fit.4 <- lm(ppltrst ~ eduyrs + uemp3m,
+           data = d.red)
+```
+
+Nun müssen wir wieder die Anwendungsvoraussetzungen prüfen...
+
+```{r}
+plot(fit.4)
+```
+
+Es gibt Abweichung von der Normalverteilung - wir müssten uns also
+überlegen, ob wir Transformationen durchführen, Variablen oder
+Interaktionen aufnehmen. Das tun wir hier jedoch nicht weiter, sondern
+lassen es erstmal so stehen. Und schauen uns den globalen F-Test,
+*Adjusted R2* und dann die Koeffizienten an.
+
+```{r}
+drop1(fit.4, test = "F")
+summary(fit.4)
+```
+
+Wir sehen folgendes: 
+
+- Das Modell scheint besser zu sein als das Nullmodell, aber die Test- und p-Werte sind nicht vertrauenswürdig. 
+- *Adjusted R2* ist klein. 
+- Die Koeffizienten sind eher klein, aber signifikant - wobei wir den Tests und p-Werten nicht
+vertrauen können.

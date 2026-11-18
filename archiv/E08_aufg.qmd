@@ -1,0 +1,38 @@
+# Woche 8 {.unnumbered}
+
+
+Einführung Datenanalyse: Kreuztabellen
+
+## Lernziele
+
+Nachdem wir uns bereits mit dem ESS-Datensatz und dessen Struktur vertraut gemacht haben, gehen wir nun zur Datenaufbereitung und Datenanalyse in R über. Dieser Übergang ist fliessend: Die Schritte zum Kennenlernen eines Datensatzes, die Plausibilitätsprüfung und die Suche nach Fehlern liefern häufig bereits erste Einblicke im Sinne einer explorativen Datenanalysen, die womöglich zu Schritten der Datenaufbereitung veranlassen. Die Aufgaben fokussieren auf die Rolle von Kreuztabellen in diesem Prozess, inklusive der Berechnung von Chi-Quadrat-Tests. In den Folgewochen gehen wir davon ausgehend schrittweise zur Berechnung von Regressionsanalysen über.
+
+Die Lernziele:
+
+-   Sie stellen Kreuztabellen auf verschiedene Weisen dar und interpretieren sie inhaltlich zutreffend.
+-   Sie interpretieren Chi-Quadrat-Tests (und lernen somit inferenzstatistische Test in R kennen).
+-   Sie erklären, wie die Phasen der Plausibilisierung, der Datenaufbereitung, der Datenexploration und der Datenanalyse zusammenhängen.
+
+
+## Aufgaben
+
+1.  Laden Sie den Datensatz von Woche 7 in RStudio. Erfassen Sie den hierfür benötigten Code nicht nur im Quarto-Dokument, sondern erstellen Sie ein zusätzliches R-Skript (z.B. unter dem Namen "ess_import.R"). Dieses Skript soll den Datensatz laden und alle notwendigen Datenaufbereitungen vornehmen. Sie können also auch bereits die ersten Definitionen von fehlenden Werten dort integrieren. Die Idee ist, dass dieses Skript über die kommenden Wochen umfangreicher wird und Sie zum Beispiel die Definition von Faktoren, Änderung von Variablenbezeichnungen oder die Berechnung neuer Variablen darin aufnehmen.
+
+2.  Repetition: Erklären sie nochmals die Funktion des `$`-Zeichens.
+
+3.  Erstellen Sie mittels der Funktion `table()` eine Kreuztabelle mit den Variablen Geschlecht und Internetnutzung. Wie können Sie vorgehen, um eine Kreuztabelle mit Prozentwerten (relativer statt absoluter Häufigkeiten) zu erstellen, die ausserdem die Randsummen enthält? Suchen Sie eine Darstellung der Tabelle --- d.h. der Anordnung der Variablen in Zeilen und Spalten sowie der Wahl der Randsummen, die sinnvoll das Verhältnis der abhängigen und unabhängigen Variablen wiedergibt. Was fällt Ihnen inhaltlich an der Tabelle auf?
+
+4.  Die Funktion `CrossTable()` ist Teil des Paketes "gmodels" und ermöglicht die flexible und detailreiche Arbeit mit Kreuztabellen. Bauen Sie mittels dieser Funktion die Kreuztabelle aus Aufgabe 2 nach.
+
+5.  Mittels `CrossTable()` lassen sich nicht nur Tabellen erstellen, sondern auch Chi-Quadrat-Tests durchführen.
+
+    -   Kopieren Sie Ihren Code für die Kreuztabelle aus Ausgabe 4, ergänzen Sie diesen um das nötige Argument für den Chi-Quadrat Test und speichern Sie es als Objekt mit dem Namen 'chi2test.res'.
+    -   Greifen Sie anschliessend auf die darin enthaltenen Angaben zum Chi-Quadrat Test zu und interpretieren Sie diese -- sowohl deskriptiv als auch inferenzstatistisch.
+    
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

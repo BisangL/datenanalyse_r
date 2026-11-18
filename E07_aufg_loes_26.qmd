@@ -1,0 +1,251 @@
+# Woche 6 {.unnumbered}
+
+*Arbeiten mit Datensätzen III: Daten prüfen*
+
+## Lernziele
+
+Der Übergang zwischen Datenbereinigung, -plausibilisierung und -analyse ist fliessend: Die ersten Schritte der Plausibilitätsprüfungen und Bereinigungen vermitteln häufig bereits erste Einblicke im Sinne einer explorativen Datenanalysen, die womöglich zu (weiteren) Schritten der Datenaufbereitung veranlassen. In dieser Woche vertiefen wir die Möglichkeit Daten mittels Funktionen, welche die Daten auf unterschiedliche Weise zusammenfassen, zu plausibilisieren. Diese Funktionen ergänzen zum Beispiel die `summary()`-Funktion, die einen Überblick über fehlende Werte, Verteilungen und Datenarten gibt. Sie können im weiteren Verlauf auch zur Datenanalyse genutzt werden.
+
+Die Lernziele:
+
+- Sie erklären, wie die Phasen der Bereinigung, Plausibilisierung, Aufbereitung, Exploration und Analyse zusammenhängen.
+- Sie fassen Daten mit unterschiedliche Funktionen zusammen, interpretieren die Resultate und schätzen deren Nützlichkeit für die Datenplausibilisieurng ein.
+- Sie interpretieren Kreuztabellen.
+- Sie interpretieren Chi-Quadrat-Tests.
+- Sie binden ein R-Skript in ihr Markdown-Dokument ein, das die Bereinigung und Aufbereitung der Daten beinhaltet, und erklären, in welchen Fällen ein solches Skript sinnvoll ist.
+
+## Aufgaben
+
+```{r echo = FALSE}
+source(file = "C:/Users/BisangL/Documents/c_fuer_quarto/skripts/datenaufbereitung_ess11.R")
+```
+
+### Aufgabe 1
+
+Kopieren Sie die Datenbereinigung von Woche 6 (inkl. Einlesen, Filtern und Selektion der Daten) in ein R-Skript. Da Sie die Umkodierungen geprüft haben, entfernen Sie nun bitte die Duplizierungen ("f_variablenname") und überschreiben Sie stattdessen die Variablen. Speichern Sie dieses R-Skript lokal ab.
+
+::: callout-important
+## `source()`-Funktion
+
+Die Funktion ermöglicht es, aus einem Markdown-Dokument oder R-Skript weitere Skripte aufzurufen und auszuführen. Dies ist nützlich, wenn zum Beispiel die Datenbereinigung die Grundlage für verschiedene Analysen ist. Im Rahmen des Seminars ist es sinnvoll, weil Sie Ihren Datensatz letzte Woche bereinigt haben und dieser Teil für alle weiteren Schritte gleich bleibt. Er muss nicht nochmals im "Forschungsbericht" (hier Aufgabenbearbeitung) erscheinen.
+:::
+
+### Aufgabe 2
+
+Verwenden Sie die `source()`-Funktion (im Markdown-Dokument (qmd-Datei)!).
+
+### Aufgabe 3
+
+Testen Sie, ob R-Skript und Markdown-Dokument (qmd-Datei) zusammen funktionieren: Löschen Sie Ihre Environment (und alle Objekte) und laden Sie mittels `source()` das R-Skript im Markdown-Dokument neu. Nun arbeiten Sie im Markdown-Dokument weiter. Fragen Sie die Struktur des bereinigten und aufbereiteten Datensatzes ab.
+
+Nun arbeiten Sie bitte im Markdown-Dokument weiter.
+
+### Aufgabe 4
+
+Wir schauen uns Plausibilisierungsmöglichkeiten an:
+
+::: callout-important
+## `table()`-Funktion
+
+Mit der `table()`-Funktion lassen sich univariate wie auch bivariate Tabellen (Kreuztabellen) erstellen. Sie sind nützlich, um kaetgoriale Daten übersichtlich darzustellen und ihre Verteilungen zu prüfen.
+:::
+
+a.  Fassen Sie die mittleren drei Kategorien der Variable Internetnutzung zusammen (arbeiten Sie im Bereinigungsskript!).
+b.  Erstellen Sie mittels der Funktion eine Kreuztabelle mit den Variablen Geschlecht und Internetnutzung (absolute Häufigkeiten). Achten Sie auf die korrekte Anordnung der abhängigen und unabhängigen Variablen.
+c.  Ändern Sie eine Kopie des Codes aus der Teilaufgabe b so ab, dass Prozentwerten (relative Häufigkeiten) ausgegeben werden (`prop.table()`-Funktion).
+d.  Arbeiten Sie mit Kopien der Tabellen der Teilaufgaben b und c weiter. Fügen Sie Randsummen hinzu (`addmargins()`-Funktion). Welche Varianten sind möglich? Welche sind sinnvoll?
+e.  Was fällt Ihnen inhaltlich auf? Und inwiefern sind die Tabellen zur Plausibilisierung der Daten nützlich? Notieren Sie sich jeweils einen Satz zu den Tabellen der Teilaufgaben b bis d.
+
+<!-- -->
+
+### Aufgabe 5
+
+Eine weitere Funktion, um Daten zusammenzufassen...:
+
+::: callout-important
+## `aggregate()`-Funktion
+
+Oftmals ist es zudem hilfreich, Daten auf andere Arten zusammenzufassen ("aggregieren", [@Leuzinger2017, 31]). Wir können für eine Variable gruppierte Mittelwerte berechnen, zum Beispiel das durchschnittliche Einkommen nach Geschlecht. Dabei sind mehrere kategoriale Gruppierungsvariablen möglich.
+:::
+
+Beispiel:
+
+```{r}
+aggregate(x = d.ch.k$eduyrs, by = list(gender = d.ch.k$gndr, unemployed = d.ch.k$uemp3m), FUN = median, na.rm = T)
+```
+
+a.  Bitte beschreiben Sie die Argumente der Funktion und ihre Spezifikationen im obenstehenden Beispiel.
+b.  Erklären Sie den Output.
+c.  Ändern Sie nacheinander die ersten drei Argumente. Halten Sie fest, inwiefern sich der Output verändert.
+d.  Überlegen Sie sich ein eigenes interessantes Beispiel. Setzen Sie dieses mittels der `aggregate()`-Funktion um und beschreiben Sie den Output. Reflektieren Sie, inwiefern dieser zur Plausibilisierung der Daten nützlich ist.
+
+<!-- -->
+
+### Aufgabe 6
+
+...und noch eine Funktion...:
+
+::: callout-important
+## `apply()`-Family
+
+Die Funktionen der `apply()`-Familie (`apply()`, `sapply()`, `tapply()`, `lapply()`) erlauben, eine Funktion (z.B. `mean()` oder `var()`) auf ein Objekt anzuwenden. Dabei können Funktionen sowohl über Spalten als auch über Zeilen angewendet werden. Wir schauen uns im Folgenden lediglich die `apply()`-Funktion an.
+:::
+
+a.  Sehen Sie sich die Hilfe zu `apply()` an.
+b.  Erklären Sie das Argument `MARGIN` (p.s. dasselbe Prinzip gilt auch für das Argument `margin` der `prop.table()`-Funktion und der `addmargins()`-Funktion!).
+c.  Beschreiben Sie die Inputs und Outputs des untenstehenden Beispiels.
+d.  Wenden Sie mit `apply()`eine andere Funktion auf numerisch kodierte Variablen des Datensatzes an. Interpretieren Sie die Resultate und beschreiben Sie, inwiefern diese die Plausibilisierung des Datensatzes unterstützen.
+e.  Bitte gehen Sie die Aufgaben nochmals durch und halten Sie stichwortartig fest, in welchen Fällen Sie die `table()`-, `aggregate()`- und `apply()`-Funktion verwenden.
+
+```{r}
+d.fac <- d.ch.k[, c("ipbhprpa", "fineqpy", "edlvdch", "mnactic", "hinctnta", "polintr", "trstprl")]
+apply(X = d.fac, MARGIN = 2, FUN = unique, na.rm = T)
+```
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+- Was ist Ihnen klar geworden?
+- Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+## Lösungen
+
+### Aufgabe 1
+
+...
+
+### Aufgabe 2: `source()`-Funktion im Markdown-Dokument ("Master-Dokument")
+
+```{r eval = F}
+source(file = "C:/Users/BisangL/Documents/c_fuer_quarto/skripts/datenaufbereitung_ess11.R")
+```
+
+### Aufgabe 3
+
+Struktur des Datensatzes, der im R-Skript eingelesenen und aufbereiteten wird:
+
+```{r}
+str(d.ch.k)
+```
+
+### Aufgabe 4: Plausibilisierung mit `table()`
+
+#### a. netusoft-Kategorien im *Bereinigungsskript* zusammenfassen
+
+Wir arbeiten mit den Originalvariable. Wir könnten auch die bereits als Faktor definierte Variable zusammenfassen, allerdings ist die Fehleranfälligkeit geringer, je weniger Umkodierungsschritte wir vornehmen. Falls `netusoft_f` für die Analyse nicht gebraucht wird, können wir diese Variable löschen.
+
+```{r eval = F}
+d.ch.k$netusoft[d.ch.k$netusoft %in% c(7, 8, 9)] <-  NA
+d.ch.k$netusoft_f <- factor(d.ch.k$netusoft, 
+                          levels = c(1, 2, 3, 4, 5),
+                          labels = c("never", "occ", "few_times", "most_days", "every_day"),
+                          ordered = T)
+d.ch.k$netusoft_zf <- factor(d.ch.k$netusoft, 
+                          levels = c(1, 2, 3, 4, 5),
+                          labels = c("never", "sometimes", "sometimes", "sometimes", "every_day"),
+                          ordered = T)
+table(d.ch.k$netusoft_zf, d.ch.k$netusoft_f) # einmalig zur Kontrolle
+```
+
+#### b. Kreuztabelle
+
+```{r}
+t <- table(d.ch.k$gndr, d.ch.k$netusoft_zf, useNA = "always")
+t
+```
+
+#### c. relative Häufigkeiten: Spalten- und Zeilenprozente
+
+```{r}
+prop.table(t, margin = 1) # Var. 1: 100% über Spalten
+prop.table(t, margin = 2) # Var. 2: 100% über Zeilen
+prop.table(t) # Var. 3: 100% über die ganze Tabelle
+```
+
+#### d. Randsummen
+
+```{r}
+addmargins(t, margin = 1) # Var. 1: Zeilensummen
+addmargins(t, margin = 2) # Var. 2: Spaltensummen
+addmargins(t) # Var. 3: Zeilen- und Spaltensummen
+addmargins(prop.table(t, margin = 1), margin = 1) # Var. 4: nicht sinnvoll - weshalb?
+addmargins(prop.table(t, margin = 1), margin = 2) # Var. 5: sinnvoll, aber fördert keine Erkenntnisse, da per Definition 1 - weshalb?
+
+# weitere Kombinationen sind nach dem gleichen Muster möglich...
+```
+
+Zeilen- und Spaltensumme sind für absolute Häufigkeitstabellen nützlich, insbesondere auch, wenn Zusammenhangsmasse berechnet werden sollen. Bei relativen Häufigkeitstabellen ist die Summe über die Zeilen- respektive Spalten per Definition eins. Die andere Summe darf nicht berechnet werden, weil sie die Anteilswerte auf unterschiedliche Gesamtheiten beziehen.
+
+#### e. Interpretation und Nutzen für Plausibilisierung
+
+Aufg. b: Anhand der absoluten Häufigkeitstabelle sind die Werte schwer interpretierbar. Wir könnten allenfalls prüfen, ob alle Fälle enthalten sind, ansonsten ist die Kombination Geschlecht und Internetnutzung nicht zur Plausibilisierung einer der beiden Variablen geeignet. Aufg. c: Die Variante 1 der relativen Häufigkeitstabelle lässt erkennen, dass rund 82% der Männer in der Stichprobe jeden Tag das Internet nutzen, während bei den Frauen dies nur rund 78% angegeben haben. Variante 2 zeigt, dass rund 58% der Befragten, die angegeben haben, das Internet nie zu nutzen, weiblich sind, und rund 42% männlich. Für die Plausibilisierung ist diese Tabelle aus oben genannten Gründen ebenfalls nicht geeignet. In Variante 3 sehen wir zum Beispiel, dass rund 2% der Befragten männlich sind und angegeben haben, das Internet nie zu nutzen. Aufg. d: Insbesondere Variante 3 ist nützlich, um Chi-Quadrat zu berechnen. Zur Plausibilisierung trägt die Tabelle aus oben genannten Gründen jedoch nicht bei.
+
+### Aufgabe 5: `aggregate()`-Funktion
+
+#### a. Argumente und ihre Spezifikation beschreiben
+
+```{r echo = F}
+aggregate(x = d.ch.k$eduyrs, # Objekt, hier Variable eduyrs
+          by = list(gender = d.ch.k$gndr, unemployed = d.ch.k$uemp3m), # gruppierende Variablen, hier gndr und uemp3m
+          FUN = median, # anzuwendende Funktion, hier Median berechnen
+          na.rm = T) # NA für Berechnung ignorieren, hier aktiviert
+```
+
+#### b. Interpretation
+
+Die Tabelle zeigt den Median der Bildungsjahre für die Gruppen Frauen arbeitslos, Frauen nicht arbeitslos, Männer arbeitslos und Männer nicht arbeitslos.
+
+#### c. Argumente verändern
+
+```{r}
+aggregate(x = d.ch.k$age, by = list(gender = d.ch.k$gndr, unemployed = d.ch.k$uemp3m), FUN = median, na.rm = T) # andere Variable, für die der Median berechnet wird, hier Alter
+# Befragte, die Arbeitslosigkeit erlebt haben, scheinen jünger zu sein (der Median der Altersvariable liegt tiefer), insebsondere Frauen
+aggregate(x = d.ch.k$age, by = list(d.ch.k$polintr), FUN = median, na.rm = T) # andere Gruppierungsvariablen, hier Pol. interesse
+# Befragte, die ein grösseres Interesse an Politik angeben, sind älter (der Median der Altersvariable liegt höher)
+aggregate(x = d.ch.k$age, by = list(d.ch.k$polintr), FUN = mean, na.rm = T) # Funktion ändern, hier mean
+# im SChnitt sind Befragte, die ein grosses Interesse an Politik angeben, rund 10 Jahre älter als Befragte, deren Interesse klein ist
+```
+
+#### d. Eigenes Beispiel
+
+```{r}
+t <- aggregate(x = d.ch.k$agea, by = list(d.ch.k$uemp3m), FUN = median, na.rm = T)
+```
+
+Der Median des Alters liegt in den beiden Gruppen rund sechs Jahre auseinander. Für Befragte, die angeben, in den letzen drei Monaten arbeitslos gewesen zu sein, liegt der Median bei 45. In der anderen Gruppen liegt er bei 51. Das heisst, die Hälfte der Befragten, die arbeitslos waren, sind jünger als 45, und die Hälte der Befragten, die nicht arbeitslos waren, sind jünger als 51. Achtung: Es sind keine Aussagen für die Grundgesamtheit möglich! Diese Aussagen sind für die Plausibilisierung nicht sinnvoll.
+
+### Aufgabe 6: `apply()`-Funktion
+
+#### a.
+
+...
+
+#### b. MARGIN
+
+Das MARGIN-Argument gibt an, ob eine Funktion über Zeilen (1) oder Spalten (2) oder beides (c(1, 2)) angewendet werden soll.
+
+#### c. Output des Beispiels
+
+Die Funktion gibt die Ausprägungen der im Datensatz genannten Variablen an. Konkret geht R die Spalten durch und führt Ausprägungen einmalig (`unique()`) auf. Diese Anwendung kann zur Plausibilisierung sinnvoll sein, insbesondere wenn in den Rohdaten bereits Faktoren enthalten sind.
+
+#### d. Eigenes Beispiel
+
+```{r}
+d.num <- d.ch.k[, c("agea", "yrbrn", "eduyrs", "wkhtot")]
+apply(X = d.num, MARGIN = 2, FUN = mean, na.rm = T)
+```
+
+Befragte sind im Durchschnitt rund 50 Jahre alt, im Jahr 2006 geboren, haben rund 12 Bildungsjahre angegeben und arbeiten rund 36 Stunden pro Woche (Achtung: MARGIN = 1 kein Sinn, weil der Durchschnitt von "Äpfel und Birnen" für jeden Fall berechnet würde!). Diese Werte scheinen plausibel und die Funktion könn**t**e zur Plausibilisierung herangezogen werden, allerdings sind diese Angaben bereits im `summary`-Output ersichtlich und die Anwendung somit überflüssig.
+
+#### e. Funktionen zur Plausibilisierung
+
+::: callout-important
+## `table()`-, `aggregate()`- und `apply()`
+
+| Funktion | allg. Anwendung | Verwendung für Plausibilisierung |
+|----|----|----|
+| `table()` | zur Auszählungen kategorialer Variablen, sowohl univariat als auch bivariat | Verteilungen kategorialer Variablen und Inkonsistenzen prüfen |
+| `aggregate()` | zur Berechnung gruppierter Masszahlen | Masszahlen mit zu erwartenden Werte abgleichen |
+| `apply()` | zur Anwendung einer Funktion über Spalten, Zeilen oder Objekte | Masszahlen mit zu erwartenden Werte abgleichen |
+:::

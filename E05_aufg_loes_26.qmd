@@ -1,0 +1,264 @@
+# Woche 4 {.unnumbered}
+
+*Arbeiten mit Datensätzen I: Daten einlesen*
+
+## Lernziele
+
+In in den kommenden Sitzungen lernen wir statistische Analysen mit R mit "echten" Daten kennen. Dazu nutzen wir den *European Social Survey* (ESS) und gegebenenfalls noch weitere Datensätze. Zu Beginn der Arbeit mit einem Datensatz müssen Sie die Daten einlesen und dann erkunden. Es gilt die Variablen und ihre Ausprägungen zu verstehen, erste Plausibilitätsprüfungen durchzuführen und Daten für die spätere Analyse aufzubereiten. Diese Techniken erarbeiten Sie sich in den kommenden Wochen und schaffen damit die Grundlage für die statistische Analysen.
+
+-   Sie lesen einen CSV-Datensatz in RStudio ein.
+-   Sie nennen die Vor- und Nachteile des CSV-Dateiformats.
+-   Sie führen erste Schritte der Datenbereinigung und -plausibilisierung durch.
+
+## Aufgaben
+
+1.  Laden Sie den Datensatz "ESS11.csv" und das Codebook herunter (siehe OLAT) und speichern die Dateien in Ihrem Arbeitsverzeichnis. Lesen Sie anschliessend den Datensatz in RStudio ein mittels der Funktion `read.csv()`.
+
+2.  Betrachten Sie den Datensatz über die Funktion `View()` oder indem Sie auf das erstellte Objekt im Fenster "Environment" klicken. Suchen Sie für zwei Variablen die Fragen und Informationen im Codebook heraus und fassen Sie diese kurz zusammen.
+
+3.  Öffnen Sie nun die Datei "ESS11.csv" in einem Tabellenkalkulations- oder einem Textbearbeitungsprogramm (z.B. Microsoft Excel, Windows-Editor oder TextEdit auf Mac).
+
+<!-- -->
+
+```         
+a.  Vergleichen Sie die beiden Varianten (Ihr Dataframe in RStudio und die im Textbearbeitungsprogramm geöffnete Datei) und beschreiben Sie kurz die Unterschiede.
+b.  Ersetzen Sie im Tabellenkalkulations- oder Textbearbeitungsprogramm die Kommas durch Strichpunkten (in Excel funktioniert das Ersetzen mit Strichpunkt nicht, falls Sie trotzdem damit arbeiten, sollten Sie es mit einem anderen Zeichen ausprobieren) und speichern Sie diese neue Version ab. Gehen Sie zurück zu R Studio und versuchen Sie, die neue Version des Datensatzes einzulesen. Welches Argument müssen Sie anpassen, damit das funktioniert?
+c.  Welche Vor- und Nachteile hat das CSV-Format im Vergleich zu anderen Dateiformaten (Excel, SPSS, ...)?
+```
+
+<!-- -->
+
+4.  Erkunden Sie den Datensatz mit Funktionen, die Sie bisher kennengelernt haben. Halten Sie Ihre Erkenntnisse stichwortartig fest.
+
+5.  Filtern Sie mittels Variable cntry, so dass nur noch Befragte aus der Schweiz enthalten sind. Verwenden Sie die Vorgehensweise, die Sie letzte Woche kennengelernt haben. Erstellen Sie mit diesen Fällen einen Teildatensatz, prüfen Sie Ihre Veränderungen und arbeiten Sie fortan mit diesem.
+
+6.  Wählen Sie die Variablen agea, yrbrn, ipbhprpa, fineqpy, edlvdch, eduyrs, mnactic, wkhtot, hinctnta, polintr, trstprl, prtvtdgb, stfdem, gndr, uemp3m, pdwrk und netusoft, sowie die beiden Variablen von Aufgabe 2 aus und speichern Sie diese in einem neuen Datensatz-Objekt ab. Verwenden Sie dazu die Vorgehensweise, die Sie letzte Woche kennengelernt haben. Prüfen Sie Ihre Veränderungen (wie immer!) und arbeiten Sie mit diesem Teildatensatz weiter.
+
+7.  Fassen Sie die Inhalte der Variablen in einer Tabelle zusammen.
+
+8.  Schauen Sie sich die Variable agea an.
+
+<!-- -->
+
+```         
+a.  Welche Umkodierung(en) müssen Sie vornehmen?
+b.  Welche Fehler und Probleme liegen vor? Welche Fälle sind betroffen?
+```
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+## Lösungen
+
+1.  Datensatz herunterladen und in Ordner lokal speichern, dann Datensatz einlesen
+
+Die Funktion `read.csv()` hat verschiedene Argumente, wie Sie der Dokumentation (mittels `?read.csv`) entnehmen können. Wir sehen, dass die Standard-Argumente (`header = T`, `sep = ","` etc.) passen und geben deshalb nur den Pfad bei Argument `file` ein. Insbesondere wenn Sie die Datei nicht in dem Ordner abgelegt haben, den Sie als in der ersten Sitzung als working directory (Arbeitsverzeichnis) definiert haben, gilt es als erster Schritt diesen Pfad ausfindig zu machen. Das Arbeitsverzeichnis ist der Ort auf Ihrem Rechner, wo die Daten abgelegt sind, auf die R zugreifen soll (ggfs. haben Sie diese in einem Unterordner abgelegt). Sie finden den Pfad in der Schreibweise, die R versteht, unter Tools \> Global Options \> Default working directory \> Browse... (hier den Ordner suchen und öffnen, dann den Pfadzeile kopieren und das Fenster schliessen). Wichtig: Sie sehen hier nur Ordner, keine Dateien!
+
+Fügen Sie dem Pfad noch den Dateinamen inklusive Endung hinzu. Schrägstriche markieren Ebenenwechsel, deshalb braucht es auch vor dem Dateinamen noch einen Schrägstrich.
+
+```{r}
+# Vorbereitung
+rm(list = ls()) # Workspace loeschen
+options(scipen = 999) # schaltet wissenschaftliche Schreibweise aus
+
+d.ess <- read.csv(file = "C:/Users/BisangL/Documents/c_fuer_quarto/buch_hs26/daten/ESS11/ESS11.csv")
+```
+
+Den gesamten Pfad zu nennen, ist in der Praxis vorteilhaft. Falls Sie in unterschiedlichen Projekten und Ablagen arbeiten, stellt dies sicher, dass R in den jeweils passenden Ordnern nach der Datei sucht. Es gäbe auch Alternativen: Zum Beispiel könnten Sie in einem R Project arbeiten oder nur den Dateiname nennen, wenn Sie die working directory definiert haben -- dies stellt sich in der Praxis jedoch als unpraktisch heraus.
+
+2.  ...
+
+3.  csv-Format
+
+    a.  In RStudio wird der Datensatz als übersichtliche Tabelle dargestellt, während in anderen Programmen die Daten komma-getrennt aneinandergehängt sind.
+    b.  Indem Sie die Kommas mit Strichpunkten ersetzen, ändert sich das Trennzeichen. Die `read.csv`-Funktion ermöglicht über das Argument `sep =` zu bestimmen, welches Zeichen die Spalten trennt. Der Standardwerte ist ein Komma. Das heisst, es ist das Argument `sep = "(hier das Zeichen anpassen)"` anzupassen.
+    c.  Das CSV-Dateiformat hat vor allem zwei Vorteile: Erstens -- und wie in der Teilaufgabe oben deutlich wurde -- können Sie über beliebige Texteditoren die Daten bearbeiten, da im Format lediglich Rohdaten in Textform abgespeichert sind. Bei anderen Dateiformaten wie etwa .sav (von der Statistiksoftware SPSS) ist dies nicht so einfach möglich. Damit ist das CSV-Format ein besonders transparenter Standard, mit dem fast alle Programme und Betriebssysteme umgehen können. Der zweite Vorteil ist, dass die CSV-Dateien nur sehr wenig Speicherplatz brauchen. Sie können somit auch grosse Datensätze schnell mit RStudio einlesen. Dem gegenüber steht der Nachteil von CSV, dass das Dateiformat keine Möglichkeiten bietet, Informationen auf komplexere Art und Weise abzuspeichern (z.B. Levels für kategoriale Variablenausprägungen, Metadaten). Zudem besteht die Gefahr, dass Sonderzeichen in den Daten zu Problemen führen oder Trennzeichen, die als Ausprägung vorkommen, ebenfalls als Spaltenumbruch gelesen werden.
+
+::: callout-important
+## csv
+
+Das CSV-Dateiformat bietet eine sehr grundlegende Art und Weise um Daten oder eben Datensätze zu speichern. Die Fälle werden über Zeilenumbrüche getrennt. Die Spalten wiederum werden durch ein bestimmtes Zeichen voneinander abgegrenzt. Die Abkürzung bedeutet "Comma Seperated Values", weil als Trennzeichen oftmals ein Komma eingesetzt wird.
+:::
+
+4.  Beschreibung des Datensatzes:
+
+Wir haben uns hier ein Objekt der Klasse...
+
+```{r}
+class(d.ess)
+```
+
+geladen.
+
+Bevor man sich mit den einzelnen Variablen beschäftigt, werden grundsätzliche Aspekte geprüft:
+
+::: callout-important
+## Plausibilisierung I: Datensatz
+
+Plausibilisierung meint, dass wir uns die Daten erstmal genau *anschauen*. In einem ersten Schritt schauen wir uns das Datensatz-Objekt insgesamt an.
+
+1.  Haben Sie *alle Zeilen* (und Spalten) eingelesen? Dies bezieht sich auf den Originaldatensatz, hier `d.ess`.
+
+```{r}
+dim(d.ess) # stimmt mit csv-Datei überein
+```
+
+2.  Wenn Sie selbst eine Erhebung durchgeführt haben, sollten Sie sich zudem einen Überblick verschaffen, ob die Befragten *Muster* beim Ausfüllen des Fragebogens» angewendet haben.
+:::
+
+Die zweite und die 22. Variablen heissen...
+
+```{r}
+names(d.ess)[c(2, 22)]
+```
+
+Die ersten fünf Variablen -- alphabetisch geordnet -- heissen:
+
+```{r}
+sort(names(d.ess))[1:5]
+```
+
+Die Funktion `str()` generiert eine Übersicht und zeigt die interne Struktur eines R-Objekts auf. Für unseren Datensatz bedeutet dies: die Variablen (auf welche wir mit \$ zugreifen können), deren Dateiformat sowie die ersten Ausprägungen. Der Datensatz umfasst wenige Character-Variable und viele numerische Variablen -- allerdings bricht die Auflistung aufgrund der Länge ab.
+
+```{r}
+# str(d.ess)
+```
+
+Wir reduzieren den Datensatz und kommen nachher nochmals auf beschreibende Funktionen zurück:
+
+5.  filtern (Zeilen)
+
+```{r}
+d.ch <- d.ess[d.ess$cntry == "CH",]
+table(d.ch$cntry, useNA = "always") # prüfen
+```
+
+Die Tabelle zeigt, dass nur noch Fälle mit "CH"-Ausprägung enthalten sind. Fehlende Werte sind keine enthalten.
+
+6.  selektieren (Spalten)
+
+```{r}
+d.ch.k <- d.ch[, c("agea", "yrbrn", "ipbhprpa", "fineqpy","edlvdch", "eduyrs", 
+                   "mnactic", "wkhtot", "hinctnta", "polintr", "trstprl", 
+                   "prtvtdgb", "stfdem", "gndr", "uemp3m", "pdwrk", "netusoft")]
+colnames(d.ch.k) # prüfen
+```
+
+...es sind nur noch die ausgewählten Variablen enthalten.
+
+Diesen Datensatz schauen wir uns nochmals an:
+
+Es gibt ... Zeilen und ... Spalten:
+
+```{r}
+dim(d.ch.k)
+```
+
+```{r}
+str(d.ch.k)
+```
+
+Alle Variablen sind als metrische Variable gespeichert, auch die Variable "gndr". Dies sollten wir später noch anpassen. Weiter sehen wir, dass Dummy-Variablen (Variablen mit zwei Ausprägungen) zum Teil mit 1 und 2 und zum Teil mit 0 und 1 kodiert sind (z.B. pdwrk und uemp3m).
+
+```{r}
+summary(d.ch.k)
+```
+
+Es wird deutlich, dass hier tatsächlich Rohdaten eingelesen werden: Auch fehlende Werte gelten aktuell noch als gültige Zahlen (...jemand wäre im Jahr 999 geboren -- das ist Unsinn und direkt als fehlender Wert zu erkennen). Zudem ist zum Beispiel ersichtlich, dass die Variable Geschlecht ziemlich gleichmässig verteilt ist. Und wir sehen, dass die Variable prtvtdgb durchgehend NAs enthält — weshalb?
+
+7.  Inhalte der gewählten Variable
+
+    | Variablenname | Inhalt der Variable |
+    |------------------------------------|------------------------------------|
+    | agea | Age of respondent, calculated |
+    | yrbrn | Year of birth |
+    | ipbhprpa | Important to help people and care for others well-being |
+    | fineqpy | Making businesses pay a fine when they pay men more than women for doing the same work |
+    | edlvdch | Highest level of education, Switzerland |
+    | eduyrs | Years of full-time education completed |
+    | mnactic | Main activity, last 7 days |
+    | wkhtot | Total hours normally worked per week in main job overtime included |
+    | hinctnta | Household's total net income, all sources |
+    | polintr | How interested in politics |
+    | trstprl | Trust in country's parliament |
+    | prtvtdgb | Party voted for in last national election \[nicht für Schweiz enthalten!\] |
+    | stfdem | How satisfied with the way democracy works in country |
+    | gndr | Gender |
+    | uemp3m | Ever unemployed and seeking work for a period more than three months |
+    | pdwrk | Doing last 7 days: paid work |
+    | netusoft | Internet use, how often |
+
+8.  Bereinigung, Plausibilisierung und Aufbereitung am Beispiel von agea
+
+::: callout-important
+## Daten bereinigen
+
+In dieser Phase fokussieren wir auf "technische Probleme" und Probleme, die anhand des Codebooks erkennbar sind.
+
+1.  *Fehlende Werte*: Sind fehlende Werte in den Rohdaten enthalten? Wie sind fehlende Werte gemäss Codebuch kodiert?
+2.  Sind die Variablen korrekt *kodiert* (numeric/character)?
+3.  Bei character-Variablen, die wir für unsere Analyse brauchen, schauen wir uns an, ob *Sonderzeichen, Anführungszeichen und Semikolons* korrekt eingelesen wurden.
+:::
+
+a.  Wie oben im str-Output gesehen, ist die Variable numerisch kodiert. Das ist sinnvoll. Gemäss summary-Output sind in agea keine `NA` enthalten. Fehlende Werte sind mit `999` ("Not available") kodiert und sie müssen auf `NA` gesetzt werden. Da es sich um eine numerisch kodierte Variable handelt, müssen Sonderzeichen nicht geprüft werden.
+
+```{r}
+d.ch.k$agea[d.ch.k$agea == 999] <- NA
+table(d.ch.k$agea, useNA = "always") # prüfen
+```
+
+::: callout-important
+## Plausibilsierung II: Fehler, Unstimmigkeiten und Unsicherheiten in Variablen suchen
+
+1.  Wir schauen uns univariat *Auffälligkeiten, Ausreisser und Extremwerte* an.
+
+2.  Anschliessend prüfen wir, ob *Inkonsistenzen* vorliegen und machen «Querchecks» mittels bivariaten Tabellen, Masszahlen und Darstellungen (logische Überlegungen!). Hier können wir unter Umständen auch externe Informationen hinzuziehen.
+:::
+
+Wir schauen nun nach Auffälligkeiten, Ausreissern und Extremwerten:
+
+```{r}
+range(d.ch.k$agea, na.rm = T)
+hist(d.ch.k$agea)
+```
+
+...15 bis 90 Jahre macht nun Sinn, zumal gemäss Informationen zum European Social Survey nur Personen ab 15 Jahre befragt werden (siehe [hier](https://ess.sikt.no/en/study/412db4fe-c77a-4e98-8ea4-6c19007f551b/), Abschnitt "Universe, scope and method") und die Verteilung ist so erwartbar.
+
+b.  Inkonsistenzen? Das Alter sollte sich aus dem Jahrgang und Jahr der Befragung ableiten lassen. Das ist nicht in allen Fällen so:
+
+```{r}
+which(d.ch.k$agea != 2023 - d.ch.k$yrbrn)
+# Differenz berechnen
+2023 - d.ch.k$yrbrn[d.ch.k$agea != 2023 - d.ch.k$yrbrn] - d.ch.k$agea[d.ch.k$agea != 2023 - d.ch.k$yrbrn]
+# betroffene Fälle anschauen
+d.ch.k[d.ch.k$agea != 2023 - d.ch.k$yrbrn, c("agea", "yrbrn")]
+```
+
+Da die Differenzen durchgehend `-1` betragen, scheint ein systematisches Problem vorzuliegen. Es gibt im Wesentlichen vier Arten damit umzugehen:
+
+::: callout-important
+## Umgang mit `NA`
+
+1.  Wir können die benötigten Werte ableiten, etwa bei den Altersvariablen – allerdings ist oftmals unklar, welcher Wert falsch ist, deshalb werden fehlende Werte selten ergänzt.
+
+2.  Wir können die Werte schätzen. Es gibt unterschiedlich elaborierte Schätzverfahren. Grundsätzlich ist jedoch davon abzuraten, weil oftmals die Transparenz fehlt und Verzerrungen in den Daten verstärkt werden können.
+
+3.  Wir könn**t**en den ganzen Fall löschen – das macht man in der Praxis äusserst selten, weil damit viele Datenpunkte verloren gehen würden.
+
+4.  Wir können die Werte als `NA` definieren. Das ist das übliche Vorgehen.
+:::
+
+Hier setzen wir diese Fälle in beiden Variablen auf `NA` und prüfen die Veränderung.
+
+```{r}
+v.age <- which(d.ch.k$agea != 2023 - d.ch.k$yrbrn)
+d.ch.k$agea[v.age] <- NA
+table(d.ch.k$agea, useNA = "always")
+
+d.ch.k$yrbrn[v.age] <- NA
+table(d.ch.k$yrbrn, useNA = "always") # das stimmt
+```

@@ -1,0 +1,123 @@
+# Woche 9 {.unnumbered}
+
+Faktoren und Funktion `source()`
+
+## Lernziele
+
+Aufbauend auf unserer bisherigen Arbeit mit Kreuztabellen und der kurzen Einführung zu Faktoren besteht das Ziel für diese Woche darin, dass Sie sich mit Faktoren noch besser vertraut machen. Faktoren sind geeignetes Format, um kategoriale -- d.h. nominale und ordinale -- Daten in R zu speichern und damit zu arbeiten. Der Umgang mit dieser Art von Daten ist allerdings nicht ganz leicht und erfordert ein wenig Übung.
+
+Konkret:
+
+-   Sie wandeln, sofern nötig, Variablen in Faktoren um.
+-   Sie erklären den Unterschied zwischen geordneten und ungeordneten Faktoren.
+-   Sie erstellen geordneten und ungeordneten Faktoren in R.
+-   Sie erklären die Levels-Labels-Struktur von Faktoren und was Levels und Labels sind.
+-   Sie definieren die Levels eines Faktors.
+-   Sie benennen oder sortieren die Levels neu benennt, fassen sie zusammen und entfernen nicht benötigte Levels.
+
+## Hinweise zu den Faktoren
+
+Wir sehen mit `str(d.ess)`, dass manche Variablen numerisch kodiert sind, die ordinal oder kategorial skaliert sein sollten. Solche müssen wir in R als Faktoren definieren.
+
+Faktoren sind ein wichtiger Objekttyp der für die Organisation von sozialwissenschaftlichen Beobachtungen in Form von Variablen relevant ist [@Manderscheid2017, 35]. Dieser Objekttyp enthält nicht mehr Zahlen, sondern "Levels". Es handelt sich um benannte Elemente und wir können dies insbesondere für Variablen mit nominalem oder ordinalem Skalenniveau verwenden. Der Unterschied zwischen numerischen Variablen und kategorial Variablen ist wichtig, weil gewisse Funktionen nicht auf Faktoren anwendbar sind.
+
+Die Labels (Name) und zugehörigen Levels (Code) finden wir im Codebook:
+
+gndr\
+1 Male\
+2 Female\
+9 No answer\*
+
+netusoft\
+1 Never\
+2 Only occasionally\
+3 A few times a week\
+4 Most days\
+5 Every day\
+7 Refusal\*\
+8 Don't know\*\
+9 No answer\*
+
+Wir definieren "gndr" als Faktor (und übernehmen das auch ins Aufbereitungsskript):
+
+```{r echo = FALSE}
+# Vorbereitung
+rm(list = ls()) # Workspace loeschen
+options(scipen = 999) # schaltet wissenschaftliche Schreibweise aus
+
+# Daten einlesen
+d.ess <- read.csv(file = "C:/Users/BisangL/Documents/c_fuer_quarto/buch_hs24/daten/ess_19_ch.csv")
+```
+
+```{r}
+d.ess$gndr <- factor(d.ess$gndr)
+levels(d.ess$gndr)
+levels(d.ess$gndr) <- c("m", "w")
+str(d.ess$gndr)
+```
+
+...und betrachten, was sich geändert hat:
+
+```{r}
+# d.ess$gndr + 1 # funktioniert jetzt nicht mehr
+is.factor(d.ess$gndr)
+table(d.ess$gndr)
+plot(d.ess$gndr)
+```
+
+Im Unterschied zu "gndr" ist "netusoft" eine ordinal skalierte Variable. Solche kategorialen Daten können wir als geordnete Faktoren erfassen:
+
+```{r}
+is.vector(d.ess$netusoft)
+table(d.ess$netusoft)
+plot(d.ess$netusoft)
+```
+
+Wir wandeln den Vektor in einem Schritt in einen Faktor um:
+
+```{r}
+d.ess$netusoft <- factor(d.ess$netusoft, ordered = T,
+                         levels = 1:5,
+                         labels = c("never", "occ", "few_times", 
+                                    "most_days", "every_day"))
+```
+
+Wiederum werden jetzt Tabellen und Plots an das Datenformat angepasst:
+
+```{r}
+is.factor(d.ess$netusoft)
+table(d.ess$netusoft)
+plot(d.ess$netusoft)
+```
+
+## Aufgaben
+
+[**Reichen Sie bitte ein R-Skript (.R-Datei) ein.**]{style="color:red;"}
+
+1.  Fügen Sie im R-Skript für Datenimport und -aufbereitung ein Kapitel zur Definition und Aufbereitung einzelner Variablen als Faktoren ein. [Laden Sie das Skript anschliessend in Ihrem Quarto Dokument und arbeiten Sie dort weiter - das haben wir im Unterricht erledigt, fokussieren Sie sich nun bitte auf die Datenaufbereitung.]{style="color:grey;"}
+
+::: callout-important
+## `source()-Funktion`
+Verwenden Sie die Funktion `source()` und geben Sie für das Argument `file =` den Pfad zum R-Skript (.R-Datei) an, das Sie letzte Woche erstellt haben.
+:::
+
+2.  Gehen Sie den ESS-Datensatz durch und überlegen Sie, welche Variablen als geordnete oder ungeordnete Faktoren gespeichert werden sollten (die Variablen "edulvlb" und "isco08" brauchen Sie nicht zu berücksichtigen).
+
+3.  Duplizieren Sie nun jede dieser von Ihnen ausgesuchten Variablen im Datensatz, etwa gndr zu f_gndr. Definieren Sie diese als Faktoren.
+
+4.  Überprüfen Sie mittels Kreuztabellen, ob Ihre Faktoren sinnvoll und fehlerfrei definiert sind.
+
+5.  Fügen Sie die Faktorendefinition dem R-Skript hinzu. Verzichten Sie auf Duplizierungen und überschreiben Sie die betreffenden Variablen.
+
+6.  Testen Sie, ob R-Skript und Quarto-Dokument zusammen funktionieren: Löschen Sie Ihre Environment (und alle Objekte) und laden Sie mittels `source()` das R-Skript im Quarto-Dokument neu. Fragen Sie dann im Quarto-Dokument das Format (`str()`) einer als Faktor definierten Variablen auf.
+
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem R-Skript!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
+
+[**Laden Sie bitte das R-Skript auf OLAT hoch. Mit dem Quartodokument werden wir nächste Woche weiterarbeiten. **]{style="color:red;"}

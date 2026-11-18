@@ -1,0 +1,36 @@
+# Woche 11 {.unnumbered}
+
+Repetition bivariate Regression
+
+## Lernziele
+
+Im Rahmen dieser Aufgaben werden keine neuen Themen eingeführt, sondern Aspekte (Zugriff auf lm-Objekt und Interpretation des Modells) der Woche 10 wiederholt. 
+
+Konkret repetieren wir:
+
+-   Sie erklären die Struktur eines lm-Objekts.
+-   Sie interpretieren das Modell und schätzen dessen Güte ein.
+
+## Aufgaben
+
+1.  Laden Sie das Datenimport-Skript (stellen Sie sicher, dass es auf dem aktuellsten Stand ist und verbessern Sie -- falls vorhanden -- Fehler) und kopieren Sie die Regressionsmodelle aus dem Quarto-Dokument Woche 10 in das aktuelle Quarto-Dokument. 
+
+2.  Beziehen Sie sich auf das Modell mit der metrischen unabhängigen Variable. Greifen Sie mittels `$` auf das lm-Objekt zu und
+
+    -   erstellen Sie einen Plot mit der Vorhersagewerte für y auf der x-Achse und den Residuen des Modells auf der y-Achse (Tukey-Anscombe-Plot). Wie ist dieser Plot zu interpretieren?
+
+    -   plotten Sie die unabhängige Variable gegen die abhängige Variable (wiederum mit den Ausprägungen im lm-Objekt). Ergänzen Sie dann bei dieser zweiten Darstellung die Regressionsgerade mittels `abline()`. Dazu sollen Sie auf den b0-Wert als y-Achsenabschnitt (`a`) und den Koeffizienten als Steigung (`b`) zurückgreifen. Sie finden beide Werte im Unterobjekt `coefficients`.
+
+3.  R integriert kategoriale Variablen im Regressionsmodell als Dummy-Variablen (0-1 kodierte Variablen). Fügen Sie dem Datensatz die benötigten Dummy-Variablen für die Variable "eisced" an.
+
+4.  In der nächsten Einheit erarbeiten wir uns Wissen zu den t- und F-Werten und zu deren inferenzstatistischen Interpretation. Lesen Sie dazu die Abschnitte aus Diaz-Bone (2023).
+
+5.  Interpretieren Sie einen der p-Werte in Ihrem Modell und halten Sie die Interpretation schriftlich fest.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

@@ -1,0 +1,21 @@
+{
+  "hash": "cd7425ff6b6d687aded4ee5c6ac17b86",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Woche 8 {.unnumbered}\n\n*\"Loops\"/for-Schleifen*\n\n## Lernziele\n\nIn den letzten Wochen haben wir verschiedene Funktionen kennengelernt, um Daten zu bereinigen, zu plausibilisieren und aufzubereiten. Zudem haben wir insbesondere die Funktionen zur Erstellung von Grafiken angewendet, um erste interessante Ergebnisse zu generieren. In dieser Woche schauen wir uns an, in welchen Fällen for-Schleifen.\n\nKonkret:\n\n-   Sie erläutern, wozu und in welchen Fällen for-Schleifen nützlich sind.\n-   Sie erklären, wie eine for-Schleife funktioniert.\n-   Sie erstellen einfache for-Schleifen.\n\n## Aufgaben\n\n::: callout-important\n## for-Schleifen\n\nOperationen, die mehrfach ausgeführt werden sollen, können mit for-Schleifen oder Funktionen erfasst werden.\n\n[**Good Practice:**]{style=\"color:darkgreen;\"}\n\n-   for-Schleifen nur verwenden, wenn keine Alternativen möglich sind, denn sie sind vergleichsweise langsam. Wenn immer möglich ist Vektorisierung oder `apply()` vorzuziehen.\n-   Wenn Sie for-Schleifen verwenden, packen Sie so wenige \"Tasks\" wie möglich in die Schleife. Denn \"Tasks\" in der Schleife werden bei jedem Durchgang ausgeführt!\n:::\n\n### Aufgabe 1: summary-Output mit for-Schleif nachbauen\n\nBauen Sie den summary-Output der numerischen Variablen mit einer for-Schleife nach. Orientieren Sie sich am untenstehenden Aufbau einer For-Schleife.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Aufbau einer For-Schleife. Gelb markierte Elemente sind fix, die anderen sind zu definieren.](Bilder/aufbau_for-schleife.png){width=3.2in}\n:::\n:::\n\n\nHinweis: Bilden Sie einen Vektor mit den numerischen Variablen, die bearbeitet werden sollen und verwenden Sie diesen Vektor für den for-Loop (in der Initiierung, d.h. in den runden Klammern, und auch im Rumpf, d.h. in den geschweiften Klammern).\n\n`v.num <- c(\"agea\", \"yrbrn\", \"eduyrs\", \"wkhtot\")`\n\nBeispiel, wie dieser Vektor im Loop-Rumpf verwendet wird:\n`min(d.ch.k[, v.num[i]])`\n\nAlle Outputs fügen Sie mit z.B. `rbind()` und/oder `paste()` zusammen und speichern das als Objekt im Rumpf. \nObjekte, die in einem Loop generiert werden, werden standardmässig nicht rausgeschrieben, sondern «verschwinden» nach Abbruch des Loops. Deshalb braucht es als letzte Funktion im Rumpf noch `print(hier der Name Ihres Objekts)`.\n\n### Aufgabe 2: Code lesen\n\nBeschreiben Sie, was untenstehender Code macht und inwiefern diese for-Schleife sinnvoller ist als jene, die Sie in Aufgabe 1 gebaut haben. (Kommentieren Sie den Code aus.) Hinweis: `kmeans(mca1$ind$coord[, c(\"Dim 1\", \"Dim 2\")], i)$withinss` ruft die Within-Clustervarianz von i Clustern auf, die mit der Funktion `kmeans()` von Koordinaten (`mca1$ind$coord[, c(\"Dim 1\", \"Dim 2\")]`) gebildet wurden.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nwss <- rep(0, 18)\nfor(i in 1:17){\n  wss[i] <- sum(kmeans(mca1$ind$coord[, c(\"Dim 1\", \"Dim 2\")], i)$withinss)\n}\nplot(1:18, wss, type = \"b\", xlab = \"\", ylab = \"\")\n```\n:::\n\n\n### Aufgabe 3: eigenes Beispiel\n\nEntwickeln Sie einen eigenen Loop, der für die Plausibilisierung und Aufbereitung hilfreich ist.\n\n*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit \"Reflexion\" in\nIhrem Markdown-Dokument!)*\n\nBitte reflektieren Sie und halten stichpunktartig fest:\n\n-   Was ist Ihnen klar geworden?\n-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?\n\n",
+    "supporting": [
+      "E09a_aufg_26_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

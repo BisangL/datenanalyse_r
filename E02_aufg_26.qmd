@@ -1,0 +1,160 @@
+# Woche 1 {.unnumbered}
+
+*Einführung in R und Grundlagen I*
+
+## R als Programm & RStudio
+
+Ross Ihaka und Robert Gentleman haben die Programmiersprache R in den 1990er Jahre an der Universität Auckland in Neuseeland entwickelt [@Manderscheid2017, 1]. R war von Beginn an auf statistische Analysen und die Statistiklehre ausgerichtet. Der Buchstabe "R" als Name geht sowohl auf die vormalige Programmiersprache "S" als auch auf die Vornamen der beiden Entwickler zurück [@Sauer2019, 13f.]. Das R-Projekt wurde in Zusammenarbeit mit anderen Wissenschaftlern\*innen vorangetrieben und später unter der General Public Licence ([GNU](https://en.wikipedia.org/wiki/GNU)) veröffentlicht [@Manderscheid2017, 1]. R ist daher frei zugänglich, kostenlos und darf von allen weiterentwickelt werden. Es ist insbesondere auch diese *Open Source*-Idee, welche stark zur Verbreitung von R beiträgt und durch die laufenden Entwicklungen in den Fachbereichen und Analysemethoden direkt in die Software eingehen.
+
+Das Programm R ist in Paketen organisiert und präsentiert sich als "Statistikumgebung" [@Manderscheid2017, 1]. Ausgehend von der Basisversion ("R Base"-Paket, vorinstalliert) können Sie R beliebig mit Paketen erweitern. Unter [https://cran.r-project.org/](#0) findet sich eine beständig wachsende und umfangreiche Sammlung von Paketen. Die Pakete bieten sowohl Lösungen für allgemeine Verfahren (z.B. Pakete für die multiple Korrespondenzanalyse, siehe "soc.ca") als auch für spezifische Probleme (z.B. für "Atomic Force Microscope Image Analysis" beim Paket "AFM").
+
+Bevor Sie die Pakete nutzen können, müssen Sie diese **einmalig installieren** und jedes Mal, wenn Sie eine **neue R-Sitzung starten, neu laden** (siehe untenstehender Code). Das werden Sie in den nachfolgenden Aufgaben auch üben. Die verwendeten Pakete werden nach dem Beenden des Programms wieder "versorgt", alle einmal installierten Pakete bleiben aber installiert. Dieser Vorgang stellt sicher, dass R "schlank" bleibt und jeweils nur die benötigen Pakete ausgeführt.
+
+```{r eval=FALSE}
+install.packages("soc.ca") # R-Code, um das Paket "soc.ca" zu installieren
+library(soc.ca) # R-Code, um das Paket "soc.ca" zu laden
+```
+
+Neben den Stärken der *Open Source*-Idee und der daraus folgenden, beständigen Aktualisierung und Erweiterungen des Programms zeichnet R vielfältige Visualisierungsmöglichkeiten aus. Es bieten sich zahllose Möglichkeiten für Grafiken und Diagramme bereits mit der Basisversion, insbesondere aber mit weiterführenden Paketen (z.B. "ggplot2").
+
+Grafische Benutzeroberflächen (GUI) ergänzen die Programmiersprache R. Wir verwenden im Seminar RStudio -- die am weitesten verbreitete grafische Benutzeroberfläche von R. RStudio erleichtert den Umgang mit R. Es bietet einige praktische Zusatzfunktionen (z.B. Auto-Vervollständigungsfunktionen, automatisches Einrücken, Syntaxhervorhebung, integrierte Hilfsfunktion, Informationen zu Objekten im Workspace, menügestützten Oberflächen oder Daten-Viewer [@Manderscheid2017,18]). Wenn Sie **RStudio öffnen, startet R automatisch im Hintergrund**. Diese Arbeitsteilung von R und RStudio ist mit einem Auto vergleichbar: R ist der Motor des Autos und RStudio das Armaturenbrett, vor dem Sie sitzen und das Auto lenken. R verrichtet die eigentliche Arbeit.
+
+Für den weiteren Verlauf fassen wir **R als Sprache** auf -- sowohl als Programmiersprache als auch als Sprache in einem metaphorischen Sinn: Sie lernen ein komplexes System zur Kommunikation kennen. Wie auch bei einer anderen Sprache gibt es in R Zeichen mit Bedeutungen (ähnliche wie Nomen, Verben...) und Regeln zur Verknüpfung dieser Zeichen (ähnlich wie eine Grammatik). Diese Grundlagen eignen Sie sich im Folgenden an.
+
+Mit dieser Vorstellung von R als Sprache geht auch die Vorstellung des Lernprozesses einher: Wir lernen eine Sprache, indem wir diese immer wieder benutzen, Probleme lösen und vor allem auch Fehler machen. Damit Sie später mit dem Programm selbstständig arbeiten und mit diesen Problemen umgehen können, entwickeln Sie im Seminar auch Lösungsstrategien und ein Sinn für die Interpretation von Fehlermeldungen. Am Anfang fällt Ihnen möglicherweise manches schwer, mit der Zeit werden Sie jedoch mit R vertrauter und sicherer.
+
+## Lernziele
+
+Die Herausforderung besteht darin, den Weg zwischen scheinbarer *Trivialität* und überfordernder *Komplexität* zu finden: Nehmen Sie kleine Schritte ernst, sonst werden die grossen Schritte sehr schnell mühsam. Die Lernziele der ersten beiden Wochen sind:
+
+1.  Die aktuellen Versionen von R und RStudio auf Ihrem Computer installieren
+2.  R-Pakete installieren, diese Zeile auskommentieren und Pakete laden
+3.  Eine Funktion aufrufen
+4.  Erklären, wie Sie mit R interagieren können
+5.  einfache Operationen durchführen
+6.  Online Unterstützungsangeboten aufzählen
+7.  Die Funktionen der vier Fenster in RStudio erläutern und insbesondere die Unterschiede zwischen der Konsole und dem Skript benennen
+8.  Erklären, wie und wozu Sie im Skript kommentieren
+9.  Den Unterschied zwischen R-Datei und qmd-Datei erklären
+10. Das R-Skript in ein Markdown-Dokument (.qmd) übertragen
+11. Bezüglich *Funktionen* (erstes Grundelement der "Sprache R") können Sie
+    -   angeben, wie Funktionen grundsätzlich aufgebaut sind
+    -   erläutern, wie Sie Hilfe zu Funktionen finden
+    -   erklären, wozu Argumente in Funktionen verwendet werden
+12. Bezüglich *Objekte* (zweites Grundelement der "Sprache R") können Sie
+    -   erklären, was ein Objekt ist
+    -   die im Workspace verfügbaren Objekte anzeigen
+    -   das Zusammenspiel von Funktionen und Objekte erläutern
+    -   drei verschiedenen Arten von Objektklassen unterscheiden und beschreiben
+
+## Aufgaben
+
+1.  Installieren Sie die aktuellen Versionen von [R](https://cran.r-project.org) und [RStudio](https://www.rstudio.com/products/rstudio/download/) auf Ihrem Computer. Wenn Sie diese bereits installiert haben, überprüfen Sie bitte deren Aktualität und updaten diese bei Bedarf.
+
+2.  Fassen Sie in eigenen Worten die Funktionen der vier Fenster von RStudio zusammen.
+
+3.  "swirl" ist eine in R implementierte interaktive Einführung in die Grundlagen von R. Installieren und laden Sie dieses Paket.
+
+::: callout-important
+## Auskommentieren! \#
+
+Pakete sind einmalig zu installieren, müssen jedoch nach jedem Neustart (von R) neu geladen werden. Eine gute Möglichkeit ist, nach der einmaligen Installation diese Zeile «auszukommentieren» mit einem "\#" zu Beginn der Zeile.
+:::
+
+```{r, echo = F}
+# install.packages("swirl") # diese Zeile soll nicht mehr ausgeführt werden, deshalb wird sie auskommentiert
+library(swirl)
+```
+
+::: callout-important
+## Code "ausführen"
+
+Damit R die Addition tatsächlich "ausführt" (d.h., Sie ein Resultat erhalten), müssen Sie im **Skript** den Cursor in die entsprechende Zeile setzen und "run" klicken (oben rechts) oder "ctrl + enter". In der **Konsole** reicht "enter".
+:::
+
+4.  Rufen Sie die Funktion `swirl()` auf und experimentieren Sie damit (*Hinweis*: tun Sie dies in der Konsole, das ist das Feld unten links). Falls Sie bereits R-Erfahrung haben: Rufen Sie sich in Erinnerung und notieren Sie sich, was Sie noch wissen und was für Sie neu ist.
+
+5.  Suchen Sie online nach R-Tutorials, R-Foren und Ähnlichem. Halten Sie die URLs von Seiten und Ressourcen fest, die Ihnen hilfreich und/oder wichtig vorkommen (aber unter Umständen noch etwas schwer zu verstehen sind).
+
+6.  Nutzen Sie R für eine Addition (quasi als Taschenrechner). Probieren Sie dies sowohl in einem Skript als auch in der Konsole. Worin bestehen Vor- und Nachteile?
+
+7.  Übertragen Sie die Addition in ein R Markdown-Datei (.qmd; unter File - New File - R Markdown; wählen Sie PDF).
+
+<!-- -->
+
+a.  In welchen Abschnitten führt R die Addition tatsächlich aus?
+b.  Beschreiben Sie in wenigen Sätzen, was Sie berechnen. In welchen Abschnitten ist diese Beschreibung ohne Fehlermeldung möglich?
+c.  Fügen Sie die Notizen von Aufgabe 1 bis 5 dem Markdown-File (.qmd) hinzu. Ordnen Sie R-Code und Text sinnvoll in Code Chunks respektive Fliesstext zu.
+d.  Schauen Sie sich auch die Formatierungsmöglichkeiten für Fliesstext in den Cheatsheets zu R Markdown an (siehe [hier](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf)). Probieren Sie drei Formatierungen in Ihrem Markdown-Dokument (.qmd) aus.
+e.  Speichern Sie die R Markdown-Datei (.qmd) an einem für Sie sinnvollen Ort (z.B. Kurs-Ordner) lokal auf Ihrem Computer (unter File - Save As).
+f.  Welche Vor- und Nachteile hat R Markdown(.qmd) gegenüber einem Skript?
+
+<!-- -->
+
+Arbeiten Sie für die nachfolgenden Aufgaben mit der R Markdown-Datei (.qmd) weiter. Es folgt eine kurze Einführung von Vektoren, Assignements, Funktionen und Objekten und jeweils eine Aufgabe, um das Eingeführte selbst anzuwenden.
+
+9.  **Vektoren** erlauben, Funktionen auf mehrere Zahlen (im Vektorobjekt) gleichzeitig anzuwenden. Sie werden mit der Funktion `r c()` erstellt (c kommt von combine). In der Klammer werden die Elemente mit einem Komma getrennt. Zum Beispiel können wir für mehrere Personen gleichzeitig das Einkommen durch die Anzahl Arbeitsstunden (beides pro Woche) teilen:
+
+```{r}
+c(1500, 2000, 500, 1000, 2500) / c(32, 40, 16, 20, 65)
+```
+
+Überlegen Sie sich ein eigenes Beispiel und setzten dieses um.
+
+10. **Assignments**: Falls Sie mehrere Operationen mit den oben eingeführten Vektoren machen möchten, ist es sinnvoll, diese als Objekte zu speichern. Die Objektnamen sind frei wählbar, Sie sollten jedoch darauf achten, dass diese konzis (knapp und eindeutig), sinnvoll und möglichst einheitlich sind und mit einem Buchstaben beginnen. Einige Wörter sind in R bereits "belegt" (siehe `?Reserved`, z.B. mean oder R). Diese sollten Sie nicht überschreiben. Vektoren können mit einem Assignment `<-` einem Objekt zugewiesen werden. Ein Trick: Mit **Alt + -** können Sie diesen Pfeil schnell tippen. Zurück zum Beispiel:
+
+```{r}
+inc <- c(1500, 2000, 500, 1000, 2500)
+wk_h <- c(32, 40, 16, 20, 65)
+inc / wk_h # selbe Operation wie oben
+```
+
+Kopieren Sie Ihr Beispiel und speichern Sie die beiden Vektoren je als Objekt.
+
+11. **Funktionen**: Im ersten Teil des Seminars verwenden wir Funktionen, die bereits jemand für uns verfasst hat (man kann im Gegensatz dazu auch eigene Funktionen schreiben!). Sie haben bereits die Funktion `c()` verwendet. Funktionen ruft man auf, indem man ihren Namen (z.B. `c` oder auch `round`) schreibt und dann in Klammern die Argumente angibt (z.B. `round(x = 2.432, digits = 1)`). Informationen zu den möglichen Argumenten und ihren Ausprägungen erhalten Sie auf der Hilfeseite der jeweiligen Funktion. Tippen Sie dazu ein Fragezeichen gefolgt vom Funktionsnamen in die Konsole und führen Sie diese Zeile aus (`?round`). Für manche Argumente sind default-Werte definiert (z.B. rundet R auf ganze Zahlen, wenn Sie das Argument `digits` nicht angeben). Die Namen der Argumente (z.B. `x`) müssen Sie nicht angeben, wenn Sie ihre Reihenfolge berücksichtigen (die Kurzform ist dann `round(2.432, 1)`). Sie können Funktionen auch ineinander schachteln:
+
+```{r}
+round(mean(inc))
+```
+
+Schauen Sie sich die Hilfeseite von `mean()` an. Fassen Sie in eigenen Worten zusammen, wie Funktionen aufgebaut sind und wozu Argumente verwendet werden.
+
+12. **Objekte**: In R ist alles (z.B. Datensatz, Matrix, Funktion, Vektor) ein Objekt. Es werden allerdings Objektklassen unterschieden. Vielen Fehlermeldungen liegt eine Nicht-Passung von Objektklasse und Funktion zugrunde (z.B. Durchschnitt von Buchstaben berechnen). Deshalb sollten Sie die Objektklasse des Objekts/der Objekte, mit denen Sie arbeiten, stets präsent haben. Sie können sie mit `class(inc)` abfragen. Die wichtigsten Objektklassen sind:
+
+|  |  |
+|----------------------|--------------------------------------------------|
+| numeric/integer | Dezimalzahlen/ganze Zahlen |
+| character | Buchstaben (ggf. mit Zahlen) |
+| factor | Vektor mit numerischen Codes und Labels |
+| logical | TRUE, FALSE, NA |
+| data frame | zweidimensionales Objekt mit Spaltennamen |
+| matrix | zweidimensionales Objekt ohne Spaltennamen |
+| list | "Vektor", der ganze Objekte enthält |
+| lm | Output eines linearen Modells |
+| function | bereits vorhandene/selbstgeschrieben Funktion |
+| NULL | Objekt, das existiert, aber nicht definiert ist -- das verwendet man um Objekte erst mal zu initiieren, die nachher noch gefüllt werden (z.B. `x <- NULL`) |
+
+Wir werden im Verlauf des Seminars noch sehen, wie Sie die Objektklasse eines Objekts ändern können.
+
+Erläutern Sie, wie Funktionen und Objekte zusammenhängen.
+
+13. Geben Sie an, welche Elemente des folgenden Codes Objekte, Assignments und Vektoren sind:
+
+```{r eval = F}
+sqrt(x)
+# help("sqrt") "#" löschen, um Befehl auszuführen
+# ?help "#" löschen, um Befehl auszuführen
+y <- c(1, 3, 4, 5, 6, 7, NA)
+z <- c(7, 8, 10, 11)
+is.logical(TRUE)
+```
+
+14. Generieren Sie aus dem Markdown-Dokument (.qmd) ein PDF (unter Knit - Knit to PDF) und reichen Sie dieses über [OLAT](https://lms.uzh.ch/url/RepositoryEntry/17753735758/CourseNode/79952613784216) ein. Möglicherweise müssen Sie noch eine LaTex distribution installieren -- folgen Sie bitte den Anweisungen in der Konsole.
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Markdown-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?

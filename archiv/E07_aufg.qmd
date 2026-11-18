@@ -1,0 +1,40 @@
+# Woche 7 {.unnumbered}
+
+Datenaufbereitung
+
+## Lernziele
+
+In der zweiten Hälfte des Semesters lernen wir statistische Analysen mit R mit "echten" Daten kennen. Dazu nutzen wir den *European Social Survey* (ESS). Zu Beginn der Arbeit mit einem Datensatz müssen Sie die Daten erkunden: Es gilt die Variablen und ihre Ausprägungen zu verstehen, erste Plausibilitätsprüfungen durchzuführen und Daten für die spätere Analyse aufzubereiten. Diese Techniken erarbeiten Sie sich in diesem Wochenplan und schaffen damit die Grundlage nachfolgend für statistische Analysen mit diesem Datensatz.
+
+Die Lernziele:
+
+-   Sie laden einen CSV-Datensatz.
+-   Sie nennen die Vor- und Nachteile des CSV-Dateiformats.
+-   Sie beschreiben einen geladen Datensatz mittels verschiedener Funktionen und in unterschiedlichem Detailgrad.
+-   Sie wenden erste Techniken zur Plausibilitätsprüfung von Datensätzen an.
+-   Sie wenden erste Techniken zur Datenaufbereitung an.
+
+## Aufgaben
+
+1.  Laden Sie den Datensatz "ess_19_ch.csv" und das ESS-Codebook herunter (siehe OLAT) und speichern Sie die Dateien in Ihrem Arbeitsverzeichnis. Laden Sie anschliessend den Datensatz in RStudio mittels der Funktion 'read.csv()'. Betrachten Sie den Datensatz über die Funktion 'View()' oder indem Sie auf Ihr erstelltes Objekt im Fenster "Environment" klicken. Vergleichen Sie für einzelne Variablen die Informationen im Datensatz mit den Fragen im Codebook!
+
+2.  Öffnen Sie nun die Datei "ess_19_ch.csv" in einem Tabellenkalkulations- oder einem Textbearbeitungsprogramm (z.B. Microsoft Excel, Windows-Editor oder TextEdit auf Mac).
+
+    -   Vergleichen Sie die beiden Varianten (Ihr Dataframe in RStudio und die im Textbearbeitungsprogramm geöffnete Datei), um das Dateiformat "CSV" besser zu verstehen.
+
+    -   Ersetzen Sie anschliessend im Tabellenkalkulations- oder Textbearbeitungsprogramm die Kommas in der "Ess_19_ch.csv" Datei mit Strichpunkten (in Excel funktioniert das Ersetzen mit Strichpunkt nicht, falls Sie trotzdem damit arbeiten, sollten Sie es mit einem anderen Zeichen ausprobieren) und speichern Sie diese neue Version ab. Gehen Sie zurück zu R Studio und versuchen Sie, die neue Version des Datensatzes zu laden. Welchen Parameter müssen Sie anpassen, damit das funktioniert?
+
+    -   Welche Vorteile hat das CSV-Format? Welche Nachteile im Vergleich zu anderen Dateiformaten (Excel, SPSS, ...) sind möglich?
+
+3.  Versuchen Sie mit Funktionen, die Sie bisher kennengelernt haben, den geladenen Datensatz kurz zu beschreiben.
+
+4.  In den Variablen zum Alter und den Bildungsabschlüssen der befragten Personen haben sich einige Fehler eingeschlichen (ignorieren Sie die Variable "edulvlb"). Welche Fehler finden Sie? Und welche Fälle betrifft es (Fallnummer)?
+
+
+*Reflexion (bitte betiteln Sie diesen Abschnitt auch mit "Reflexion" in Ihrem Quarto-Dokument!)*
+
+Bitte reflektieren Sie und halten stichpunktartig fest:
+
+-   Was ist Ihnen klar geworden?
+
+-   Wo sind Sie noch unsicher? Was hat noch nicht geklappt?
