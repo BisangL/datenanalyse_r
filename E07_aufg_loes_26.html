@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Woche 6 – Sozialwissenschaftliche Datenanalyse mit R</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./E08_aufg_loes_26.html" rel="next">
+<link href="./E06_aufg_loes_26.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8575377b15774f46c10fa1d7752ca172.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E07_aufg_loes_26.html">Woche 6</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Sozialwissenschaftliche Datenanalyse mit R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einführung in den Kurs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E02_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E03_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E04_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E05_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 4</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E06_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E07_aufg_loes_26.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Woche 6</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E08_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 7</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E09a_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E09b_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 9</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E10_aufg_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./literatur.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literatur</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lernziele" id="toc-lernziele" class="nav-link active" data-scroll-target="#lernziele">Lernziele</a></li>
+  <li><a href="#aufgaben" id="toc-aufgaben" class="nav-link" data-scroll-target="#aufgaben">Aufgaben</a>
+  <ul class="collapse">
+  <li><a href="#aufgabe-1" id="toc-aufgabe-1" class="nav-link" data-scroll-target="#aufgabe-1">Aufgabe 1</a></li>
+  <li><a href="#aufgabe-2" id="toc-aufgabe-2" class="nav-link" data-scroll-target="#aufgabe-2">Aufgabe 2</a></li>
+  <li><a href="#aufgabe-3" id="toc-aufgabe-3" class="nav-link" data-scroll-target="#aufgabe-3">Aufgabe 3</a></li>
+  <li><a href="#aufgabe-4" id="toc-aufgabe-4" class="nav-link" data-scroll-target="#aufgabe-4">Aufgabe 4</a></li>
+  <li><a href="#aufgabe-5" id="toc-aufgabe-5" class="nav-link" data-scroll-target="#aufgabe-5">Aufgabe 5</a></li>
+  <li><a href="#aufgabe-6" id="toc-aufgabe-6" class="nav-link" data-scroll-target="#aufgabe-6">Aufgabe 6</a></li>
+  </ul></li>
+  <li><a href="#lösungen" id="toc-lösungen" class="nav-link" data-scroll-target="#lösungen">Lösungen</a>
+  <ul class="collapse">
+  <li><a href="#aufgabe-1-1" id="toc-aufgabe-1-1" class="nav-link" data-scroll-target="#aufgabe-1-1">Aufgabe 1</a></li>
+  <li><a href="#aufgabe-2-source-funktion-im-markdown-dokument-master-dokument" id="toc-aufgabe-2-source-funktion-im-markdown-dokument-master-dokument" class="nav-link" data-scroll-target="#aufgabe-2-source-funktion-im-markdown-dokument-master-dokument">Aufgabe 2: <code>source()</code>-Funktion im Markdown-Dokument (“Master-Dokument”)</a></li>
+  <li><a href="#aufgabe-3-1" id="toc-aufgabe-3-1" class="nav-link" data-scroll-target="#aufgabe-3-1">Aufgabe 3</a></li>
+  <li><a href="#aufgabe-4-plausibilisierung-mit-table" id="toc-aufgabe-4-plausibilisierung-mit-table" class="nav-link" data-scroll-target="#aufgabe-4-plausibilisierung-mit-table">Aufgabe 4: Plausibilisierung mit <code>table()</code></a></li>
+  <li><a href="#aufgabe-5-aggregate-funktion" id="toc-aufgabe-5-aggregate-funktion" class="nav-link" data-scroll-target="#aufgabe-5-aggregate-funktion">Aufgabe 5: <code>aggregate()</code>-Funktion</a></li>
+  <li><a href="#aufgabe-6-apply-funktion" id="toc-aufgabe-6-apply-funktion" class="nav-link" data-scroll-target="#aufgabe-6-apply-funktion">Aufgabe 6: <code>apply()</code>-Funktion</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Woche 6</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Arbeiten mit Datensätzen III: Daten prüfen</em></p>
+<section id="lernziele" class="level2">
+<h2 class="anchored" data-anchor-id="lernziele">Lernziele</h2>
+<p>Der Übergang zwischen Datenbereinigung, -plausibilisierung und -analyse ist fliessend: Die ersten Schritte der Plausibilitätsprüfungen und Bereinigungen vermitteln häufig bereits erste Einblicke im Sinne einer explorativen Datenanalysen, die womöglich zu (weiteren) Schritten der Datenaufbereitung veranlassen. In dieser Woche vertiefen wir die Möglichkeit Daten mittels Funktionen, welche die Daten auf unterschiedliche Weise zusammenfassen, zu plausibilisieren. Diese Funktionen ergänzen zum Beispiel die <code>summary()</code>-Funktion, die einen Überblick über fehlende Werte, Verteilungen und Datenarten gibt. Sie können im weiteren Verlauf auch zur Datenanalyse genutzt werden.</p>
+<p>Die Lernziele:</p>
+<ul>
+<li>Sie erklären, wie die Phasen der Bereinigung, Plausibilisierung, Aufbereitung, Exploration und Analyse zusammenhängen.</li>
+<li>Sie fassen Daten mit unterschiedliche Funktionen zusammen, interpretieren die Resultate und schätzen deren Nützlichkeit für die Datenplausibilisieurng ein.</li>
+<li>Sie interpretieren Kreuztabellen.</li>
+<li>Sie interpretieren Chi-Quadrat-Tests.</li>
+<li>Sie binden ein R-Skript in ihr Markdown-Dokument ein, das die Bereinigung und Aufbereitung der Daten beinhaltet, und erklären, in welchen Fällen ein solches Skript sinnvoll ist.</li>
+</ul>
+</section>
+<section id="aufgaben" class="level2">
+<h2 class="anchored" data-anchor-id="aufgaben">Aufgaben</h2>
+<section id="aufgabe-1" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-1">Aufgabe 1</h3>
+<p>Kopieren Sie die Datenbereinigung von Woche 6 (inkl. Einlesen, Filtern und Selektion der Daten) in ein R-Skript. Da Sie die Umkodierungen geprüft haben, entfernen Sie nun bitte die Duplizierungen (“f_variablenname”) und überschreiben Sie stattdessen die Variablen. Speichern Sie dieses R-Skript lokal ab.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span><code>source()</code>-Funktion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Funktion ermöglicht es, aus einem Markdown-Dokument oder R-Skript weitere Skripte aufzurufen und auszuführen. Dies ist nützlich, wenn zum Beispiel die Datenbereinigung die Grundlage für verschiedene Analysen ist. Im Rahmen des Seminars ist es sinnvoll, weil Sie Ihren Datensatz letzte Woche bereinigt haben und dieser Teil für alle weiteren Schritte gleich bleibt. Er muss nicht nochmals im “Forschungsbericht” (hier Aufgabenbearbeitung) erscheinen.</p>
+</div>
+</div>
+</section>
+<section id="aufgabe-2" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-2">Aufgabe 2</h3>
+<p>Verwenden Sie die <code>source()</code>-Funktion (im Markdown-Dokument (qmd-Datei)!).</p>
+</section>
+<section id="aufgabe-3" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-3">Aufgabe 3</h3>
+<p>Testen Sie, ob R-Skript und Markdown-Dokument (qmd-Datei) zusammen funktionieren: Löschen Sie Ihre Environment (und alle Objekte) und laden Sie mittels <code>source()</code> das R-Skript im Markdown-Dokument neu. Nun arbeiten Sie im Markdown-Dokument weiter. Fragen Sie die Struktur des bereinigten und aufbereiteten Datensatzes ab.</p>
+<p>Nun arbeiten Sie bitte im Markdown-Dokument weiter.</p>
+</section>
+<section id="aufgabe-4" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-4">Aufgabe 4</h3>
+<p>Wir schauen uns Plausibilisierungsmöglichkeiten an:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span><code>table()</code>-Funktion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mit der <code>table()</code>-Funktion lassen sich univariate wie auch bivariate Tabellen (Kreuztabellen) erstellen. Sie sind nützlich, um kaetgoriale Daten übersichtlich darzustellen und ihre Verteilungen zu prüfen.</p>
+</div>
+</div>
+<ol type="a">
+<li>Fassen Sie die mittleren drei Kategorien der Variable Internetnutzung zusammen (arbeiten Sie im Bereinigungsskript!).</li>
+<li>Erstellen Sie mittels der Funktion eine Kreuztabelle mit den Variablen Geschlecht und Internetnutzung (absolute Häufigkeiten). Achten Sie auf die korrekte Anordnung der abhängigen und unabhängigen Variablen.</li>
+<li>Ändern Sie eine Kopie des Codes aus der Teilaufgabe b so ab, dass Prozentwerten (relative Häufigkeiten) ausgegeben werden (<code>prop.table()</code>-Funktion).</li>
+<li>Arbeiten Sie mit Kopien der Tabellen der Teilaufgaben b und c weiter. Fügen Sie Randsummen hinzu (<code>addmargins()</code>-Funktion). Welche Varianten sind möglich? Welche sind sinnvoll?</li>
+<li>Was fällt Ihnen inhaltlich auf? Und inwiefern sind die Tabellen zur Plausibilisierung der Daten nützlich? Notieren Sie sich jeweils einen Satz zu den Tabellen der Teilaufgaben b bis d.</li>
+</ol>
+<!-- -->
+</section>
+<section id="aufgabe-5" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-5">Aufgabe 5</h3>
+<p>Eine weitere Funktion, um Daten zusammenzufassen…:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span><code>aggregate()</code>-Funktion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Oftmals ist es zudem hilfreich, Daten auf andere Arten zusammenzufassen (“aggregieren”, <span class="citation" data-cites="Leuzinger2017">(<a href="literatur.html#ref-Leuzinger2017" role="doc-biblioref">Leuzinger 2017, p. 31</a>)</span>). Wir können für eine Variable gruppierte Mittelwerte berechnen, zum Beispiel das durchschnittliche Einkommen nach Geschlecht. Dabei sind mehrere kategoriale Gruppierungsvariablen möglich.</p>
+</div>
+</div>
+<p>Beispiel:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="at">x =</span> d.ch.k<span class="sc">$</span>eduyrs, <span class="at">by =</span> <span class="fu">list</span>(<span class="at">gender =</span> d.ch.k<span class="sc">$</span>gndr, <span class="at">unemployed =</span> d.ch.k<span class="sc">$</span>uemp3m), <span class="at">FUN =</span> median, <span class="at">na.rm =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  gender unemployed  x
+1      m        yes 12
+2      w        yes 11
+3      m         no 10
+4      w         no 10</code></pre>
+</div>
+</div>
+<ol type="a">
+<li>Bitte beschreiben Sie die Argumente der Funktion und ihre Spezifikationen im obenstehenden Beispiel.</li>
+<li>Erklären Sie den Output.</li>
+<li>Ändern Sie nacheinander die ersten drei Argumente. Halten Sie fest, inwiefern sich der Output verändert.</li>
+<li>Überlegen Sie sich ein eigenes interessantes Beispiel. Setzen Sie dieses mittels der <code>aggregate()</code>-Funktion um und beschreiben Sie den Output. Reflektieren Sie, inwiefern dieser zur Plausibilisierung der Daten nützlich ist.</li>
+</ol>
+<!-- -->
+</section>
+<section id="aufgabe-6" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-6">Aufgabe 6</h3>
+<p>…und noch eine Funktion…:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span><code>apply()</code>-Family
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Funktionen der <code>apply()</code>-Familie (<code>apply()</code>, <code>sapply()</code>, <code>tapply()</code>, <code>lapply()</code>) erlauben, eine Funktion (z.B. <code>mean()</code> oder <code>var()</code>) auf ein Objekt anzuwenden. Dabei können Funktionen sowohl über Spalten als auch über Zeilen angewendet werden. Wir schauen uns im Folgenden lediglich die <code>apply()</code>-Funktion an.</p>
+</div>
+</div>
+<ol type="a">
+<li>Sehen Sie sich die Hilfe zu <code>apply()</code> an.</li>
+<li>Erklären Sie das Argument <code>MARGIN</code> (p.s. dasselbe Prinzip gilt auch für das Argument <code>margin</code> der <code>prop.table()</code>-Funktion und der <code>addmargins()</code>-Funktion!).</li>
+<li>Beschreiben Sie die Inputs und Outputs des untenstehenden Beispiels.</li>
+<li>Wenden Sie mit <code>apply()</code>eine andere Funktion auf numerisch kodierte Variablen des Datensatzes an. Interpretieren Sie die Resultate und beschreiben Sie, inwiefern diese die Plausibilisierung des Datensatzes unterstützen.</li>
+<li>Bitte gehen Sie die Aufgaben nochmals durch und halten Sie stichwortartig fest, in welchen Fällen Sie die <code>table()</code>-, <code>aggregate()</code>- und <code>apply()</code>-Funktion verwenden.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d.fac <span class="ot">&lt;-</span> d.ch.k[, <span class="fu">c</span>(<span class="st">"ipbhprpa"</span>, <span class="st">"fineqpy"</span>, <span class="st">"edlvdch"</span>, <span class="st">"mnactic"</span>, <span class="st">"hinctnta"</span>, <span class="st">"polintr"</span>, <span class="st">"trstprl"</span>)]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> d.fac, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> unique, <span class="at">na.rm =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$ipbhprpa
+[1] "somewhat"   "yes"        "little"     "very_much"  "not_at_all"
+[6] "not"        NA          
+
+$fineqpy
+[1] "somewhat_in_favour"  "strongly_in_favour"  "neither_nor"        
+[4] "somewhat_in_against" "strongly_in_against" NA                   
+
+$edlvdch
+ [1] "voc2"        "pu_ma"       "u_ma"        "secI"        "pu_ba"      
+ [6] "app"         "gen"         "hi_voc_tert" "u_ba"        "prim"       
+[11] "bacc_ad"     "ad_voc"      "add_sec"     "hi_voc_app"  "el_voc"     
+[16] "voc"         "bacc"        "doc"         "voc_ad"      "u_m4"       
+[21] "tea"         "u_int"       NA            "inc_prim"   
+
+$mnactic
+ [1] "paid_w"     "edu"        "ret"        "mili"       "sick_disa" 
+ [6] "other"      "house"      NA           "look_job"   "n_look_job"
+
+$hinctnta
+ [1] "dec_5"  "dec_7"  "dec_2"  NA       "dec_6"  "dec_8"  "dec_4"  "dec_10"
+ [9] "dec_1"  "dec_3"  "dec_9" 
+
+$polintr
+[1] "hardly" "quite"  "very"   "not"   
+
+$trstprl
+ [1] "trust6"  "trust7"  "trust9"  "trust10" "trust4"  "trust8"  "trust5" 
+ [8] "trust3"  "trust2"  NA        "trust0"  "trust1" </code></pre>
+</div>
+</div>
+<p><em>Reflexion (bitte betiteln Sie diesen Abschnitt auch mit “Reflexion” in Ihrem Markdown-Dokument!)</em></p>
+<p>Bitte reflektieren Sie und halten stichpunktartig fest:</p>
+<ul>
+<li>Was ist Ihnen klar geworden?</li>
+<li>Wo sind Sie noch unsicher? Was hat noch nicht geklappt?</li>
+</ul>
+</section>
+</section>
+<section id="lösungen" class="level2">
+<h2 class="anchored" data-anchor-id="lösungen">Lösungen</h2>
+<section id="aufgabe-1-1" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-1-1">Aufgabe 1</h3>
+<p>…</p>
+</section>
+<section id="aufgabe-2-source-funktion-im-markdown-dokument-master-dokument" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-2-source-funktion-im-markdown-dokument-master-dokument">Aufgabe 2: <code>source()</code>-Funktion im Markdown-Dokument (“Master-Dokument”)</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="at">file =</span> <span class="st">"C:/Users/BisangL/Documents/c_fuer_quarto/skripts/datenaufbereitung_ess11.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="aufgabe-3-1" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-3-1">Aufgabe 3</h3>
+<p>Struktur des Datensatzes, der im R-Skript eingelesenen und aufbereiteten wird:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d.ch.k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   1384 obs. of  25 variables:
+ $ psu        : int  3223 3949 3271 3740 3787 3894 2981 3276 3711 2958 ...
+ $ stratum    : int  200 202 203 204 200 201 201 200 203 202 ...
+ $ anweight   : num  0.433 0.749 0.514 0.597 0.579 ...
+ $ agea       : int  66 30 47 17 28 44 79 34 52 70 ...
+ $ yrbrn      : int  1957 1993 1976 2006 1995 1979 1944 1989 1971 1953 ...
+ $ ipbhprpa   : Ord.factor w/ 6 levels "very_much"&lt;"yes"&lt;..: 3 2 4 1 2 3 6 2 3 1 ...
+ $ fineqpy    : Ord.factor w/ 5 levels "strongly_in_favour"&lt;..: 2 2 1 3 1 2 1 3 3 1 ...
+ $ edlvdch    : Ord.factor w/ 23 levels "inc_prim"&lt;"prim"&lt;..: 13 18 22 3 17 12 12 12 12 5 ...
+ $ eduyrs     : int  9 13 16 10 15 12 11 9 9 8 ...
+ $ mnactic    : Factor w/ 9 levels "paid_w","edu",..: 1 1 1 2 1 1 6 1 1 6 ...
+ $ wkhtot     : int  13 60 48 NA 20 42 42 45 10 42 ...
+ $ hinctnta   : Ord.factor w/ 10 levels "dec_1"&lt;"dec_2"&lt;..: 5 7 2 NA 6 6 8 7 5 4 ...
+ $ polintr    : Ord.factor w/ 4 levels "very"&lt;"quite"&lt;..: 3 2 1 3 3 3 1 3 3 2 ...
+ $ trstprl    : Ord.factor w/ 11 levels "trust0"&lt;"trust1"&lt;..: 7 8 10 8 11 5 7 9 6 7 ...
+ $ ppltrst    : int  6 6 8 3 5 6 6 9 4 8 ...
+ $ stfdem     : Ord.factor w/ 11 levels "sat_0"&lt;"sat_1"&lt;..: 7 8 11 9 11 7 8 9 8 7 ...
+ $ gndr       : Factor w/ 2 levels "m","w": 1 1 1 2 2 1 2 2 2 2 ...
+ $ uemp3m     : Factor w/ 2 levels "yes","no": 1 2 2 2 2 2 2 2 2 2 ...
+ $ pdwrk      : Factor w/ 2 levels "no","yes": 2 2 2 1 2 2 1 2 2 1 ...
+ $ netusoft   : Ord.factor w/ 5 levels "never"&lt;"occ"&lt;..: 5 5 5 5 5 5 5 5 5 5 ...
+ $ nwspol     : int  90 120 60 90 15 10 120 5 40 60 ...
+ $ fineqpy_zf : Ord.factor w/ 3 levels "in_favour"&lt;"neither_nor"&lt;..: 1 1 1 2 1 1 1 2 2 1 ...
+ $ edlvdch_zf : Ord.factor w/ 4 levels "prim"&lt;"sek1"&lt;..: 3 4 4 2 4 3 3 3 3 3 ...
+ $ stfdem_num : int  6 7 10 8 10 6 7 8 7 6 ...
+ $ netusoft_zf: Ord.factor w/ 3 levels "never"&lt;"sometimes"&lt;..: 3 3 3 3 3 3 3 3 3 3 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="aufgabe-4-plausibilisierung-mit-table" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-4-plausibilisierung-mit-table">Aufgabe 4: Plausibilisierung mit <code>table()</code></h3>
+<section id="a.-netusoft-kategorien-im-bereinigungsskript-zusammenfassen" class="level4">
+<h4 class="anchored" data-anchor-id="a.-netusoft-kategorien-im-bereinigungsskript-zusammenfassen">a. netusoft-Kategorien im <em>Bereinigungsskript</em> zusammenfassen</h4>
+<p>Wir arbeiten mit den Originalvariable. Wir könnten auch die bereits als Faktor definierte Variable zusammenfassen, allerdings ist die Fehleranfälligkeit geringer, je weniger Umkodierungsschritte wir vornehmen. Falls <code>netusoft_f</code> für die Analyse nicht gebraucht wird, können wir diese Variable löschen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d.ch.k<span class="sc">$</span>netusoft[d.ch.k<span class="sc">$</span>netusoft <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>)] <span class="ot">&lt;-</span>  <span class="cn">NA</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>d.ch.k<span class="sc">$</span>netusoft_f <span class="ot">&lt;-</span> <span class="fu">factor</span>(d.ch.k<span class="sc">$</span>netusoft, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"occ"</span>, <span class="st">"few_times"</span>, <span class="st">"most_days"</span>, <span class="st">"every_day"</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ordered =</span> T)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>d.ch.k<span class="sc">$</span>netusoft_zf <span class="ot">&lt;-</span> <span class="fu">factor</span>(d.ch.k<span class="sc">$</span>netusoft, </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"sometimes"</span>, <span class="st">"sometimes"</span>, <span class="st">"sometimes"</span>, <span class="st">"every_day"</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ordered =</span> T)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d.ch.k<span class="sc">$</span>netusoft_zf, d.ch.k<span class="sc">$</span>netusoft_f) <span class="co"># einmalig zur Kontrolle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="b.-kreuztabelle" class="level4">
+<h4 class="anchored" data-anchor-id="b.-kreuztabelle">b. Kreuztabelle</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">table</span>(d.ch.k<span class="sc">$</span>gndr, d.ch.k<span class="sc">$</span>netusoft_zf, <span class="at">useNA =</span> <span class="st">"always"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+       never sometimes everyday &lt;NA&gt;
+  m       27        96      574    0
+  w       38       109      540    0
+  &lt;NA&gt;     0         0        0    0</code></pre>
+</div>
+</div>
+</section>
+<section id="c.-relative-häufigkeiten-spalten--und-zeilenprozente" class="level4">
+<h4 class="anchored" data-anchor-id="c.-relative-häufigkeiten-spalten--und-zeilenprozente">c.&nbsp;relative Häufigkeiten: Spalten- und Zeilenprozente</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(t, <span class="at">margin =</span> <span class="dv">1</span>) <span class="co"># Var. 1: 100% über Spalten</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+            never  sometimes   everyday       &lt;NA&gt;
+  m    0.03873745 0.13773314 0.82352941 0.00000000
+  w    0.05531295 0.15866084 0.78602620 0.00000000
+  &lt;NA&gt;                                            </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(t, <span class="at">margin =</span> <span class="dv">2</span>) <span class="co"># Var. 2: 100% über Zeilen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+           never sometimes  everyday &lt;NA&gt;
+  m    0.4153846 0.4682927 0.5152603     
+  w    0.5846154 0.5317073 0.4847397     
+  &lt;NA&gt; 0.0000000 0.0000000 0.0000000     </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(t) <span class="co"># Var. 3: 100% über die ganze Tabelle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+            never  sometimes   everyday       &lt;NA&gt;
+  m    0.01950867 0.06936416 0.41473988 0.00000000
+  w    0.02745665 0.07875723 0.39017341 0.00000000
+  &lt;NA&gt; 0.00000000 0.00000000 0.00000000 0.00000000</code></pre>
+</div>
+</div>
+</section>
+<section id="d.-randsummen" class="level4">
+<h4 class="anchored" data-anchor-id="d.-randsummen">d.&nbsp;Randsummen</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(t, <span class="at">margin =</span> <span class="dv">1</span>) <span class="co"># Var. 1: Zeilensummen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+       never sometimes everyday &lt;NA&gt;
+  m       27        96      574    0
+  w       38       109      540    0
+  &lt;NA&gt;     0         0        0    0
+  Sum     65       205     1114    0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(t, <span class="at">margin =</span> <span class="dv">2</span>) <span class="co"># Var. 2: Spaltensummen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+       never sometimes everyday &lt;NA&gt; Sum
+  m       27        96      574    0 697
+  w       38       109      540    0 687
+  &lt;NA&gt;     0         0        0    0   0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(t) <span class="co"># Var. 3: Zeilen- und Spaltensummen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+       never sometimes everyday &lt;NA&gt;  Sum
+  m       27        96      574    0  697
+  w       38       109      540    0  687
+  &lt;NA&gt;     0         0        0    0    0
+  Sum     65       205     1114    0 1384</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(<span class="fu">prop.table</span>(t, <span class="at">margin =</span> <span class="dv">1</span>), <span class="at">margin =</span> <span class="dv">1</span>) <span class="co"># Var. 4: nicht sinnvoll - weshalb?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+            never  sometimes   everyday       &lt;NA&gt;
+  m    0.03873745 0.13773314 0.82352941 0.00000000
+  w    0.05531295 0.15866084 0.78602620 0.00000000
+  &lt;NA&gt;                                            
+  Sum                                             </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(<span class="fu">prop.table</span>(t, <span class="at">margin =</span> <span class="dv">1</span>), <span class="at">margin =</span> <span class="dv">2</span>) <span class="co"># Var. 5: sinnvoll, aber fördert keine Erkenntnisse, da per Definition 1 - weshalb?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+            never  sometimes   everyday       &lt;NA&gt;        Sum
+  m    0.03873745 0.13773314 0.82352941 0.00000000 1.00000000
+  w    0.05531295 0.15866084 0.78602620 0.00000000 1.00000000
+  &lt;NA&gt;                                                       </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># weitere Kombinationen sind nach dem gleichen Muster möglich...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Zeilen- und Spaltensumme sind für absolute Häufigkeitstabellen nützlich, insbesondere auch, wenn Zusammenhangsmasse berechnet werden sollen. Bei relativen Häufigkeitstabellen ist die Summe über die Zeilen- respektive Spalten per Definition eins. Die andere Summe darf nicht berechnet werden, weil sie die Anteilswerte auf unterschiedliche Gesamtheiten beziehen.</p>
+</section>
+<section id="e.-interpretation-und-nutzen-für-plausibilisierung" class="level4">
+<h4 class="anchored" data-anchor-id="e.-interpretation-und-nutzen-für-plausibilisierung">e. Interpretation und Nutzen für Plausibilisierung</h4>
+<p>Aufg. b: Anhand der absoluten Häufigkeitstabelle sind die Werte schwer interpretierbar. Wir könnten allenfalls prüfen, ob alle Fälle enthalten sind, ansonsten ist die Kombination Geschlecht und Internetnutzung nicht zur Plausibilisierung einer der beiden Variablen geeignet. Aufg. c: Die Variante 1 der relativen Häufigkeitstabelle lässt erkennen, dass rund 82% der Männer in der Stichprobe jeden Tag das Internet nutzen, während bei den Frauen dies nur rund 78% angegeben haben. Variante 2 zeigt, dass rund 58% der Befragten, die angegeben haben, das Internet nie zu nutzen, weiblich sind, und rund 42% männlich. Für die Plausibilisierung ist diese Tabelle aus oben genannten Gründen ebenfalls nicht geeignet. In Variante 3 sehen wir zum Beispiel, dass rund 2% der Befragten männlich sind und angegeben haben, das Internet nie zu nutzen. Aufg. d: Insbesondere Variante 3 ist nützlich, um Chi-Quadrat zu berechnen. Zur Plausibilisierung trägt die Tabelle aus oben genannten Gründen jedoch nicht bei.</p>
+</section>
+</section>
+<section id="aufgabe-5-aggregate-funktion" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-5-aggregate-funktion">Aufgabe 5: <code>aggregate()</code>-Funktion</h3>
+<section id="a.-argumente-und-ihre-spezifikation-beschreiben" class="level4">
+<h4 class="anchored" data-anchor-id="a.-argumente-und-ihre-spezifikation-beschreiben">a. Argumente und ihre Spezifikation beschreiben</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  gender unemployed  x
+1      m        yes 12
+2      w        yes 11
+3      m         no 10
+4      w         no 10</code></pre>
+</div>
+</div>
+</section>
+<section id="b.-interpretation" class="level4">
+<h4 class="anchored" data-anchor-id="b.-interpretation">b. Interpretation</h4>
+<p>Die Tabelle zeigt den Median der Bildungsjahre für die Gruppen Frauen arbeitslos, Frauen nicht arbeitslos, Männer arbeitslos und Männer nicht arbeitslos.</p>
+</section>
+<section id="c.-argumente-verändern" class="level4">
+<h4 class="anchored" data-anchor-id="c.-argumente-verändern">c.&nbsp;Argumente verändern</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="at">x =</span> d.ch.k<span class="sc">$</span>age, <span class="at">by =</span> <span class="fu">list</span>(<span class="at">gender =</span> d.ch.k<span class="sc">$</span>gndr, <span class="at">unemployed =</span> d.ch.k<span class="sc">$</span>uemp3m), <span class="at">FUN =</span> median, <span class="at">na.rm =</span> T) <span class="co"># andere Variable, für die der Median berechnet wird, hier Alter</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  gender unemployed  x
+1      m        yes 44
+2      w        yes 46
+3      m         no 50
+4      w         no 52</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Befragte, die Arbeitslosigkeit erlebt haben, scheinen jünger zu sein (der Median der Altersvariable liegt tiefer), insebsondere Frauen</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="at">x =</span> d.ch.k<span class="sc">$</span>age, <span class="at">by =</span> <span class="fu">list</span>(d.ch.k<span class="sc">$</span>polintr), <span class="at">FUN =</span> median, <span class="at">na.rm =</span> T) <span class="co"># andere Gruppierungsvariablen, hier Pol. interesse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Group.1  x
+1    very 59
+2   quite 51
+3  hardly 44
+4     not 42</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Befragte, die ein grösseres Interesse an Politik angeben, sind älter (der Median der Altersvariable liegt höher)</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="at">x =</span> d.ch.k<span class="sc">$</span>age, <span class="at">by =</span> <span class="fu">list</span>(d.ch.k<span class="sc">$</span>polintr), <span class="at">FUN =</span> mean, <span class="at">na.rm =</span> T) <span class="co"># Funktion ändern, hier mean</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Group.1        x
+1    very 56.65882
+2   quite 52.29134
+3  hardly 45.36170
+4     not 45.56548</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># im SChnitt sind Befragte, die ein grosses Interesse an Politik angeben, rund 10 Jahre älter als Befragte, deren Interesse klein ist</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="d.-eigenes-beispiel" class="level4">
+<h4 class="anchored" data-anchor-id="d.-eigenes-beispiel">d.&nbsp;Eigenes Beispiel</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(<span class="at">x =</span> d.ch.k<span class="sc">$</span>agea, <span class="at">by =</span> <span class="fu">list</span>(d.ch.k<span class="sc">$</span>uemp3m), <span class="at">FUN =</span> median, <span class="at">na.rm =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Der Median des Alters liegt in den beiden Gruppen rund sechs Jahre auseinander. Für Befragte, die angeben, in den letzen drei Monaten arbeitslos gewesen zu sein, liegt der Median bei 45. In der anderen Gruppen liegt er bei 51. Das heisst, die Hälfte der Befragten, die arbeitslos waren, sind jünger als 45, und die Hälte der Befragten, die nicht arbeitslos waren, sind jünger als 51. Achtung: Es sind keine Aussagen für die Grundgesamtheit möglich! Diese Aussagen sind für die Plausibilisierung nicht sinnvoll.</p>
+</section>
+</section>
+<section id="aufgabe-6-apply-funktion" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-6-apply-funktion">Aufgabe 6: <code>apply()</code>-Funktion</h3>
+<section id="a." class="level4">
+<h4 class="anchored" data-anchor-id="a.">a.</h4>
+<p>…</p>
+</section>
+<section id="b.-margin" class="level4">
+<h4 class="anchored" data-anchor-id="b.-margin">b. MARGIN</h4>
+<p>Das MARGIN-Argument gibt an, ob eine Funktion über Zeilen (1) oder Spalten (2) oder beides (c(1, 2)) angewendet werden soll.</p>
+</section>
+<section id="c.-output-des-beispiels" class="level4">
+<h4 class="anchored" data-anchor-id="c.-output-des-beispiels">c.&nbsp;Output des Beispiels</h4>
+<p>Die Funktion gibt die Ausprägungen der im Datensatz genannten Variablen an. Konkret geht R die Spalten durch und führt Ausprägungen einmalig (<code>unique()</code>) auf. Diese Anwendung kann zur Plausibilisierung sinnvoll sein, insbesondere wenn in den Rohdaten bereits Faktoren enthalten sind.</p>
+</section>
+<section id="d.-eigenes-beispiel-1" class="level4">
+<h4 class="anchored" data-anchor-id="d.-eigenes-beispiel-1">d.&nbsp;Eigenes Beispiel</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>d.num <span class="ot">&lt;-</span> d.ch.k[, <span class="fu">c</span>(<span class="st">"agea"</span>, <span class="st">"yrbrn"</span>, <span class="st">"eduyrs"</span>, <span class="st">"wkhtot"</span>)]</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> d.num, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> mean, <span class="at">na.rm =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      agea      yrbrn     eduyrs     wkhtot 
+  50.11448 2006.97724   11.84989   36.13218 </code></pre>
+</div>
+</div>
+<p>Befragte sind im Durchschnitt rund 50 Jahre alt, im Jahr 2006 geboren, haben rund 12 Bildungsjahre angegeben und arbeiten rund 36 Stunden pro Woche (Achtung: MARGIN = 1 kein Sinn, weil der Durchschnitt von “Äpfel und Birnen” für jeden Fall berechnet würde!). Diese Werte scheinen plausibel und die Funktion könn<strong>t</strong>e zur Plausibilisierung herangezogen werden, allerdings sind diese Angaben bereits im <code>summary</code>-Output ersichtlich und die Anwendung somit überflüssig.</p>
+</section>
+<section id="e.-funktionen-zur-plausibilisierung" class="level4">
+<h4 class="anchored" data-anchor-id="e.-funktionen-zur-plausibilisierung">e. Funktionen zur Plausibilisierung</h4>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span><code>table()</code>-, <code>aggregate()</code>- und <code>apply()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Funktion</th>
+<th>allg. Anwendung</th>
+<th>Verwendung für Plausibilisierung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>table()</code></td>
+<td>zur Auszählungen kategorialer Variablen, sowohl univariat als auch bivariat</td>
+<td>Verteilungen kategorialer Variablen und Inkonsistenzen prüfen</td>
+</tr>
+<tr class="even">
+<td><code>aggregate()</code></td>
+<td>zur Berechnung gruppierter Masszahlen</td>
+<td>Masszahlen mit zu erwartenden Werte abgleichen</td>
+</tr>
+<tr class="odd">
+<td><code>apply()</code></td>
+<td>zur Anwendung einer Funktion über Spalten, Zeilen oder Objekte</td>
+<td>Masszahlen mit zu erwartenden Werte abgleichen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Leuzinger2017" class="csl-entry" role="listitem">
+Leuzinger, Sebastian. 2017. <em>An introduction to r</em>. IDEA.
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./E06_aufg_loes_26.html" class="pagination-link" aria-label="Woche 5">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Woche 5</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./E08_aufg_loes_26.html" class="pagination-link" aria-label="Woche 7">
+        <span class="nav-page-text">Woche 7</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

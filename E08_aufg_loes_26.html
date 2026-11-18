@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Woche 7 – Sozialwissenschaftliche Datenanalyse mit R</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./E09a_aufg_loes_26.html" rel="next">
+<link href="./E07_aufg_loes_26.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8575377b15774f46c10fa1d7752ca172.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E08_aufg_loes_26.html">Woche 7</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Sozialwissenschaftliche Datenanalyse mit R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einführung in den Kurs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E02_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E03_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E04_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E05_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 4</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E06_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E07_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 6</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E08_aufg_loes_26.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Woche 7</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E09a_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E09b_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 9</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E10_aufg_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Woche 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./literatur.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literatur</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lernziele" id="toc-lernziele" class="nav-link active" data-scroll-target="#lernziele">Lernziele</a></li>
+  <li><a href="#aufgaben" id="toc-aufgaben" class="nav-link" data-scroll-target="#aufgaben">Aufgaben</a>
+  <ul class="collapse">
+  <li><a href="#aufgabe-1-hist-funktion" id="toc-aufgabe-1-hist-funktion" class="nav-link" data-scroll-target="#aufgabe-1-hist-funktion">Aufgabe 1: <code>hist()</code>-Funktion</a></li>
+  <li><a href="#aufgabe-2-plot-funktion-univariat" id="toc-aufgabe-2-plot-funktion-univariat" class="nav-link" data-scroll-target="#aufgabe-2-plot-funktion-univariat">Aufgabe 2: <code>plot()</code>-Funktion (univariat)</a></li>
+  <li><a href="#aufgabe-3-plot-funktion-bivariat" id="toc-aufgabe-3-plot-funktion-bivariat" class="nav-link" data-scroll-target="#aufgabe-3-plot-funktion-bivariat">Aufgabe 3*: <code>plot()</code>-Funktion (bivariat)</a></li>
+  <li><a href="#aufgabe-4-elemente-hinzufügen" id="toc-aufgabe-4-elemente-hinzufügen" class="nav-link" data-scroll-target="#aufgabe-4-elemente-hinzufügen">Aufgabe 4: Elemente hinzufügen</a></li>
+  <li><a href="#aufgabe-5-chi-quadrat" id="toc-aufgabe-5-chi-quadrat" class="nav-link" data-scroll-target="#aufgabe-5-chi-quadrat">Aufgabe 5*: Chi-Quadrat</a></li>
+  </ul></li>
+  <li><a href="#lösungen" id="toc-lösungen" class="nav-link" data-scroll-target="#lösungen">Lösungen</a>
+  <ul class="collapse">
+  <li><a href="#aufgabe-1-histogramm" id="toc-aufgabe-1-histogramm" class="nav-link" data-scroll-target="#aufgabe-1-histogramm">Aufgabe 1: Histogramm</a></li>
+  <li><a href="#aufgabe-2-plotfunktion-univariat" id="toc-aufgabe-2-plotfunktion-univariat" class="nav-link" data-scroll-target="#aufgabe-2-plotfunktion-univariat">Aufgabe 2: <code>plot()</code>–Funktion (univariat)</a></li>
+  <li><a href="#aufgabe-3-plotfunktion-bivariat" id="toc-aufgabe-3-plotfunktion-bivariat" class="nav-link" data-scroll-target="#aufgabe-3-plotfunktion-bivariat">Aufgabe 3: <code>plot()</code>–Funktion (bivariat)</a></li>
+  <li><a href="#aufgabe-4-elemente-hinzufügen-1" id="toc-aufgabe-4-elemente-hinzufügen-1" class="nav-link" data-scroll-target="#aufgabe-4-elemente-hinzufügen-1">Aufgabe 4: Elemente hinzufügen</a></li>
+  <li><a href="#aufgabe-5-chi-quadrat-wert" id="toc-aufgabe-5-chi-quadrat-wert" class="nav-link" data-scroll-target="#aufgabe-5-chi-quadrat-wert">Aufgabe 5: Chi-Quadrat-Wert</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Woche 7</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Arbeiten mit Datensätzen III: Daten erkunden</em></p>
+<section id="lernziele" class="level2">
+<h2 class="anchored" data-anchor-id="lernziele">Lernziele</h2>
+<p>Nachdem wir in der letzten Woche drei Möglichkeiten zur Zusammenfassung von Daten angeschaut haben, probieren Sie in dieser Woche (einfache) grafische Techniken aus. Wir haben letzte Woche festgestellt, dass viele Outputs bereits über die Datenplausibilisierung hinausgehen. Wie bereits angedeutet ist der Übergang fliessend. Auch Grafiken können sowohl zur Plausibilisierung der Daten als auch zur Analyse von Daten eingesetzt werden. Wie die Grafik unter “Einführung in den Kurs” aufzeigt, liegen dazwischen immer wieder Datenaufbereitungsschritte, in denen Sie zum Beispiel Kategorien zusammenfassen.</p>
+<p>Die Lernziele:</p>
+<ul>
+<li>Sie erläutern, welche Grafiken für welche Datenarten sinnvoll und nützlich sind.</li>
+<li>Sie stellen zwei Variablen in einem Streudiagramm dar und interpretieren die Darstellung.</li>
+<li>Sie stellen metrische Verteilungen in Histogrammen dar.</li>
+<li>Sie nennen erste Techniken, wie Grafiken erweitert und kombiniert werden können.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Daten visualisieren
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Grafiken sollen Information übertragen.</li>
+<li>Machen Sie sich mit Ihren Daten gut vertraut, bevor Sie Grafiken veröffentlichen (oder als Studierende für Seminar- oder Abschlussarbeiten verwenden).</li>
+<li>Sie müssen sich darüber im Klaren sein, was die Grafik darstellen soll. Tipp: Mit Peers besprechen!</li>
+</ul>
+<p><span style="color:darkgreen;"><strong>Do’s:</strong></span></p>
+<p>Daten</p>
+<ul>
+<li>Ziel der Grafik bestimmt die Transformation und/oder Aggregation der dargestellten Daten</li>
+<li>Datenart(en) passt zu Grafiktyp</li>
+</ul>
+<p>Einbindung im Text</p>
+<ul>
+<li>Grafik in einen Kontext einbinden, der ihre Relevanz aufzeigt. Sie soll möglichst auf der Seite platziert sein, auf der sie beschrieben wird.</li>
+<li>Grafik so gross, dass Information lesbar ist, aber nicht grösser (ggf. auch abhängig vom Layout; Rahmen nur verwenden, wenn sie helfen die Grafik abzugrenzen)</li>
+</ul>
+<p>Inhalt</p>
+<ul>
+<li>Inhalt und Style/Layout passen zusammen</li>
+<li>Grafik an den Inhalt anpassen</li>
+</ul>
+<p>Konsistenz</p>
+<ul>
+<li>Design und Skalierung (nach Möglichkeit) in allen Plots konsistent</li>
+</ul>
+<p>Standard und einfach</p>
+<ul>
+<li>Grafik möglichst einfach halten, das heisst keine “unnötige” Details und möglichst kurze Labels. Informationen nicht wiederholen. Zusätzliche Informationen in weiterführenden Tabellen oder Information auf mehrere Plots mit gleichen Skalen aufteilen.</li>
+<li>Grafik an die Empfäner:innen anpassen, d.h. überlegen Sie, wie diese die Grafik wahrnehmen und verstehen könnten. Wählen Sie für die Empfänger:innen gewohnte Darstellungsformen.</li>
+<li>Orientieren Sie sich an Standards, um Fehler zu vermeiden und Daten für ein breites Publikum verständlich darzustellen.</li>
+<li>numerisch kodierte Daten:
+<ul>
+<li>Limits und Zwischenlinien sinnvoll und möglichst einfach wählen</li>
+<li>Null einschliessen, ausser es gibt einen wichtigen Grund, der dagegen spricht</li>
+<li>Gerundete Werte verwenden (Minimum bis Maximum ist oft nicht geeignet!)</li>
+<li>Achsenbeschriftung muss alle Werte abdecken</li>
+</ul></li>
+</ul>
+<p>Kongruenz</p>
+<ul>
+<li>Beschriftung, Titel und Text stimmen überein. Die Beschriftung soll die Grafik vollständig erklären (inklusive Quellenangabe!). Es ist möglich auf eine ausführliche Beschreibung im Text zu verweisen.</li>
+</ul>
+<p>Beschriftung</p>
+<ul>
+<li>Legende und Achsenbeschriftungen sind ein Muss</li>
+</ul>
+<p>Ordnung</p>
+<ul>
+<li>Abhängige Variablen auf der y-Achse, unabhängige Variablen auf der x-Achse darstellen</li>
+<li>kategorial kodierte Daten: Kategoiren begründet ordnen (Inhalt, Alphabet, Gruppierung, Anzahl…)</li>
+</ul>
+<p>Farben</p>
+<ul>
+<li>Farben mit Bedacht einsetzen</li>
+<li>Farbgebung für Farbenblinde optimieren</li>
+<li>Kulturelle Bedeutungen berücksichtigen</li>
+<li>Unterscheidbarkeit prüfen (Print/Bildschirm bedenken!)</li>
+</ul>
+<p><span style="color:red;"><strong>Don’ts:</strong></span></p>
+<p>Eindrücke <em>nicht</em> verzerren</p>
+<ul>
+<li>Gruppierung von Daten können Eindrücke verändern</li>
+<li>Irreführende Skalen können Eindrücke verzerren</li>
+<li>Balkenbreite bei Histogrammen führen zu ganz unterschiedlichen Eindrücken entstehen</li>
+<li>Proportionen von Flächen müssen stimmen (wenn das relevant ist)</li>
+<li>Seitenverhältnisse beeinflussen die Wahrnehmung!</li>
+<li>Keine 3d-Grafik für 2d-Daten</li>
+<li>Nicht zu viele Daten auf zu engem Raum (Print/Bildschirm bedenken!)</li>
+</ul>
+<p>Quelle: <span class="citation" data-cites="Chen2008">(<a href="literatur.html#ref-Chen2008" role="doc-biblioref">Chen et al. 2008</a>)</span></p>
+</div>
+</div>
+</section>
+<section id="aufgaben" class="level2">
+<h2 class="anchored" data-anchor-id="aufgaben">Aufgaben</h2>
+<section id="aufgabe-1-hist-funktion" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-1-hist-funktion">Aufgabe 1: <code>hist()</code>-Funktion</h3>
+<p>Die <code>hist()</code>-Funktion haben Sie in Woche 4, 5 und 6 “en passant” schon kennengelernt. Stellen Sie eine Variable mittels Histogramm dar.</p>
+<!-- -->
+<ol type="a">
+<li>Treffen Sie eine sinnvolle Wahl und begründen Sie diese.</li>
+<li>Sehen Sie sich die Hilfe zu <code>hist()</code> an. Beschreiben Sie die Argumente <code>x</code>, <code>breaks</code>, <code>col</code>, <code>main</code>, <code>xlim</code>, <code>ylim</code>, <code>xlab</code> und <code>ylab</code>.</li>
+<li>Experimentieren Sie mit diesen Argumenten und legen Sie abschliessend sinnvolle Werte fest. Begründen Sie Ihre Wahl.</li>
+<li>Interpretieren Sie in wenigen Sätzen die Grafik inhaltlich.</li>
+</ol>
+</section>
+<section id="aufgabe-2-plot-funktion-univariat" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-2-plot-funktion-univariat">Aufgabe 2: <code>plot()</code>-Funktion (univariat)</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span><code>plot()</code>-Funktion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Diese Funktion ist zur Visualisierung von Daten vielseitig einsetzbar. Wie die <code>table()</code>-Funktion kann sie sowohl univariat als auch bivariat verwendet werden. Zudem können sowohl kategorial als auch numerisch kodierte Daten als Input eingehen. R passt den Grafiktyp automatisch an (solange Sie die Daten im Verlauf der Datenbereinigung korrekt kodiert haben!).</p>
+</div>
+</div>
+<!-- -->
+<p>a. Sehen Sie sich die Hilfe zu <code>plot()</code> (vom R Base Package) an und beschreiben Sie die Argumente <code>x</code>, <code>y</code>, <code>main</code>, <code>xlab</code>, <code>ylab</code> und <code>col</code>.</p>
+<p>b. Stellen Sie die Variable von Aufgabe 1 mit der <code>plot()</code>-Funktion dar. Spezifizieren Sie die vorher nachgeschlagenen Argumente sinnvoll. Was zeigt die Grafik? Weshalb ist die Darstellung von Aufgabe 1 sinnvoller?</p>
+<p>c. Stellen Sie eine kategorial kodierte Variable mit der <code>plot()</code>-Funktion dar. Inwiefern ist diese Grafik sinnvoll? Was zeigt sie inhaltlich?</p>
+</section>
+<section id="aufgabe-3-plot-funktion-bivariat" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-3-plot-funktion-bivariat">Aufgabe 3*: <code>plot()</code>-Funktion (bivariat)</h3>
+<p>Nutzten Sie Funktion <code>plot()</code>, um eine bivariate Verteilung darzustellen.</p>
+<!-- -->
+<ol type="a">
+<li>Welche Kombinationen von Datenarten lassen sich sinnvoll darstellen? Probieren Sie aus und begründen Sie.</li>
+<li>Interpretieren Sie die <em>sinnvollen</em> Outputs und benennen Sie den Grafiktyp.</li>
+<li>Überlegen Sie sich Optionen für die Darstellung derjenigen Kombinationen, die mittels <code>plot()</code>-Funktion noch nicht zufriedenstellend dargestellt werden können.</li>
+</ol>
+</section>
+<section id="aufgabe-4-elemente-hinzufügen" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-4-elemente-hinzufügen">Aufgabe 4: Elemente hinzufügen</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Grafische Elemente hinzufügen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Diese Funktionen sind nützlich, wenn Sie einem Plot entweder quasi einen weiteren Plot oder ein grafisches Element hinzufügen wollen. Mittels dem Argument <code>add = T</code> können zwei Verteilungen in einem Plot dargestellt werden (siehe Woche 4, Aufgabe 1, Exkurs zu grafischen Darstellungen ovn Verteilungen). Dabei ist zu berücksichtigen, dass die Farben nicht deckend sein dürfen, weil sonst ein Teil der ersten Grafik verdeckt wird. Solche Kombinationen sind mit dem <code>ggplot2</code>-Package einfacher zu erstellen und wir vertiefen an dieser Stelle deshalb lediglich, wie Sie einzelne grafische Elemente einer bestehenden Grafik hinzufügen. Linien können Sie mittels der Funktion <code>abline()</code>, Punkte mittels der Funktion <code>points()</code> hinzufügen.</p>
+</div>
+</div>
+<!-- -->
+<p>a. Schauen Sie sich die entsprechende Hilfeseite an und fügen Sie Ihrem Streudiagramm von Aufgabe 4 eine Linie hinzu, die ungefähr den Zusammenhang der beiden Variablen widerspiegelt.</p>
+<p>*In einem nächsten Schritt überlegen Sie sich und halten schriftlich fest, wie Sie die exakte Linie zeichnen können.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Legende gehört dazu!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In der Legende einer Grafik wird angegeben, was die Farben (oder auch Formen, Grössen…) repräsentieren. In Base R können Legenden mit der Funktion <code>legend()</code> initiiert werden.</p>
+</div>
+</div>
+<p>b. Schauen Sie sich die Hilfeseite der Funktion an, fügen Sie untenstehender Grafik eine Legende hinzu und beschriften Sie die Achsen. Macht die Grafik Sinn? Können Sie die Variablen sinnvoller darstellen?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d.ch.k<span class="sc">$</span>agea, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">800</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>new.color <span class="ot">&lt;-</span> <span class="fu">rgb</span>(<span class="at">red =</span> <span class="dv">0</span>, <span class="at">green =</span> <span class="dv">255</span>, <span class="at">blue =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="dv">255</span><span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">maxColorValue =</span> <span class="dv">255</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d.ch.k<span class="sc">$</span>eduyrs, <span class="at">col =</span> new.color, <span class="at">add =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="aufgabe-5-chi-quadrat" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-5-chi-quadrat">Aufgabe 5*: Chi-Quadrat</h3>
+<p>Repetieren Sie die Inhalte der Statistik-Vorlesung zum Thema Chi-Quadrat-Test. Falls Sie nicht teilnehmen, lesen Sie bitte das Kapitel 4.25 in “Statistik für die Soziologie” (<a href="https://www.utb.de/doi/abs/10.36198/9783838559766-67-113">hier über die ZHB frei zugänglich</a>). Berechnen Sie den Chi-Quadrat-Wert mit der <code>chisq.test()</code>-Funktion für die Variablen aus Aufgabe 4, Woche 6 (Sie brauchen die absolute Häufigkeitstabelle!). Interpretieren Sie das Resultat.</p>
+<p><em>Reflexion (bitte betiteln Sie diesen Abschnitt auch mit “Reflexion” in Ihrem Markdown-Dokument!)</em></p>
+<p>Bitte reflektieren Sie und halten stichpunktartig fest:</p>
+<ul>
+<li>Was ist Ihnen klar geworden?</li>
+<li>Wo sind Sie noch unsicher? Was hat noch nicht geklappt?</li>
+</ul>
+</section>
+</section>
+<section id="lösungen" class="level2">
+<h2 class="anchored" data-anchor-id="lösungen">Lösungen</h2>
+<section id="aufgabe-1-histogramm" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-1-histogramm">Aufgabe 1: Histogramm</h3>
+<!-- -->
+<ol type="a">
+<li>Wahl für Histogramm:</li>
+</ol>
+<p>Metrische Variablen können mittels Histogramm dargestellt werden, das sind agea, yrbrn, eduyrs oder wkhtot</p>
+<ol start="2" type="a">
+<li>Argumente…</li>
+</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Inhalt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x</code></td>
+<td>Vektor (numerisch)</td>
+</tr>
+<tr class="even">
+<td><code>breaks</code></td>
+<td>Anzahl Balken (oder auch Funktion/Algorithmus zu deren Berechnung – in der Praxis jedoch selten benutzt)</td>
+</tr>
+<tr class="odd">
+<td><code>col</code></td>
+<td>Balkenfarbe (Füllung)</td>
+</tr>
+<tr class="even">
+<td><code>main</code></td>
+<td>Titel des Diagramms</td>
+</tr>
+<tr class="odd">
+<td><code>xlim/ylim</code></td>
+<td>Spannweite der x-, resp. y-Achse</td>
+</tr>
+<tr class="even">
+<td><code>xlab/ylab</code></td>
+<td>Beschriftung der x-, resp. y-Achse</td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="a">
+<li>Spezifikation dieser Argumente…</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d.ch.k<span class="sc">$</span>wkhtot, <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">main =</span> <span class="st">"Verteilung der Wochenarbeitsstunden"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="at">xlab =</span> <span class="st">"Wochenarbeitsstunden"</span>, <span class="at">ylab =</span> <span class="st">"Häufigkeit"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Interpretation…</li>
+</ol>
+<p>Die meisten Befragten arbeiten etwas mehr als 40 Stunden pro Woche. 42 Stunden pro Woche entspricht bei einem Beschäftigungsgrad von 100% der üblichen Arbeitszeit in der Schweiz. Vergleichsweise viele arbeiten bis zu rund 50 Arbeitsstunden pro Woche. Dies erklärt sich dadurch, dass Überstunden auch erfasst wurden. Das Maximum liegt bei 90 Stunden pro Woche, was bei einer Sieben-Tage-Woche rund 13 Stunden pro Tag und bei einer Fünf-Tage-Woche 18 Stunden pro Tag wären. Ersteres ist auf Dauerunrealistisch, kann vielleicht in äussersten Ausnahmefällen. Letzteres ist unplausibel. Unter 40 Stunden pro Woche finden sich Teilzeitpensen. Interessant wäre, sich das Histogramm nach Geschlecht anzuschauen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)) </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d.ch.k<span class="sc">$</span>wkhtot[d.ch.k<span class="sc">$</span>gndr <span class="sc">==</span> <span class="st">"w"</span>], <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">main =</span> <span class="st">"Verteilung Frauen"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">300</span>), <span class="at">xlab =</span> <span class="st">"Wochenarbeitsstunden"</span>, <span class="at">ylab =</span> <span class="st">"Häufigkeit"</span>, <span class="at">yaxt =</span> <span class="st">"n"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">300</span>, <span class="dv">50</span>), <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">300</span>, <span class="dv">50</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d.ch.k<span class="sc">$</span>wkhtot[d.ch.k<span class="sc">$</span>gndr <span class="sc">==</span> <span class="st">"m"</span>], <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">main =</span> <span class="st">"Verteilung Männer"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">300</span>), <span class="at">xlab =</span> <span class="st">"Wochenarbeitsstunden"</span>, <span class="at">ylab =</span> <span class="st">"Häufigkeit"</span>, <span class="at">yaxt =</span> <span class="st">"n"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">300</span>, <span class="dv">50</span>), <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">300</span>, <span class="dv">50</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="aufgabe-2-plotfunktion-univariat" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-2-plotfunktion-univariat">Aufgabe 2: <code>plot()</code>–Funktion (univariat)</h3>
+<ol type="a">
+<li>Argumente…</li>
+</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Inhalt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x</code>, <code>y</code></td>
+<td>Koordinaten oder R-Objekt, das plot()-Funktion bearbeiten kann</td>
+</tr>
+<tr class="even">
+<td><code>main</code></td>
+<td>Titel des Diagramms</td>
+</tr>
+<tr class="odd">
+<td><code>xlab</code>, <code>ylab</code></td>
+<td>Beschriftung der x-, resp. y-Achse</td>
+</tr>
+<tr class="even">
+<td><code>col</code></td>
+<td>Farbe</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="a">
+<li>Variable von Aufgabe 1</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="fu">jitter</span>(d.ch.k<span class="sc">$</span>wkhtot), <span class="at">main =</span> <span class="st">"Verteilung der Wochenarbeitsstunden"</span>, <span class="at">xlab =</span> <span class="st">"Fall"</span>, <span class="at">ylab =</span> <span class="st">"Wochenarbeitsstunden"</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Die Grafik ist nichts sagend und sinnlos, weil man nichts erkennen kann - auch, wenn man die Punkte mit der <code>jitter()</code>-Funktion versetzt zeichnet.</p>
+<ol start="3" type="a">
+<li>Kategoriale Variable</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d.ch.k<span class="sc">$</span>gndr, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">800</span>), <span class="at">main =</span> <span class="st">"Verteilung des Geschlechts"</span>, <span class="at">ylab =</span> <span class="st">"Anzahl"</span>, <span class="at">xlab =</span> <span class="st">"Geschlecht"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Die Grafik ist korrekt, aber inhaltlich nicht sinnvoll, weil aufgrund des Stichprobenplans das Geschlecht in der Stichprobe ungefähr gleich verteilt sein soll. Sie zeigt, wie viele der Befragten männlich, respektive weiblich angegeben haben.</p>
+</section>
+<section id="aufgabe-3-plotfunktion-bivariat" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-3-plotfunktion-bivariat">Aufgabe 3: <code>plot()</code>–Funktion (bivariat)</h3>
+<!-- -->
+<ol type="a">
+<li>Kombinationen von Datenarten und c.&nbsp;noch nicht sinnvolle Plots sinnvoller konstruieren: kat und num: Boxplot</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d.ch.k<span class="sc">$</span>gndr, d.ch.k<span class="sc">$</span>wkhtot, <span class="at">ylab =</span> <span class="st">"Arbeitswochenstunden"</span>, <span class="at">xlab =</span> <span class="st">"Geschlecht"</span>) <span class="co"># sinnvoll</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color:red;"><strong>num und kat: (Streudiagramm gegen Index – nicht sinnvoll!)</strong></span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d.ch.k<span class="sc">$</span>wkhtot, d.ch.k<span class="sc">$</span>gndr) <span class="co"># num und kat -&gt; nicht sinnvoll</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color:darkgreen;"><strong>num und num: Streudiagramm</strong></span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">jitter</span>(d.ch.k<span class="sc">$</span>agea), <span class="fu">jitter</span>(d.ch.k<span class="sc">$</span>eduyrs)) <span class="co"># mit diesen Variablen jedoch nicht wirklich hilfreich</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color:red;"><strong>kat und kat: (“Mosaic” – nicht sinnvoll!)</strong></span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d.ch.k<span class="sc">$</span>gndr, d.ch.k<span class="sc">$</span>edlvdch_zf) <span class="co"># vergleicht Anteile Bildungslevel nach Geschlecht, allerdings gestapelte Balkendiagramme und deshalb schwer lesbar </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --&gt; lesbarer wird's so:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="at">x =</span> d.ch.k<span class="sc">$</span>gndr, <span class="at">y =</span> d.ch.k<span class="sc">$</span>edlvdch_zf), <span class="dv">2</span>), </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">beside =</span> T, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Anteilswert"</span>, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Bildungsniveau"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Frauen"</span>, <span class="st">"Männer"</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">15</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="fl">1.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Korrekte Kodierung der Variablen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die plot()-Funktion generiert je nach Kodierung der Variable unterschiedliche Plotarten. Deshalb ist es essentiell, dass die Variablen im Aufbereitungsskript korrekt kodiert sind!</p>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Interpretation der sinnvollen Outputs:</li>
+</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Plot</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Boxplot</td>
+<td>Die meisten befragten Männer arbeiten um die 40 Stunden pro Wochen, während Frauen eher in Teilzeitpensen arbeiten.</td>
+</tr>
+<tr class="even">
+<td>(Streudiagramm)</td>
+<td>Bildet die Anzahl Wochenarbeitsstunden in Abhängigkeit der Bildungsjahre ab. Anhand des Plots ist keine Tendenz erkennbar.</td>
+</tr>
+<tr class="odd">
+<td>Balkendiagramm (angepasst)</td>
+<td>Es sind mehr Männer in der Stichprobe als Frauen, die angegeben haben, ein Sek1-Abschluss zu haben. Betreffend Primar- und Tertiär-Abschluss sind es mehr Frauen. Diese Daten sind allerdings schwierig zu interpretieren, weil wir nur die Stichprobe anschauen.</td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="a">
+<li>Siehe a.</li>
+</ol>
+<!-- -->
+</section>
+<section id="aufgabe-4-elemente-hinzufügen-1" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-4-elemente-hinzufügen-1">Aufgabe 4: Elemente hinzufügen</h3>
+<ol type="a">
+<li>Linien zu Streudiagramm</li>
+</ol>
+<p>…es ist nicht wirklich ein Zusammenhang erkennbar, auch wenn wir uns nur Befragte mit tertiärer Bildung anschauen…</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">jitter</span>(d.ch.k<span class="sc">$</span>agea)[d.ch.k<span class="sc">$</span>edlvdch_zf <span class="sc">==</span> <span class="st">"tert"</span>], <span class="fu">jitter</span>(d.ch.k<span class="sc">$</span>eduyrs)[d.ch.k<span class="sc">$</span>edlvdch_zf <span class="sc">==</span> <span class="st">"tert"</span>], </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40</span>))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">15</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(eduyrs <span class="sc">~</span> agea, <span class="at">data =</span> d.ch.k[d.ch.k<span class="sc">$</span>edlvdch_zf <span class="sc">==</span> <span class="st">"tert"</span>, ]), <span class="at">col =</span> <span class="st">"blue"</span>) <span class="co"># Regressionslinie dazu, die macht hier kein Sinn, weil kein Zusammenhang vorliegt, wie wir bereits festgestellt haben...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- -->
+<ol start="2" type="a">
+<li>Legende zu Histogramm</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d.ch.k<span class="sc">$</span>agea, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">800</span>), <span class="at">xlab =</span> <span class="st">"Jahre"</span>, <span class="at">ylab =</span> <span class="st">"Häufigkeit"</span>, <span class="at">main =</span> <span class="st">"Bildungs- und Altersjahre"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>new.color <span class="ot">&lt;-</span> <span class="fu">rgb</span>(<span class="at">red =</span> <span class="dv">0</span>, <span class="at">green =</span> <span class="dv">255</span>, <span class="at">blue =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="dv">255</span><span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">maxColorValue =</span> <span class="dv">255</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d.ch.k<span class="sc">$</span>eduyrs, <span class="at">col =</span> new.color, <span class="at">add =</span> T)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Bildungsjahre"</span>, <span class="st">"Altersjahre"</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(new.color, <span class="st">"blue"</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">15</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="fl">1.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Es handelt sich um ein Histogramm der Bildungs- und Altersjahre gemeinsam in einem Plot. Auf der x-Achse sind zwar in beiden Fällen Jahre abgebildet, die Grafik macht aber nichts sichtbar. Sinnvoller ist es, sich zwei Gruppen einer der beiden Variablen anzuschauen, oder den Zusammenhang der beiden Variablen bivariat darzustellen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">jitter</span>(d.ch.k<span class="sc">$</span>agea), <span class="fu">jitter</span>(d.ch.k<span class="sc">$</span>eduyrs)) <span class="co"># man sieht nicht so viel... ausser vielleicht, dass ältere Personen weniger und "mittelalte" Befragte am meisten Bildungsjahre angeben...</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(eduyrs <span class="sc">~</span> agea, <span class="at">data =</span> d.ch.k), <span class="at">col =</span> <span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="E08_aufg_loes_26_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="aufgabe-5-chi-quadrat-wert" class="level3">
+<h3 class="anchored" data-anchor-id="aufgabe-5-chi-quadrat-wert">Aufgabe 5: Chi-Quadrat-Wert</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(d.ch.k<span class="sc">$</span>gndr, d.ch.k<span class="sc">$</span>netusoft_zf)) <span class="co"># es scheint in den Stichprobendaten kein Zusammenhang zu bestehen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  table(d.ch.k$gndr, d.ch.k$netusoft_zf)
+X-squared = 3.6516, df = 2, p-value = 0.1611</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># wir schauen uns das noch in der Grundgesamtheit an...</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'survey' wurde unter R Version 4.6.2 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: grid</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: survival</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attache Paket: 'survey'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Das folgende Objekt ist maskiert 'package:graphics':
+
+    dotchart</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>svy.ch <span class="ot">&lt;-</span> <span class="fu">svydesign</span>(<span class="at">ids =</span> <span class="sc">~</span>psu, <span class="at">strata =</span> <span class="sc">~</span>stratum, <span class="at">weights =</span> <span class="sc">~</span>anweight,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> d.ch.k)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">svychisq</span>(<span class="at">formula =</span> <span class="sc">~</span> gndr <span class="sc">+</span> netusoft_zf, <span class="at">design =</span> svy.ch)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's X^2: Rao &amp; Scott adjustment
+
+data:  svychisq(formula = ~gndr + netusoft_zf, design = svy.ch)
+F = 1.9621, ndf = 1.9986, ddf = 2752.0922, p-value = 0.1408</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># auch in der Grundgesamtheit besteht kein Zusammenhang</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Chen2008" class="csl-entry" role="listitem">
+Chen, Chun-houh., Wolfgang. Hardle, and Antony. Unwin. 2008. <em><a href="https://doi.org/10.1007/978-3-540-33037-0">Handbook of data visualization</a></em>. 1st ed. 2008. Springer Berlin Heidelberg.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./E07_aufg_loes_26.html" class="pagination-link" aria-label="Woche 6">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Woche 6</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./E09a_aufg_loes_26.html" class="pagination-link" aria-label="Woche 8">
+        <span class="nav-page-text">Woche 8</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
