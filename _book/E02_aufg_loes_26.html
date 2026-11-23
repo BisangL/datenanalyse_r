@@ -352,8 +352,17 @@ div.csl-indent {
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'swirl' wurde unter R Version 4.6.1 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>
-| Hi! Type swirl() when you are ready to begin.</code></pre>
+| Hi! I see that you have some variables saved in your workspace. To keep
+| things running smoothly, I recommend you clean up before starting swirl.
+
+| Type ls() to see a list of the variables in your workspace. Then, type
+| rm(list=ls()) to clear your workspace.
+
+| Type swirl() when you are ready to begin.</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -390,7 +399,7 @@ div.csl-indent {
 <li><strong>Vektoren</strong> erlauben, Funktionen auf mehrere Zahlen (im Vektorobjekt) gleichzeitig anzuwenden. Sie werden mit der Funktion erstellt (c kommt von combine). In der Klammer werden die Elemente mit einem Komma getrennt. Zum Beispiel können wir für mehrere Personen gleichzeitig das Einkommen durch die Anzahl Arbeitsstunden (beides pro Woche) teilen:</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2500</span>) <span class="sc">/</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">40</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">65</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2500</span>) <span class="sc">/</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">40</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">65</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 46.87500 50.00000 31.25000 50.00000 38.46154</code></pre>
 </div>
@@ -400,9 +409,9 @@ div.csl-indent {
 <li><strong>Assignments</strong>: Falls Sie mehrere Operationen mit den oben eingeführten Vektoren machen möchten, ist es sinnvoll, diese als Objekte zu speichern. Die Objektnamen sind frei wählbar, Sie sollten jedoch darauf achten, dass diese konzis (knapp und eindeutig), sinnvoll und möglichst einheitlich sind und mit einem Buchstaben beginnen. Einige Wörter sind in R bereits “belegt” (siehe <code>?Reserved</code>, z.B. mean oder R). Diese sollten Sie nicht überschreiben. Vektoren können mit einem Assignment <code>&lt;-</code> einem Objekt zugewiesen werden. Ein Trick: Mit <strong>Alt + -</strong> können Sie diesen Pfeil schnell tippen. Zurück zum Beispiel:</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>inc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2500</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>wk_h <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">40</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">65</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>inc <span class="sc">/</span> wk_h <span class="co"># selbe Operation wie oben</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>inc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2500</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>wk_h <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">40</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">65</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>inc <span class="sc">/</span> wk_h <span class="co"># selbe Operation wie oben</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 46.87500 50.00000 31.25000 50.00000 38.46154</code></pre>
 </div>
@@ -412,7 +421,7 @@ div.csl-indent {
 <li><strong>Funktionen</strong>: Im ersten Teil des Seminars verwenden wir Funktionen, die bereits jemand für uns verfasst hat (man kann im Gegensatz dazu auch eigene Funktionen schreiben!). Sie haben bereits die Funktion <code>c()</code> verwendet. Funktionen ruft man auf, indem man ihren Namen (z.B. <code>c</code> oder auch <code>round</code>) schreibt und dann in Klammern die Argumente angibt (z.B. <code>round(x = 2.432, digits = 1)</code>). Informationen zu den möglichen Argumenten und ihren Ausprägungen erhalten Sie auf der Hilfeseite der jeweiligen Funktion. Tippen Sie dazu ein Fragezeichen gefolgt vom Funktionsnamen in die Konsole und führen Sie diese Zeile aus (<code>?round</code>). Für manche Argumente sind default-Werte definiert (z.B. rundet R auf ganze Zahlen, wenn Sie das Argument <code>digits</code> nicht angeben). Die Namen der Argumente (z.B. <code>x</code>) müssen Sie nicht angeben, wenn Sie ihre Reihenfolge berücksichtigen (die Kurzform ist dann <code>round(2.432, 1)</code>). Sie können Funktionen auch ineinander schachteln:</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(inc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(inc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1500</code></pre>
 </div>
@@ -475,12 +484,12 @@ div.csl-indent {
 <li>Geben Sie an, welche Elemente des folgenden Codes Objekte, Assignments und Vektoren sind:</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(x)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># help("sqrt") "#" löschen, um Befehl auszuführen</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?help "#" löschen, um Befehl auszuführen</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="cn">NA</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">11</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(<span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(x)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># help("sqrt") "#" löschen, um Befehl auszuführen</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?help "#" löschen, um Befehl auszuführen</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="cn">NA</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">11</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(<span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="14" type="1">
 <li>Generieren Sie aus dem Markdown-Dokument (.qmd) ein PDF (unter Knit - Knit to PDF) und reichen Sie dieses über <a href="https://lms.uzh.ch/url/RepositoryEntry/17753735758/CourseNode/79952613784216">OLAT</a> ein. Möglicherweise müssen Sie noch eine LaTex distribution installieren – folgen Sie bitte den Anweisungen in der Konsole.</li>
@@ -520,14 +529,14 @@ div.csl-indent {
 <li><code>swirl()</code> installieren und laden (in der Konsole – nicht im Markdown Dokument!)</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("swirl")</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(swirl)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">swirl</span>()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bye</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("swirl")</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(swirl)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">swirl</span>()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bye</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Worin besteht das Problem bei folgendem Code?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"swirl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"swirl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Beim Knitten des Dokumentes führt dieser Code unter Umständen zu einer Fehlermeldung. Hierfür gibt es verschiedene Lösungswege. Sie könnten die genauen Details eines CRAN Mirrors angeben (siehe Fehlermeldung beim Rendern), damit das Paket bei jedem Rendern erneut installiert wird. Das ist jedoch nicht nötig, eine einmalige Installation reicht aus. Eine andere Möglichkeit ist im entsprechenden Kopf des Code Chunks die Option <code>eval = FLALSE</code> zu ergänzen. Am einfachsten ist es jedoch, die Funktion als Kommentar zu setzen (wie Sie es im Code Chunk oben sehen).</p>
 <ol start="4" type="1">
@@ -554,7 +563,7 @@ div.csl-indent {
 <li>R als Taschenrechner</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="co"># funktioniert sowohl in Konsole als auch im Skript</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="co"># funktioniert sowohl in Konsole als auch im Skript</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
@@ -606,7 +615,7 @@ div.csl-indent {
 <li>Eigenes Beispiel: <em>Je grösser die Füsse, desto mehr Lohn – kein Witz! Dies ist keine Kausalität, sondern hängt damit zusammen, dass Männer, die tendenziell grössere Füsse haben, immer noch mehr verdienen als Frauen, deren Füssen in der Tendenz kleiner sind.</em></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">c</span>(<span class="dv">35</span>, <span class="dv">39</span>, <span class="dv">46</span>, <span class="dv">37</span>, <span class="dv">45</span>, <span class="dv">44</span>, <span class="dv">15</span>), <span class="fu">c</span>(<span class="dv">3500</span>, <span class="dv">3750</span>, <span class="dv">8000</span>, <span class="dv">4000</span>, <span class="dv">12000</span>, <span class="dv">10000</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">c</span>(<span class="dv">35</span>, <span class="dv">39</span>, <span class="dv">46</span>, <span class="dv">37</span>, <span class="dv">45</span>, <span class="dv">44</span>, <span class="dv">15</span>), <span class="fu">c</span>(<span class="dv">3500</span>, <span class="dv">3750</span>, <span class="dv">8000</span>, <span class="dv">4000</span>, <span class="dv">12000</span>, <span class="dv">10000</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8358855</code></pre>
 </div>
@@ -616,9 +625,9 @@ div.csl-indent {
 <li>…als Vektoren im Workspace gespeichert…</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>schuhgr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">35</span>, <span class="dv">39</span>, <span class="dv">46</span>, <span class="dv">37</span>, <span class="dv">45</span>, <span class="dv">44</span>, <span class="dv">15</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>lohn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3500</span>, <span class="dv">3750</span>, <span class="dv">8000</span>, <span class="dv">4000</span>, <span class="dv">12000</span>, <span class="dv">10000</span>, <span class="dv">10</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(schuhgr, lohn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>schuhgr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">35</span>, <span class="dv">39</span>, <span class="dv">46</span>, <span class="dv">37</span>, <span class="dv">45</span>, <span class="dv">44</span>, <span class="dv">15</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>lohn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3500</span>, <span class="dv">3750</span>, <span class="dv">8000</span>, <span class="dv">4000</span>, <span class="dv">12000</span>, <span class="dv">10000</span>, <span class="dv">10</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(schuhgr, lohn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8358855</code></pre>
 </div>
@@ -629,18 +638,18 @@ div.csl-indent {
 </ol>
 <p>Funktionen sind Objekte. Outputs von Funktionen können jedoch auch als Objekten im Workspace gespeichert werden, z.B.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>d_inc <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(inc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d_inc <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(inc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="12" type="1">
 <li>Geben Sie an, welche Elemente des folgenden Codes Objekte, Assignments und Vektoren sind:</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(inc) <span class="co"># inc ist ein Objekt (x ist nicht definiert), sqrt ist eine Funktion</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># help("sqrt") "#" löschen, um Funktion auszuführen</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?help "#" löschen, um Funktion auszuführen</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="cn">NA</span>) <span class="co"># y Objekt, &lt;- Assignment, c(...) Vektor</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">11</span>) <span class="co"># z Objekt, &lt;- Assignment, c(...) Vektor</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(<span class="cn">TRUE</span>) <span class="co"># is.logical ist eine Funktion, für das Argument x ist TRUE eingesetzt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(inc) <span class="co"># inc ist ein Objekt (x ist nicht definiert), sqrt ist eine Funktion</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># help("sqrt") "#" löschen, um Funktion auszuführen</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?help "#" löschen, um Funktion auszuführen</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="cn">NA</span>) <span class="co"># y Objekt, &lt;- Assignment, c(...) Vektor</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">11</span>) <span class="co"># z Objekt, &lt;- Assignment, c(...) Vektor</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(<span class="cn">TRUE</span>) <span class="co"># is.logical ist eine Funktion, für das Argument x ist TRUE eingesetzt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="13" type="1">
 <li>…</li>
