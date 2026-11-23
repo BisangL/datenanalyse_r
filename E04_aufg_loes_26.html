@@ -246,7 +246,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./E10_aufg_26.html" class="sidebar-item-text sidebar-link">
+  <a href="./E10_aufg_loes_26.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Woche 10</span></a>
   </div>
 </li>
@@ -322,7 +322,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>v.bild[<span class="dv">5</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Greifen wir auf das fünfte Element eines Vektors von 11 bis 20 zu, ist das “Ergebnis” 15:</p>
@@ -337,8 +337,8 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d.pol[<span class="dv">1</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  v.id    v.pol  v.strom v.wasser   v.eink v.wohn pol.r
-1    1 2.591288 6830.748 289.5104 85579.24  stadt     3</code></pre>
+<pre><code>  v.id    v.pol  v.strom v.wasser  v.eink v.wohn pol.r
+1    1 6.858178 8761.065  274.411 83096.5  stadt     7</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d.pol[, <span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -351,7 +351,7 @@ window.Quarto = {
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d.pol[<span class="dv">1</span>, <span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.591288</code></pre>
+<pre><code>[1] 6.858178</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>d.pol[<span class="dv">2</span>, <span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -359,40 +359,40 @@ window.Quarto = {
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d.pol[<span class="dv">1</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  v.id    v.pol  v.strom v.wasser   v.eink v.wohn pol.r
-1    1 2.591288 6830.748 289.5104 85579.24  stadt     3</code></pre>
+<pre><code>  v.id    v.pol  v.strom v.wasser  v.eink v.wohn pol.r
+1    1 6.858178 8761.065  274.411 83096.5  stadt     7</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>d.pol[, <span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 289.5104 267.7266 285.1117 249.5373 289.7462 303.0357 341.9245 332.4102
-  [9] 333.5768 326.2947 294.6191 271.9337 292.7651 339.2466 242.4955 307.9087
- [17] 283.5574 272.7406 361.2260 298.8887 308.3169 307.6428 280.9019 304.6902
- [25] 328.3091 315.6924 278.4356 297.9132 262.5050 305.4673 320.7103 254.3800
- [33] 256.0944 298.7197 320.1140 297.9366 265.6097 312.6073 235.7835 288.3935
- [41] 247.5022 300.7679 245.5060 253.3770 269.3280 289.4166 276.3005 348.1288
- [49] 275.8847 270.2102 298.5848 307.0897 270.1148 328.0799 335.7584 313.2827
- [57] 317.6097 297.9542 309.3387 246.2719 297.5664 320.6313 307.4911 244.4471
- [65] 232.9657 309.1014 331.5806 268.5160 244.2716 333.6999 296.9435 375.3112
- [73] 292.9214 228.6941 280.4212 268.3304 289.2223 250.8843 318.2317 282.0096
- [81] 306.2452 236.3790 250.0655 329.6414 276.3671 346.5049 300.3164 266.5742
- [89] 317.6931 252.4217 230.6831 308.0009 265.5971 323.4520 258.4937 324.0471
- [97] 348.1424 286.1459 257.2104 321.8948</code></pre>
+<pre><code>  [1] 274.4110 241.7775 326.3211 310.3763 314.2702 350.3932 268.0168 264.0539
+  [9] 297.6999 317.6168 351.1525 267.1193 280.0993 295.3505 337.4947 307.6708
+ [17] 311.5468 298.3147 263.9045 298.5639 304.8696 254.1487 312.4287 285.0872
+ [25] 282.0921 327.0039 380.2324 305.0408 277.2102 301.7297 249.9961 345.0464
+ [33] 282.5349 308.5545 343.4980 271.7065 274.5763 305.0346 310.3005 318.5596
+ [41] 314.2663 239.1883 317.1940 280.4001 299.0461 256.4735 211.1221 240.9777
+ [49] 307.4078 281.9977 355.3474 309.7499 294.9521 329.9515 333.9452 269.3651
+ [57] 314.6559 289.1085 327.7963 266.4120 328.4214 314.8545 348.0398 278.2805
+ [65] 258.5743 325.6877 310.7701 252.9769 288.6835 241.7988 309.3720 268.3209
+ [73] 309.0893 296.0106 242.7612 256.7288 285.3593 287.6175 307.5064 245.1934
+ [81] 265.7846 310.5781 308.5539 289.6226 305.3891 262.1530 281.2171 298.7774
+ [89] 306.9437 302.7676 328.5141 281.7794 310.2943 308.8692 355.6892 263.0794
+ [97] 286.3673 310.0192 279.2104 296.4635</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>d.pol[, <span class="st">"v.pol"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 2.591288 4.338226 5.625060 9.727732 2.230485 6.388446 2.006966 8.987440
-  [9] 2.278337 5.274561 7.746454 3.487849 7.014430 7.131685 4.556461 3.352438
- [17] 8.404759 2.780594 8.879430 8.470080 2.135414 8.788276 5.047273 5.200960
- [25] 9.111960 9.857176 9.189177 5.013027 9.877083 8.980136 4.831315 8.166313
- [33] 9.575182 1.066119 5.311673 5.508239 7.849662 1.179214 9.429340 2.889865
- [41] 2.090454 3.984579 6.439427 1.414838 5.635381 9.910418 2.643730 4.062163
- [49] 2.030075 6.738180 4.123116 1.202756 6.857495 9.471123 6.743930 9.951950
- [57] 5.501780 1.706144 9.648612 1.160858 2.138216 2.327522 9.075787 8.899835
- [65] 3.288512 1.658194 5.771819 7.851290 1.386866 3.719650 7.670967 6.183573
- [73] 5.481540 8.042065 5.733928 9.654049 2.570589 3.928244 3.711433 7.577123
- [81] 5.583701 2.386443 5.734446 5.212020 8.985045 2.792617 5.711526 8.380892
- [89] 5.230723 5.555302 2.473455 8.874139 7.515090 1.605501 8.091928 5.226234
- [97] 9.025748 6.158753 7.478924 8.506180</code></pre>
+<pre><code>  [1] 6.858178 8.781292 6.410277 7.157494 7.063976 8.014528 6.054806 2.724811
+  [9] 8.446916 4.149847 7.266608 1.436702 4.737500 8.641045 5.497199 1.106565
+ [17] 6.299009 7.275636 7.665345 5.211392 4.799965 7.541168 1.927661 9.773234
+ [25] 1.772751 4.477595 2.437056 1.027699 8.696698 6.795284 6.957827 8.284727
+ [33] 5.401432 1.739023 3.916496 1.289937 1.230082 5.408281 7.823461 4.612027
+ [41] 2.167003 2.511177 3.658053 3.474678 2.306367 1.412265 7.106262 3.323616
+ [49] 8.588742 5.921951 7.397460 8.312474 7.816915 6.263460 2.936669 3.428010
+ [57] 8.190175 7.714066 2.861060 1.797547 3.770794 8.601440 8.587986 3.151170
+ [65] 8.993218 1.411476 5.892800 2.202390 7.483351 5.837272 4.477763 5.775017
+ [73] 7.528131 6.684681 4.394614 4.141754 8.557511 8.702226 1.471985 6.327729
+ [81] 1.752227 6.224701 1.195534 4.897016 3.691892 4.772345 1.782425 5.437449
+ [89] 2.946041 1.023687 9.411699 5.873850 7.517595 5.199641 9.583392 1.881900
+ [97] 3.470339 2.304589 3.648037 6.212490</code></pre>
 </div>
 </div>
 <p>Die Logik können wir erweitern und mit bereits bekannten Funktionen kombinieren:</p>
@@ -400,16 +400,16 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d.pol[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    v.strom v.wasser
-1  6830.748 289.5104
-2  7151.606 267.7266
-3  6687.450 285.1117
-4  7691.692 249.5373
-5  7250.189 289.7462
-6  7309.544 303.0357
-7  6359.515 341.9245
-8  6523.897 332.4102
-9  7162.275 333.5768
-10 8546.701 326.2947</code></pre>
+1  8761.065 274.4110
+2  7616.661 241.7775
+3  6888.447 326.3211
+4  7819.990 310.3763
+5  7680.017 314.2702
+6  6728.655 350.3932
+7  8058.631 268.0168
+8  8176.877 264.0539
+9  7422.392 297.6999
+10 7790.929 317.6168</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d.pol)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -417,9 +417,9 @@ window.Quarto = {
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>d.pol[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>), <span class="fu">c</span>(<span class="st">"v.pol"</span>, <span class="st">"v.eink"</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     v.pol   v.eink
-4 9.727732 97768.45
-5 2.230485 81742.86</code></pre>
+<pre><code>     v.pol    v.eink
+4 7.157494  78218.58
+5 7.063976 103978.87</code></pre>
 </div>
 </div>
 <ol start="2" type="i">
@@ -428,18 +428,18 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(d.pol<span class="sc">$</span>v.wasser)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 292.041</code></pre>
+<pre><code>[1] 295.6328</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(d.pol<span class="sc">$</span>v.wasser, d.pol<span class="sc">$</span>v.strom)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.06985526</code></pre>
+<pre><code>[1] -0.0597614</code></pre>
 </div>
 </div>
 <p>Die beiden Möglichkeiten können wir kombinieren, um zum Beispiel den fünften Fall der Wasser-Variable im data-frame-Objekt d.pol aufzurufen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>d.pol<span class="sc">$</span>v.wasser[<span class="dv">5</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 289.7462</code></pre>
+<pre><code>[1] 314.2702</code></pre>
 </div>
 </div>
 <p>Eine Positionsangabe ist ausreichend, weil die Variable eindimensional ist.</p>
@@ -450,19 +450,19 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Welche Fälle stammen aus dem Tessin?</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(d.mig<span class="sc">$</span>v.reg <span class="sc">==</span> <span class="st">"Tessin"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15 27 39 95</code></pre>
+<pre><code>[1]  13  66  74 100</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Welche Fälle stammen aus dem Tessin und sind Frauen?</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(d.mig<span class="sc">$</span>v.reg <span class="sc">==</span> <span class="st">"Tessin"</span> <span class="sc">&amp;</span> d.mig<span class="sc">$</span>v.geschl <span class="sc">==</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 27 39</code></pre>
+<pre><code>[1]  66  74 100</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Welche Fälle im Datensatz sind Frauen oder Ausländer*innen</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># und aus der tiefsten Einkommensklasse...</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>((d.mig<span class="sc">$</span>v.geschl <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> d.mig<span class="sc">$</span>v.ch <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">&amp;</span></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>        d.mig<span class="sc">$</span>v.eink.kl <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 69 70 89 99</code></pre>
+<pre><code>[1] 34 60 87</code></pre>
 </div>
 </div>
 <p>R gibt die Position im Vektor aus. Damit wir den Inhalt an dieser Position sehen, müssen wir indizieren. Dadurch ist es möglich einen Teildatensatz mit Personen, die ein überdurchschnittliches Einkommen aufweisen, zu erstellen (<em>subsetting</em>):</p>
@@ -513,7 +513,7 @@ window.Quarto = {
 <span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v.<span class="fl">1.</span>m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  158.4   168.2   177.0   176.4   181.6   196.0 </code></pre>
+  164.1   173.5   177.7   176.9   181.3   189.1 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(v.<span class="fl">1.</span>m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -527,7 +527,7 @@ window.Quarto = {
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v.<span class="fl">1.</span>w)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  155.5   161.1   167.7   166.4   169.2   176.7 </code></pre>
+  148.2   160.6   164.6   163.9   168.9   174.3 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(v.<span class="fl">1.</span>w)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -545,7 +545,7 @@ window.Quarto = {
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v.<span class="fl">2.</span>w)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  144.0   162.1   166.2   166.2   170.1   184.8 </code></pre>
+  144.8   161.9   165.8   166.0   170.1   183.9 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(v.<span class="fl">2.</span>w, <span class="at">breaks =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -562,7 +562,7 @@ window.Quarto = {
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v.<span class="fl">3.</span>w)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  138.0   162.0   166.0   166.0   170.1   191.3 </code></pre>
+  137.9   161.9   166.0   166.0   170.0   190.6 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(v.<span class="fl">3.</span>w, <span class="at">breaks =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -657,9 +657,9 @@ blue   255</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="fu">summary</span>(v.<span class="fl">1.</span>w), <span class="fu">summary</span>(v.<span class="fl">2.</span>w), <span class="fu">summary</span>(v.<span class="fl">3.</span>w))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Min.  1st Qu.   Median     Mean  3rd Qu.     Max.
-[1,] 155.5174 161.1135 167.7188 166.3926 169.1769 176.7106
-[2,] 144.0081 162.1378 166.2449 166.2242 170.0984 184.8030
-[3,] 138.0399 161.9976 166.0473 166.0402 170.0816 191.3440</code></pre>
+[1,] 148.1612 160.5574 164.5548 163.8554 168.8514 174.2979
+[2,] 144.8442 161.8696 165.8214 165.9573 170.0504 183.9444
+[3,] 137.9036 161.9062 165.9607 165.9766 170.0411 190.5631</code></pre>
 </div>
 </div>
 <p>Wir sehen in der obenstehenden Tabelle, dass der Durchschnitt (Mean) deutlich variiert. Wir haben unterschiedlich viele Zahlen aus der theoretischen Normalverteilung mit den Parametern Mittelwert (166) und Standardabweichung (6) gezogen. In der Tendenz kommt der empirische Mittelwert (in der obenstehenden Tabelle) mit zunehmender Fallzahl näher am theoretischen Mittelwert (Parameter der Verteilung) zuliegen.</p>
@@ -712,24 +712,24 @@ blue   255</code></pre>
 <span id="cb64-24"><a href="#cb64-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d.pol)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  v.id    v.pol  v.strom v.wasser   v.eink v.wohn
-1    1 4.625764 7068.773 323.6438 87487.79  stadt
-2    2 9.953270 7316.626 298.6044 82369.13  stadt
-3    3 5.231943 7344.796 265.6632 72619.12  stadt
-4    4 6.935771 6984.558 276.5402 86233.75  stadt
-5    5 5.463243 7568.036 289.7526 87544.78  stadt
-6    6 6.029278 7911.383 300.0924 42365.77  stadt</code></pre>
+1    1 5.939836 7273.952 322.1588 86841.88  stadt
+2    2 5.937701 7477.618 282.2236 83125.50  stadt
+3    3 7.995834 7682.792 323.4618 88150.42  stadt
+4    4 7.738474 8293.720 316.3470 99718.47  stadt
+5    5 1.526352 7124.316 262.8376 82560.64  stadt
+6    6 6.598763 7626.491 283.5128 70751.16  stadt</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># v.pol runden (-&gt; neue Variable)</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>d.pol<span class="sc">$</span>pol.r <span class="ot">&lt;-</span> <span class="fu">round</span>(d.pol<span class="sc">$</span>v.pol)</span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d.pol)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  v.id    v.pol  v.strom v.wasser   v.eink v.wohn pol.r
-1    1 4.625764 7068.773 323.6438 87487.79  stadt     5
-2    2 9.953270 7316.626 298.6044 82369.13  stadt    10
-3    3 5.231943 7344.796 265.6632 72619.12  stadt     5
-4    4 6.935771 6984.558 276.5402 86233.75  stadt     7
-5    5 5.463243 7568.036 289.7526 87544.78  stadt     5
-6    6 6.029278 7911.383 300.0924 42365.77  stadt     6</code></pre>
+1    1 5.939836 7273.952 322.1588 86841.88  stadt     6
+2    2 5.937701 7477.618 282.2236 83125.50  stadt     6
+3    3 7.995834 7682.792 323.4618 88150.42  stadt     8
+4    4 7.738474 8293.720 316.3470 99718.47  stadt     8
+5    5 1.526352 7124.316 262.8376 82560.64  stadt     2
+6    6 6.598763 7626.491 283.5128 70751.16  stadt     7</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -767,17 +767,17 @@ blue   255</code></pre>
 <span id="cb68-32"><a href="#cb68-32" aria-hidden="true" tabindex="-1"></a>d.mig <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(v.geschl, v.bild, v.ch, v.eink, v.alter, v.reg)</span>
 <span id="cb68-33"><a href="#cb68-33" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d.mig, <span class="at">n =</span> <span class="dv">10</span>) <span class="co"># die ersten 10 Fälle anzeigen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   v.geschl v.bild v.ch    v.eink  v.alter             v.reg
-1         2      3    0  85601.58 64.15657    Zentralschweiz
-2        NA      3    1 121182.92 50.63739 Espace Mittelland
-3         1      3    1  71285.49 45.77736            Zürich
-4         1      3    1  72648.06 43.21018            Zürich
-5         3      2    1  89567.57 45.56453        Ostschweiz
-6         1      2    0  96681.22 24.93328    Zentralschweiz
-7         1      2    0  79311.38 21.46384  Région Lemanique
-8        NA      4    0  96222.72 35.93611            Zürich
-9         2      2    1  97598.41 28.49368    Zentralschweiz
-10        1      3    1  78339.75 23.36897   Nordwestschweiz</code></pre>
+<pre><code>   v.geschl v.bild v.ch    v.eink  v.alter            v.reg
+1         1      2    0 106969.10 28.50938   Zentralschweiz
+2         2      3    0 105938.00 37.67813           Zürich
+3         1      4    1 109109.85 50.93806           Zürich
+4         1      3    0  88772.42 35.43473  Nordwestschweiz
+5         1      4    1  91351.58 45.35539           Zürich
+6         1      3    1  77891.67 24.89165       Ostschweiz
+7         3     NA    1  65701.86 19.09298  Nordwestschweiz
+8        NA      4    0  90768.64 48.36445 Région Lemanique
+9         1      4    1  85996.94 41.83259 Région Lemanique
+10        3      2    1  75032.47 33.86338   Zentralschweiz</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
@@ -793,9 +793,9 @@ blue   255</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>d.mig[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  v.bild    v.eink
-2      3 121182.92
-3      3  71285.49</code></pre>
+<pre><code>  v.bild   v.eink
+2      3 105938.0
+3      4 109109.9</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>d.mig[<span class="dv">101</span>, <span class="dv">6</span>] <span class="co"># liegt ausserhalb der vorhandenen Dimensionen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -856,12 +856,12 @@ blue   255</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d.mig)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   100 obs. of  6 variables:
- $ v.geschl: num  2 NA 1 1 3 1 1 NA 2 1 ...
- $ v.bild  : num  3 3 3 3 2 2 2 4 2 3 ...
- $ v.ch    : num  0 1 1 1 1 0 0 0 1 1 ...
- $ v.ch.neu: num  85602 121183 71285 72648 89568 ...
- $ v.alter : num  64.2 50.6 45.8 43.2 45.6 ...
- $ v.reg   : chr  "Zentralschweiz" "Espace Mittelland" "Zürich" "Zürich" ...</code></pre>
+ $ v.geschl: num  1 2 1 1 1 1 3 NA 1 3 ...
+ $ v.bild  : num  2 3 4 3 4 3 NA 4 4 2 ...
+ $ v.ch    : num  0 0 1 0 1 1 1 0 1 1 ...
+ $ v.ch.neu: num  106969 105938 109110 88772 91352 ...
+ $ v.alter : num  28.5 37.7 50.9 35.4 45.4 ...
+ $ v.reg   : chr  "Zentralschweiz" "Zürich" "Zürich" "Nordwestschweiz" ...</code></pre>
 </div>
 </div>
 <p>Die Funktion <code>str()</code> gibt die Struktur des Datensatzes und die enthaltenen Elemente (hier Variablen des Datensatzes) aus. Machen die Datenarten Sinn? Nein, denn die Durchschnitt von v.geschl, v.bild, v.eink.kl und v.ch zu berechnen machen keinen Sinn! Wir müssen dringend umkodieren (wir nutzen erstmal <code>as.character()</code>, wir werden im Verlauf des Seminars aber noch eine weitere Möglichkeit kennenlernen):</p>
@@ -883,19 +883,19 @@ blue   255</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d.mig)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      v.geschl         v.bild           v.ch        v.ch.neu     
- Length   :100   Length   :100   Length   :100   Min.   : 39793  
- N.unique :  3   N.unique :  4   N.unique :  2   1st Qu.: 78382  
- N.blank  :  0   N.blank  :  0   N.blank  :  0   Median : 87689  
- Min.nchar:  1   Min.nchar:  1   Min.nchar:  1   Mean   : 86785  
- Max.nchar:  1   Max.nchar:  1   Max.nchar:  1   3rd Qu.: 96709  
- NAs      :  5   NAs      :  3                   Max.   :124914  
+ Length   :100   Length   :100   Length   :100   Min.   : 49066  
+ N.unique :  3   N.unique :  4   N.unique :  2   1st Qu.: 73939  
+ N.blank  :  0   N.blank  :  0   N.blank  :  0   Median : 87411  
+ Min.nchar:  1   Min.nchar:  1   Min.nchar:  1   Mean   : 86560  
+ Max.nchar:  1   Max.nchar:  1   Max.nchar:  1   3rd Qu.: 98566  
+ NAs      :  5   NAs      :  3                   Max.   :115197  
     v.alter            v.reg    
- Min.   :18.31   Length   :100  
- 1st Qu.:26.13   N.unique :  7  
- Median :40.26   N.blank  :  0  
- Mean   :39.77   Min.nchar:  6  
- 3rd Qu.:52.96   Max.nchar: 17  
- Max.   :64.16   NAs      :  4  </code></pre>
+ Min.   :18.35   Length   :100  
+ 1st Qu.:28.48   N.unique :  7  
+ Median :40.78   N.blank  :  0  
+ Mean   :40.02   Min.nchar:  6  
+ 3rd Qu.:53.22   Max.nchar: 17  
+ Max.   :64.13   NAs      :  4  </code></pre>
 </div>
 </div>
 <p>Die Funktion gibt für jede Variable eine Zusammenfassung aus. Sie berechnet für jede metrische Variable den Mittelwert, sowie die Lage- und Streuungsmasse. Bei Character-Daten wird die Klasse ausgegeben. Zudem wird die Anzahl fehlender Werte (<code>NA</code>) angezeigt, falls welche vorhanden sind.</p>
@@ -962,14 +962,14 @@ blue   255</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(d.mig<span class="sc">$</span>v.geschl <span class="sc">==</span> <span class="st">"3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  5 36 74</code></pre>
+<pre><code>[1]  7 10 33</code></pre>
 </div>
 </div>
 <p>Noch spezieller könnten diese Fälle sein, wenn sie zum Beispiel ein ausgeprägt hohes oder tiefes Bildungsniveau aufweisen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(d.mig<span class="sc">$</span>v.geschl <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">&amp;</span> (d.mig<span class="sc">$</span>v.bild <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">|</span> d.mig<span class="sc">$</span>v.bild <span class="sc">==</span> <span class="st">"4"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>integer(0)</code></pre>
+<pre><code>[1] 33</code></pre>
 </div>
 </div>
 <p>Da noch keine Fälle vorhanden sind, fügen wir beim ersten Fall mit Geschlechtsausprägung “3” ein besonders hohes Bildungsniveau hinzu und prüfen, ob nun ein Fall vorhanden ist, der beide Bedingungen erfüllt.</p>
@@ -977,7 +977,7 @@ blue   255</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>d.mig<span class="sc">$</span>v.bild[<span class="fu">which</span>(d.mig<span class="sc">$</span>v.geschl <span class="sc">==</span> <span class="st">"3"</span>)[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="st">"4"</span></span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(d.mig<span class="sc">$</span>v.geschl <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">&amp;</span> (d.mig<span class="sc">$</span>v.bild <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">|</span> d.mig<span class="sc">$</span>v.bild <span class="sc">==</span> <span class="st">"4"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
+<pre><code>[1]  7 33</code></pre>
 </div>
 </div>
 <ol start="6" type="1">
@@ -1019,19 +1019,19 @@ blue   255</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(d.tdf.t<span class="fl">.1</span><span class="sc">$</span>alter) <span class="co"># Alter an Unilu: zufällig</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 52.72269</code></pre>
+<pre><code>[1] 48.05678</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(d.tdf.t.<span class="fl">2.</span>c<span class="sc">$</span>alter) <span class="co"># Alter andere Universitäten: zufällig</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 49.21119</code></pre>
+<pre><code>[1] 46.10299</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(d.tdf.t<span class="fl">.3</span><span class="sc">$</span>alter) <span class="co"># sollte tendenziell höher liegen als in d.tdf.t.4, aber zwei Bedingungen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 70.86478</code></pre>
+<pre><code>[1] 71.11958</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(d.tdf.t<span class="fl">.4</span><span class="sc">$</span>alter)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 44.00415</code></pre>
+<pre><code>[1] 41.80311</code></pre>
 </div>
 </div>
 <ol start="6" type="1">
@@ -1040,7 +1040,7 @@ blue   255</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">mean</span>(dat.tdf<span class="sc">$</span>alter[dat.tdf<span class="sc">$</span>univ <span class="sc">==</span> <span class="st">"unilu"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 52.72269</code></pre>
+<pre><code>[1] 48.05678</code></pre>
 </div>
 </div>
 
